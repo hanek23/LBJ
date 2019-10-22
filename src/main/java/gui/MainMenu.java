@@ -27,6 +27,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 
 import constants.Labels;
 import domain.Table;
+import generator.Operation;
 
 public class MainMenu implements Runnable {
 
@@ -54,11 +55,9 @@ public class MainMenu implements Runnable {
 			WindowBasedTextGUI gui = new MultiWindowTextGUI(screen);
 			window = new BasicWindow(Labels.WINDOW_NAME);
 			mainMenuContent = new Panel(new GridLayout(1));
-			GridLayout gridLayout = (GridLayout) mainMenuContent.getLayoutManager();
-			gridLayout.setHorizontalSpacing(3);
 			mainMenuContent.addComponent(new Label(Labels.MAIN_MENU_QUESTION));
 			ActionListBox mainMenu = new ActionListBox();
-			AddColumn addColumn = new AddColumn(this, window, this);
+			AddColumn addColumn = new AddColumn(this, window, this, Operation.ADD_COLUMN);
 			addUpdatableChild(addColumn);
 			mainMenu.addItem(Labels.MAIN_MENU_ADD_COLUMN, addColumn);
 			CreateTable createTable = new CreateTable(this, window, this);

@@ -16,6 +16,7 @@ public class Labels {
 	// CREATE TABLE
 	public static final String CREATE_TABLE_TABLE_NAME = "Table name";
 	public static final String CREATE_TABLE_PRIMARY_KEY_NAME = "Primary key name";
+	public static final String CREATE_TABLE_PRIMARY_KEY_CONSTRAIN = "Primary key constraint name";
 	public static final String CREATE_TABLE_DATABASES = "Databases";
 	public static final String CREATE_TABLE_DATABASES_ORACLE = "Oracle";
 	public static final String CREATE_TABLE_DATABASES_MSSQL = "MSSQL";

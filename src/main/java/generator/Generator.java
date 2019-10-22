@@ -8,7 +8,7 @@ public class Generator {
 		// only static methods
 	}
 
-	public static String generate(Table table) {
+	public static String generate(Table table, Operation operation) {
 		return "Generating table: " + table.getName() + " with " + table.getColumns().size() + " columns";
 	}
 

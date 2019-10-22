@@ -27,16 +27,16 @@ import com.googlecode.lanterna.gui2.WindowPostRenderer;
 import com.googlecode.lanterna.gui2.Button.Listener;
 
 import constants.Labels;
+import constants.NamingConventions;
+import constants.Settings;
 import domain.Column;
 import domain.DataType;
 import domain.ForeignKey;
 import domain.Table;
 import generator.Generator;
+import generator.Operation;
 
 public class AddColumn implements Runnable, Updatable {
-
-	private static final int MAX_LENGTH_OF_NAMES = 32;
-	private static final int NUMBER_OF_COLUMNS = 20;
 
 	private Window window;
 	private Runnable previousWindow;
@@ -63,100 +63,99 @@ public class AddColumn implements Runnable, Updatable {
 	private CheckBox nullable;
 	private MainMenu mainMenu;
 	private Column column;
+	private Operation operation;
 
-	public AddColumn(MainMenu mainMenu, Window window, Runnable previousWindow) {
-		this(mainMenu, window, previousWindow, new Table(""));
-		tableName.setEnabled(true);
+	public AddColumn(MainMenu mainMenu, Window window, Runnable previousWindow, Operation operation) {
+		this(mainMenu, window, previousWindow, new Table(""), operation);
 	}
 
-	public AddColumn(MainMenu mainMenu, Window window, Runnable previousWindow, Table table) {
+	public AddColumn(MainMenu mainMenu, Window window, Runnable previousWindow, Table table, Operation operation) {
 		this.mainMenu = mainMenu;
 		this.window = window;
 		this.previousWindow = previousWindow;
 		this.table = table;
+		this.operation = operation;
 		initialize();
-		tableName.setEnabled(false);
+		if (operation == Operation.CREATE_TABLE) {
+			tableName.setEnabled(false);
+		}
 	}
 
 	private void initialize() {
-		content = new Panel(new GridLayout(NUMBER_OF_COLUMNS));
+		content = new Panel(new GridLayout(Settings.GUI_NUMBER_OF_COLUMNS));
 		GridLayout gridLayout = (GridLayout) content.getLayoutManager();
-		gridLayout.setVerticalSpacing(1);
+		gridLayout.setVerticalSpacing(Settings.GUI_VERTICAL_SPACING);
 
 		tableNameLabel = new Label(Labels.CREATE_TABLE_TABLE_NAME);
 		content.addComponent(tableNameLabel);
 		tableName = new TextBox(table.getName());
-		content.addComponent(
-				tableName.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(NUMBER_OF_COLUMNS - 1)));
+		content.addComponent(tableName
+				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
 
 		columnNameLabel = new Label(Labels.ADD_COLUMN_NAME);
 		content.addComponent(columnNameLabel);
 		columnName = new TextBox();
-		content.addComponent(
-				columnName.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(NUMBER_OF_COLUMNS - 1)));
+		content.addComponent(columnName
+				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
 
 		content.addComponent(new Label(Labels.ADD_COLUMN_NULLABLE));
 		nullable = new CheckBox();
-		content.addComponent(
-				nullable.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(NUMBER_OF_COLUMNS - 1)));
+		content.addComponent(nullable
+				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
 
 		content.addComponent(new Label(Labels.ADD_COLUMN_INDEX));
 		index = new CheckBox();
-		content.addComponent(index.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(NUMBER_OF_COLUMNS - 1)));
+		content.addComponent(
+				index.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
 
 		indexNameLabel = new Label(Labels.ADD_COLUMN_INDEX_NAME);
 		content.addComponent(indexNameLabel);
 		indexName = new TextBox();
 		indexName.setEnabled(false);
-		content.addComponent(
-				indexName.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(NUMBER_OF_COLUMNS - 1)));
+		content.addComponent(indexName
+				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
 
 		content.addComponent(new Label(Labels.ADD_COLUMN_FOREIGN_KEY));
 		foreignKey = new CheckBox();
-		content.addComponent(
-				foreignKey.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(NUMBER_OF_COLUMNS - 1)));
+		content.addComponent(foreignKey
+				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
 
 		referencedTableLabel = new Label(Labels.ADD_COLUMN_REFERENCED_TABLE);
 		content.addComponent(referencedTableLabel);
 		referencedTable = new TextBox();
 		referencedTable.setEnabled(false);
-		content.addComponent(
-				referencedTable.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(NUMBER_OF_COLUMNS - 1)));
+		content.addComponent(referencedTable
+				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
 
 		referencedColumnLabel = new Label(Labels.ADD_COLUMN_REFERENCED_COLUMN);
 		content.addComponent(referencedColumnLabel);
 		referencedColumn = new TextBox();
 		referencedColumn.setEnabled(false);
-		content.addComponent(
-				referencedColumn.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(NUMBER_OF_COLUMNS - 1)));
+		content.addComponent(referencedColumn
+				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
 
 		foreignKeyNameLabel = new Label(Labels.ADD_COLUMN_FOREIGN_KEY_NAME);
 		content.addComponent(foreignKeyNameLabel);
-		foreignKeyName = new TextBox("F_");
+		foreignKeyName = new TextBox(NamingConventions.FOREIGN_KEY_NAME_DEFAULT_VALUE);
 		foreignKeyName.setEnabled(false);
-		content.addComponent(
-				foreignKeyName.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(NUMBER_OF_COLUMNS - 1)));
+		content.addComponent(foreignKeyName
+				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
 
 		content.addComponent(new Label(Labels.ADD_COLUMN_TYPE));
 		typesComboBox = new ComboBox<>(DataType.values());
 		typesComboBox.setReadOnly(true);
-		typesComboBox.setPreferredSize(new TerminalSize(10, 1));
-		content.addComponent(typesComboBox);
-		content.addComponent(
-				new EmptySpace().setLayoutData(GridLayout.createHorizontallyFilledLayoutData(NUMBER_OF_COLUMNS - 2)));
+		content.addComponent(typesComboBox
+				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
 
 		additionalInfoLabel = new Label(Labels.ADD_COLUMN_ADDITIONAL_INFO);
 		content.addComponent(additionalInfoLabel);
 		additionalInfo = new TextBox();
-		content.addComponent(additionalInfo);
+		content.addComponent(additionalInfo
+				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
 
-		content.addComponent(
-				new EmptySpace().setLayoutData(GridLayout.createHorizontallyFilledLayoutData(NUMBER_OF_COLUMNS - 2)));
-		content.addComponent(new Separator(Direction.HORIZONTAL)
-				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(NUMBER_OF_COLUMNS)));
-
+		content.addComponent(new EmptySpace());
 		Button backButton = new Button(Labels.BUTTON_BACK);
-		content.addComponent(backButton);
+		content.addComponent(backButton.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
 		backButton.addListener(new Listener() {
 
 			@Override
@@ -167,7 +166,7 @@ public class AddColumn implements Runnable, Updatable {
 		});
 
 		Button addColumnButton = new Button(Labels.BUTTON_ADD_ANOTHER_COLUMN);
-		content.addComponent(addColumnButton);
+		content.addComponent(addColumnButton.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
 		addColumnButton.addListener(new Listener() {
 
 			@Override
@@ -179,7 +178,7 @@ public class AddColumn implements Runnable, Updatable {
 				table.setName(tableName.getText());
 				column = AddColumn.this.createColumn();
 				table.addColumn(column);
-				AddColumn newAddColumn = new AddColumn(mainMenu, window, AddColumn.this, table);
+				AddColumn newAddColumn = new AddColumn(mainMenu, window, AddColumn.this, table, operation);
 				mainMenu.addUpdatableChild(newAddColumn);
 				newAddColumn.run();
 			}
@@ -187,7 +186,7 @@ public class AddColumn implements Runnable, Updatable {
 		});
 
 		Button generateButton = new Button(Labels.BUTTON_GENERATE);
-		content.addComponent(generateButton);
+		content.addComponent(generateButton.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
 		generateButton.addListener(new Listener() {
 
 			@Override
@@ -197,7 +196,7 @@ public class AddColumn implements Runnable, Updatable {
 				}
 				table.setName(tableName.getText());
 				table.addColumn(AddColumn.this.createColumn());
-				Generator.generate(table);
+				Generator.generate(table, operation);
 			}
 		});
 
@@ -212,72 +211,24 @@ public class AddColumn implements Runnable, Updatable {
 	}
 
 	private boolean validate() {
-		boolean toReturn = validateTextBox(tableName, tableNameLabel);
-		toReturn = validateTextBox(columnName, columnNameLabel) && toReturn;
+		boolean toReturn = GuiValidator.validateTextBox(tableName, tableNameLabel);
+		toReturn = GuiValidator.validateTextBox(columnName, columnNameLabel) && toReturn;
 		if (index.isChecked()) {
-			boolean indexValidation = validateTextBox(indexName, indexNameLabel);
-			if (indexValidation) {
-				indexValidation = validateTextBoxValueLength(indexName, indexNameLabel, MAX_LENGTH_OF_NAMES)
-						&& indexValidation;
-			}
-			if (indexValidation) {
-				indexValidation = validateTextBoxDefaultValue(indexName, indexNameLabel, "I__") && indexValidation;
-			}
-			toReturn = indexValidation && toReturn;
+			toReturn = GuiValidator.validateAll(indexName, indexNameLabel, NamingConventions.INDEX_NAME_DEFAULT_VALUE,
+					NamingConventions.INDEX_NAME_DEFAULT_VALUE + NamingConventions.SEPARATOR) && toReturn;
 		}
 		if (foreignKey.isChecked()) {
-			toReturn = validateTextBox(referencedTable, referencedTableLabel) && toReturn;
-			toReturn = validateTextBox(referencedColumn, referencedColumnLabel) && toReturn;
-			boolean foreignKeyValidation = validateTextBox(foreignKeyName, foreignKeyNameLabel);
-			if (foreignKeyValidation) {
-				foreignKeyValidation = validateTextBoxValueLength(foreignKeyName, foreignKeyNameLabel,
-						MAX_LENGTH_OF_NAMES) && foreignKeyValidation;
-			}
-			if (foreignKeyValidation) {
-				foreignKeyValidation = validateTextBoxDefaultValue(foreignKeyName, foreignKeyNameLabel, "F__")
-						&& foreignKeyValidation;
-			}
-			if (foreignKeyValidation) {
-				foreignKeyValidation = validateTextBoxDefaultValue(foreignKeyName, foreignKeyNameLabel, "F_")
-						&& foreignKeyValidation;
-			}
-			toReturn = foreignKeyValidation && toReturn;
+			toReturn = GuiValidator.validateTextBox(referencedTable, referencedTableLabel) && toReturn;
+			toReturn = GuiValidator.validateTextBox(referencedColumn, referencedColumnLabel) && toReturn;
+			toReturn = GuiValidator.validateAll(foreignKeyName, foreignKeyNameLabel,
+					NamingConventions.FOREIGN_KEY_NAME_DEFAULT_VALUE,
+					NamingConventions.FOREIGN_KEY_NAME_DEFAULT_VALUE + NamingConventions.SEPARATOR) && toReturn;
 		}
 		if (typesComboBox.getSelectedItem().isAdditionalInfoRequired()) {
-			toReturn = validateTextBox(additionalInfo, additionalInfoLabel) && toReturn;
+			toReturn = GuiValidator.validateTextBox(additionalInfo, additionalInfoLabel) && toReturn;
 		}
 
 		return toReturn;
-	}
-
-	private boolean validateTextBoxDefaultValue(TextBox textBox, Label label, String defaultValue) {
-		if (textBox.getText().equals(defaultValue)) {
-			label.setBackgroundColor(TextColor.ANSI.RED);
-			return false;
-		} else {
-			label.setBackgroundColor(null);
-			return true;
-		}
-	}
-
-	private boolean validateTextBox(TextBox textBox, Label label) {
-		if (StringUtils.isEmpty(textBox.getText())) {
-			label.setBackgroundColor(TextColor.ANSI.RED);
-			return false;
-		} else {
-			label.setBackgroundColor(null);
-			return true;
-		}
-	}
-
-	private boolean validateTextBoxValueLength(TextBox textBox, Label label, int maxLength) {
-		if (textBox.getText().length() > maxLength) {
-			label.setBackgroundColor(TextColor.ANSI.RED);
-			return false;
-		} else {
-			label.setBackgroundColor(null);
-			return true;
-		}
 	}
 
 	@Override
@@ -292,7 +243,8 @@ public class AddColumn implements Runnable, Updatable {
 		if (index.isChecked()) {
 			indexName.setEnabled(true);
 			if (tableName.isFocused() || columnName.isFocused() || StringUtils.isEmpty(indexName.getText())) {
-				indexName.setText("I_" + tableName.getText() + "_" + columnName.getText());
+				indexName.setText(NamingConventions.INDEX_NAME_DEFAULT_VALUE + tableName.getText()
+						+ NamingConventions.SEPARATOR + columnName.getText());
 			}
 		} else {
 			indexName.setText("");
@@ -303,7 +255,8 @@ public class AddColumn implements Runnable, Updatable {
 			referencedColumn.setEnabled(true);
 			foreignKeyName.setEnabled(true);
 			if (referencedTable.isFocused() || referencedColumn.isFocused()) {
-				foreignKeyName.setText("F_" + referencedTable.getText() + "_" + referencedColumn.getText());
+				foreignKeyName.setText(NamingConventions.FOREIGN_KEY_NAME_DEFAULT_VALUE + referencedTable.getText()
+						+ NamingConventions.SEPARATOR + referencedColumn.getText());
 			}
 		} else {
 			referencedTable.setEnabled(false);
