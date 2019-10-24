@@ -1,6 +1,10 @@
 package constants;
 
 public class Labels {
+	
+	private Labels() {
+		// only static constants
+	}
 
 	public static final String WINDOW_NAME = "LBJ";
 	public static final String BUTTON_BACK = "Back";

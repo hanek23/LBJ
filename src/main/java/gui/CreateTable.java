@@ -100,7 +100,7 @@ public class CreateTable implements Runnable, Updatable {
 				if (!CreateTable.this.validate()) {
 					return;
 				}
-				// TODO boolean z databazi
+				// TODO boolean z databazi, SEQUENCE NAME
 				AddColumn addColumn = new AddColumn(mainMenu, window, thisInstance, new Table(tableName.getText()),
 						Operation.CREATE_TABLE);
 				mainMenu.addUpdatableChild(addColumn);

@@ -10,6 +10,8 @@ public class Table {
 	private String name;
 	private String primaryKeyColumnName;
 	private String primaryKeyContrainName;
+	private String primaryKeyIndexName;
+	private String sequenceName;
 	private List<Column> columns;
 	private boolean forOracle;
 	private boolean forMssql;
@@ -98,6 +100,22 @@ public class Table {
 
 	public void setForPostgreSql(boolean forPostgreSql) {
 		this.forPostgreSql = forPostgreSql;
+	}
+
+	public String getSequenceName() {
+		return sequenceName;
+	}
+
+	public void setSequenceName(String sequenceName) {
+		this.sequenceName = sequenceName;
+	}
+
+	public String getPrimaryKeyIndexName() {
+		return primaryKeyIndexName;
+	}
+
+	public void setPrimaryKeyIndexName(String primaryKeyIndexName) {
+		this.primaryKeyIndexName = primaryKeyIndexName;
 	}
 
 }

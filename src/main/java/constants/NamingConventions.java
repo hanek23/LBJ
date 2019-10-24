@@ -1,6 +1,10 @@
 package constants;
 
 public class NamingConventions {
+	
+	private NamingConventions() {
+		// only static constants
+	}
 
 	public static final String SEPARATOR = "_";
 	public static final String PRIMARY_KEY_NAME_DEFAULT_VALUE = "id" + SEPARATOR;
