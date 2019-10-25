@@ -18,15 +18,40 @@ public class Generator {
 			changesets = createTable(table);
 		}
 		for (Column column : table.getColumns()) {
-			changesets += createColumn(column);
+			changesets += addColumn(column);
 		}
 		changesets = XmlBuilder.replaceAuthor(changesets, "phan");
 		return XmlBuilder.toChangelog(changesets);
 	}
 
-	private static String createColumn(Column column) {
-		String createColumn = null;
-		return createColumn;
+	private static String addColumn(Column column) {
+		String addColumn = XmlParts.ADD_COLUMN;
+		if (column.hasForeignKey() || column.isNullable()) {
+			addColumn = XmlBuilder.addColumnConstraints(addColumn);
+			if (column.hasForeignKey()) {
+				addColumn = XmlBuilder.addColumnForeignKeyConstraint(addColumn);
+				addColumn = XmlBuilder.replaceColumnForeignKeyName(addColumn, column.getForeignKey().getName());
+				addColumn = XmlBuilder.replaceColumnForeignKeyReferencedColumn(addColumn,
+						column.getForeignKey().getReferencedColumn());
+				addColumn = XmlBuilder.replaceColumnForeignKeyReferencedTable(addColumn,
+						column.getForeignKey().getReferencedTable());
+			} else {
+				addColumn = XmlBuilder.removeColumnForeignKeyConstraint(addColumn);
+			}
+			if (!column.isNullable()) {
+				addColumn = XmlBuilder.addColumnNullableFalse(addColumn);
+			} else {
+				addColumn = XmlBuilder.removeNullable(addColumn);
+			}
+		}
+		if (column.hasIndex()) {
+			addColumn += XmlParts.COLUMN_INDEX;
+			addColumn = XmlBuilder.replaceColumnIndexName(addColumn, column.getIndexName());
+		}
+		addColumn = XmlBuilder.replaceTableName(addColumn, column.getTable().getName());
+		addColumn = XmlBuilder.replaceColumnName(addColumn, column.getName());
+		addColumn = XmlBuilder.replaceColumnDataType(addColumn, column.getDataType());
+		return addColumn;
 	}
 
 	private static String createTable(Table table) {

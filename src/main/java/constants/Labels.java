@@ -1,7 +1,7 @@
 package constants;
 
 public class Labels {
-	
+
 	private Labels() {
 		// only static constants
 	}
@@ -31,7 +31,7 @@ public class Labels {
 	public static final String ADD_COLUMN_INDEX = "Index";
 	public static final String ADD_COLUMN_FOREIGN_KEY = "Foreign key";
 	public static final String ADD_COLUMN_NULLABLE = "Nullable";
-	public static final String ADD_COLUMN_TYPE = "Type";
+	public static final String ADD_COLUMN_TYPE = "Data type";
 	public static final String ADD_COLUMN_REFERENCED_TABLE = "Referenced table";
 	public static final String ADD_COLUMN_REFERENCED_COLUMN = "Referenced column";
 	public static final String ADD_COLUMN_FOREIGN_KEY_NAME = "Foreign key name";

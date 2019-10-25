@@ -1,7 +1,10 @@
 package generator;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import domain.Column;
+import domain.ForeignKey;
 import domain.Table;
 
 public class GeneratorTest {
@@ -15,7 +18,7 @@ public class GeneratorTest {
 	@Test
 	public void testGenerateTable() {
 		Table table = createTable();
-		System.out.println(Generator.generate(table, Operation.CREATE_TABLE));
+		System.out.println(StringUtils.deleteWhitespace(Generator.generate(table, Operation.CREATE_TABLE)));
 
 	}
 
@@ -28,7 +31,24 @@ public class GeneratorTest {
 		table.setPrimaryKeyContrainName(TABLE_CONSTRAIN_PRIMARY_KEY_NAME);
 		table.setSequenceName(TABLE_SEQUENCE_NAME);
 		table.setPrimaryKeyIndexName(TABLE_PRIMARY_KEY_INDEX_NAME);
+		table.addColumn(createColumn());
 		return table;
+	}
+
+	private Column createColumn() {
+		Column column = new Column("message");
+		column.setDataType("varchar(50)");
+		column.setIndex(true);
+		column.setIndexName("I_NDER_CONTAINER_NDER_MESSAGE");
+		column.setNullable(false);
+
+		ForeignKey foreignKey = new ForeignKey("F_NDER_CONTAINER_NDER_MESSAGE");
+		foreignKey.setReferencedColumn("container");
+		foreignKey.setReferencedTable("NDER_MESSAGE");
+
+		column.setForeignKey(foreignKey);
+
+		return column;
 	}
 
 }

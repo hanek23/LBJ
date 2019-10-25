@@ -15,11 +15,13 @@ public class XmlParts {
 	public static final String REPLACE_CONSTRAIN_PRIMARY_KEY_NAME = "$CONSTRAIN_PK_NAME$";
 	public static final String REPLACE_SEQUENCE_NAME = "$SEQUENCE_NAME$";
 	public static final String REPLACE_COLUMN_NAME = "$COLUMN_NAME$";
-	public static final String REPLACE_COLUMN_TYPE = "$COLUMN_TYPE$";
+	public static final String REPLACE_COLUMN_DATA_TYPE = "$COLUMN_TYPE$";
 	public static final String REPLACE_COLUMN_FOREIGN_KEY_NAME = "$COLUMN_FK_NAME$";
 	public static final String REPLACE_COLUMN_FOREIGN_KEY_REFERECED_TABLE_NAME = "$REFERENCED_TABLE_NAME$";
 	public static final String REPLACE_COLUMN_FOREIGN_KEY_REFERECED_COLUMN_NAME = "$REFERENCED_COLUMN_NAME$";
+	public static final String REPLACE_COLUMN_CONSTRAINS = "$COLUMN_CONSTRAINS";
 	public static final String REPLACE_COLUMN_INDEX_NAME = "$INDEX_NAME$";
+	public static final String REPLACE_COLUMN_FOREIGN_KEY = "$COLUMN_FOREIGN_KEY$";
 	public static final String REPLACE_COLUMN_NULLABLE = "$NULLABLE$";
 	public static final String REPLACE_COLUMN_NULLABLE_VALUE = "$NULLABLE_VALUE$";
 
@@ -66,8 +68,8 @@ public class XmlParts {
 			+ "		incrementBy=\"50\" cacheSize=\"20\" maxValue=\"999999999999999999\" cycle=\"false\" />\n"
 			+ "</changeSet>\n";
 
-	public static final String CREATE_TABLE_INDEX_PRIMARY_KEY = "<changeSet author=\"" + REPLACE_AUTHOR + "\" id=\""
-			+ REPLACE_ID + "\">\n" + "	<preConditions onFail=\"MARK_RAN\">\n" + "		<not>\n"
+	public static final String COLUMN_INDEX = "<changeSet author=\"" + REPLACE_AUTHOR + "\" id=\"" + REPLACE_ID
+			+ "\">\n" + "	<preConditions onFail=\"MARK_RAN\">\n" + "		<not>\n"
 			+ "			<indexExists indexName=\"" + REPLACE_COLUMN_INDEX_NAME + "\" />\n" + "		</not>\n"
 			+ "	</preConditions>\n" + "	<comment>Create index " + REPLACE_COLUMN_INDEX_NAME
 			+ " if it doesn't exist.</comment>\n" + "	<createIndex tableName=\"" + REPLACE_TABLE_NAME
@@ -80,13 +82,14 @@ public class XmlParts {
 			+ "\" />\n" + "			</not>\n" + "		</preConditions>\n" + "		<comment>Add column "
 			+ REPLACE_COLUMN_NAME + " to " + REPLACE_TABLE_NAME + "</comment>\n" + "		<addColumn tableName=\""
 			+ REPLACE_TABLE_NAME + "\">\n" + "			<column name=\"" + REPLACE_COLUMN_NAME + "\" type=\""
-			+ REPLACE_COLUMN_TYPE + "\">\n" + "				\n" + "			</column>\n" + "		</addColumn>\n"
-			+ "	</changeSet>";
+			+ REPLACE_COLUMN_DATA_TYPE + "\">\n" + REPLACE_COLUMN_CONSTRAINS + "			</column>\n"
+			+ "		</addColumn>\n" + "	</changeSet>";
 
-	public static final String COLUMN_FOREIGN_KEY_CONSTRAIN = "<constraints foreignKeyName=\""
-			+ REPLACE_COLUMN_FOREIGN_KEY_NAME + "\"\n" + "referencedTableName=\""
-			+ REPLACE_COLUMN_FOREIGN_KEY_REFERECED_TABLE_NAME + "\" \n" + "referencedColumnNames=\""
-			+ REPLACE_COLUMN_FOREIGN_KEY_REFERECED_COLUMN_NAME + "\" " + REPLACE_COLUMN_NULLABLE + " />";
+	public static final String COLUMN_CONSTRAINS = "<constraints " + REPLACE_COLUMN_FOREIGN_KEY + " "
+			+ REPLACE_COLUMN_NULLABLE + "/>";
+	public static final String COLUMN_FOREIGN_KEY_CONSTRAINT = "foreignKeyName=\"" + REPLACE_COLUMN_FOREIGN_KEY_NAME
+			+ "\"\n" + "referencedTableName=\"" + REPLACE_COLUMN_FOREIGN_KEY_REFERECED_TABLE_NAME + "\" \n"
+			+ "referencedColumnNames=\"" + REPLACE_COLUMN_FOREIGN_KEY_REFERECED_COLUMN_NAME + "\"";
 
 	public static final String COLUMN_NULLABLE = "nullable=\"" + REPLACE_COLUMN_NULLABLE_VALUE + "\"";
 

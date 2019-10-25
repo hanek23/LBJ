@@ -1,36 +1,21 @@
 package gui;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TimeZone;
-
 import org.apache.commons.lang3.StringUtils;
 
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.Theme;
-import com.googlecode.lanterna.graphics.ThemeDefinition;
-import com.googlecode.lanterna.gui2.AbstractComponent;
 import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.CheckBox;
-import com.googlecode.lanterna.gui2.ComboBox;
-import com.googlecode.lanterna.gui2.Direction;
 import com.googlecode.lanterna.gui2.EmptySpace;
 import com.googlecode.lanterna.gui2.GridLayout;
 import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.Panel;
-import com.googlecode.lanterna.gui2.Separator;
 import com.googlecode.lanterna.gui2.TextBox;
 import com.googlecode.lanterna.gui2.Window;
-import com.googlecode.lanterna.gui2.WindowDecorationRenderer;
-import com.googlecode.lanterna.gui2.WindowPostRenderer;
 import com.googlecode.lanterna.gui2.Button.Listener;
 
 import constants.Labels;
 import constants.NamingConventions;
 import constants.Settings;
 import domain.Column;
-import domain.DataType;
 import domain.ForeignKey;
 import domain.Table;
 import generator.Generator;
@@ -45,8 +30,8 @@ public class AddColumn implements Runnable, Updatable {
 	private TextBox referencedTable;
 	private TextBox foreignKeyName;
 	private CheckBox foreignKey;
-	private TextBox additionalInfo;
-	private ComboBox<DataType> typesComboBox;
+	private Label dataTypeLabel;
+	private TextBox dataType;
 	private Panel content;
 	private Table table;
 	private TextBox tableName;
@@ -56,7 +41,6 @@ public class AddColumn implements Runnable, Updatable {
 	private Label referencedTableLabel;
 	private Label referencedColumnLabel;
 	private Label foreignKeyNameLabel;
-	private Label additionalInfoLabel;
 	private CheckBox index;
 	private TextBox indexName;
 	private Label indexNameLabel;
@@ -96,6 +80,12 @@ public class AddColumn implements Runnable, Updatable {
 		content.addComponent(columnNameLabel);
 		columnName = new TextBox();
 		content.addComponent(columnName
+				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
+
+		dataTypeLabel = new Label(Labels.ADD_COLUMN_TYPE);
+		content.addComponent(dataTypeLabel);
+		dataType = new TextBox();
+		content.addComponent(dataType
 				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
 
 		content.addComponent(new Label(Labels.ADD_COLUMN_NULLABLE));
@@ -139,18 +129,6 @@ public class AddColumn implements Runnable, Updatable {
 		foreignKeyName = new TextBox(NamingConventions.FOREIGN_KEY_NAME_DEFAULT_VALUE);
 		foreignKeyName.setEnabled(false);
 		content.addComponent(foreignKeyName
-				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
-
-		content.addComponent(new Label(Labels.ADD_COLUMN_TYPE));
-		typesComboBox = new ComboBox<>(DataType.values());
-		typesComboBox.setReadOnly(true);
-		content.addComponent(typesComboBox
-				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
-
-		additionalInfoLabel = new Label(Labels.ADD_COLUMN_ADDITIONAL_INFO);
-		content.addComponent(additionalInfoLabel);
-		additionalInfo = new TextBox();
-		content.addComponent(additionalInfo
 				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
 
 		content.addComponent(new EmptySpace());
@@ -207,7 +185,7 @@ public class AddColumn implements Runnable, Updatable {
 		ForeignKey foreignKeyObject = new ForeignKey(foreignKeyName.getText(), referencedTable.getText(),
 				referencedColumn.getText());
 		return new Column(columnName.getText(), indexName.getText(), foreignKeyObject, nullable.isChecked(),
-				typesComboBox.getSelectedItem());
+				dataType.getText());
 	}
 
 	private boolean validate() {
@@ -224,9 +202,7 @@ public class AddColumn implements Runnable, Updatable {
 					NamingConventions.FOREIGN_KEY_NAME_DEFAULT_VALUE,
 					NamingConventions.FOREIGN_KEY_NAME_DEFAULT_VALUE + NamingConventions.SEPARATOR) && toReturn;
 		}
-		if (typesComboBox.getSelectedItem().isAdditionalInfoRequired()) {
-			toReturn = GuiValidator.validateTextBox(additionalInfo, additionalInfoLabel) && toReturn;
-		}
+		toReturn = GuiValidator.validateTextBox(dataType, dataTypeLabel) && toReturn;
 
 		return toReturn;
 	}
@@ -265,10 +241,6 @@ public class AddColumn implements Runnable, Updatable {
 			referencedTable.setText("");
 			referencedColumn.setText("");
 			foreignKeyName.setText("");
-		}
-		additionalInfo.setEnabled(typesComboBox.getSelectedItem().isAdditionalInfoRequired());
-		if (!typesComboBox.getSelectedItem().isAdditionalInfoRequired()) {
-			additionalInfo.setText("");
 		}
 		changeCase();
 	}

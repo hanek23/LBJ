@@ -51,12 +51,12 @@ public class XmlBuilder {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NAME, columnName);
 	}
 
-	public static String replaceColumnType(String replaceIn, String columnType) {
-		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_TYPE, columnType);
+	public static String replaceColumnDataType(String replaceIn, String columnDataType) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_DATA_TYPE, columnDataType);
 	}
 
 	public static String replaceColumnForeignKeyName(String replaceIn, String foreignKeyName) {
-		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_FOREIGN_KEY_REFERECED_TABLE_NAME, foreignKeyName);
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_FOREIGN_KEY_NAME, foreignKeyName);
 	}
 
 	public static String replaceColumnForeignKeyReferencedTable(String replaceIn, String foreignKeyReferencedTable) {
@@ -73,12 +73,26 @@ public class XmlBuilder {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_INDEX_NAME, indexName);
 	}
 
-	public static String replaceColumnNullable(String replaceIn, String nullable) {
-		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NULLABLE, nullable);
+	public static String addColumnNullableFalse(String replaceIn) {
+		replaceIn = StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NULLABLE, XmlParts.COLUMN_NULLABLE);
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NULLABLE_VALUE, "false");
 	}
 
-	public static String replaceColumnNullableValue(String replaceIn, boolean nullableValue) {
-		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NULLABLE_VALUE, String.valueOf(nullableValue));
+	public static String addColumnConstraints(String replaceIn) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_CONSTRAINS, XmlParts.COLUMN_CONSTRAINS);
+	}
+
+	public static String addColumnForeignKeyConstraint(String replaceIn) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_FOREIGN_KEY,
+				XmlParts.COLUMN_FOREIGN_KEY_CONSTRAINT);
+	}
+
+	public static String removeColumnForeignKeyConstraint(String replaceIn) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_FOREIGN_KEY, "");
+	}
+
+	public static String removeNullable(String replaceIn) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NULLABLE, "");
 	}
 
 }
