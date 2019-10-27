@@ -51,8 +51,10 @@ public class Column {
 	}
 
 	public void setForeignKey(ForeignKey foreignKey) {
-		foreignKey.setColumn(this);
-		this.foreignKey = foreignKey;
+		if (foreignKey != null) {
+			foreignKey.setColumn(this);
+			this.foreignKey = foreignKey;
+		}
 	}
 
 	public boolean isNullable() {

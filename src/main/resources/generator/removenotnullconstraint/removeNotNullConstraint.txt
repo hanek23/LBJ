@@ -1,0 +1,44 @@
+	<changeSet author="phan" id="1" dbms="oracle">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="N">
+				SELECT NULLABLE
+				FROM USER_TAB_COLUMNS
+				WHERE table_name =
+				'NDER_REFERENCE'
+				AND column_name = 'RNAAC'
+			</sqlCheck>
+		</preConditions>
+		<comment>Remove NOTNULL constraint from column RNAAC in table NDER_REFERENCE if it exists</comment>
+		<dropNotNullConstraint tableName="NDER_REFERENCE" columnName="rnaac"
+			columnDataType="char(3)" />
+	</changeSet>
+
+	<changeSet author="phan" id="2" dbms="mssql">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">
+				SELECT is_nullable
+				FROM sys.columns
+				WHERE object_id =
+				OBJECT_ID('NDER_REFERENCE')
+				AND name = 'RNAAC'
+			</sqlCheck>
+		</preConditions>
+		<comment>Remove NOTNULL constraint from column RNAAC in table NDER_REFERENCE if it exists</comment>
+		<dropNotNullConstraint tableName="NDER_REFERENCE" columnName="rnaac"
+			columnDataType="char(3)" />
+	</changeSet>
+
+	<changeSet author="phan" id="3" dbms="postgresql">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="NO">
+				SELECT is_nullable
+				FROM information_schema.columns
+				WHERE
+				columns.table_name = 'nder_reference'
+				AND columns.column_name = 'rnaac'
+			</sqlCheck>
+		</preConditions>
+		<comment>Remove NOTNULL constraint from column RNAAC at table NDER_REFERENCE if it exists</comment>
+		<dropNotNullConstraint tableName="NDER_REFERENCE" columnName="rnaac"
+			columnDataType="char(3)" />
+	</changeSet>

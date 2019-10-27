@@ -1,0 +1,25 @@
+	<changeSet id="1" author="ldur" dbms="postgresql">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="ORG_ENT" columnName="active" />
+			</not>
+		</preConditions>
+		<addColumn tableName="ORG_ENT">
+			<column name="active" type="boolean" defaultValue="false" >
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+	</changeSet>
+	
+	<changeSet id="2" author="ldur"  dbms="oracle, mssql">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="ORG_ENT" columnName="active" />
+			</not>
+		</preConditions>
+		<addColumn tableName="ORG_ENT">
+			<column name="active" type="char(1)" defaultValue="0">
+				<constraints nullable="false" />
+			</column> 
+		</addColumn>
+	</changeSet>

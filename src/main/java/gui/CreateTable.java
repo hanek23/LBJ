@@ -27,7 +27,6 @@ public class CreateTable implements Runnable, Updatable {
 	private TextBox primaryKeyName;
 	private TextBox tableName;
 	private boolean initialized;
-	private CreateTable thisInstance;
 	private MainMenu mainMenu;
 	private Label tableNameLabel;
 	private Label primaryKeyNameLabel;
@@ -36,78 +35,23 @@ public class CreateTable implements Runnable, Updatable {
 	private CheckBox mssql;
 	private CheckBox postgresql;
 	private TextBox primaryKeyConstraint;
-	private Label primaryKeyConstrainLabel;
+	private Label primaryKeyConstraintLabel;
+	private TextBox sequenceName;
+	private Label sequenceNameLabel;
+	private Label primaryKeyIndexLabel;
+	private TextBox primaryKeyIndex;
 
 	public CreateTable(MainMenu mainMenu, Window window, Runnable previousWindow) {
 		this.mainMenu = mainMenu;
 		this.window = window;
 		this.previousWindow = previousWindow;
-		thisInstance = this;
 		initialize();
 	}
 
 	private void initialize() {
-		content = new Panel(new GridLayout(Settings.GUI_NUMBER_OF_COLUMNS));
-		GridLayout gridLayout = (GridLayout) content.getLayoutManager();
-		gridLayout.setVerticalSpacing(Settings.GUI_VERTICAL_SPACING);
-
-		tableNameLabel = new Label(Labels.CREATE_TABLE_TABLE_NAME);
-		content.addComponent(tableNameLabel);
-		tableName = new TextBox();
-		content.addComponent(tableName
-				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
-
-		primaryKeyNameLabel = new Label(Labels.CREATE_TABLE_PRIMARY_KEY_NAME);
-		content.addComponent(primaryKeyNameLabel);
-		primaryKeyName = new TextBox(NamingConventions.PRIMARY_KEY_NAME_DEFAULT_VALUE);
-		content.addComponent(primaryKeyName
-				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
-
-		primaryKeyConstrainLabel = new Label(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN);
-		content.addComponent(primaryKeyConstrainLabel);
-		primaryKeyConstraint = new TextBox(NamingConventions.PRIMARY_KEY_CONSTRAINT_DEFAULT_VALUE);
-		content.addComponent(primaryKeyConstraint
-				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
-
-		databasesLabel = new Label(Labels.CREATE_TABLE_DATABASES)
-				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS));
-		content.addComponent(databasesLabel);
-
-		oracle = new CheckBox(Labels.CREATE_TABLE_DATABASES_ORACLE);
-		oracle.setChecked(true);
-		content.addComponent(
-				oracle.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS)));
-
-		mssql = new CheckBox(Labels.CREATE_TABLE_DATABASES_MSSQL);
-		mssql.setChecked(true);
-		content.addComponent(
-				mssql.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS)));
-
-		postgresql = new CheckBox(Labels.CREATE_TABLE_DATABASES_POSTGRESQL);
-		postgresql.setChecked(true);
-		content.addComponent(postgresql
-				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS)));
-
-		content.addComponent(new EmptySpace());
-		content.addComponent(new Button(Labels.BUTTON_BACK, previousWindow)
-				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
-		Button addColumnButton = new Button(Labels.BUTTON_ADD_COLUMN);
-		content.addComponent(addColumnButton.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
-		addColumnButton.addListener(new Listener() {
-
-			@Override
-			public void onTriggered(Button button) {
-				if (!CreateTable.this.validate()) {
-					return;
-				}
-				// TODO boolean z databazi, SEQUENCE NAME
-				AddColumn addColumn = new AddColumn(mainMenu, window, thisInstance, new Table(tableName.getText()),
-						Operation.CREATE_TABLE);
-				mainMenu.addUpdatableChild(addColumn);
-				addColumn.run();
-			}
-		});
-
+		initializeComponents();
+		addComponentsToContent();
+		addButtonsToContent();
 		initialized = true;
 	}
 
@@ -115,19 +59,19 @@ public class CreateTable implements Runnable, Updatable {
 		boolean toReturn = GuiValidator.validateTextBox(tableName, tableNameLabel);
 		toReturn = GuiValidator.validateAll(primaryKeyName, primaryKeyNameLabel,
 				NamingConventions.PRIMARY_KEY_NAME_DEFAULT_VALUE) && toReturn;
-		toReturn = validateDatabasesCheckBoxs() && toReturn;
-		toReturn = GuiValidator.validateAll(primaryKeyConstraint, primaryKeyConstrainLabel,
+		toReturn = validateDatabasesCheckBoxes() && toReturn;
+		toReturn = GuiValidator.validateAll(primaryKeyConstraint, primaryKeyConstraintLabel,
 				NamingConventions.PRIMARY_KEY_CONSTRAINT_DEFAULT_VALUE) && toReturn;
 		return toReturn;
 	}
 
-	private boolean validateDatabasesCheckBoxs() {
+	private boolean validateDatabasesCheckBoxes() {
 		if (oracle.isChecked() || mssql.isChecked() || postgresql.isChecked()) {
 			databasesLabel.setBackgroundColor(null);
-			return false;
+			return true;
 		} else {
 			databasesLabel.setBackgroundColor(TextColor.ANSI.RED);
-			return true;
+			return false;
 		}
 	}
 
@@ -143,7 +87,95 @@ public class CreateTable implements Runnable, Updatable {
 		if (tableName.isFocused()) {
 			primaryKeyName.setText(NamingConventions.PRIMARY_KEY_NAME_DEFAULT_VALUE + tableName.getText());
 			primaryKeyConstraint.setText(NamingConventions.PRIMARY_KEY_CONSTRAINT_DEFAULT_VALUE + tableName.getText());
+			primaryKeyIndex.setText(NamingConventions.INDEX_NAME_DEFAULT_VALUE + tableName.getText()
+					+ NamingConventions.SEPARATOR + primaryKeyName.getText());
 		}
+		if (oracle.isChecked() || postgresql.isChecked()) {
+			sequenceName.setText(NamingConventions.SEQUENCE_NAME_DEFAULT_VALUE + tableName.getText());
+			sequenceName.setEnabled(true);
+		} else {
+			sequenceName.setText("");
+			sequenceName.setEnabled(false);
+		}
+		changeCase();
+	}
+
+	private void changeCase() {
+		GuiUtils.upperCase(tableName);
+		GuiUtils.lowerCase(primaryKeyName);
+		GuiUtils.upperCase(primaryKeyConstraint);
+		GuiUtils.upperCase(sequenceName);
+		GuiUtils.upperCase(primaryKeyIndex);
+	}
+
+	private void initializeComponents() {
+		content = GuiUtils.initializeDefaultContent();
+
+		tableNameLabel = new Label(Labels.TABLE_NAME);
+		tableName = new TextBox();
+
+		primaryKeyNameLabel = new Label(Labels.CREATE_TABLE_PRIMARY_KEY_NAME);
+		primaryKeyName = new TextBox(NamingConventions.PRIMARY_KEY_NAME_DEFAULT_VALUE);
+
+		primaryKeyConstraintLabel = new Label(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN);
+		primaryKeyConstraint = new TextBox(NamingConventions.PRIMARY_KEY_CONSTRAINT_DEFAULT_VALUE);
+
+		primaryKeyIndexLabel = new Label(Labels.CREATE_TABLE_PRIMARY_INDEX);
+		primaryKeyIndex = new TextBox(NamingConventions.INDEX_NAME_DEFAULT_VALUE);
+
+		databasesLabel = new Label(Labels.CREATE_TABLE_DATABASES);
+
+		oracle = new CheckBox(Labels.CREATE_TABLE_DATABASES_ORACLE);
+		oracle.setChecked(true);
+
+		mssql = new CheckBox(Labels.CREATE_TABLE_DATABASES_MSSQL);
+		mssql.setChecked(true);
+
+		postgresql = new CheckBox(Labels.CREATE_TABLE_DATABASES_POSTGRESQL);
+		postgresql.setChecked(true);
+
+		sequenceNameLabel = new Label(Labels.CREATE_TABLE_SEQUENCE_NAME);
+		sequenceName = new TextBox();
+	}
+
+	private void addComponentsToContent() {
+		GuiUtils.addLabelAndComponentToContent(tableNameLabel, tableName, content);
+		GuiUtils.addLabelAndComponentToContent(primaryKeyNameLabel, primaryKeyName, content);
+		GuiUtils.addLabelAndComponentToContent(primaryKeyConstraintLabel, primaryKeyConstraint, content);
+		GuiUtils.addLabelAndComponentToContent(primaryKeyIndexLabel, primaryKeyIndex, content);
+		GuiUtils.addComponentToContent(databasesLabel, content);
+		GuiUtils.addComponentToContent(oracle, content);
+		GuiUtils.addComponentToContent(mssql, content);
+		GuiUtils.addComponentToContent(postgresql, content);
+		GuiUtils.addLabelAndComponentToContent(sequenceNameLabel, sequenceName, content);
+	}
+
+	private void addButtonsToContent() {
+		content.addComponent(new EmptySpace());
+		GuiUtils.addDefaultBackButton(content, previousWindow);
+		Button addColumnButton = new Button(Labels.BUTTON_ADD_COLUMN);
+		content.addComponent(addColumnButton.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
+		addColumnButton.addListener(new Listener() {
+
+			@Override
+			public void onTriggered(Button button) {
+				if (!CreateTable.this.validate()) {
+					return;
+				}
+				// TODO PRIMARY KEY INDEX DEFUALT NAME?
+				Table table = new Table(tableName.getText());
+				table.setForOracle(oracle.isChecked());
+				table.setForMssql(mssql.isChecked());
+				table.setForPostgreSql(postgresql.isChecked());
+				table.setPrimaryKeyColumnName(primaryKeyName.getText());
+				table.setPrimaryKeyContrainName(primaryKeyConstraint.getText());
+				table.setPrimaryKeyIndexName(primaryKeyIndex.getText());
+				table.setSequenceName(sequenceName.getText());
+				AddColumn addColumn = new AddColumn(mainMenu, window, CreateTable.this, table, Operation.CREATE_TABLE);
+				mainMenu.addUpdatableChild(addColumn);
+				addColumn.run();
+			}
+		});
 	}
 
 	public Window getWindow() {

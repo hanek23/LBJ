@@ -35,6 +35,10 @@ public class XmlBuilder {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_TABLE_NAME, tableName);
 	}
 
+	public static String replaceTableNameLowerCase(String replaceIn, String tableName) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_TABLE_NAME_LOWER_CASE, StringUtils.lowerCase(tableName));
+	}
+
 	public static String replaceColumnPrimaryKeyName(String replaceIn, String primaryKeyName) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_PRIMARY_KEY_NAME, primaryKeyName);
 	}
@@ -49,6 +53,11 @@ public class XmlBuilder {
 
 	public static String replaceColumnName(String replaceIn, String columnName) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NAME, columnName);
+	}
+
+	public static String replaceColumnNameUpperCase(String replaceIn, String columnName) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NAME_UPPER_CASE,
+				StringUtils.upperCase(columnName));
 	}
 
 	public static String replaceColumnDataType(String replaceIn, String columnDataType) {
@@ -93,6 +102,10 @@ public class XmlBuilder {
 
 	public static String removeNullable(String replaceIn) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NULLABLE, "");
+	}
+
+	public static String removeConstraints(String addColumn) {
+		return StringUtils.replace(addColumn, XmlParts.REPLACE_COLUMN_CONSTRAINS, "");
 	}
 
 }

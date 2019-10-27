@@ -1,7 +1,7 @@
 package constants;
 
 public class NamingConventions {
-	
+
 	private NamingConventions() {
 		// only static constants
 	}
@@ -11,5 +11,6 @@ public class NamingConventions {
 	public static final String PRIMARY_KEY_CONSTRAINT_DEFAULT_VALUE = "P" + SEPARATOR;
 	public static final String INDEX_NAME_DEFAULT_VALUE = "I" + SEPARATOR;
 	public static final String FOREIGN_KEY_NAME_DEFAULT_VALUE = "F" + SEPARATOR;
+	public static final String SEQUENCE_NAME_DEFAULT_VALUE = "SEQ" + SEPARATOR;
 
 }

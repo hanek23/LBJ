@@ -1,88 +1,52 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
 	objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
 
-	<changeSet author="phan" id="1" dbms="mssql">
+	<changeSet author="lbj" id="1" dbms="oracle">
 		<preConditions onFail="MARK_RAN">
-			<not>
-				<tableExists tableName="NDER_CONTAINER" />
-			</not>
+			<sqlCheck expectedResult="N">
+				SELECT NULLABLE
+				FROM USER_TAB_COLUMNS
+				WHERE table_name =
+				'NDER_CONTAINER'
+				AND column_name = 'MESSAGE'
+			</sqlCheck>
 		</preConditions>
-
-		<comment>Create table NDER_CONTAINER</comment>
-		<createTable tableName="NDER_CONTAINER">
-
-			<column name="id_nder_container" type="integer" autoIncrement="true">
-				<constraints primaryKeyName="P_NDER_CONTAINER" primaryKey="true" />
-			</column>
-
-		</createTable>
+		<comment>Remove NOTNULL constraint from column MESSAGE in table NDER_CONTAINER if it exists</comment>
+		<dropNotNullConstraint tableName="NDER_CONTAINER" columnName="message"
+			columnDataType="integer" />
 	</changeSet>
 
-	<changeSet author="phan" id="2" dbms="oracle, postgresql">
+	<changeSet author="lbj" id="2" dbms="mssql">
 		<preConditions onFail="MARK_RAN">
-			<not>
-				<tableExists tableName="NDER_CONTAINER" />
-			</not>
+			<sqlCheck expectedResult="0">
+				SELECT is_nullable
+				FROM sys.columns
+				WHERE object_id =
+				OBJECT_ID('NDER_CONTAINER')
+				AND name = 'MESSAGE'
+			</sqlCheck>
 		</preConditions>
-
-		<comment>Create table NDER_CONTAINER</comment>
-		<createTable tableName="NDER_CONTAINER">
-
-			<column name="id_nder_container" type="integer">
-				<constraints primaryKeyName="P_NDER_CONTAINER" primaryKey="true" />
-			</column>
-
-		</createTable>
+		<comment>Remove NOTNULL constraint from column MESSAGE in table NDER_CONTAINER if it exists</comment>
+		<dropNotNullConstraint tableName="NDER_CONTAINER" columnName="message"
+			columnDataType="integer" />
 	</changeSet>
 
-	<changeSet author="phan" id="3" dbms="oracle">
+	<changeSet author="lbj" id="3" dbms="postgresql">
 		<preConditions onFail="MARK_RAN">
-			<not>
-				<sequenceExists sequenceName="SEQ_NDER_CONTAINER" />
-			</not>
+			<sqlCheck expectedResult="NO">
+				SELECT is_nullable
+				FROM information_schema.columns
+				WHERE
+				columns.table_name = 'nder_container'
+				AND columns.column_name = 'message'
+			</sqlCheck>
 		</preConditions>
-		<comment>Create sequence SEQ_NDER_CONTAINER on Oracle if it doesn't exist.</comment>
-		<createSequence sequenceName="SEQ_NDER_CONTAINER" startValue="50" incrementBy="50"
-			cacheSize="20" maxValue="999999999999999999999999999" ordered="false" cycle="false" />
-	</changeSet>
-	<changeSet author="phan" id="4" dbms="postgresql">
-		<preConditions onFail="MARK_RAN">
-			<not>
-				<sequenceExists sequenceName="SEQ_NDER_CONTAINER" />
-			</not>
-		</preConditions>
-		<comment>Create sequence SEQ_NDER_CONTAINER on postgreSQL if it doesn't exist.</comment>
-		<createSequence sequenceName="SEQ_NDER_CONTAINER" startValue="50" incrementBy="50"
-			cacheSize="20" maxValue="999999999999999999" cycle="false" />
-	</changeSet>
-	<changeSet author="phan" id="5">
-		<preConditions onFail="MARK_RAN">
-			<not>
-				<columnExists tableName="NDER_CONTAINER" columnName="message" />
-			</not>
-		</preConditions>
-		<comment>Add column message to NDER_CONTAINER</comment>
-		<addColumn tableName="NDER_CONTAINER">
-			<column name="message" type="varchar(50)">
-				<constraints foreignKeyName="F_NDER_CONTAINER_NDER_MESSAGE"
-					referencedTableName="NDER_MESSAGE" referencedColumnNames="container" nullable="false" />
-			</column>
-		</addColumn>
-	</changeSet>
-	<changeSet author="phan" id="6">
-		<preConditions onFail="MARK_RAN">
-			<not>
-				<indexExists indexName="I_NDER_CONTAINER_NDER_MESSAGE" />
-			</not>
-		</preConditions>
-		<comment>Create index I_NDER_CONTAINER_NDER_MESSAGE if it doesn't exist.</comment>
-		<createIndex tableName="NDER_CONTAINER" indexName="I_NDER_CONTAINER_NDER_MESSAGE">
-			<column name="message" />
-		</createIndex>
+		<comment>Remove NOTNULL constraint from column MESSAGE at table NDER_CONTAINER if it exists</comment>
+		<dropNotNullConstraint tableName="NDER_CONTAINER" columnName="message"
+			columnDataType="integer" />
 	</changeSet>
 
 </databaseChangeLog>

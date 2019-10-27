@@ -1,6 +1,5 @@
 package generator;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import domain.Column;
@@ -18,7 +17,7 @@ public class GeneratorTest {
 	@Test
 	public void testGenerateTable() {
 		Table table = createTable();
-		System.out.println(StringUtils.deleteWhitespace(Generator.generate(table, Operation.CREATE_TABLE)));
+		System.out.println(Generator.generate(table, Operation.CREATE_TABLE, "lbj"));
 
 	}
 
@@ -31,11 +30,27 @@ public class GeneratorTest {
 		table.setPrimaryKeyContrainName(TABLE_CONSTRAIN_PRIMARY_KEY_NAME);
 		table.setSequenceName(TABLE_SEQUENCE_NAME);
 		table.setPrimaryKeyIndexName(TABLE_PRIMARY_KEY_INDEX_NAME);
-		table.addColumn(createColumn());
+		table.addColumn(createVarcharColumn());
+		table.addColumn(createBooleanNotNullColumn());
+		table.addColumn(createBooleanColumn());
 		return table;
 	}
 
-	private Column createColumn() {
+	private Column createBooleanNotNullColumn() {
+		Column column = new Column("activeNotNull");
+		column.setDataType("boolean");
+		column.setNullable(false);
+		return column;
+	}
+
+	private Column createBooleanColumn() {
+		Column column = new Column("active");
+		column.setDataType("boolean");
+		column.setNullable(true);
+		return column;
+	}
+
+	private Column createVarcharColumn() {
 		Column column = new Column("message");
 		column.setDataType("varchar(50)");
 		column.setIndex(true);

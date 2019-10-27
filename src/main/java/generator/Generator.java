@@ -12,21 +12,50 @@ public class Generator {
 		// only static methods
 	}
 
-	public static String generate(Table table, Operation operation) {
+	public static String generate(Table table, Operation operation, String author) {
 		String changesets = null;
+		if (operation == Operation.REMOVE_NOT_NULL_CONSTRAINT) {
+			changesets = removeNotNullConstraint(table);
+		}
 		if (operation == Operation.CREATE_TABLE) {
 			changesets = createTable(table);
+			operation = Operation.ADD_COLUMN;
 		}
-		for (Column column : table.getColumns()) {
-			changesets += addColumn(column);
+		if (operation == Operation.ADD_COLUMN) {
+			for (Column column : table.getColumns()) {
+				changesets += addColumn(column);
+			}
 		}
-		changesets = XmlBuilder.replaceAuthor(changesets, "phan");
+		changesets = XmlBuilder.replaceAuthor(changesets, author);
 		return XmlBuilder.toChangelog(changesets);
 	}
 
+	private static String removeNotNullConstraint(Table table) {
+		if (table.getColumns().size() > 1) {
+			throw new UnsupportedOperationException(
+					"I was not taught how to remove multiple not null constraints at once");
+		}
+		String removeNotNullConstraint = XmlParts.COLUMN_REMOVE_NOT_NULL_CONSTRAINT;
+		removeNotNullConstraint = XmlBuilder.replaceTableName(removeNotNullConstraint, table.getName());
+		removeNotNullConstraint = XmlBuilder.replaceTableNameLowerCase(removeNotNullConstraint, table.getName());
+		removeNotNullConstraint = XmlBuilder.replaceColumnName(removeNotNullConstraint,
+				table.getColumns().get(0).getName());
+		removeNotNullConstraint = XmlBuilder.replaceColumnNameUpperCase(removeNotNullConstraint,
+				table.getColumns().get(0).getName());
+		removeNotNullConstraint = XmlBuilder.replaceColumnDataType(removeNotNullConstraint,
+				table.getColumns().get(0).getDataType());
+		return removeNotNullConstraint;
+	}
+
 	private static String addColumn(Column column) {
-		String addColumn = XmlParts.ADD_COLUMN;
-		if (column.hasForeignKey() || column.isNullable()) {
+		String addColumn;
+		if (StringUtils.equalsIgnoreCase(column.getDataType(), "boolean")) {
+			addColumn = XmlParts.ADD_COLUMN_BOOLEAN_ORACLE_MSSQL;
+			addColumn += XmlParts.ADD_COLUMN_BOOLEAN_POSTGRESQL;
+		} else {
+			addColumn = XmlParts.ADD_COLUMN;
+		}
+		if (column.hasForeignKey() || !column.isNullable()) {
 			addColumn = XmlBuilder.addColumnConstraints(addColumn);
 			if (column.hasForeignKey()) {
 				addColumn = XmlBuilder.addColumnForeignKeyConstraint(addColumn);
@@ -38,11 +67,13 @@ public class Generator {
 			} else {
 				addColumn = XmlBuilder.removeColumnForeignKeyConstraint(addColumn);
 			}
-			if (!column.isNullable()) {
-				addColumn = XmlBuilder.addColumnNullableFalse(addColumn);
-			} else {
+			if (column.isNullable()) {
 				addColumn = XmlBuilder.removeNullable(addColumn);
+			} else {
+				addColumn = XmlBuilder.addColumnNullableFalse(addColumn);
 			}
+		} else {
+			addColumn = XmlBuilder.removeConstraints(addColumn);
 		}
 		if (column.hasIndex()) {
 			addColumn += XmlParts.COLUMN_INDEX;
