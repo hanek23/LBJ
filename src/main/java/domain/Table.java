@@ -3,7 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import gui.AddColumn;
+import gui.AddColumnForm;
 
 public class Table {
 

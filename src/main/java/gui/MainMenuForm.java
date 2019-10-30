@@ -23,10 +23,10 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import constants.Labels;
 import generator.Operation;
 
-public class MainMenu implements Runnable {
+public class MainMenuForm implements Runnable {
 
 	public static void main(String[] args) {
-		MainMenu mainMenu = new MainMenu();
+		MainMenuForm mainMenu = new MainMenuForm();
 		mainMenu.run();
 	}
 
@@ -34,11 +34,11 @@ public class MainMenu implements Runnable {
 	private Panel mainMenuContent;
 	private List<Updatable> updatableChilds;
 
-	public MainMenu() {
+	public MainMenuForm() {
 		initialize();
 	}
 
-	public MainMenu(Window window) {
+	public MainMenuForm(Window window) {
 		this.window = window;
 	}
 
@@ -53,15 +53,15 @@ public class MainMenu implements Runnable {
 
 			ActionListBox mainMenu = new ActionListBox();
 
-			AddColumn addColumn = new AddColumn(this, window, this, Operation.ADD_COLUMN);
+			AddColumnForm addColumn = new AddColumnForm(this, window, this, Operation.ADD_COLUMN);
 			addUpdatableChild(addColumn);
 			mainMenu.addItem(Labels.MAIN_MENU_ADD_COLUMN, addColumn);
 
-			CreateTable createTable = new CreateTable(this, window, this);
+			CreateTableForm createTable = new CreateTableForm(this, window, this);
 			addUpdatableChild(createTable);
 			mainMenu.addItem(Labels.MAIN_MENU_CREATE_TABLE, createTable);
 
-			RemoveNotNullConstraint removeNotNullConstraint = new RemoveNotNullConstraint(window, this);
+			RemoveNotNullConstraintForm removeNotNullConstraint = new RemoveNotNullConstraintForm(window, this);
 			addUpdatableChild(removeNotNullConstraint);
 			mainMenu.addItem(Labels.MAIN_MENU_REMOVE_NOT_NULL_CONSTRAINT, removeNotNullConstraint);
 

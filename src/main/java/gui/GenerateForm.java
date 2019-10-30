@@ -19,7 +19,7 @@ import domain.Table;
 import generator.Generator;
 import generator.Operation;
 
-public class Generate implements Runnable {
+public class GenerateForm implements Runnable {
 
 	private Window window;
 	private Runnable previousWindow;
@@ -30,7 +30,7 @@ public class Generate implements Runnable {
 	private TextBox author;
 	private TextBox generatedXml;
 
-	public Generate(Window window, Runnable previousWindow, Table table, Operation operation) {
+	public GenerateForm(Window window, Runnable previousWindow, Table table, Operation operation) {
 		this.window = window;
 		this.previousWindow = previousWindow;
 		this.table = table;
@@ -45,7 +45,7 @@ public class Generate implements Runnable {
 
 	private void initialize() {
 		initializeComponents();
-		addComponentsToContent();
+		addComponentsToContent(false);
 		addButtonsToContent();
 	}
 
@@ -67,6 +67,7 @@ public class Generate implements Runnable {
 			@Override
 			public void onTriggered(Button button) {
 				generatedXml.setText(Generator.generate(table, operation, author.getText()));
+				generatedXml.setPreferredSize(new TerminalSize(23, 17));
 			}
 		});
 
@@ -83,10 +84,10 @@ public class Generate implements Runnable {
 		});
 	}
 
-	private void addComponentsToContent() {
+	private void addComponentsToContent(boolean addGeneratedXml) {
 		GuiUtils.addLabelAndComponentToContent(authorLabel, author, content);
 		GuiUtils.addComponentToContent(generatedXml, content);
-		content.addComponent(generatedXml.setPreferredSize(new TerminalSize(23, 17)));
+		content.addComponent(generatedXml.setPreferredSize(new TerminalSize(0, 0)));
 	}
 
 	private void initializeComponents() {

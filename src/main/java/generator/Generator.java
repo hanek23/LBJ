@@ -13,7 +13,7 @@ public class Generator {
 	}
 
 	public static String generate(Table table, Operation operation, String author) {
-		String changesets = null;
+		String changesets = "";
 		if (operation == Operation.REMOVE_NOT_NULL_CONSTRAINT) {
 			changesets = removeNotNullConstraint(table);
 		}

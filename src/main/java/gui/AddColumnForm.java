@@ -22,7 +22,7 @@ import domain.Table;
 import generator.Generator;
 import generator.Operation;
 
-public class AddColumn implements Runnable, Updatable {
+public class AddColumnForm implements Runnable, Updatable {
 
 	private Window window;
 	private Runnable previousWindow;
@@ -46,15 +46,15 @@ public class AddColumn implements Runnable, Updatable {
 	private TextBox indexName;
 	private Label indexNameLabel;
 	private CheckBox nullable;
-	private MainMenu mainMenu;
+	private MainMenuForm mainMenu;
 	private Column column;
 	private Operation operation;
 
-	public AddColumn(MainMenu mainMenu, Window window, Runnable previousWindow, Operation operation) {
+	public AddColumnForm(MainMenuForm mainMenu, Window window, Runnable previousWindow, Operation operation) {
 		this(mainMenu, window, previousWindow, new Table(""), operation);
 	}
 
-	public AddColumn(MainMenu mainMenu, Window window, Runnable previousWindow, Table table, Operation operation) {
+	public AddColumnForm(MainMenuForm mainMenu, Window window, Runnable previousWindow, Table table, Operation operation) {
 		this.mainMenu = mainMenu;
 		this.window = window;
 		this.previousWindow = previousWindow;
@@ -218,14 +218,14 @@ public class AddColumn implements Runnable, Updatable {
 
 			@Override
 			public void onTriggered(Button button) {
-				if (!AddColumn.this.validate()) {
+				if (!AddColumnForm.this.validate()) {
 					return;
 				}
 				table.removeColumn(column);
 				table.setName(tableName.getText());
-				column = AddColumn.this.createColumn();
+				column = AddColumnForm.this.createColumn();
 				table.addColumn(column);
-				AddColumn newAddColumn = new AddColumn(mainMenu, window, AddColumn.this, table, operation);
+				AddColumnForm newAddColumn = new AddColumnForm(mainMenu, window, AddColumnForm.this, table, operation);
 				mainMenu.addUpdatableChild(newAddColumn);
 				newAddColumn.run();
 			}
@@ -238,12 +238,12 @@ public class AddColumn implements Runnable, Updatable {
 
 			@Override
 			public void onTriggered(Button button) {
-				if (!AddColumn.this.validate()) {
+				if (!AddColumnForm.this.validate()) {
 					return;
 				}
 				table.setName(tableName.getText());
-				table.addColumn(AddColumn.this.createColumn());
-				Generate generate = new Generate(window, AddColumn.this, table, operation);
+				table.addColumn(AddColumnForm.this.createColumn());
+				GenerateForm generate = new GenerateForm(window, AddColumnForm.this, table, operation);
 				generate.run();
 			}
 		});

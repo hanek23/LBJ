@@ -19,7 +19,7 @@ import constants.Settings;
 import domain.Table;
 import generator.Operation;
 
-public class CreateTable implements Runnable, Updatable {
+public class CreateTableForm implements Runnable, Updatable {
 
 	private Window window;
 	private Runnable previousWindow;
@@ -27,7 +27,7 @@ public class CreateTable implements Runnable, Updatable {
 	private TextBox primaryKeyName;
 	private TextBox tableName;
 	private boolean initialized;
-	private MainMenu mainMenu;
+	private MainMenuForm mainMenu;
 	private Label tableNameLabel;
 	private Label primaryKeyNameLabel;
 	private Label databasesLabel;
@@ -41,7 +41,7 @@ public class CreateTable implements Runnable, Updatable {
 	private Label primaryKeyIndexLabel;
 	private TextBox primaryKeyIndex;
 
-	public CreateTable(MainMenu mainMenu, Window window, Runnable previousWindow) {
+	public CreateTableForm(MainMenuForm mainMenu, Window window, Runnable previousWindow) {
 		this.mainMenu = mainMenu;
 		this.window = window;
 		this.previousWindow = previousWindow;
@@ -159,7 +159,7 @@ public class CreateTable implements Runnable, Updatable {
 
 			@Override
 			public void onTriggered(Button button) {
-				if (!CreateTable.this.validate()) {
+				if (!CreateTableForm.this.validate()) {
 					return;
 				}
 				// TODO PRIMARY KEY INDEX DEFUALT NAME?
@@ -171,7 +171,7 @@ public class CreateTable implements Runnable, Updatable {
 				table.setPrimaryKeyContrainName(primaryKeyConstraint.getText());
 				table.setPrimaryKeyIndexName(primaryKeyIndex.getText());
 				table.setSequenceName(sequenceName.getText());
-				AddColumn addColumn = new AddColumn(mainMenu, window, CreateTable.this, table, Operation.CREATE_TABLE);
+				AddColumnForm addColumn = new AddColumnForm(mainMenu, window, CreateTableForm.this, table, Operation.CREATE_TABLE);
 				mainMenu.addUpdatableChild(addColumn);
 				addColumn.run();
 			}

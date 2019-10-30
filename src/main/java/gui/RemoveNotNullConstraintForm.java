@@ -14,7 +14,7 @@ import domain.Column;
 import domain.Table;
 import generator.Operation;
 
-public class RemoveNotNullConstraint implements Runnable, Updatable {
+public class RemoveNotNullConstraintForm implements Runnable, Updatable {
 
 	private Window window;
 	private Runnable previousWindow;
@@ -27,7 +27,7 @@ public class RemoveNotNullConstraint implements Runnable, Updatable {
 	private Label columnDataTypeLabel;
 	private TextBox columnDataType;
 
-	public RemoveNotNullConstraint(Window window, Runnable previousWindow) {
+	public RemoveNotNullConstraintForm(Window window, Runnable previousWindow) {
 		this.window = window;
 		this.previousWindow = previousWindow;
 		initialize();
@@ -69,11 +69,11 @@ public class RemoveNotNullConstraint implements Runnable, Updatable {
 
 			@Override
 			public void onTriggered(Button button) {
-				if (!RemoveNotNullConstraint.this.validate()) {
+				if (!RemoveNotNullConstraintForm.this.validate()) {
 					return;
 				}
-				Table table = RemoveNotNullConstraint.this.createTable();
-				Generate generate = new Generate(window, RemoveNotNullConstraint.this, table,
+				Table table = RemoveNotNullConstraintForm.this.createTable();
+				GenerateForm generate = new GenerateForm(window, RemoveNotNullConstraintForm.this, table,
 						Operation.REMOVE_NOT_NULL_CONSTRAINT);
 				generate.run();
 			}
