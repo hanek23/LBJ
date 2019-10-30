@@ -39,7 +39,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>gui.MainMenu</mainClass>
+							<mainClass>gui.MainMenuForm</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

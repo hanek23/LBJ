@@ -66,6 +66,9 @@ public class GenerateForm implements Runnable {
 
 			@Override
 			public void onTriggered(Button button) {
+				if (!GenerateForm.this.validate()) {
+					return;
+				}
 				generatedXml.setText(Generator.generate(table, operation, author.getText()));
 				generatedXml.setPreferredSize(new TerminalSize(23, 17));
 			}
@@ -82,6 +85,10 @@ public class GenerateForm implements Runnable {
 				clipboard.setContents(stringSelection, null);
 			}
 		});
+	}
+
+	protected boolean validate() {
+		return GuiValidator.validateTextBox(author, authorLabel);
 	}
 
 	private void addComponentsToContent(boolean addGeneratedXml) {
