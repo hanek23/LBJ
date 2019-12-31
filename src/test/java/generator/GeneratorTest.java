@@ -17,7 +17,7 @@ public class GeneratorTest {
 	@Test
 	public void testGenerateTable() {
 		Table table = createTable();
-		System.out.println(Generator.generate(table, Operation.CREATE_TABLE, "lbj"));
+		System.out.println(Generator.generate(table, Operation.CREATE_TABLE, "lbj23"));
 
 	}
 
