@@ -2,10 +2,8 @@ package gui;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.CheckBox;
-import com.googlecode.lanterna.gui2.EmptySpace;
 import com.googlecode.lanterna.gui2.GridLayout;
 import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.Panel;
@@ -15,11 +13,9 @@ import com.googlecode.lanterna.gui2.Button.Listener;
 
 import constants.Labels;
 import constants.NamingConventions;
-import constants.Settings;
 import domain.Column;
 import domain.ForeignKey;
 import domain.Table;
-import generator.Generator;
 import generator.Operation;
 
 public class AddColumnForm implements Runnable, Updatable {
@@ -54,7 +50,8 @@ public class AddColumnForm implements Runnable, Updatable {
 		this(mainMenu, window, previousWindow, new Table(""), operation);
 	}
 
-	public AddColumnForm(MainMenuForm mainMenu, Window window, Runnable previousWindow, Table table, Operation operation) {
+	public AddColumnForm(MainMenuForm mainMenu, Window window, Runnable previousWindow, Table table,
+			Operation operation) {
 		this.mainMenu = mainMenu;
 		this.window = window;
 		this.previousWindow = previousWindow;
@@ -74,16 +71,28 @@ public class AddColumnForm implements Runnable, Updatable {
 	}
 
 	protected Column createColumn() {
-		ForeignKey foreignKeyObject = createForeignKey();
-		return new Column(columnName.getText(), indexName.getText(), foreignKeyObject, nullable.isChecked(),
-				dataType.getText());
+		Column column = new Column(columnName.getText());
+		handleIndex(column);
+		handleForeignKey(column);
+		column.setNullable(nullable.isChecked());
+		column.setDataType(dataType.getText());
+		return column;
 	}
 
-	private ForeignKey createForeignKey() {
-		if (foreignKey.isChecked()) {
-			return new ForeignKey(foreignKeyName.getText(), referencedTable.getText(), referencedColumn.getText());
+	private void handleIndex(Column column) {
+		if (index.isChecked()) {
+			column.setIndex(true);
+			column.setIndexName(indexName.getText());
 		}
-		return null;
+	}
+
+	private void handleForeignKey(Column column) {
+		if (foreignKey.isChecked()) {
+			ForeignKey fk = new ForeignKey(foreignKeyName.getText());
+			fk.setReferencedColumn(referencedColumn.getText());
+			fk.setReferencedTable(referencedTable.getText());
+			column.setForeignKey(fk);
+		}
 	}
 
 	private boolean validate() {

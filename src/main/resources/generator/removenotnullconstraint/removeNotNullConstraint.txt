@@ -38,7 +38,7 @@
 				AND columns.column_name = 'rnaac'
 			</sqlCheck>
 		</preConditions>
-		<comment>Remove NOTNULL constraint from column RNAAC at table NDER_REFERENCE if it exists</comment>
+		<comment>Remove NOTNULL constraint from column rnaac in table NDER_REFERENCE if it exists</comment>
 		<dropNotNullConstraint tableName="NDER_REFERENCE" columnName="rnaac"
 			columnDataType="char(3)" />
 	</changeSet>

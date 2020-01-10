@@ -1,4 +1,4 @@
-	<changeSet id="1" author="ldur" dbms="postgresql">
+	<changeSet id="1" author="phan" dbms="postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="ORG_ENT" columnName="active" />
@@ -11,7 +11,7 @@
 		</addColumn>
 	</changeSet>
 	
-	<changeSet id="2" author="ldur"  dbms="oracle, mssql">
+	<changeSet id="2" author="phan"  dbms="oracle, mssql">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="ORG_ENT" columnName="active" />

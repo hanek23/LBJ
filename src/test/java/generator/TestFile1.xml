@@ -1,0 +1,254 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
+	objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+	<changeSet author="phan" id="1" dbms="mssql">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="NDER_RELATED_ID" />
+			</not>
+		</preConditions>
+
+		<comment>Create table NDER_RELATED_ID</comment>
+		<createTable tableName="NDER_RELATED_ID">
+
+			<column name="id_nder_related_id" type="integer" autoIncrement="true">
+				<constraints primaryKeyName="P_NDER_RELATED_ID" primaryKey="true" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet author="phan" id="2" dbms="oracle, postgresql">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="NDER_RELATED_ID" />
+			</not>
+		</preConditions>
+
+		<comment>Create table NDER_RELATED_ID</comment>
+		<createTable tableName="NDER_RELATED_ID">
+
+			<column name="id_nder_related_id" type="integer">
+				<constraints primaryKeyName="P_NDER_RELATED_ID" primaryKey="true" />
+			</column>
+
+		</createTable>
+	</changeSet>
+
+
+	<changeSet author="phan" id="3" dbms="oracle">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<sequenceExists sequenceName="SEQ_NDER_RELATED_ID" />
+			</not>
+		</preConditions>
+		<comment>Create sequence SEQ_NDER_RELATED_ID on Oracle if it doesn't exist.</comment>
+		<createSequence sequenceName="SEQ_NDER_RELATED_ID" startValue="50" incrementBy="50"
+			cacheSize="20" maxValue="999999999999999999999999999" ordered="false" cycle="false" />
+	</changeSet>
+
+	<changeSet author="phan" id="4" dbms="postgresql">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<sequenceExists sequenceName="SEQ_NDER_RELATED_ID" />
+			</not>
+		</preConditions>
+		<comment>Create sequence SEQ_NDER_RELATED_ID on postgreSQL if it doesn't exist.</comment>
+		<createSequence sequenceName="SEQ_NDER_RELATED_ID" startValue="50" incrementBy="50"
+			cacheSize="20" maxValue="999999999999999999" cycle="false" />
+	</changeSet>
+
+
+	<changeSet author="phan" id="5">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="NDER_RELATED_ID" columnName="version_id" />
+			</not>
+		</preConditions>
+		<comment>Add column version_id to NDER_RELATED_ID</comment>
+		<addColumn tableName="NDER_RELATED_ID">
+
+			<column name="version_id" type="integer">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+
+	<changeSet author="phan" id="6">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="NDER_RELATED_ID" columnName="messageid" />
+			</not>
+		</preConditions>
+		<comment>Add column messageid to NDER_RELATED_ID</comment>
+		<addColumn tableName="NDER_RELATED_ID">
+
+			<column name="messageid" type="varchar(50)">
+			</column>
+		</addColumn>
+	</changeSet>
+
+
+	<changeSet author="phan" id="7">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="NDER_RELATED_ID" columnName="containersn" />
+			</not>
+		</preConditions>
+		<comment>Add column containersn to NDER_RELATED_ID</comment>
+		<addColumn tableName="NDER_RELATED_ID">
+
+			<column name="containersn" type="varchar(9)">
+			</column>
+		</addColumn>
+	</changeSet>
+
+
+
+	<changeSet author="phan" id="8">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="NDER_RELATED_ID" columnName="actionsn" />
+			</not>
+		</preConditions>
+		<comment>Add column actionsn to NDER_RELATED_ID</comment>
+		<addColumn tableName="NDER_RELATED_ID">
+
+			<column name="actionsn" type="varchar(9)">
+			</column>
+		</addColumn>
+	</changeSet>
+
+
+
+	<changeSet author="phan" id="9">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="NDER_RELATED_ID" columnName="relatedmessage" />
+			</not>
+		</preConditions>
+		<comment>Add column relatedmessage to NDER_RELATED_ID</comment>
+		<addColumn tableName="NDER_RELATED_ID">
+
+			<column name="relatedmessage" type="integer">
+				<constraints foreignKeyName="F_NDER_REL_REL_MESSAGE"
+					referencedTableName="NDER_MESSAGE" referencedColumnNames="id_nder_message" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="phan" id="10">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<indexExists indexName="I_NDER_RELATED_MESSAGE" />
+			</not>
+		</preConditions>
+		<comment>Create index I_NDER_RELATED_MESSAGE if it doesn't exist.</comment>
+		<createIndex tableName="NDER_RELATED_ID" indexName="I_NDER_RELATED_MESSAGE">
+			<column name="relatedmessage" />
+		</createIndex>
+	</changeSet>
+
+
+
+	<changeSet author="phan" id="11">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="NDER_RELATED_ID" columnName="relatedcontainer" />
+			</not>
+		</preConditions>
+		<comment>Add column relatedcontainer to NDER_RELATED_ID</comment>
+		<addColumn tableName="NDER_RELATED_ID">
+			<column name="relatedcontainer" type="integer">
+				<constraints foreignKeyName="F_NDER_REL_REL_CONTAINER"
+					referencedTableName="NDER_CONTAINER" referencedColumnNames="id_nder_container" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="phan" id="12">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<indexExists indexName="I_NDER_RELATED_CONTAINER" />
+			</not>
+		</preConditions>
+		<comment>Create index I_NDER_RELATED_CONTAINER if it doesn't exist.</comment>
+		<createIndex tableName="NDER_RELATED_ID" indexName="I_NDER_RELATED_CONTAINER">
+			<column name="relatedcontainer" />
+		</createIndex>
+	</changeSet>
+
+
+
+
+
+	<changeSet author="phan" id="13">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="NDER_RELATED_ID" columnName="relatedaction" />
+			</not>
+		</preConditions>
+		<comment>Add column relatedaction to NDER_RELATED_ID</comment>
+		<addColumn tableName="NDER_RELATED_ID">
+			<column name="relatedaction" type="integer">
+				<constraints foreignKeyName="F_NDER_REL_REL_ACTION"
+					referencedTableName="NDER_ACTION" referencedColumnNames="id_nder_action" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="phan" id="14">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<indexExists indexName="I_NDER_RELATED_ACTION" />
+			</not>
+		</preConditions>
+		<comment>Create index I_NDER_RELATED_ACTION if it doesn't exist.</comment>
+		<createIndex tableName="NDER_RELATED_ID" indexName="I_NDER_RELATED_ACTION">
+			<column name="relatedaction" />
+		</createIndex>
+	</changeSet>
+
+
+
+
+
+
+	<changeSet author="phan" id="15">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="NDER_RELATED_ID" columnName="container" />
+			</not>
+		</preConditions>
+		<comment>Add column container to NDER_RELATED_ID</comment>
+		<addColumn tableName="NDER_RELATED_ID">
+			<column name="container" type="integer">
+				<constraints foreignKeyName="F_NDER_REL_CONTAINER"
+					referencedTableName="NDER_CONTAINER" referencedColumnNames="id_nder_container" nullable="false" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+
+	<changeSet author="phan" id="16">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<indexExists indexName="I_NDER_RELATED_ID_CONT" />
+			</not>
+		</preConditions>
+		<comment>Create index I_NDER_RELATED_ID_CONT if it doesn't exist.</comment>
+		<createIndex tableName="NDER_RELATED_ID" indexName="I_NDER_RELATED_ID_CONT">
+			<column name="container" />
+		</createIndex>
+	</changeSet>
+
+
+
+
+
+
+
+</databaseChangeLog>

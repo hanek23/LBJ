@@ -1,5 +1,7 @@
 package domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class Column {
 
 	private Table table;
@@ -12,6 +14,7 @@ public class Column {
 
 	public Column(String name, String indexName, ForeignKey foreignKey, boolean nullable, String dataType) {
 		this.name = name;
+		this.index = !StringUtils.isBlank(indexName);
 		this.indexName = indexName;
 		setForeignKey(foreignKey);
 		this.nullable = nullable;
@@ -19,6 +22,7 @@ public class Column {
 	}
 
 	public Column(String name) {
+		nullable = true;
 		this.name = name;
 	}
 
@@ -83,6 +87,15 @@ public class Column {
 
 	public void setDataType(String dataType) {
 		this.dataType = dataType;
+	}
+
+	/**
+	 * 
+	 * @return true if column is NOT nullable or has foreign key to a different
+	 *         table
+	 */
+	public boolean hasConstrains() {
+		return !isNullable() || hasForeignKey();
 	}
 
 }

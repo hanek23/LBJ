@@ -29,6 +29,7 @@ public class GenerateForm implements Runnable {
 	private Label authorLabel;
 	private TextBox author;
 	private TextBox generatedXml;
+	private Button copyToClipboradButton;
 
 	public GenerateForm(Window window, Runnable previousWindow, Table table, Operation operation) {
 		this.window = window;
@@ -45,7 +46,7 @@ public class GenerateForm implements Runnable {
 
 	private void initialize() {
 		initializeComponents();
-		addComponentsToContent(false);
+		addComponentsToContent();
 		addButtonsToContent();
 	}
 
@@ -71,10 +72,12 @@ public class GenerateForm implements Runnable {
 				}
 				generatedXml.setText(Generator.generate(table, operation, author.getText()));
 				generatedXml.setPreferredSize(new TerminalSize(23, 17));
+				copyToClipboradButton.setEnabled(true);
 			}
 		});
 
-		Button copyToClipboradButton = new Button(Labels.BUTTON_COPY_TO_CLIPBOARD);
+		copyToClipboradButton = new Button(Labels.BUTTON_COPY_TO_CLIPBOARD);
+		copyToClipboradButton.setEnabled(false);
 		content.addComponent(copyToClipboradButton.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
 		copyToClipboradButton.addListener(new Listener() {
 
@@ -91,7 +94,7 @@ public class GenerateForm implements Runnable {
 		return GuiValidator.validateTextBox(author, authorLabel);
 	}
 
-	private void addComponentsToContent(boolean addGeneratedXml) {
+	private void addComponentsToContent() {
 		GuiUtils.addLabelAndComponentToContent(authorLabel, author, content);
 		GuiUtils.addComponentToContent(generatedXml, content);
 		content.addComponent(generatedXml.setPreferredSize(new TerminalSize(0, 0)));

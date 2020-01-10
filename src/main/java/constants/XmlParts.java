@@ -143,7 +143,7 @@ public class XmlParts {
 			+ "				WHERE\n" + "				columns.table_name = '" + REPLACE_TABLE_NAME_LOWER_CASE + "'\n"
 			+ "				AND columns.column_name = '" + REPLACE_COLUMN_NAME + "'\n" + "			</sqlCheck>\n"
 			+ "		</preConditions>\n" + "		<comment>Remove NOTNULL constraint from column "
-			+ REPLACE_COLUMN_NAME_UPPER_CASE + " at table " + REPLACE_TABLE_NAME + " if it exists</comment>\n"
+			+ REPLACE_COLUMN_NAME + " in table " + REPLACE_TABLE_NAME + " if it exists</comment>\n"
 			+ "		<dropNotNullConstraint tableName=\"" + REPLACE_TABLE_NAME + "\" columnName=\"" + REPLACE_COLUMN_NAME
 			+ "\"\n" + "			columnDataType=\"" + REPLACE_COLUMN_DATA_TYPE + "\" />\n" + "	</changeSet>\n\n";
 

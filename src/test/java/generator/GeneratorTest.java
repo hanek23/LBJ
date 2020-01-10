@@ -1,69 +1,46 @@
 package generator;
 
-import org.junit.Test;
+import static org.junit.Assert.fail;
 
-import domain.Column;
-import domain.ForeignKey;
-import domain.Table;
+import org.apache.commons.lang3.StringUtils;
+import org.junit.Test;
 
 public class GeneratorTest {
 
-	public static final String TABLE_NAME = "NDER_CONTAINER";
-	public static final String TABLE_PRIMARY_KEY_COLUMN_NAME = "id_nder_container";
-	public static final String TABLE_CONSTRAIN_PRIMARY_KEY_NAME = "P_NDER_CONTAINER";
-	public static final String TABLE_SEQUENCE_NAME = "SEQ_NDER_CONTAINER";
-	public static final String TABLE_PRIMARY_KEY_INDEX_NAME = "I_NDER_CONTAINER";
+	private static final String AUTHOR = "phan";
 
 	@Test
-	public void testGenerateTable() {
-		Table table = createTable();
-		System.out.println(Generator.generate(table, Operation.CREATE_TABLE, "lbj23"));
-
+	public void testGenerateTestTable1() {
+		assertChangeLogEquals(new TestTable1());
 	}
 
-	private Table createTable() {
-		Table table = new Table(TABLE_NAME);
-		table.setForMssql(true);
-		table.setForOracle(true);
-		table.setForPostgreSql(true);
-		table.setPrimaryKeyColumnName(TABLE_PRIMARY_KEY_COLUMN_NAME);
-		table.setPrimaryKeyContrainName(TABLE_CONSTRAIN_PRIMARY_KEY_NAME);
-		table.setSequenceName(TABLE_SEQUENCE_NAME);
-		table.setPrimaryKeyIndexName(TABLE_PRIMARY_KEY_INDEX_NAME);
-		table.addColumn(createVarcharColumn());
-		table.addColumn(createBooleanNotNullColumn());
-		table.addColumn(createBooleanColumn());
-		return table;
+	@Test
+	public void testGenerateTestTable2() {
+		assertChangeLogEquals(new TestTable2());
 	}
 
-	private Column createBooleanNotNullColumn() {
-		Column column = new Column("activeNotNull");
-		column.setDataType("boolean");
-		column.setNullable(false);
-		return column;
+	@Test
+	public void testGenerateTestTable3() {
+		assertChangeLogEquals(new TestTable3());
 	}
 
-	private Column createBooleanColumn() {
-		Column column = new Column("active");
-		column.setDataType("boolean");
-		column.setNullable(true);
-		return column;
+	@Test
+	public void testGenerateTestTable4() {
+		assertChangeLogEquals(new TestTable4());
 	}
 
-	private Column createVarcharColumn() {
-		Column column = new Column("message");
-		column.setDataType("varchar(50)");
-		column.setIndex(true);
-		column.setIndexName("I_NDER_CONTAINER_NDER_MESSAGE");
-		column.setNullable(false);
-
-		ForeignKey foreignKey = new ForeignKey("F_NDER_CONTAINER_NDER_MESSAGE");
-		foreignKey.setReferencedColumn("container");
-		foreignKey.setReferencedTable("NDER_MESSAGE");
-
-		column.setForeignKey(foreignKey);
-
-		return column;
+	private void assertChangeLogEquals(TestTableSupplier testTableSupplier) {
+		System.out.println(Generator.generate(testTableSupplier.getTable(), testTableSupplier.getOperation(), AUTHOR));
+		String expected = StringUtils.deleteWhitespace(testTableSupplier.getExpectedTable());
+		String actual = StringUtils.deleteWhitespace(
+				Generator.generate(testTableSupplier.getTable(), testTableSupplier.getOperation(), AUTHOR));
+		for (int i = 0; i < expected.length(); i++) {
+			if (!String.valueOf(expected.charAt(i)).equals(String.valueOf(actual.charAt(i)))) {
+				fail("Wrong character at position " + i + ", lines before are expected:  "
+						+ String.valueOf(expected.subSequence(i - 10, i + 10)) + " but were: "
+						+ String.valueOf(actual.subSequence(i - 10, i + 10)));
+			}
+		}
 	}
 
 }
