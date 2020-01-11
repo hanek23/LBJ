@@ -30,7 +30,6 @@ public class GeneratorTest {
 	}
 
 	private void assertChangeLogEquals(TestTableSupplier testTableSupplier) {
-		System.out.println(Generator.generate(testTableSupplier.getTable(), testTableSupplier.getOperation(), AUTHOR));
 		String expected = StringUtils.deleteWhitespace(testTableSupplier.getExpectedTable());
 		String actual = StringUtils.deleteWhitespace(
 				Generator.generate(testTableSupplier.getTable(), testTableSupplier.getOperation(), AUTHOR));
