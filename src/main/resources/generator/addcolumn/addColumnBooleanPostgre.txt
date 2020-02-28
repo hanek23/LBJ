@@ -1,0 +1,12 @@
+<changeSet id="1" author="$AUTHOR$" dbms="postgresql">
+	<preConditions onFail="MARK_RAN">
+		<not>
+			<columnExists tableName="$TABLE_NAME$" columnName="$COLUMN_NAME$" />
+		</not>
+	</preConditions>
+	<addColumn tableName="$TABLE_NAME$">
+		<column name="$COLUMN_NAME$" type="boolean" defaultValue="false">
+			<constraints nullable="$NULLABLE$" />
+		</column>
+	</addColumn>
+</changeSet>

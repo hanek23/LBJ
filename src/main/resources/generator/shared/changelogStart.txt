@@ -6,4 +6,4 @@
 
 	$CHANGESETS$
 
-	</databaseChangeLog>
+</databaseChangeLog>

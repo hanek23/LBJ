@@ -1,13 +1,23 @@
 package generator;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import constants.XmlParts;
+
 public class GeneratorTest {
 
-	private static final String AUTHOR = "phan";
+	private static final String AUTHOR = "hanek23";
+
+	@Test
+	public void testGetResources() {
+		String fromString = XmlParts.CHANGELOG;
+		String fromFile = XmlParts.changelogStart();
+		assertTrue(StringUtils.deleteWhitespace(fromString).equals(StringUtils.deleteWhitespace(fromFile)));
+	}
 
 	@Test
 	public void testGenerateTestTable1() {

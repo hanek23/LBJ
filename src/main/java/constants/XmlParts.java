@@ -1,5 +1,11 @@
 package constants;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.stream.Collectors;
+
 public class XmlParts {
 
 	private XmlParts() {
@@ -26,6 +32,22 @@ public class XmlParts {
 	public static final String REPLACE_COLUMN_FOREIGN_KEY = "$COLUMN_FOREIGN_KEY$";
 	public static final String REPLACE_COLUMN_NULLABLE = "$NULLABLE$";
 	public static final String REPLACE_COLUMN_NULLABLE_VALUE = "$NULLABLE_VALUE$";
+
+	private static final String CHANGELOG_START_FILE_PATH = "/generator/shared/changelogStart.txt";
+
+	public static String changelogStart() {
+		return getStringFromFile(CHANGELOG_START_FILE_PATH);
+	}
+
+	private static String getStringFromFile(String path) {
+		try (InputStream inputStream = XmlParts.class.getResourceAsStream(path);
+				BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+			return reader.lines().collect(Collectors.joining("\n"));
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new IllegalArgumentException();
+		}
+	}
 
 	public static final String CHANGELOG = "<databaseChangeLog xmlns=\"http://www.liquibase.org/xml/ns/dbchangelog\"\n"
 			+ "	xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
@@ -142,8 +164,8 @@ public class XmlParts {
 			+ "				SELECT is_nullable\n" + "				FROM information_schema.columns\n"
 			+ "				WHERE\n" + "				columns.table_name = '" + REPLACE_TABLE_NAME_LOWER_CASE + "'\n"
 			+ "				AND columns.column_name = '" + REPLACE_COLUMN_NAME + "'\n" + "			</sqlCheck>\n"
-			+ "		</preConditions>\n" + "		<comment>Remove NOTNULL constraint from column "
-			+ REPLACE_COLUMN_NAME + " in table " + REPLACE_TABLE_NAME + " if it exists</comment>\n"
+			+ "		</preConditions>\n" + "		<comment>Remove NOTNULL constraint from column " + REPLACE_COLUMN_NAME
+			+ " in table " + REPLACE_TABLE_NAME + " if it exists</comment>\n"
 			+ "		<dropNotNullConstraint tableName=\"" + REPLACE_TABLE_NAME + "\" columnName=\"" + REPLACE_COLUMN_NAME
 			+ "\"\n" + "			columnDataType=\"" + REPLACE_COLUMN_DATA_TYPE + "\" />\n" + "	</changeSet>\n\n";
 

@@ -4,4 +4,6 @@
 		</preConditions>
 		<comment>Remove column $COLUMN_NAME$ from table "$TABLE_NAME$" if it exists.</comment>
 		<dropColumn columnName="$COLUMN_NAME$" tableName="$TABLE_NAME$" />
+		
+		TODO DROP FK A INDEX!
 	</changeSet>
