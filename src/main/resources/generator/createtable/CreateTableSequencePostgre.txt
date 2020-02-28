@@ -1,0 +1,10 @@
+<changeSet author="$AUTHOR$" id="$ID$" dbms="postgresql">
+	<preConditions onFail="MARK_RAN">
+		<not>
+			<sequenceExists sequenceName="$SEQUENCE_NAME$" />
+		</not>
+	</preConditions>
+	<comment>Create sequence $SEQUENCE_NAME$ on postgreSQL if it doesn't exist.</comment>
+	<createSequence sequenceName="$SEQUENCE_NAME$" startValue="50"
+		incrementBy="50" cacheSize="20" maxValue="999999999999999999" cycle="false" />
+</changeSet>

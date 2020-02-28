@@ -90,12 +90,18 @@ public class Column {
 	}
 
 	/**
-	 * 
 	 * @return true if column is NOT nullable or has foreign key to a different
 	 *         table
 	 */
 	public boolean hasConstrains() {
 		return !isNullable() || hasForeignKey();
+	}
+
+	/**
+	 * @return true if and only if type is "boolean" (case is ignored)
+	 */
+	public boolean isTypeBoolean() {
+		return StringUtils.equalsIgnoreCase(dataType, "boolean");
 	}
 
 }

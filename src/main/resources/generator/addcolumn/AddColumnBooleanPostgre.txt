@@ -1,12 +1,12 @@
-<changeSet id="2" author="$AUTHOR$"  dbms="oracle, mssql">
+<changeSet id="$ID$" author="$AUTHOR$" dbms="postgresql">
 	<preConditions onFail="MARK_RAN">
 		<not>
 			<columnExists tableName="$TABLE_NAME$" columnName="$COLUMN_NAME$" />
 		</not>
 	</preConditions>
 	<addColumn tableName="$TABLE_NAME$">
-		<column name="$COLUMN_NAME$" type="char(1)" defaultValue="0">
-			<constraints nullable="$NULLABLE$" />
-		</column> 
+		<column name="$COLUMN_NAME$" type="boolean" defaultValue="false">
+			$COLUMN_CONSTRAINS$
+		</column>
 	</addColumn>
 </changeSet>

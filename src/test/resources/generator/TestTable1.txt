@@ -1,0 +1,39 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
+	objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+	<changeSet author="hanek23" id="1">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="NDER_REFERENCE" columnName="nderaction"/>
+			</not>
+		</preConditions>
+		<comment>Add column nderaction to NDER_REFERENCE</comment>
+		<addColumn tableName="NDER_REFERENCE">
+			<column name="nderaction" type="integer">
+				<constraints foreignKeyName="F_NDER_REF_ID_NDER_ACTION" referencedTableName="NDER_ACTION" referencedColumnNames="id_nder_action"/>
+			</column>
+		</addColumn>
+	</changeSet>
+	<changeSet author="hanek23" id="2" dbms="mssql,postgresql">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<indexExists indexName="I_NDER_REFERENCE_NACTION"/>
+			</not>
+		</preConditions>
+		<comment>Create index I_NDER_REFERENCE_NACTION if it doesn't exist.</comment>
+		<createIndex tableName="NDER_REFERENCE" indexName="I_NDER_REFERENCE_NACTION">
+			<column name="nderaction"/>
+		</createIndex>
+	</changeSet>
+	<changeSet author="hanek23" id="3" dbms="oracle">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'NDER_REFERENCE' and index_name='I_NDER_REFERENCE_NACTION'</sqlCheck>
+		</preConditions>
+		<comment>Create index I_NDER_REFERENCE_NACTION if it doesn't exist.</comment>
+		<createIndex tableName="NDER_REFERENCE" indexName="I_NDER_REFERENCE_NACTION">
+			<column name="nderaction"/>
+		</createIndex>
+	</changeSet>
+</databaseChangeLog>

@@ -3,13 +3,11 @@ package gui;
 import org.apache.commons.lang3.StringUtils;
 
 import com.googlecode.lanterna.gui2.Button;
-import com.googlecode.lanterna.gui2.CheckBox;
 import com.googlecode.lanterna.gui2.Component;
 import com.googlecode.lanterna.gui2.GridLayout;
 import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.TextBox;
-import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
 import constants.Settings;

@@ -1,6 +1,7 @@
 package gui;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -24,11 +25,6 @@ import constants.Labels;
 import generator.Operation;
 
 public class MainMenuForm implements Runnable {
-
-	public static void main(String[] args) {
-		MainMenuForm mainMenu = new MainMenuForm();
-		mainMenu.run();
-	}
 
 	private Window window;
 	private Panel mainMenuContent;
@@ -64,6 +60,13 @@ public class MainMenuForm implements Runnable {
 			RemoveNotNullConstraintForm removeNotNullConstraint = new RemoveNotNullConstraintForm(window, this);
 			addUpdatableChild(removeNotNullConstraint);
 			mainMenu.addItem(Labels.MAIN_MENU_REMOVE_NOT_NULL_CONSTRAINT, removeNotNullConstraint);
+
+			mainMenu.addItem(Labels.BUTTON_EXIT, new Runnable() {
+				@Override
+				public void run() {
+					System.exit(0);
+				}
+			});
 
 			mainMenuContent.addComponent(mainMenu);
 

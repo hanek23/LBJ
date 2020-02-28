@@ -1,23 +1,13 @@
 package generator;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
-import constants.XmlParts;
-
 public class GeneratorTest {
 
 	private static final String AUTHOR = "hanek23";
-
-	@Test
-	public void testGetResources() {
-		String fromString = XmlParts.CHANGELOG;
-		String fromFile = XmlParts.changelogStart();
-		assertTrue(StringUtils.deleteWhitespace(fromString).equals(StringUtils.deleteWhitespace(fromFile)));
-	}
 
 	@Test
 	public void testGenerateTestTable1() {
@@ -39,10 +29,18 @@ public class GeneratorTest {
 		assertChangeLogEquals(new TestTable4());
 	}
 
+	@Test
+	public void testGenerateTestTable5() {
+		assertChangeLogEquals(new TestTable5());
+	}
+
 	private void assertChangeLogEquals(TestTableSupplier testTableSupplier) {
-		String expected = StringUtils.deleteWhitespace(testTableSupplier.getExpectedTable());
+		String expected = StringUtils.deleteWhitespace(testTableSupplier.getExpectedTable())
+				.replace(System.lineSeparator(), "");
 		String actual = StringUtils.deleteWhitespace(
-				Generator.generate(testTableSupplier.getTable(), testTableSupplier.getOperation(), AUTHOR));
+				Generator.generate(testTableSupplier.getTable(), testTableSupplier.getOperation(), AUTHOR)
+						.replace(System.lineSeparator(), ""));
+		System.out.println(actual);
 		for (int i = 0; i < expected.length(); i++) {
 			if (!String.valueOf(expected.charAt(i)).equals(String.valueOf(actual.charAt(i)))) {
 				fail("Wrong character at position " + i + ", lines before are expected:  "

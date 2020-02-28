@@ -1,0 +1,11 @@
+<changeSet author="$AUTHOR$" id="$ID$" dbms="oracle">
+	<preConditions onFail="MARK_RAN">
+		<not>
+			<sequenceExists sequenceName="$SEQUENCE_NAME$" />
+		</not>
+	</preConditions>
+	<comment>Create sequence $SEQUENCE_NAME$ on Oracle if it doesn't exist.</comment>
+	<createSequence sequenceName="$SEQUENCE_NAME$" startValue="50"
+		incrementBy="50" cacheSize="20" maxValue="999999999999999999999999999" ordered="false"
+		cycle="false" />
+</changeSet>

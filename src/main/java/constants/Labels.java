@@ -18,12 +18,12 @@ public class Labels {
 	public static final String MAIN_MENU_ADD_COLUMN = "Add column(s)";
 	public static final String MAIN_MENU_CREATE_TABLE = "Create table";
 	public static final String MAIN_MENU_REMOVE_NOT_NULL_CONSTRAINT = "Remove not null constraint";
+	public static final String BUTTON_EXIT = "Exit";
 
 	// CREATE TABLE
 	public static final String TABLE_NAME = "Table name";
 	public static final String CREATE_TABLE_PRIMARY_KEY_NAME = "Primary key name";
 	public static final String CREATE_TABLE_PRIMARY_KEY_CONSTRAIN = "Primary key constraint name";
-	public static final String CREATE_TABLE_PRIMARY_INDEX = "Primary key index name";
 	public static final String CREATE_TABLE_DATABASES = "Databases";
 	public static final String CREATE_TABLE_DATABASES_ORACLE = "Oracle";
 	public static final String CREATE_TABLE_DATABASES_MSSQL = "MSSQL";

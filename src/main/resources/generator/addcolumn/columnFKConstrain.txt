@@ -1,3 +1,0 @@
-<constraints foreignKeyName="$COLUMN_FK_NAME$"
-referencedTableName="$REFERENCED_TABLE_NAME$" 
-referencedColumnNames="$REFERENCED_COLUMN_NAME$" nullable="$NULLABLE$" />

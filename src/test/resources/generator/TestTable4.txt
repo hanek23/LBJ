@@ -4,7 +4,7 @@
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
 	objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
 
-	<changeSet author="phan" id="1" dbms="mssql">
+	<changeSet author="hanek23" id="1" dbms="mssql">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<tableExists tableName="NDER_RELATED_ID" />
@@ -20,7 +20,7 @@
 		</createTable>
 	</changeSet>
 
-	<changeSet author="phan" id="2" dbms="oracle, postgresql">
+	<changeSet author="hanek23" id="2" dbms="oracle, postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<tableExists tableName="NDER_RELATED_ID" />
@@ -37,8 +37,7 @@
 		</createTable>
 	</changeSet>
 
-
-	<changeSet author="phan" id="3" dbms="oracle">
+	<changeSet author="hanek23" id="3" dbms="oracle">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<sequenceExists sequenceName="SEQ_NDER_RELATED_ID" />
@@ -49,7 +48,7 @@
 			cacheSize="20" maxValue="999999999999999999999999999" ordered="false" cycle="false" />
 	</changeSet>
 
-	<changeSet author="phan" id="4" dbms="postgresql">
+	<changeSet author="hanek23" id="4" dbms="postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<sequenceExists sequenceName="SEQ_NDER_RELATED_ID" />
@@ -60,8 +59,7 @@
 			cacheSize="20" maxValue="999999999999999999" cycle="false" />
 	</changeSet>
 
-
-	<changeSet author="phan" id="5">
+	<changeSet author="hanek23" id="5">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="NDER_RELATED_ID" columnName="version_id" />
@@ -76,8 +74,7 @@
 		</addColumn>
 	</changeSet>
 
-
-	<changeSet author="phan" id="6">
+	<changeSet author="hanek23" id="6">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="NDER_RELATED_ID" columnName="messageid" />
@@ -91,8 +88,7 @@
 		</addColumn>
 	</changeSet>
 
-
-	<changeSet author="phan" id="7">
+	<changeSet author="hanek23" id="7">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="NDER_RELATED_ID" columnName="containersn" />
@@ -106,9 +102,7 @@
 		</addColumn>
 	</changeSet>
 
-
-
-	<changeSet author="phan" id="8">
+	<changeSet author="hanek23" id="8">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="NDER_RELATED_ID" columnName="actionsn" />
@@ -122,9 +116,7 @@
 		</addColumn>
 	</changeSet>
 
-
-
-	<changeSet author="phan" id="9">
+	<changeSet author="hanek23" id="9">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="NDER_RELATED_ID" columnName="relatedmessage" />
@@ -135,12 +127,12 @@
 
 			<column name="relatedmessage" type="integer">
 				<constraints foreignKeyName="F_NDER_REL_REL_MESSAGE"
-					referencedTableName="NDER_MESSAGE" referencedColumnNames="id_nder_message" />
+					referencedTableName="NDER_MESSAGE" referencedColumnNames="id_nder_message"/>
 			</column>
 		</addColumn>
 	</changeSet>
 
-	<changeSet author="phan" id="10">
+	<changeSet author="hanek23" id="10" dbms="mssql,postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<indexExists indexName="I_NDER_RELATED_MESSAGE" />
@@ -151,10 +143,18 @@
 			<column name="relatedmessage" />
 		</createIndex>
 	</changeSet>
+	
+	<changeSet author="hanek23" id="11" dbms="oracle">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'NDER_RELATED_ID' and index_name='I_NDER_RELATED_MESSAGE'</sqlCheck>
+		</preConditions>
+		<comment>Create index I_NDER_RELATED_MESSAGE if it doesn't exist.</comment>
+		<createIndex tableName="NDER_RELATED_ID" indexName="I_NDER_RELATED_MESSAGE">
+			<column name="relatedmessage" />
+		</createIndex>
+	</changeSet>
 
-
-
-	<changeSet author="phan" id="11">
+	<changeSet author="hanek23" id="12">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="NDER_RELATED_ID" columnName="relatedcontainer" />
@@ -169,7 +169,7 @@
 		</addColumn>
 	</changeSet>
 
-	<changeSet author="phan" id="12">
+	<changeSet author="hanek23" id="13" dbms="mssql,postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<indexExists indexName="I_NDER_RELATED_CONTAINER" />
@@ -180,12 +180,18 @@
 			<column name="relatedcontainer" />
 		</createIndex>
 	</changeSet>
+	
+	<changeSet author="hanek23" id="14" dbms="oracle">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'NDER_RELATED_ID' and index_name='I_NDER_RELATED_CONTAINER'</sqlCheck>
+		</preConditions>
+		<comment>Create index I_NDER_RELATED_CONTAINER if it doesn't exist.</comment>
+		<createIndex tableName="NDER_RELATED_ID" indexName="I_NDER_RELATED_CONTAINER">
+			<column name="relatedcontainer" />
+		</createIndex>
+	</changeSet>
 
-
-
-
-
-	<changeSet author="phan" id="13">
+	<changeSet author="hanek23" id="15">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="NDER_RELATED_ID" columnName="relatedaction" />
@@ -200,7 +206,7 @@
 		</addColumn>
 	</changeSet>
 
-	<changeSet author="phan" id="14">
+	<changeSet author="hanek23" id="16" dbms="mssql,postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<indexExists indexName="I_NDER_RELATED_ACTION" />
@@ -211,13 +217,18 @@
 			<column name="relatedaction" />
 		</createIndex>
 	</changeSet>
+	
+	<changeSet author="hanek23" id="17" dbms="oracle">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'NDER_RELATED_ID' and index_name='I_NDER_RELATED_ACTION'</sqlCheck>
+		</preConditions>
+		<comment>Create index I_NDER_RELATED_ACTION if it doesn't exist.</comment>
+		<createIndex tableName="NDER_RELATED_ID" indexName="I_NDER_RELATED_ACTION">
+			<column name="relatedaction" />
+		</createIndex>
+	</changeSet>
 
-
-
-
-
-
-	<changeSet author="phan" id="15">
+	<changeSet author="hanek23" id="18">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="NDER_RELATED_ID" columnName="container" />
@@ -232,8 +243,7 @@
 		</addColumn>
 	</changeSet>
 
-
-	<changeSet author="phan" id="16">
+	<changeSet author="hanek23" id="19" dbms="mssql,postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<indexExists indexName="I_NDER_RELATED_ID_CONT" />
@@ -244,11 +254,15 @@
 			<column name="container" />
 		</createIndex>
 	</changeSet>
-
-
-
-
-
-
+	
+	<changeSet author="hanek23" id="20" dbms="oracle">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'NDER_RELATED_ID' and index_name='I_NDER_RELATED_ID_CONT'</sqlCheck>
+		</preConditions>
+		<comment>Create index I_NDER_RELATED_ID_CONT if it doesn't exist.</comment>
+		<createIndex tableName="NDER_RELATED_ID" indexName="I_NDER_RELATED_ID_CONT">
+			<column name="container" />
+		</createIndex>
+	</changeSet>
 
 </databaseChangeLog>

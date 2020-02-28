@@ -4,48 +4,48 @@
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
 	objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
 
-	<changeSet author="lbj" id="1" dbms="oracle">
+	<changeSet author="hanek23" id="1" dbms="oracle">
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="N">
 				SELECT NULLABLE
 				FROM USER_TAB_COLUMNS
 				WHERE table_name =
-				'NDER_CONTAINER'
-				AND column_name = 'MESSAGE'
+				'NDER_RELATED_ID'
+				AND column_name = 'CONTAINER'
 			</sqlCheck>
 		</preConditions>
-		<comment>Remove NOTNULL constraint from column MESSAGE in table NDER_CONTAINER if it exists</comment>
-		<dropNotNullConstraint tableName="NDER_CONTAINER" columnName="message"
+		<comment>Remove NOTNULL constraint from column CONTAINER in table NDER_RELATED_ID if it exists</comment>
+		<dropNotNullConstraint tableName="NDER_RELATED_ID" columnName="container"
 			columnDataType="integer" />
 	</changeSet>
 
-	<changeSet author="lbj" id="2" dbms="mssql">
+	<changeSet author="hanek23" id="2" dbms="mssql">
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">
 				SELECT is_nullable
 				FROM sys.columns
 				WHERE object_id =
-				OBJECT_ID('NDER_CONTAINER')
-				AND name = 'MESSAGE'
+				OBJECT_ID('NDER_RELATED_ID')
+				AND name = 'CONTAINER'
 			</sqlCheck>
 		</preConditions>
-		<comment>Remove NOTNULL constraint from column MESSAGE in table NDER_CONTAINER if it exists</comment>
-		<dropNotNullConstraint tableName="NDER_CONTAINER" columnName="message"
+		<comment>Remove NOTNULL constraint from column CONTAINER in table NDER_RELATED_ID if it exists</comment>
+		<dropNotNullConstraint tableName="NDER_RELATED_ID" columnName="container"
 			columnDataType="integer" />
 	</changeSet>
 
-	<changeSet author="lbj" id="3" dbms="postgresql">
+	<changeSet author="hanek23" id="3" dbms="postgresql">
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="NO">
 				SELECT is_nullable
 				FROM information_schema.columns
 				WHERE
-				columns.table_name = 'nder_container'
-				AND columns.column_name = 'message'
+				columns.table_name = 'nder_related_id'
+				AND columns.column_name = 'container'
 			</sqlCheck>
 		</preConditions>
-		<comment>Remove NOTNULL constraint from column MESSAGE at table NDER_CONTAINER if it exists</comment>
-		<dropNotNullConstraint tableName="NDER_CONTAINER" columnName="message"
+		<comment>Remove NOTNULL constraint from column container in table NDER_RELATED_ID if it exists</comment>
+		<dropNotNullConstraint tableName="NDER_RELATED_ID" columnName="container"
 			columnDataType="integer" />
 	</changeSet>
 

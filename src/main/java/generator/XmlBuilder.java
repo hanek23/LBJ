@@ -3,6 +3,8 @@ package generator;
 import org.apache.commons.lang3.StringUtils;
 
 import constants.XmlParts;
+import domain.Column;
+import domain.Table;
 
 public class XmlBuilder {
 
@@ -20,7 +22,7 @@ public class XmlBuilder {
 			changesets = replaceId(changesets, id);
 			id++;
 		}
-		return StringUtils.replace(XmlParts.CHANGELOG, XmlParts.REPLACE_CHAGESETS, changesets);
+		return StringUtils.replace(XmlParts.getChangelogStart(), XmlParts.REPLACE_CHAGESETS, changesets);
 	}
 
 	public static String replaceAuthor(String replaceIn, String author) {
@@ -31,81 +33,85 @@ public class XmlBuilder {
 		return StringUtils.replaceOnce(replaceIn, XmlParts.REPLACE_ID, String.valueOf(id));
 	}
 
-	public static String replaceTableName(String replaceIn, String tableName) {
-		return StringUtils.replace(replaceIn, XmlParts.REPLACE_TABLE_NAME, tableName);
+	public static String replaceTableName(String replaceIn, Table table) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_TABLE_NAME, table.getName());
 	}
 
-	public static String replaceTableNameLowerCase(String replaceIn, String tableName) {
-		return StringUtils.replace(replaceIn, XmlParts.REPLACE_TABLE_NAME_LOWER_CASE, StringUtils.lowerCase(tableName));
+	public static String replaceTableNameLowerCase(String replaceIn, Table table) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_TABLE_NAME_LOWER_CASE,
+				StringUtils.lowerCase(table.getName()));
 	}
 
-	public static String replaceColumnPrimaryKeyName(String replaceIn, String primaryKeyName) {
-		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_PRIMARY_KEY_NAME, primaryKeyName);
+	public static String replaceColumnPrimaryKeyName(String replaceIn, Table table) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_PRIMARY_KEY_NAME,
+				table.getPrimaryKeyColumnName());
 	}
 
-	public static String replaceConstrainPrimaryKeyName(String replaceIn, String constrainPrimaryKeyName) {
-		return StringUtils.replace(replaceIn, XmlParts.REPLACE_CONSTRAIN_PRIMARY_KEY_NAME, constrainPrimaryKeyName);
+	public static String replaceConstrainPrimaryKeyName(String replaceIn, Table table) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_CONSTRAIN_PRIMARY_KEY_NAME,
+				table.getPrimaryKeyContrainName());
 	}
 
-	public static String replaceSequenceName(String replaceIn, String sequenceName) {
-		return StringUtils.replace(replaceIn, XmlParts.REPLACE_SEQUENCE_NAME, sequenceName);
+	public static String replaceSequenceName(String replaceIn, Table table) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_SEQUENCE_NAME, table.getSequenceName());
 	}
 
-	public static String replaceColumnName(String replaceIn, String columnName) {
-		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NAME, columnName);
+	public static String replaceColumnName(String replaceIn, Column column) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NAME, column.getName());
 	}
 
-	public static String replaceColumnNameUpperCase(String replaceIn, String columnName) {
+	public static String replaceColumnNameUpperCase(String replaceIn, Column column) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NAME_UPPER_CASE,
-				StringUtils.upperCase(columnName));
+				StringUtils.upperCase(column.getName()));
 	}
 
-	public static String replaceColumnDataType(String replaceIn, String columnDataType) {
-		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_DATA_TYPE, columnDataType);
+	public static String replaceColumnDataType(String replaceIn, Column column) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_DATA_TYPE, column.getDataType());
 	}
 
-	public static String replaceColumnForeignKeyName(String replaceIn, String foreignKeyName) {
-		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_FOREIGN_KEY_NAME, foreignKeyName);
+	public static String replaceColumnForeignKeyName(String replaceIn, Column column) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_FOREIGN_KEY_NAME,
+				column.getForeignKey().getName());
 	}
 
-	public static String replaceColumnForeignKeyReferencedTable(String replaceIn, String foreignKeyReferencedTable) {
+	public static String replaceColumnForeignKeyReferencedTable(String replaceIn, Column column) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_FOREIGN_KEY_REFERECED_TABLE_NAME,
-				foreignKeyReferencedTable);
+				column.getForeignKey().getReferencedTable());
 	}
 
-	public static String replaceColumnForeignKeyReferencedColumn(String replaceIn, String foreignKeyReferencedColumn) {
+	public static String replaceColumnForeignKeyReferencedColumn(String replaceIn, Column column) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_FOREIGN_KEY_REFERECED_COLUMN_NAME,
-				foreignKeyReferencedColumn);
+				column.getForeignKey().getReferencedColumn());
 	}
 
-	public static String replaceColumnIndexName(String replaceIn, String indexName) {
-		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_INDEX_NAME, indexName);
+	public static String replaceColumnIndexName(String replaceIn, Column column) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_INDEX_NAME, column.getIndexName());
 	}
 
-	public static String addColumnNullableFalse(String replaceIn) {
-		replaceIn = StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NULLABLE, XmlParts.COLUMN_NULLABLE);
+	public static String replaceColumnNullable(String replaceIn, Column column) {
+		if (column.isNullable()) {
+			return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NULLABLE, "");
+		}
+		replaceIn = StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NULLABLE,
+				XmlParts.getAddColumnConstraintsNullable());
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NULLABLE_VALUE, "false");
 	}
 
 	public static String addColumnConstraints(String replaceIn) {
-		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_CONSTRAINS, XmlParts.COLUMN_CONSTRAINS);
-	}
-
-	public static String addColumnForeignKeyConstraint(String replaceIn) {
-		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_FOREIGN_KEY,
-				XmlParts.COLUMN_FOREIGN_KEY_CONSTRAINT);
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_CONSTRAINS, XmlParts.getAddColumnConstraints());
 	}
 
 	public static String removeColumnForeignKeyConstraint(String replaceIn) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_FOREIGN_KEY, "");
 	}
 
-	public static String removeNullable(String replaceIn) {
-		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NULLABLE, "");
+	public static String removeConstraints(String replaceIn) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_CONSTRAINS, "");
 	}
 
-	public static String removeConstraints(String addColumn) {
-		return StringUtils.replace(addColumn, XmlParts.REPLACE_COLUMN_CONSTRAINS, "");
+	public static String addColumnConstraintsForeignKey(String replaceIn) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_FOREIGN_KEY,
+				XmlParts.getAddColumnConstraintsForeignKey());
 	}
 
 }

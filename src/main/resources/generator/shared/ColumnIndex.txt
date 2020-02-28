@@ -10,9 +10,9 @@
 	</createIndex>
 </changeSet>
 
-<changeSet author="$AUTHOR$" id="$ID$.1" dbms="oracle">
+<changeSet author="$AUTHOR$" id="$ID$" dbms="oracle">
 	<preConditions onFail="MARK_RAN">
-		<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = '"$TABLE_NAME$"' and index_name='$INDEX_NAME$'</sqlCheck>
+		<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = '$TABLE_NAME$' and index_name='$INDEX_NAME$'</sqlCheck>
 	</preConditions>
 	<comment>Create index $INDEX_NAME$ if it doesn't exist.</comment>
 	<createIndex tableName="$TABLE_NAME$" indexName="$INDEX_NAME$">

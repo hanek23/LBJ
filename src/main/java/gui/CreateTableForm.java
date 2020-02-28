@@ -4,18 +4,15 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Button.Listener;
 import com.googlecode.lanterna.gui2.CheckBox;
-import com.googlecode.lanterna.gui2.Direction;
 import com.googlecode.lanterna.gui2.EmptySpace;
 import com.googlecode.lanterna.gui2.GridLayout;
 import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.Panel;
-import com.googlecode.lanterna.gui2.Separator;
 import com.googlecode.lanterna.gui2.TextBox;
 import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
 import constants.NamingConventions;
-import constants.Settings;
 import domain.Table;
 import generator.Operation;
 
@@ -38,8 +35,6 @@ public class CreateTableForm implements Runnable, Updatable {
 	private Label primaryKeyConstraintLabel;
 	private TextBox sequenceName;
 	private Label sequenceNameLabel;
-	private Label primaryKeyIndexLabel;
-	private TextBox primaryKeyIndex;
 
 	public CreateTableForm(MainMenuForm mainMenu, Window window, Runnable previousWindow) {
 		this.mainMenu = mainMenu;
@@ -87,8 +82,6 @@ public class CreateTableForm implements Runnable, Updatable {
 		if (tableName.isFocused()) {
 			primaryKeyName.setText(NamingConventions.PRIMARY_KEY_NAME_DEFAULT_VALUE + tableName.getText());
 			primaryKeyConstraint.setText(NamingConventions.PRIMARY_KEY_CONSTRAINT_DEFAULT_VALUE + tableName.getText());
-			primaryKeyIndex.setText(NamingConventions.INDEX_NAME_DEFAULT_VALUE + tableName.getText()
-					+ NamingConventions.SEPARATOR + primaryKeyName.getText());
 		}
 		if (oracle.isChecked() || postgresql.isChecked()) {
 			sequenceName.setText(NamingConventions.SEQUENCE_NAME_DEFAULT_VALUE + tableName.getText());
@@ -105,7 +98,6 @@ public class CreateTableForm implements Runnable, Updatable {
 		GuiUtils.lowerCase(primaryKeyName);
 		GuiUtils.upperCase(primaryKeyConstraint);
 		GuiUtils.upperCase(sequenceName);
-		GuiUtils.upperCase(primaryKeyIndex);
 	}
 
 	private void initializeComponents() {
@@ -119,9 +111,6 @@ public class CreateTableForm implements Runnable, Updatable {
 
 		primaryKeyConstraintLabel = new Label(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN);
 		primaryKeyConstraint = new TextBox(NamingConventions.PRIMARY_KEY_CONSTRAINT_DEFAULT_VALUE);
-
-		primaryKeyIndexLabel = new Label(Labels.CREATE_TABLE_PRIMARY_INDEX);
-		primaryKeyIndex = new TextBox(NamingConventions.INDEX_NAME_DEFAULT_VALUE);
 
 		databasesLabel = new Label(Labels.CREATE_TABLE_DATABASES);
 
@@ -142,7 +131,6 @@ public class CreateTableForm implements Runnable, Updatable {
 		GuiUtils.addLabelAndComponentToContent(tableNameLabel, tableName, content);
 		GuiUtils.addLabelAndComponentToContent(primaryKeyNameLabel, primaryKeyName, content);
 		GuiUtils.addLabelAndComponentToContent(primaryKeyConstraintLabel, primaryKeyConstraint, content);
-		GuiUtils.addLabelAndComponentToContent(primaryKeyIndexLabel, primaryKeyIndex, content);
 		GuiUtils.addComponentToContent(databasesLabel, content);
 		GuiUtils.addComponentToContent(oracle, content);
 		GuiUtils.addComponentToContent(mssql, content);
@@ -162,16 +150,15 @@ public class CreateTableForm implements Runnable, Updatable {
 				if (!CreateTableForm.this.validate()) {
 					return;
 				}
-				// TODO PRIMARY KEY INDEX DEFUALT NAME?
 				Table table = new Table(tableName.getText());
 				table.setForOracle(oracle.isChecked());
 				table.setForMssql(mssql.isChecked());
 				table.setForPostgreSql(postgresql.isChecked());
 				table.setPrimaryKeyColumnName(primaryKeyName.getText());
 				table.setPrimaryKeyContrainName(primaryKeyConstraint.getText());
-				table.setPrimaryKeyIndexName(primaryKeyIndex.getText());
 				table.setSequenceName(sequenceName.getText());
-				AddColumnForm addColumn = new AddColumnForm(mainMenu, window, CreateTableForm.this, table, Operation.CREATE_TABLE);
+				AddColumnForm addColumn = new AddColumnForm(mainMenu, window, CreateTableForm.this, table,
+						Operation.CREATE_TABLE);
 				mainMenu.addUpdatableChild(addColumn);
 				addColumn.run();
 			}

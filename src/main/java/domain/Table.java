@@ -3,14 +3,11 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import gui.AddColumnForm;
-
 public class Table {
 
 	private String name;
 	private String primaryKeyColumnName;
 	private String primaryKeyContrainName;
-	private String primaryKeyIndexName;
 	private String sequenceName;
 	private List<Column> columns;
 	private boolean forOracle;
@@ -30,6 +27,15 @@ public class Table {
 
 	public Table(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * Sets forOracle, forMssql and forPostgre to TRUE
+	 */
+	public void setForAllDatabases() {
+		forOracle = true;
+		forMssql = true;
+		forPostgreSql = true;
 	}
 
 	public String getName() {
@@ -108,14 +114,6 @@ public class Table {
 
 	public void setSequenceName(String sequenceName) {
 		this.sequenceName = sequenceName;
-	}
-
-	public String getPrimaryKeyIndexName() {
-		return primaryKeyIndexName;
-	}
-
-	public void setPrimaryKeyIndexName(String primaryKeyIndexName) {
-		this.primaryKeyIndexName = primaryKeyIndexName;
 	}
 
 }
