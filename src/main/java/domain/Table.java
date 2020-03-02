@@ -27,6 +27,7 @@ public class Table {
 
 	public Table(String name) {
 		this.name = name;
+		setForAllDatabases();
 	}
 
 	/**

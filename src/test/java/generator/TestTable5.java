@@ -19,7 +19,6 @@ public class TestTable5 extends TestTable {
 	@Override
 	public Table getTable() {
 		Table table = new Table("NDER_REFERENCE");
-		table.setForAllDatabases();
 		table.addColumn(new Column("version_id", null, null, true, "integer"));
 		table.addColumn(new Column("isAlive", null, null, false, "boolean"));
 		return table;

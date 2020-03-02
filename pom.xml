@@ -39,7 +39,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>gui.MainMenuForm</mainClass>
+							<mainClass>main.LBJ</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
