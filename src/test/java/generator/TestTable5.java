@@ -9,7 +9,7 @@ import domain.Table;
  * changesets for column should be generated as {@link #getOperation()} returns
  * {@link Operation#ADD_COLUMN}
  */
-public class TestTable5 extends TestTable implements TestTableSupplier {
+public class TestTable5 extends TestTable {
 
 	@Override
 	public Operation getOperation() {

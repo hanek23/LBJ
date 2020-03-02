@@ -7,7 +7,7 @@ import domain.Table;
  * Supplies a table with one column on which NOT NULL constraint should be
  * removed
  */
-public class TestTable3 extends TestTable implements TestTableSupplier {
+public class TestTable3 extends TestTable {
 
 	@Override
 	public Operation getOperation() {

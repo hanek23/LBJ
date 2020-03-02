@@ -35,12 +35,9 @@ public class GeneratorTest {
 	}
 
 	private void assertChangeLogEquals(TestTableSupplier testTableSupplier) {
-		String expected = StringUtils.deleteWhitespace(testTableSupplier.getExpectedTable())
-				.replace(System.lineSeparator(), "");
+		String expected = StringUtils.deleteWhitespace(testTableSupplier.getExpectedTable());
 		String actual = StringUtils.deleteWhitespace(
-				Generator.generate(testTableSupplier.getTable(), testTableSupplier.getOperation(), AUTHOR)
-						.replace(System.lineSeparator(), ""));
-		System.out.println(actual);
+				Generator.generate(testTableSupplier.getTable(), testTableSupplier.getOperation(), AUTHOR));
 		for (int i = 0; i < expected.length(); i++) {
 			if (!String.valueOf(expected.charAt(i)).equals(String.valueOf(actual.charAt(i)))) {
 				fail("Wrong character at position " + i + ", lines before are expected:  "

@@ -9,7 +9,7 @@ import domain.Table;
  * should be generated as {@link #getOperation()} returns
  * {@link Operation#CREATE_TABLE}
  */
-public class TestTable4 extends TestTable implements TestTableSupplier {
+public class TestTable4 extends TestTable {
 
 	@Override
 	public Operation getOperation() {
