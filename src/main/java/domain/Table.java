@@ -31,6 +31,14 @@ public class Table {
 	}
 
 	/**
+	 * @return Table with empty table name, zero columns and for all supported
+	 *         databases (Oracle, MSSQL and Postgres).
+	 */
+	public static Table emptyTable() {
+		return new Table("");
+	}
+
+	/**
 	 * Sets forOracle, forMssql and forPostgre to TRUE
 	 */
 	public void setForAllDatabases() {

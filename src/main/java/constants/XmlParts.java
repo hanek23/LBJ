@@ -35,7 +35,8 @@ public class XmlParts {
 	private static final String CREATE_TABLE_ORACLE_POSTGRE_TEMPLATE = "/generator/createtable/CreateTableOraclePostgre.txt";
 	private static final String CREATE_TABLE_SEQUENCE_POSTGRE_TEMPLATE = "/generator/createtable/CreateTableSequencePostgre.txt";
 	private static final String CREATE_TABLE_SEQUENCE_ORACLE_TEMPLATE = "/generator/createtable/CreateTableSequenceOracle.txt";
-	private static final String COLUMN_INDEX_TEMPLATE = "/generator/shared/ColumnIndex.txt";
+	private static final String COLUMN_INDEX_MSSQL_POSTGRE_TEMPLATE = "/generator/shared/CreateIndexMssqlPostgre.txt";
+	private static final String COLUMN_INDEX_ORACLE_TEMPLATE = "/generator/shared/CreateIndexOracle.txt";
 	private static final String ADD_COLUMN_TEMPLATE = "/generator/addcolumn/AddColumn.txt";
 	private static final String ADD_COLUMN_BOOLEAN_ORACLE_MSSQL_TEMPLATE = "/generator/addcolumn/AddColumnBooleanOracleMssql.txt";
 	private static final String ADD_COLUMN_BOOLEAN_POSTGRE_TEMPLATE = "/generator/addcolumn/AddColumnBooleanPostgre.txt";
@@ -64,8 +65,12 @@ public class XmlParts {
 		return FileUtils.getStringFromFileResource(XmlParts.class, CREATE_TABLE_SEQUENCE_POSTGRE_TEMPLATE);
 	}
 
-	public static String getColumnIndex() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, COLUMN_INDEX_TEMPLATE);
+	public static String getColumnIndexMssqlPostgre() {
+		return FileUtils.getStringFromFileResource(XmlParts.class, COLUMN_INDEX_MSSQL_POSTGRE_TEMPLATE);
+	}
+
+	public static String getColumnIndexOracle() {
+		return FileUtils.getStringFromFileResource(XmlParts.class, COLUMN_INDEX_ORACLE_TEMPLATE);
 	}
 
 	public static String getAddColumn() {

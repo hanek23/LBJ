@@ -1,4 +1,4 @@
-<changeSet author="$AUTHOR$" id="$ID$" dbms="oracle, postgresql">
+<changeSet id="$ID$" author="$AUTHOR$" dbms="oracle, postgresql">
 	<preConditions onFail="MARK_RAN">
 		<not>
 			<tableExists tableName="$TABLE_NAME$" />

@@ -1,4 +1,4 @@
-<changeSet author="$AUTHOR$" id="$ID$" dbms="postgresql">
+<changeSet id="$ID$" author="$AUTHOR$" dbms="postgresql">
 	<preConditions onFail="MARK_RAN">
 		<not>
 			<sequenceExists sequenceName="$SEQUENCE_NAME$" />

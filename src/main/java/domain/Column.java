@@ -104,4 +104,16 @@ public class Column {
 		return StringUtils.equalsIgnoreCase(dataType, "boolean");
 	}
 
+	public boolean isForOracle() {
+		return getTable().isForOracle();
+	}
+
+	public boolean isForMssql() {
+		return getTable().isForMssql();
+	}
+
+	public boolean isForPostgreSql() {
+		return getTable().isForPostgreSql();
+	}
+
 }

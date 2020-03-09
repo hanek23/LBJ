@@ -23,31 +23,31 @@ public class AddColumnForm implements Runnable, Updatable {
 	private Window window;
 	private Runnable previousWindow;
 	private boolean initialized;
+	private CheckBox foreignKeyCheckBox;
+	private CheckBox nullableCheckBox;
+	private CheckBox indexCheckBox;
 	private TextBox referencedColumn;
 	private TextBox referencedTable;
 	private TextBox foreignKeyName;
-	private CheckBox foreignKey;
-	private Label dataTypeLabel;
 	private TextBox dataType;
-	private Panel content;
-	private Table table;
 	private TextBox tableName;
 	private TextBox columnName;
+	private TextBox indexName;
+	private Label dataTypeLabel;
 	private Label tableNameLabel;
 	private Label columnNameLabel;
 	private Label referencedTableLabel;
 	private Label referencedColumnLabel;
 	private Label foreignKeyNameLabel;
-	private CheckBox index;
-	private TextBox indexName;
 	private Label indexNameLabel;
-	private CheckBox nullable;
 	private MainMenuForm mainMenu;
 	private Column column;
+	private Table table;
+	private Panel content;
 	private Operation operation;
 
 	public AddColumnForm(MainMenuForm mainMenu, Window window, Runnable previousWindow, Operation operation) {
-		this(mainMenu, window, previousWindow, new Table(""), operation);
+		this(mainMenu, window, previousWindow, Table.emptyTable(), operation);
 	}
 
 	public AddColumnForm(MainMenuForm mainMenu, Window window, Runnable previousWindow, Table table,
@@ -74,20 +74,20 @@ public class AddColumnForm implements Runnable, Updatable {
 		Column column = new Column(columnName.getText());
 		handleIndex(column);
 		handleForeignKey(column);
-		column.setNullable(nullable.isChecked());
+		column.setNullable(nullableCheckBox.isChecked());
 		column.setDataType(dataType.getText());
 		return column;
 	}
 
 	private void handleIndex(Column column) {
-		if (index.isChecked()) {
+		if (indexCheckBox.isChecked()) {
 			column.setIndex(true);
 			column.setIndexName(indexName.getText());
 		}
 	}
 
 	private void handleForeignKey(Column column) {
-		if (foreignKey.isChecked()) {
+		if (foreignKeyCheckBox.isChecked()) {
 			ForeignKey fk = new ForeignKey(foreignKeyName.getText());
 			fk.setReferencedColumn(referencedColumn.getText());
 			fk.setReferencedTable(referencedTable.getText());
@@ -98,11 +98,11 @@ public class AddColumnForm implements Runnable, Updatable {
 	private boolean validate() {
 		boolean toReturn = GuiValidator.validateTextBox(tableName, tableNameLabel);
 		toReturn = GuiValidator.validateTextBox(columnName, columnNameLabel) && toReturn;
-		if (index.isChecked()) {
+		if (indexCheckBox.isChecked()) {
 			toReturn = GuiValidator.validateAll(indexName, indexNameLabel, NamingConventions.INDEX_NAME_DEFAULT_VALUE,
 					NamingConventions.INDEX_NAME_DEFAULT_VALUE + NamingConventions.SEPARATOR) && toReturn;
 		}
-		if (foreignKey.isChecked()) {
+		if (foreignKeyCheckBox.isChecked()) {
 			toReturn = GuiValidator.validateTextBox(referencedTable, referencedTableLabel) && toReturn;
 			toReturn = GuiValidator.validateTextBox(referencedColumn, referencedColumnLabel) && toReturn;
 			toReturn = GuiValidator.validateAll(foreignKeyName, foreignKeyNameLabel,
@@ -119,11 +119,12 @@ public class AddColumnForm implements Runnable, Updatable {
 		window.setComponent(content);
 	}
 
+	@Override
 	public void update() {
 		if (!initialized) {
 			return;
 		}
-		if (index.isChecked()) {
+		if (indexCheckBox.isChecked()) {
 			indexName.setEnabled(true);
 			if (tableName.isFocused() || columnName.isFocused() || StringUtils.isEmpty(indexName.getText())) {
 				indexName.setText(NamingConventions.INDEX_NAME_DEFAULT_VALUE + tableName.getText()
@@ -133,7 +134,7 @@ public class AddColumnForm implements Runnable, Updatable {
 			indexName.setText("");
 			indexName.setEnabled(false);
 		}
-		if (foreignKey.isChecked()) {
+		if (foreignKeyCheckBox.isChecked()) {
 			referencedTable.setEnabled(true);
 			referencedColumn.setEnabled(true);
 			foreignKeyName.setEnabled(true);
@@ -173,15 +174,15 @@ public class AddColumnForm implements Runnable, Updatable {
 		dataTypeLabel = new Label(Labels.COLUMN_DATA_TYPE);
 		dataType = new TextBox();
 
-		nullable = new CheckBox();
+		nullableCheckBox = new CheckBox();
 
 		indexNameLabel = new Label(Labels.ADD_COLUMN_INDEX_NAME);
 		indexName = new TextBox();
 		indexName.setEnabled(false);
 
-		index = new CheckBox();
+		indexCheckBox = new CheckBox();
 
-		foreignKey = new CheckBox();
+		foreignKeyCheckBox = new CheckBox();
 
 		referencedTableLabel = new Label(Labels.ADD_COLUMN_REFERENCED_TABLE);
 		referencedTable = new TextBox();
@@ -200,10 +201,10 @@ public class AddColumnForm implements Runnable, Updatable {
 		GuiUtils.addLabelAndComponentToContent(tableNameLabel, tableName, content);
 		GuiUtils.addLabelAndComponentToContent(columnNameLabel, columnName, content);
 		GuiUtils.addLabelAndComponentToContent(dataTypeLabel, dataType, content);
-		GuiUtils.addLabelAndComponentToContent(new Label(Labels.ADD_COLUMN_NULLABLE), nullable, content);
-		GuiUtils.addLabelAndComponentToContent(new Label(Labels.ADD_COLUMN_INDEX), index, content);
-		GuiUtils.addLabelAndComponentToContent(new Label(Labels.ADD_COLUMN_INDEX_NAME), indexName, content);
-		GuiUtils.addLabelAndComponentToContent(new Label(Labels.ADD_COLUMN_FOREIGN_KEY), foreignKey, content);
+		GuiUtils.addLabelAndComponentToContent(new Label(Labels.ADD_COLUMN_NULLABLE), nullableCheckBox, content);
+		GuiUtils.addLabelAndComponentToContent(new Label(Labels.ADD_COLUMN_INDEX), indexCheckBox, content);
+		GuiUtils.addLabelAndComponentToContent(indexNameLabel, indexName, content);
+		GuiUtils.addLabelAndComponentToContent(new Label(Labels.ADD_COLUMN_FOREIGN_KEY), foreignKeyCheckBox, content);
 		GuiUtils.addLabelAndComponentToContent(referencedTableLabel, referencedTable, content);
 		GuiUtils.addLabelAndComponentToContent(referencedColumnLabel, referencedColumn, content);
 		GuiUtils.addLabelAndComponentToContent(foreignKeyNameLabel, foreignKeyName, content);

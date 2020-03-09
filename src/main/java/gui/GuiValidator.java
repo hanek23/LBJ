@@ -45,18 +45,17 @@ public class GuiValidator {
 	}
 
 	public static boolean validateAll(TextBox textBox, Label label, String... defaultValues) {
-		boolean foreignKeyValidation = validateTextBox(textBox, label);
-		if (foreignKeyValidation) {
-			foreignKeyValidation = validateTextBoxValueLength(textBox, label, Settings.MAX_LENGTH_OF_NAMES)
-					&& foreignKeyValidation;
+		boolean validationResult = validateTextBox(textBox, label);
+		if (validationResult) {
+			validationResult = validateTextBoxValueLength(textBox, label, Settings.MAX_LENGTH_OF_NAMES)
+					&& validationResult;
 		}
 		for (String defaultValue : defaultValues) {
-			if (foreignKeyValidation) {
-				foreignKeyValidation = validateTextBoxDefaultValue(textBox, label, defaultValue)
-						&& foreignKeyValidation;
+			if (validationResult) {
+				validationResult = validateTextBoxDefaultValue(textBox, label, defaultValue) && validationResult;
 			}
 		}
-		return foreignKeyValidation;
+		return validationResult;
 	}
 
 }

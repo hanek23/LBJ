@@ -1,4 +1,4 @@
-<changeSet author="$AUTHOR$" id="$ID$" dbms="mssql">
+<changeSet id="$ID$" author="$AUTHOR$" dbms="mssql">
 	<preConditions onFail="MARK_RAN">
 		<not>
 			<tableExists tableName="$TABLE_NAME$" />

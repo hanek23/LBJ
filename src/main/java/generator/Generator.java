@@ -82,7 +82,12 @@ public class Generator {
 
 	private static String handleIndex(Column column, String addColumn) {
 		if (column.hasIndex()) {
-			addColumn += XmlParts.getColumnIndex();
+			if (column.isForMssql() || column.isForPostgreSql()) {
+				addColumn += XmlParts.getColumnIndexMssqlPostgre();
+			}
+			if (column.isForOracle()) {
+				addColumn += XmlParts.getColumnIndexOracle();
+			}
 			addColumn = XmlBuilder.replaceColumnIndexName(addColumn, column);
 		}
 		return addColumn;

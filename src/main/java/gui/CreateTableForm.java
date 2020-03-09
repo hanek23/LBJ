@@ -75,6 +75,7 @@ public class CreateTableForm implements Runnable, Updatable {
 		window.setComponent(content);
 	}
 
+	@Override
 	public void update() {
 		if (!initialized) {
 			return;

@@ -1,4 +1,4 @@
-<changeSet author="$AUTHOR$" id="$ID$" dbms="oracle">
+<changeSet id="$ID$" author="$AUTHOR$" dbms="oracle">
 	<preConditions onFail="MARK_RAN">
 		<not>
 			<sequenceExists sequenceName="$SEQUENCE_NAME$" />

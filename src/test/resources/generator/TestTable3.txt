@@ -4,7 +4,7 @@
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
 	objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
 
-	<changeSet author="hanek23" id="1" dbms="oracle">
+	<changeSet id="1" author="hanek23" dbms="oracle">
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="N">
 				SELECT NULLABLE
@@ -19,7 +19,7 @@
 			columnDataType="integer" />
 	</changeSet>
 
-	<changeSet author="hanek23" id="2" dbms="mssql">
+	<changeSet id="2" author="hanek23" dbms="mssql">
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">
 				SELECT is_nullable
@@ -34,7 +34,7 @@
 			columnDataType="integer" />
 	</changeSet>
 
-	<changeSet author="hanek23" id="3" dbms="postgresql">
+	<changeSet id="3" author="hanek23" dbms="postgresql">
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="NO">
 				SELECT is_nullable

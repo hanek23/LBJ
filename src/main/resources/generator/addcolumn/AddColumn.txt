@@ -1,4 +1,4 @@
-<changeSet author="$AUTHOR$" id="$ID$">
+<changeSet id="$ID$" author="$AUTHOR$">
 	<preConditions onFail="MARK_RAN">
 		<not>
 			<columnExists tableName="$TABLE_NAME$" columnName="$COLUMN_NAME$" />

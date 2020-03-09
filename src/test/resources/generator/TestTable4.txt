@@ -4,7 +4,7 @@
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
 	objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
 
-	<changeSet author="hanek23" id="1" dbms="mssql">
+	<changeSet id="1" author="hanek23" dbms="mssql">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<tableExists tableName="NDER_RELATED_ID" />
@@ -20,7 +20,7 @@
 		</createTable>
 	</changeSet>
 
-	<changeSet author="hanek23" id="2" dbms="oracle, postgresql">
+	<changeSet id="2" author="hanek23" dbms="oracle, postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<tableExists tableName="NDER_RELATED_ID" />
@@ -37,7 +37,7 @@
 		</createTable>
 	</changeSet>
 
-	<changeSet author="hanek23" id="3" dbms="oracle">
+	<changeSet id="3" author="hanek23" dbms="oracle">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<sequenceExists sequenceName="SEQ_NDER_RELATED_ID" />
@@ -48,7 +48,7 @@
 			cacheSize="20" maxValue="999999999999999999999999999" ordered="false" cycle="false" />
 	</changeSet>
 
-	<changeSet author="hanek23" id="4" dbms="postgresql">
+	<changeSet id="4" author="hanek23" dbms="postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<sequenceExists sequenceName="SEQ_NDER_RELATED_ID" />
@@ -59,7 +59,7 @@
 			cacheSize="20" maxValue="999999999999999999" cycle="false" />
 	</changeSet>
 
-	<changeSet author="hanek23" id="5">
+	<changeSet id="5" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="NDER_RELATED_ID" columnName="version_id" />
@@ -74,7 +74,7 @@
 		</addColumn>
 	</changeSet>
 
-	<changeSet author="hanek23" id="6">
+	<changeSet id="6" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="NDER_RELATED_ID" columnName="messageid" />
@@ -88,7 +88,7 @@
 		</addColumn>
 	</changeSet>
 
-	<changeSet author="hanek23" id="7">
+	<changeSet id="7" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="NDER_RELATED_ID" columnName="containersn" />
@@ -102,7 +102,7 @@
 		</addColumn>
 	</changeSet>
 
-	<changeSet author="hanek23" id="8">
+	<changeSet id="8" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="NDER_RELATED_ID" columnName="actionsn" />
@@ -116,7 +116,7 @@
 		</addColumn>
 	</changeSet>
 
-	<changeSet author="hanek23" id="9">
+	<changeSet id="9" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="NDER_RELATED_ID" columnName="relatedmessage" />
@@ -132,7 +132,7 @@
 		</addColumn>
 	</changeSet>
 
-	<changeSet author="hanek23" id="10" dbms="mssql,postgresql">
+	<changeSet id="10" author="hanek23" dbms="mssql,postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<indexExists indexName="I_NDER_RELATED_MESSAGE" />
@@ -144,7 +144,7 @@
 		</createIndex>
 	</changeSet>
 	
-	<changeSet author="hanek23" id="11" dbms="oracle">
+	<changeSet id="11" author="hanek23" dbms="oracle">
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'NDER_RELATED_ID' and index_name='I_NDER_RELATED_MESSAGE'</sqlCheck>
 		</preConditions>
@@ -154,7 +154,7 @@
 		</createIndex>
 	</changeSet>
 
-	<changeSet author="hanek23" id="12">
+	<changeSet id="12" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="NDER_RELATED_ID" columnName="relatedcontainer" />
@@ -169,7 +169,7 @@
 		</addColumn>
 	</changeSet>
 
-	<changeSet author="hanek23" id="13" dbms="mssql,postgresql">
+	<changeSet id="13" author="hanek23" dbms="mssql,postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<indexExists indexName="I_NDER_RELATED_CONTAINER" />
@@ -181,7 +181,7 @@
 		</createIndex>
 	</changeSet>
 	
-	<changeSet author="hanek23" id="14" dbms="oracle">
+	<changeSet id="14" author="hanek23" dbms="oracle">
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'NDER_RELATED_ID' and index_name='I_NDER_RELATED_CONTAINER'</sqlCheck>
 		</preConditions>
@@ -191,7 +191,7 @@
 		</createIndex>
 	</changeSet>
 
-	<changeSet author="hanek23" id="15">
+	<changeSet id="15" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="NDER_RELATED_ID" columnName="relatedaction" />
@@ -206,7 +206,7 @@
 		</addColumn>
 	</changeSet>
 
-	<changeSet author="hanek23" id="16" dbms="mssql,postgresql">
+	<changeSet id="16" author="hanek23" dbms="mssql,postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<indexExists indexName="I_NDER_RELATED_ACTION" />
@@ -218,7 +218,7 @@
 		</createIndex>
 	</changeSet>
 	
-	<changeSet author="hanek23" id="17" dbms="oracle">
+	<changeSet id="17" author="hanek23" dbms="oracle">
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'NDER_RELATED_ID' and index_name='I_NDER_RELATED_ACTION'</sqlCheck>
 		</preConditions>
@@ -228,7 +228,7 @@
 		</createIndex>
 	</changeSet>
 
-	<changeSet author="hanek23" id="18">
+	<changeSet id="18" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="NDER_RELATED_ID" columnName="container" />
@@ -243,7 +243,7 @@
 		</addColumn>
 	</changeSet>
 
-	<changeSet author="hanek23" id="19" dbms="mssql,postgresql">
+	<changeSet id="19" author="hanek23" dbms="mssql,postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<indexExists indexName="I_NDER_RELATED_ID_CONT" />
@@ -255,7 +255,7 @@
 		</createIndex>
 	</changeSet>
 	
-	<changeSet author="hanek23" id="20" dbms="oracle">
+	<changeSet id="20" author="hanek23" dbms="oracle">
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'NDER_RELATED_ID' and index_name='I_NDER_RELATED_ID_CONT'</sqlCheck>
 		</preConditions>
