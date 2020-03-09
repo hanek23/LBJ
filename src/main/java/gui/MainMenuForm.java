@@ -30,7 +30,7 @@ public class MainMenuForm implements Runnable {
 	private Panel mainMenuContent;
 	private List<Updatable> updatableChilds;
 
-	public MainMenuForm() {
+	public MainMenuForm() throws IOException {
 		initialize();
 	}
 
@@ -38,7 +38,7 @@ public class MainMenuForm implements Runnable {
 		this.window = window;
 	}
 
-	private void initialize() {
+	private void initialize() throws IOException {
 		DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
 		try (Screen screen = terminalFactory.createScreen()) {
 			screen.startScreen();
@@ -101,8 +101,6 @@ public class MainMenuForm implements Runnable {
 			});
 
 			gui.addWindowAndWait(window);
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 
 	}

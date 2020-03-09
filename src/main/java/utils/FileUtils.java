@@ -20,7 +20,6 @@ public class FileUtils {
 	/**
 	 * @param clazz of which you want to access resources of
 	 * @param path  to resource. For example "/generator/shared/ChangelogStart.txt"
-	 * @return string representation of specified resource file
 	 */
 	public static String getStringFromFileResource(Class<?> clazz, String path) {
 		try (InputStream inputStream = clazz.getResourceAsStream(path);
