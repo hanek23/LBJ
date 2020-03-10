@@ -21,6 +21,7 @@ public class Labels {
 	public static final String BUTTON_EXIT = "Exit";
 
 	// CREATE TABLE
+	public static final String TABLE_NAME_FORM = "Create table";
 	public static final String TABLE_NAME = "Table name";
 	public static final String CREATE_TABLE_PRIMARY_KEY_NAME = "Primary key name";
 	public static final String CREATE_TABLE_PRIMARY_KEY_CONSTRAIN = "Primary key constraint name";

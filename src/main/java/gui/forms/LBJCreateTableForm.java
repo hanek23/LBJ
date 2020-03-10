@@ -2,6 +2,7 @@ package gui.forms;
 
 import com.googlecode.lanterna.gui2.Window;
 
+import constants.Labels;
 import domain.Table;
 import gui.components.LBJCheckBox;
 import gui.components.LBJForm;
@@ -19,8 +20,8 @@ public class LBJCreateTableForm extends LBJForm<Table> {
 	private LBJCheckBox postgreCheckBox;
 	private LBJTextBox sequenceNameTextBox;
 
-	public LBJCreateTableForm(String name, Window window, LBJForm<?> previousForm) {
-		super(name, window, previousForm);
+	public LBJCreateTableForm(Window window, LBJForm<?> previousForm) {
+		super(window, previousForm);
 	}
 
 	@Override
@@ -43,6 +44,11 @@ public class LBJCreateTableForm extends LBJForm<Table> {
 	public Table convert() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return Labels.TABLE_NAME_FORM;
 	}
 
 }

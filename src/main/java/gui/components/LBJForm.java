@@ -8,7 +8,6 @@ import com.googlecode.lanterna.gui2.Window;
 
 public abstract class LBJForm<T> {
 
-	private String name;
 	private LBJForm<?> previousForm;
 	private LBJForm<?> nextForm;
 	private Window window;
@@ -17,8 +16,7 @@ public abstract class LBJForm<T> {
 	private Panel content;
 	private List<LBJComponent<?>> components;
 
-	public LBJForm(String name, Window window, LBJForm<?> previousForm) {
-		this.name = name;
+	public LBJForm(Window window, LBJForm<?> previousForm) {
 		this.window = window;
 		this.previousForm = previousForm;
 		initialize();
@@ -120,17 +118,7 @@ public abstract class LBJForm<T> {
 		this.initialized = initialized;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	@Override
-	public String toString() {
-		return name;
-	}
+	public abstract String toString();
 
 }
