@@ -10,6 +10,10 @@ public class LBJTextBox extends LBJComponent<String> {
 	private Pattern allowedPattern;
 	private TextBox textBox;
 
+	public LBJTextBox(String name) {
+		setName(name);
+	}
+
 	@Override
 	public String getValue() {
 		return textBox.getText();

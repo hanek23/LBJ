@@ -6,24 +6,37 @@ import java.util.List;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.Window;
 
-public abstract class LBJForm {
+public abstract class LBJForm<T> {
 
-	private LBJForm previousForm;
-	private LBJForm nextForm;
+	private String name;
+	private LBJForm<?> previousForm;
+	private LBJForm<?> nextForm;
 	private Window window;
 	private boolean visible;
 	private boolean initialized;
 	private Panel content;
 	private List<LBJComponent<?>> components;
 
-	public abstract void update();
-
-	public abstract void initialize();
-
-	public LBJForm() {
+	public LBJForm(String name, Window window, LBJForm<?> previousForm) {
+		this.name = name;
+		this.window = window;
+		this.previousForm = previousForm;
 		initialize();
 		initialized = true;
 	}
+
+	public void initialize() {
+		initializeComponents();
+		addButtonsToContent();
+	}
+
+	public abstract void initializeComponents();
+
+	public abstract void addButtonsToContent();
+
+	public abstract void update();
+
+	public abstract T convert();
 
 	public boolean validate() {
 		boolean isFormValid = true;
@@ -48,11 +61,11 @@ public abstract class LBJForm {
 		nextForm.focus();
 	}
 
-	public LBJForm getPreviousForm() {
+	public LBJForm<?> getPreviousForm() {
 		return previousForm;
 	}
 
-	public void setPreviousForm(LBJForm previousForm) {
+	public void setPreviousForm(LBJForm<?> previousForm) {
 		this.previousForm = previousForm;
 	}
 
@@ -91,11 +104,11 @@ public abstract class LBJForm {
 		return getComponents().add(component);
 	}
 
-	public LBJForm getNextForm() {
+	public LBJForm<?> getNextForm() {
 		return nextForm;
 	}
 
-	public void setNextForm(LBJForm nextForm) {
+	public void setNextForm(LBJForm<?> nextForm) {
 		this.nextForm = nextForm;
 	}
 
@@ -105,6 +118,19 @@ public abstract class LBJForm {
 
 	public void setInitialized(boolean initialized) {
 		this.initialized = initialized;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return name;
 	}
 
 }

@@ -12,7 +12,7 @@ public abstract class LBJComponent<T> {
 	private Label label;
 	private T value;
 	private boolean enabled;
-	private LBJForm form;
+	private LBJForm<T> form;
 	private List<LBJValidator<T>> validators;
 
 	public boolean isValid() {
@@ -48,11 +48,11 @@ public abstract class LBJComponent<T> {
 		this.enabled = enabled;
 	}
 
-	public LBJForm getForm() {
+	public LBJForm<T> getForm() {
 		return form;
 	}
 
-	public void setForm(LBJForm form) {
+	public void setForm(LBJForm<T> form) {
 		this.form = form;
 	}
 
