@@ -1,44 +1,18 @@
 package gui.components;
 
-import java.util.ArrayList;
-import java.util.List;
+import gui.forms.LBJForm;
 
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.gui2.Label;
-
-public abstract class LBJComponent<T> {
+public abstract class LBJComponent {
 
 	private String name;
-	private Label label;
-	private T value;
 	private boolean enabled;
-	private LBJForm<T> form;
-	private List<LBJValidator<T>> validators;
+	private LBJForm form;
 
-	public boolean isValid() {
-		boolean isValid = true;
-		for (LBJValidator<T> validator : validators) {
-			isValid = validator.isValid(value) && isValid;
-		}
-		if (isValid) {
-			label.setBackgroundColor(TextColor.ANSI.DEFAULT);
-		} else {
-			label.setBackgroundColor(TextColor.ANSI.RED);
-		}
-		return isValid;
+	public LBJComponent(String name, LBJForm form) {
+		this.name = name;
+		this.form = form;
+		enabled = true;
 	}
-
-	public Label getLabel() {
-		return label;
-	}
-
-	public void setLabel(Label label) {
-		this.label = label;
-	}
-
-	public abstract T getValue();
-
-	public abstract void setValue(T value);
 
 	public boolean isEnabled() {
 		return enabled;
@@ -48,23 +22,12 @@ public abstract class LBJComponent<T> {
 		this.enabled = enabled;
 	}
 
-	public LBJForm<T> getForm() {
+	public LBJForm getForm() {
 		return form;
 	}
 
-	public void setForm(LBJForm<T> form) {
+	public void setForm(LBJForm form) {
 		this.form = form;
-	}
-
-	public List<LBJValidator<T>> getValidators() {
-		if (validators == null) {
-			validators = new ArrayList<>();
-		}
-		return validators;
-	}
-
-	public boolean addValidator(LBJValidator<T> validator) {
-		return getValidators().add(validator);
 	}
 
 	public String getName() {

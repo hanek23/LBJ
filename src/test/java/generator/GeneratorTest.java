@@ -38,8 +38,9 @@ public class GeneratorTest {
 	private void assertChangeLogEquals(TestTableSupplier testTableSupplier) throws Exception {
 		String expected = testTableSupplier.getExpectedTable();
 		String actual = Generator.generate(testTableSupplier.getTable(), testTableSupplier.getOperation(), AUTHOR);
-		XmlAssert.assertThat(actual).isValid();
 		StreamSource liquibaseXsd = new StreamSource(GeneratorTest.class.getResourceAsStream(LIQUIBASE_XSD));
+
+		XmlAssert.assertThat(actual).isValid();
 		XmlAssert.assertThat(actual).isValidAgainst(liquibaseXsd);
 		XmlAssert.assertThat(actual).and(expected).normalizeWhitespace().areIdentical();
 	}

@@ -5,11 +5,10 @@ import com.googlecode.lanterna.gui2.Window;
 import constants.Labels;
 import domain.Table;
 import gui.components.LBJCheckBox;
-import gui.components.LBJForm;
 import gui.components.LBJPlainLabel;
 import gui.components.LBJTextBox;
 
-public class LBJCreateTableForm extends LBJForm<Table> {
+public class LBJCreateTableForm extends LBJEntityForm<Table> {
 
 	private LBJTextBox tableNameTextBox;
 	private LBJTextBox primaryKeyNameTextBox;
@@ -20,7 +19,7 @@ public class LBJCreateTableForm extends LBJForm<Table> {
 	private LBJCheckBox postgreCheckBox;
 	private LBJTextBox sequenceNameTextBox;
 
-	public LBJCreateTableForm(Window window, LBJForm<?> previousForm) {
+	public LBJCreateTableForm(Window window, LBJEntityForm<?> previousForm) {
 		super(window, previousForm);
 	}
 

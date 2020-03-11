@@ -1,9 +1,11 @@
-package gui.components;
+package gui.validators;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+
+import gui.validators.LBJLowerCaseStringValidator;
 
 public class LBJLowerCaseStringValidatorTest {
 

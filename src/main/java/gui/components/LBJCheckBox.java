@@ -1,14 +1,21 @@
 package gui.components;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.lanterna.gui2.CheckBox;
 
-public class LBJCheckBox extends LBJComponent<Boolean> {
+import gui.forms.LBJEntityForm;
+import gui.forms.LBJForm;
 
-	private Boolean defaultValue;
-	private List<LBJComponent<?>> relatedComponents;
+public class LBJCheckBox extends LBJValueHolderComponent<Boolean> {
+
+	private List<LBJComponent> relatedComponents;
 	private CheckBox checkBox;
+
+	public LBJCheckBox(String name, LBJForm form) {
+		super(name, form);
+	}
 
 	@Override
 	public Boolean getValue() {
@@ -20,32 +27,25 @@ public class LBJCheckBox extends LBJComponent<Boolean> {
 		if (value == null) {
 			throw new IllegalArgumentException("Cannot set null to checkbox value! name: " + getName());
 		}
-		if (value.booleanValue()) {
-			for (LBJComponent<?> component : relatedComponents) {
-				component.setEnabled(true);
-			}
+		for (LBJComponent component : relatedComponents) {
+			component.setEnabled(value);
 		}
 		checkBox.setChecked(value);
 	}
 
 	public boolean isChecked() {
-		return false;
+		return getValue();
 	}
 
-	public Boolean getDefaultValue() {
-		return defaultValue;
-	}
-
-	public void setDefaultValue(Boolean defaultValue) {
-		this.defaultValue = defaultValue;
-	}
-
-	public List<LBJComponent<?>> getRelatedComponents() {
+	public List<LBJComponent> getRelatedComponents() {
+		if (relatedComponents == null) {
+			relatedComponents = new ArrayList<>();
+		}
 		return relatedComponents;
 	}
 
-	public void setRelatedComponents(List<LBJComponent<?>> relatedComponents) {
-		this.relatedComponents = relatedComponents;
+	public boolean addRelatedComponent(LBJComponent relatedComponent) {
+		return getRelatedComponents().add(relatedComponent);
 	}
 
 	public CheckBox getCheckBox() {

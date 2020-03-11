@@ -1,4 +1,4 @@
-package gui.components;
+package gui.validators;
 
 import org.apache.commons.lang3.StringUtils;
 

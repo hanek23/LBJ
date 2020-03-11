@@ -1,4 +1,4 @@
-package gui.components;
+package gui.forms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,17 +6,20 @@ import java.util.List;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.Window;
 
-public abstract class LBJForm<T> {
+import gui.components.LBJComponent;
+import gui.components.LBJValueHolderComponent;
 
-	private LBJForm<?> previousForm;
-	private LBJForm<?> nextForm;
+public abstract class LBJForm {
+
+	private LBJForm previousForm;
+	private LBJForm nextForm;
 	private Window window;
 	private boolean visible;
 	private boolean initialized;
 	private Panel content;
-	private List<LBJComponent<?>> components;
+	private List<LBJComponent> components;
 
-	public LBJForm(Window window, LBJForm<?> previousForm) {
+	public LBJForm(Window window, LBJForm previousForm) {
 		this.window = window;
 		this.previousForm = previousForm;
 		initialize();
@@ -34,12 +37,12 @@ public abstract class LBJForm<T> {
 
 	public abstract void update();
 
-	public abstract T convert();
-
 	public boolean validate() {
 		boolean isFormValid = true;
-		for (LBJComponent<?> component : components) {
-			isFormValid = component.isValid() && isFormValid;
+		for (LBJComponent component : components) {
+			if (component instanceof LBJValueHolderComponent<?>) {
+				isFormValid = ((LBJValueHolderComponent<?>) component).isValid() && isFormValid;
+			}
 		}
 		return isFormValid;
 	}
@@ -59,11 +62,11 @@ public abstract class LBJForm<T> {
 		nextForm.focus();
 	}
 
-	public LBJForm<?> getPreviousForm() {
+	public LBJForm getPreviousForm() {
 		return previousForm;
 	}
 
-	public void setPreviousForm(LBJForm<?> previousForm) {
+	public void setPreviousForm(LBJForm previousForm) {
 		this.previousForm = previousForm;
 	}
 
@@ -91,22 +94,22 @@ public abstract class LBJForm<T> {
 		this.content = content;
 	}
 
-	public List<LBJComponent<?>> getComponents() {
+	public List<LBJComponent> getComponents() {
 		if (components == null) {
 			components = new ArrayList<>();
 		}
 		return components;
 	}
 
-	public boolean addComponent(LBJComponent<?> component) {
+	public boolean addComponent(LBJComponent component) {
 		return getComponents().add(component);
 	}
 
-	public LBJForm<?> getNextForm() {
+	public LBJForm getNextForm() {
 		return nextForm;
 	}
 
-	public void setNextForm(LBJForm<?> nextForm) {
+	public void setNextForm(LBJForm nextForm) {
 		this.nextForm = nextForm;
 	}
 

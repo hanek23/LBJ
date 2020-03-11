@@ -1,4 +1,4 @@
-package gui.components;
+package gui.validators;
 
 public interface LBJValidator<T> {
 

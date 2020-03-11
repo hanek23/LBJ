@@ -1,17 +1,21 @@
 package gui.components;
 
-import java.util.regex.Pattern;
-
 import com.googlecode.lanterna.gui2.TextBox;
 
-public class LBJTextBox extends LBJComponent<String> {
+import gui.forms.LBJForm;
 
-	private String defaultValue;
-	private Pattern allowedPattern;
+public class LBJTextBox extends LBJValueHolderComponent<String> {
+
 	private TextBox textBox;
 
-	public LBJTextBox(String name) {
-		setName(name);
+	public LBJTextBox(String name, LBJForm form) {
+		super(name, form);
+	}
+
+	@Override
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		textBox.setEnabled(enabled);
 	}
 
 	@Override
@@ -22,22 +26,6 @@ public class LBJTextBox extends LBJComponent<String> {
 	@Override
 	public void setValue(String value) {
 		textBox.setText(value);
-	}
-
-	public String getDefaultValue() {
-		return defaultValue;
-	}
-
-	public void setDefaultValue(String defaultValue) {
-		this.defaultValue = defaultValue;
-	}
-
-	public Pattern getAllowedPattern() {
-		return allowedPattern;
-	}
-
-	public void setAllowedPattern(Pattern allowedPattern) {
-		this.allowedPattern = allowedPattern;
 	}
 
 	public TextBox getTextBox() {
