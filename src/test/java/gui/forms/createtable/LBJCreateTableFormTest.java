@@ -1,12 +1,17 @@
 package gui.forms.createtable;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import constants.Labels;
+import constants.NamingConventions;
 import gui.components.LBJMockForm;
+import gui.components.LBJTextBox;
+import gui.validators.LBJValidatorSupplier;
+import gui.validators.LBJValueValidator;
 
 public class LBJCreateTableFormTest {
 
@@ -32,6 +37,34 @@ public class LBJCreateTableFormTest {
 		assertThat(tested.getSequenceNameTextBox().getLabel().getText()).isEqualTo(Labels.CREATE_TABLE_SEQUENCE_NAME);
 		assertThat(tested.toString()).isEqualTo(Labels.TABLE_NAME_FORM);
 
+		assertTrue(tested.getOracleCheckBox().isChecked());
+		assertTrue(tested.getMssqlCheckBox().isChecked());
+		assertTrue(tested.getPostgreCheckBox().isChecked());
+
+		assertValidator(tested.getTableNameTextBox(),
+				LBJValidatorSupplier.caseValidator(NamingConventions.TABLE_NAME_CASE));
+		assertValidator(tested.getTableNameTextBox(), LBJValidatorSupplier.stringRequiredValidator);
+		assertValidator(tested.getTableNameTextBox(), LBJValidatorSupplier.stringLengthValidator);
+
+		assertValidator(tested.getPrimaryKeyNameTextBox(),
+				LBJValidatorSupplier.caseValidator(NamingConventions.PRIMARY_KEY_NAME_CASE));
+		assertValidator(tested.getPrimaryKeyNameTextBox(), LBJValidatorSupplier.stringRequiredValidator);
+		assertValidator(tested.getPrimaryKeyNameTextBox(), LBJValidatorSupplier.stringLengthValidator);
+
+		assertValidator(tested.getPrimaryKeyConstraintNameTextBox(),
+				LBJValidatorSupplier.caseValidator(NamingConventions.PRIMARY_KEY_CONSTRAINT_NAME_CASE));
+		assertValidator(tested.getPrimaryKeyConstraintNameTextBox(), LBJValidatorSupplier.stringRequiredValidator);
+		assertValidator(tested.getPrimaryKeyConstraintNameTextBox(), LBJValidatorSupplier.stringLengthValidator);
+
+		assertValidator(tested.getSequenceNameTextBox(),
+				LBJValidatorSupplier.caseValidator(NamingConventions.SEQUENCE_NAME_CASE));
+		assertValidator(tested.getSequenceNameTextBox(), LBJValidatorSupplier.stringRequiredValidator);
+		assertValidator(tested.getSequenceNameTextBox(), LBJValidatorSupplier.stringLengthValidator);
+
+	}
+
+	private void assertValidator(LBJTextBox tableNameTextBox, LBJValueValidator<String> caseValidator) {
+		assertThat(tableNameTextBox.getValidators()).contains(caseValidator);
 	}
 
 }

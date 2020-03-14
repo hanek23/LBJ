@@ -5,6 +5,10 @@ import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import gui.updaters.LBJFormUpdater;
 
+/**
+ * Custom updater for {@link LBJCreateTableForm} that updates Sequence Name to
+ * value "SEQ_TABLENAME"
+ */
 public class LBJCreateTableFormSequenceNameUpdater implements LBJFormUpdater<LBJCreateTableForm> {
 
 	@Override

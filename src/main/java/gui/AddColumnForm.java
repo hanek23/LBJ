@@ -3,13 +3,13 @@ package gui;
 import org.apache.commons.lang3.StringUtils;
 
 import com.googlecode.lanterna.gui2.Button;
+import com.googlecode.lanterna.gui2.Button.Listener;
 import com.googlecode.lanterna.gui2.CheckBox;
 import com.googlecode.lanterna.gui2.GridLayout;
 import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.TextBox;
 import com.googlecode.lanterna.gui2.Window;
-import com.googlecode.lanterna.gui2.Button.Listener;
 
 import constants.Labels;
 import constants.NamingConventions;
@@ -204,7 +204,8 @@ public class AddColumnForm implements Runnable, Updatable {
 		LBJFormUtils.addLabelAndComponentToContent(new Label(Labels.ADD_COLUMN_NULLABLE), nullableCheckBox, content);
 		LBJFormUtils.addLabelAndComponentToContent(new Label(Labels.ADD_COLUMN_INDEX), indexCheckBox, content);
 		LBJFormUtils.addLabelAndComponentToContent(indexNameLabel, indexName, content);
-		LBJFormUtils.addLabelAndComponentToContent(new Label(Labels.ADD_COLUMN_FOREIGN_KEY), foreignKeyCheckBox, content);
+		LBJFormUtils.addLabelAndComponentToContent(new Label(Labels.ADD_COLUMN_FOREIGN_KEY), foreignKeyCheckBox,
+				content);
 		LBJFormUtils.addLabelAndComponentToContent(referencedTableLabel, referencedTable, content);
 		LBJFormUtils.addLabelAndComponentToContent(referencedColumnLabel, referencedColumn, content);
 		LBJFormUtils.addLabelAndComponentToContent(foreignKeyNameLabel, foreignKeyName, content);
