@@ -1,21 +1,27 @@
 package gui.components;
 
-import gui.forms.LBJWizardForm;
+import com.googlecode.lanterna.gui2.Label;
 
+import gui.forms.LBJForm;
+
+/**
+ * Abstract base for all {@link LBJComponent}s like {@link LBJLabeledComponent}
+ * and {@link LBJValueHolderComponent}. It has 'name' which is in most cases
+ * (component must extends {@link LBJLabeledComponent}) equal to {@link Label}'s
+ * text.
+ */
 public abstract class LBJComponent {
 
 	private String name;
 	private boolean enabled;
-	private LBJWizardForm form;
+	private LBJForm form;
 
-	public LBJComponent(String name, LBJWizardForm form) {
+	public LBJComponent(String name, LBJForm form) {
 		this.name = name;
 		this.form = form;
 		form.addComponent(this);
 		enabled = true;
 	}
-
-	public abstract boolean isValid();
 
 	public boolean isEnabled() {
 		return enabled;
@@ -25,11 +31,11 @@ public abstract class LBJComponent {
 		this.enabled = enabled;
 	}
 
-	public LBJWizardForm getForm() {
+	public LBJForm getForm() {
 		return form;
 	}
 
-	public void setForm(LBJWizardForm form) {
+	public void setForm(LBJForm form) {
 		this.form = form;
 	}
 

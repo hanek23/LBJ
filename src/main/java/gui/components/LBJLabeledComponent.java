@@ -1,29 +1,19 @@
 package gui.components;
 
-import java.util.List;
-
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.Label;
 
-import gui.forms.LBJWizardForm;
-import gui.validators.LBJFormValidator;
+import gui.forms.LBJForm;
 
+/**
+ * Abstract base for all {@link LBJComponent}s that have {@link Label}.
+ * {@link Label}'s text serves as component's name.
+ */
 public abstract class LBJLabeledComponent extends LBJComponent {
 
 	private Label label;
-	private List<LBJFormValidator> formValidators;
 
-	@Override
-	public boolean isValid() {
-		boolean isValid = true;
-		for (LBJFormValidator validator : formValidators) {
-			isValid = validator.isValid(getForm()) && isValid;
-		}
-		setLabelColorByValidity(isValid);
-		return isValid;
-	}
-
-	public LBJLabeledComponent(String name, LBJWizardForm form) {
+	public LBJLabeledComponent(String name, LBJForm form) {
 		super(name, form);
 	}
 
@@ -35,8 +25,16 @@ public abstract class LBJLabeledComponent extends LBJComponent {
 		this.label = label;
 	}
 
+	/**
+	 * Overrides the current background color according to passed boolean.
+	 * 
+	 * @param isValid if {@code TRUE} is passed, color will be set to default. If
+	 *                {@code FALSE} is passed color will be set to
+	 *                {@link TextColor.ANSI.RED}.
+	 * 
+	 */
 	public void setLabelColorByValidity(boolean isValid) {
-		getLabel().setBackgroundColor(isValid ? TextColor.ANSI.DEFAULT : TextColor.ANSI.RED);
+		getLabel().setBackgroundColor(isValid ? null : TextColor.ANSI.RED);
 	}
 
 }

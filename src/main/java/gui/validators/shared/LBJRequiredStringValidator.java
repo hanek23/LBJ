@@ -1,7 +1,13 @@
-package gui.validators;
+package gui.validators.shared;
 
 import org.apache.commons.lang3.StringUtils;
 
+import gui.validators.LBJValueValidator;
+
+/**
+ * Validates that components {@link String} value is not
+ * {@link StringUtils#isBlank(CharSequence)}
+ */
 public class LBJRequiredStringValidator implements LBJValueValidator<String> {
 
 	@Override

@@ -1,7 +1,12 @@
 package constants;
 
+import generator.Generator;
 import utils.FileUtils;
 
+/**
+ * Static access to XML parts for generating final outcome of this application
+ * using {@link Generator}.
+ */
 public class XmlParts {
 
 	private XmlParts() {

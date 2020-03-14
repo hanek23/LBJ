@@ -4,34 +4,67 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.lanterna.gui2.Component;
+import com.googlecode.lanterna.gui2.Label;
 
-import gui.forms.LBJWizardForm;
+import gui.forms.LBJForm;
 import gui.updaters.LBJValueUpdater;
 import gui.validators.LBJValueValidator;
 
+/**
+ * Abstract base for {@link LBJComponent}s that hold some value T like
+ * {@link String} or {@link Boolean} and also has a {@link Label} It provides
+ * common place for custom {@link LBJValueUpdater}s and
+ * {@link LBJValueValidators}s which LBJ Framework calls when they are needed.
+ */
 public abstract class LBJValueHolderComponent<T> extends LBJLabeledComponent {
 
-	private T value;
 	private List<LBJValueValidator<T>> validators;
 	private List<LBJValueUpdater<T>> updaters;
 
-	public LBJValueHolderComponent(String name, LBJWizardForm form) {
+	public LBJValueHolderComponent(String name, LBJForm form) {
 		super(name, form);
-	}
-
-	@Override
-	public boolean isValid() {
-		boolean isValid = super.isValid();
-		for (LBJValueValidator<T> validator : validators) {
-			isValid = validator.isValid(value) && isValid;
-		}
-		super.setLabelColorByValidity(isValid);
-		return isValid;
 	}
 
 	public abstract T getValue();
 
 	public abstract void setValue(T value);
+
+	public abstract Component getComponent();
+
+	/**
+	 * If component is enabled iterates through all validators associated with this
+	 * component and calls
+	 * {@link LBJLabeledComponent#setLabelColorByValidity(boolean)} with result. If
+	 * component is disabled it is considered valid so it returns <code>true</code>.
+	 * 
+	 * @return <code>true</code> if components passes all validations,
+	 *         <code>false</code> otherwise.
+	 */
+	public boolean isValid() {
+		if (!isEnabled()) {
+			super.setLabelColorByValidity(true);
+			return true;
+		}
+		boolean isValid = true;
+		for (LBJValueValidator<T> validator : getValidators()) {
+			isValid = validator.isValid(getValue()) && isValid;
+		}
+		super.setLabelColorByValidity(isValid);
+		return isValid;
+	}
+
+	/**
+	 * If component is enabled iterates throught all updaters associated with this
+	 * component and updates value of this component.
+	 */
+	public void update() {
+		if (!isEnabled()) {
+			return;
+		}
+		for (LBJValueUpdater<T> updater : getUpdaters()) {
+			updater.update(this);
+		}
+	}
 
 	public List<LBJValueValidator<T>> getValidators() {
 		if (validators == null) {
@@ -43,8 +76,6 @@ public abstract class LBJValueHolderComponent<T> extends LBJLabeledComponent {
 	public boolean addValidator(LBJValueValidator<T> validator) {
 		return getValidators().add(validator);
 	}
-
-	public abstract Component getComponent();
 
 	public List<LBJValueUpdater<T>> getUpdaters() {
 		if (updaters == null) {

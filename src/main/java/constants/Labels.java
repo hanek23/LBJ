@@ -1,5 +1,8 @@
 package constants;
 
+/**
+ * Labels for the application's GUI
+ */
 public class Labels {
 
 	private Labels() {

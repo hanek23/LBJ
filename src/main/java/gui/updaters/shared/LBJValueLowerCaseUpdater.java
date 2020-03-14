@@ -5,6 +5,9 @@ import org.apache.commons.lang3.StringUtils;
 import gui.components.LBJValueHolderComponent;
 import gui.updaters.LBJValueUpdater;
 
+/**
+ * Updates components {@link String} value to lower case.
+ */
 public class LBJValueLowerCaseUpdater implements LBJValueUpdater<String> {
 
 	@Override

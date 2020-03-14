@@ -15,7 +15,9 @@ public class LBJCreateTableFormSequenceNameUpdater implements LBJFormUpdater<LBJ
 		LBJTextBox sequenceName = form.getSequenceNameTextBox();
 
 		if (oracle.isChecked() || postgre.isChecked()) {
-			sequenceName.setValue(NamingConventions.SEQUENCE_NAME_DEFAULT_VALUE + tableName.getValue());
+			if (tableName.isFocused()) {
+				sequenceName.setValue(NamingConventions.SEQUENCE_NAME_DEFAULT_VALUE + tableName.getValue());
+			}
 			sequenceName.setEnabled(true);
 		} else {
 			sequenceName.setValue("");

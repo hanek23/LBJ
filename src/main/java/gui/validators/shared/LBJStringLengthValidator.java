@@ -1,9 +1,14 @@
-package gui.validators;
+package gui.validators.shared;
 
 import org.apache.commons.lang3.StringUtils;
 
 import constants.Settings;
+import gui.validators.LBJValueValidator;
 
+/**
+ * Validates that components {@link String} value length is not longer than
+ * {@link Settings#MAX_LENGTH_OF_NAMES}
+ */
 public class LBJStringLengthValidator implements LBJValueValidator<String> {
 
 	@Override

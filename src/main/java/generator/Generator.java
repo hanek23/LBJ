@@ -6,6 +6,10 @@ import constants.XmlParts;
 import domain.Column;
 import domain.Table;
 
+/**
+ * Class for converting {@link Table}, {@link Column} etc. to Liquibase
+ * changelog.
+ */
 public class Generator {
 
 	private Generator() {

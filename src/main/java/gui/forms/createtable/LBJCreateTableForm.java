@@ -1,8 +1,13 @@
 package gui.forms.createtable;
 
+import com.googlecode.lanterna.gui2.Button;
+import com.googlecode.lanterna.gui2.Button.Listener;
+import com.googlecode.lanterna.gui2.EmptySpace;
+import com.googlecode.lanterna.gui2.GridLayout;
 import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
+import constants.NamingConventions;
 import domain.Table;
 import gui.LBJFormUtils;
 import gui.builders.LBJCheckBoxBuilder;
@@ -12,6 +17,7 @@ import gui.components.LBJCheckBox;
 import gui.components.LBJPlainLabel;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
+import gui.forms.LBJForm;
 import gui.updaters.LBJUpdaterSupplier;
 import gui.validators.LBJValidatorSupplier;
 
@@ -26,7 +32,7 @@ public class LBJCreateTableForm extends LBJEntityForm<Table> {
 	private LBJCheckBox postgreCheckBox;
 	private LBJTextBox sequenceNameTextBox;
 
-	public LBJCreateTableForm(Window window, LBJEntityForm<?> previousForm) {
+	public LBJCreateTableForm(Window window, LBJForm previousForm) {
 		super(window, previousForm);
 	}
 
@@ -35,18 +41,18 @@ public class LBJCreateTableForm extends LBJEntityForm<Table> {
 		tableNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, this)
 				.addValidator(LBJValidatorSupplier.stringRequiredValidator)
 				.addValidator(LBJValidatorSupplier.stringLengthValidator)
-				.addValidator(LBJValidatorSupplier.upperCaseValidator).addUpdater(LBJUpdaterSupplier.upperCaseUpdater)
-				.build();
+				.addValidator(LBJValidatorSupplier.caseValidator(NamingConventions.TABLE_NAME_CASE))
+				.addUpdater(LBJUpdaterSupplier.caseUpdater(NamingConventions.TABLE_NAME_CASE)).build();
 		primaryKeyNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_NAME, this)
 				.addValidator(LBJValidatorSupplier.stringRequiredValidator)
 				.addValidator(LBJValidatorSupplier.stringLengthValidator)
-				.addValidator(LBJValidatorSupplier.lowerCaseValidator).addUpdater(LBJUpdaterSupplier.lowerCaseUpdater)
-				.build();
+				.addValidator(LBJValidatorSupplier.caseValidator(NamingConventions.PRIMARY_KEY_NAME_CASE))
+				.addUpdater(LBJUpdaterSupplier.caseUpdater(NamingConventions.PRIMARY_KEY_NAME_CASE)).build();
 		primaryKeyConstraintNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN, this)
 				.addValidator(LBJValidatorSupplier.stringRequiredValidator)
 				.addValidator(LBJValidatorSupplier.stringLengthValidator)
-				.addValidator(LBJValidatorSupplier.upperCaseValidator).addUpdater(LBJUpdaterSupplier.upperCaseUpdater)
-				.build();
+				.addValidator(LBJValidatorSupplier.caseValidator(NamingConventions.PRIMARY_KEY_CONSTRAINT_NAME_CASE))
+				.addUpdater(LBJUpdaterSupplier.caseUpdater(NamingConventions.PRIMARY_KEY_CONSTRAINT_NAME_CASE)).build();
 		databasesLabel = new LBJPlainLabelBuilder(Labels.CREATE_TABLE_DATABASES, this).build();
 		oracleCheckBox = new LBJCheckBoxBuilder(Labels.CREATE_TABLE_DATABASES_ORACLE, this).checked().build();
 		mssqlCheckBox = new LBJCheckBoxBuilder(Labels.CREATE_TABLE_DATABASES_MSSQL, this).checked().build();
@@ -54,8 +60,8 @@ public class LBJCreateTableForm extends LBJEntityForm<Table> {
 		sequenceNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_SEQUENCE_NAME, this)
 				.addValidator(LBJValidatorSupplier.stringRequiredValidator)
 				.addValidator(LBJValidatorSupplier.stringLengthValidator)
-				.addValidator(LBJValidatorSupplier.upperCaseValidator).addUpdater(LBJUpdaterSupplier.upperCaseUpdater)
-				.build();
+				.addValidator(LBJValidatorSupplier.caseValidator(NamingConventions.SEQUENCE_NAME_CASE))
+				.addUpdater(LBJUpdaterSupplier.caseUpdater(NamingConventions.SEQUENCE_NAME_CASE)).build();
 	}
 
 	@Override
@@ -83,17 +89,17 @@ public class LBJCreateTableForm extends LBJEntityForm<Table> {
 
 	@Override
 	public void addButtonsToContent() {
-//		getContent().addComponent(new EmptySpace());
-//		LBJFormUtils.addDefaultBackButton(getContent(), getPreviousForm());
-//		Button addColumnButton = new Button(Labels.BUTTON_ADD_COLUMN);
-//		getContent().addComponent(addColumnButton.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
-//		addColumnButton.addListener(new Listener() {
-//
-//			@Override
-//			public void onTriggered(Button button) {
-//
-//			}
-//		});
+		getContent().addComponent(new EmptySpace());
+		LBJFormUtils.addDefaultBackButton(getContent(), getPreviousForm());
+		Button addColumnButton = new Button(Labels.BUTTON_ADD_COLUMN);
+		getContent().addComponent(addColumnButton.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
+		addColumnButton.addListener(new Listener() {
+
+			@Override
+			public void onTriggered(Button button) {
+				validate();
+			}
+		});
 	}
 
 	@Override

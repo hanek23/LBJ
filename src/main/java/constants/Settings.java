@@ -1,5 +1,9 @@
 package constants;
 
+/**
+ * Miscellaneous settings of either lanterna (number of columns etc.) or
+ * databases constraints like maximum length of names
+ */
 public class Settings {
 
 	private Settings() {

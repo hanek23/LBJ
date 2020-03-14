@@ -11,7 +11,6 @@ import gui.Updatable;
 import gui.components.LBJComponent;
 import gui.components.LBJValueHolderComponent;
 import gui.updaters.LBJFormUpdater;
-import gui.updaters.LBJValueUpdater;
 import gui.validators.LBJFormValidator;
 
 public abstract class LBJForm implements Updatable, Runnable {
@@ -65,11 +64,8 @@ public abstract class LBJForm implements Updatable, Runnable {
 			updater.update(this);
 		}
 		for (LBJComponent component : getComponents()) {
-			if (!(component instanceof LBJValueHolderComponent<?>)) {
-				continue;
-			}
-			for (LBJValueUpdater componentUpdater : ((LBJValueHolderComponent<?>) component).getUpdaters()) {
-				componentUpdater.update((LBJValueHolderComponent) component);
+			if (component instanceof LBJValueHolderComponent<?>) {
+				((LBJValueHolderComponent<?>) component).update();
 			}
 		}
 	}
