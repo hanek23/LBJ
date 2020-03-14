@@ -1,16 +1,20 @@
 package gui.builders;
 
+import com.googlecode.lanterna.gui2.CheckBox;
 import com.googlecode.lanterna.gui2.Label;
+
 import gui.components.LBJCheckBox;
 import gui.components.LBJComponent;
-import gui.forms.LBJForm;
+import gui.forms.LBJWizardForm;
 
 public class LBJCheckBoxBuilder {
 
 	private LBJCheckBox lbjCheckBox;
 
-	public LBJCheckBoxBuilder(String name, LBJForm form) {
+	public LBJCheckBoxBuilder(String name, LBJWizardForm form) {
 		lbjCheckBox = new LBJCheckBox(name, form);
+		lbjCheckBox.setCheckBox(new CheckBox());
+		lbjCheckBox.setLabel(new Label(name));
 	}
 
 	public LBJCheckBoxBuilder checked() {
@@ -24,7 +28,7 @@ public class LBJCheckBoxBuilder {
 	}
 
 	public LBJCheckBoxBuilder label(String label) {
-		lbjCheckBox.setLabel(new Label(label));
+		lbjCheckBox.getLabel().setText(label);
 		return this;
 	}
 

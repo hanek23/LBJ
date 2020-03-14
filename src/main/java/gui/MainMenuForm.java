@@ -23,6 +23,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 
 import constants.Labels;
 import generator.Operation;
+import gui.forms.createtable.LBJCreateTableForm;
 
 public class MainMenuForm implements Runnable {
 
@@ -53,7 +54,11 @@ public class MainMenuForm implements Runnable {
 			addUpdatableChild(addColumn);
 			mainMenu.addItem(Labels.MAIN_MENU_ADD_COLUMN, addColumn);
 
-			CreateTableForm createTable = new CreateTableForm(this, window, this);
+//			CreateTableForm createTable = new CreateTableForm(this, window, this);
+//			addUpdatableChild(createTable);
+//			mainMenu.addItem(Labels.MAIN_MENU_CREATE_TABLE, createTable);
+
+			LBJCreateTableForm createTable = new LBJCreateTableForm(window, null);
 			addUpdatableChild(createTable);
 			mainMenu.addItem(Labels.MAIN_MENU_CREATE_TABLE, createTable);
 

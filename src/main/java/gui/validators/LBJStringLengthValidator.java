@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import constants.Settings;
 
-public class LBJStringLengthValidator implements LBJValidator<String> {
+public class LBJStringLengthValidator implements LBJValueValidator<String> {
 
 	@Override
 	public boolean isValid(String value) {

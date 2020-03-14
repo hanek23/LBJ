@@ -2,11 +2,11 @@ package gui.validators;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class LBJUpperCaseStringValidator implements LBJValidator<String> {
+public class LBJLowerCaseValidator implements LBJValueValidator<String> {
 
 	@Override
 	public boolean isValid(String value) {
-		return StringUtils.isAllUpperCase(value);
+		return StringUtils.isAllLowerCase(value);
 	}
 
 }

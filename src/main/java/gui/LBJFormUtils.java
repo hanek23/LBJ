@@ -11,12 +11,34 @@ import com.googlecode.lanterna.gui2.TextBox;
 
 import constants.Labels;
 import constants.Settings;
+import gui.components.LBJLabeledComponent;
+import gui.components.LBJValueHolderComponent;
 
-public class GuiUtils {
+public class LBJFormUtils {
 
-	private GuiUtils() {
+	private LBJFormUtils() {
 		// only static methods
 	}
+
+	public static Panel initializeDefaultContent() {
+		Panel content = new Panel(new GridLayout(Settings.GUI_NUMBER_OF_COLUMNS));
+		GridLayout gridLayout = (GridLayout) content.getLayoutManager();
+		gridLayout.setVerticalSpacing(Settings.GUI_VERTICAL_SPACING);
+		return content;
+	}
+
+	public static void addComponentToContent(Panel content, LBJValueHolderComponent<?> component) {
+		content.addComponent(component.getLabel().setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
+		content.addComponent(component.getComponent()
+				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
+	}
+
+	public static void addComponentToContent(Panel content, LBJLabeledComponent component) {
+		content.addComponent(component.getLabel()
+				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS)));
+	}
+
+	// OLD
 
 	public static void addLabelAndComponentToContent(Label label, Component component, Panel content) {
 		content.addComponent(label);
@@ -40,13 +62,6 @@ public class GuiUtils {
 	public static void addDefaultBackButton(Panel content, Runnable previousWindow) {
 		content.addComponent(new Button(Labels.BUTTON_BACK, previousWindow)
 				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
-	}
-
-	public static Panel initializeDefaultContent() {
-		Panel content = new Panel(new GridLayout(Settings.GUI_NUMBER_OF_COLUMNS));
-		GridLayout gridLayout = (GridLayout) content.getLayoutManager();
-		gridLayout.setVerticalSpacing(Settings.GUI_VERTICAL_SPACING);
-		return content;
 	}
 
 }

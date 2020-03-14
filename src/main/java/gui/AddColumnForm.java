@@ -154,16 +154,16 @@ public class AddColumnForm implements Runnable, Updatable {
 	}
 
 	private void changeCase() {
-		GuiUtils.upperCase(tableName);
-		GuiUtils.lowerCase(columnName);
-		GuiUtils.upperCase(indexName);
-		GuiUtils.upperCase(referencedTable);
-		GuiUtils.lowerCase(referencedColumn);
-		GuiUtils.upperCase(foreignKeyName);
+		LBJFormUtils.upperCase(tableName);
+		LBJFormUtils.lowerCase(columnName);
+		LBJFormUtils.upperCase(indexName);
+		LBJFormUtils.upperCase(referencedTable);
+		LBJFormUtils.lowerCase(referencedColumn);
+		LBJFormUtils.upperCase(foreignKeyName);
 	}
 
 	private void initializeComponents() {
-		content = GuiUtils.initializeDefaultContent();
+		content = LBJFormUtils.initializeDefaultContent();
 
 		tableNameLabel = new Label(Labels.TABLE_NAME);
 		tableName = new TextBox(table.getName());
@@ -198,16 +198,16 @@ public class AddColumnForm implements Runnable, Updatable {
 	}
 
 	private void addComponentsToContent() {
-		GuiUtils.addLabelAndComponentToContent(tableNameLabel, tableName, content);
-		GuiUtils.addLabelAndComponentToContent(columnNameLabel, columnName, content);
-		GuiUtils.addLabelAndComponentToContent(dataTypeLabel, dataType, content);
-		GuiUtils.addLabelAndComponentToContent(new Label(Labels.ADD_COLUMN_NULLABLE), nullableCheckBox, content);
-		GuiUtils.addLabelAndComponentToContent(new Label(Labels.ADD_COLUMN_INDEX), indexCheckBox, content);
-		GuiUtils.addLabelAndComponentToContent(indexNameLabel, indexName, content);
-		GuiUtils.addLabelAndComponentToContent(new Label(Labels.ADD_COLUMN_FOREIGN_KEY), foreignKeyCheckBox, content);
-		GuiUtils.addLabelAndComponentToContent(referencedTableLabel, referencedTable, content);
-		GuiUtils.addLabelAndComponentToContent(referencedColumnLabel, referencedColumn, content);
-		GuiUtils.addLabelAndComponentToContent(foreignKeyNameLabel, foreignKeyName, content);
+		LBJFormUtils.addLabelAndComponentToContent(tableNameLabel, tableName, content);
+		LBJFormUtils.addLabelAndComponentToContent(columnNameLabel, columnName, content);
+		LBJFormUtils.addLabelAndComponentToContent(dataTypeLabel, dataType, content);
+		LBJFormUtils.addLabelAndComponentToContent(new Label(Labels.ADD_COLUMN_NULLABLE), nullableCheckBox, content);
+		LBJFormUtils.addLabelAndComponentToContent(new Label(Labels.ADD_COLUMN_INDEX), indexCheckBox, content);
+		LBJFormUtils.addLabelAndComponentToContent(indexNameLabel, indexName, content);
+		LBJFormUtils.addLabelAndComponentToContent(new Label(Labels.ADD_COLUMN_FOREIGN_KEY), foreignKeyCheckBox, content);
+		LBJFormUtils.addLabelAndComponentToContent(referencedTableLabel, referencedTable, content);
+		LBJFormUtils.addLabelAndComponentToContent(referencedColumnLabel, referencedColumn, content);
+		LBJFormUtils.addLabelAndComponentToContent(foreignKeyNameLabel, foreignKeyName, content);
 	}
 
 	private void addButtonsToContent() {

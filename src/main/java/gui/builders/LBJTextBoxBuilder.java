@@ -6,15 +6,18 @@ import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.TextBox;
 
 import gui.components.LBJTextBox;
-import gui.forms.LBJForm;
+import gui.forms.LBJWizardForm;
+import gui.updaters.LBJValueUpdater;
+import gui.validators.LBJValueValidator;
 
 public class LBJTextBoxBuilder {
 
 	private LBJTextBox lbjTextBox;
 
-	public LBJTextBoxBuilder(String name, LBJForm form) {
+	public LBJTextBoxBuilder(String name, LBJWizardForm form) {
 		lbjTextBox = new LBJTextBox(name, form);
 		lbjTextBox.setTextBox(new TextBox());
+		lbjTextBox.setLabel(new Label(name));
 	}
 
 	public LBJTextBoxBuilder disabled() {
@@ -23,12 +26,22 @@ public class LBJTextBoxBuilder {
 	}
 
 	public LBJTextBoxBuilder label(String label) {
-		lbjTextBox.setLabel(new Label(label));
+		lbjTextBox.getLabel().setText(label);
 		return this;
 	}
 
 	public LBJTextBoxBuilder pattern(String regex) {
 		lbjTextBox.getTextBox().setValidationPattern(Pattern.compile(regex));
+		return this;
+	}
+
+	public LBJTextBoxBuilder addValidator(LBJValueValidator<String> validator) {
+		lbjTextBox.addValidator(validator);
+		return this;
+	}
+
+	public LBJTextBoxBuilder addUpdater(LBJValueUpdater<String> updater) {
+		lbjTextBox.addUpdater(updater);
 		return this;
 	}
 

@@ -1,17 +1,31 @@
 package gui.components;
 
+import java.util.List;
+
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.Label;
 
-import gui.forms.LBJEntityForm;
-import gui.forms.LBJForm;
+import gui.forms.LBJWizardForm;
+import gui.validators.LBJFormValidator;
 
 public abstract class LBJLabeledComponent extends LBJComponent {
 
-	public LBJLabeledComponent(String name, LBJForm form) {
-		super(name, form);
+	private Label label;
+	private List<LBJFormValidator> formValidators;
+
+	@Override
+	public boolean isValid() {
+		boolean isValid = true;
+		for (LBJFormValidator validator : formValidators) {
+			isValid = validator.isValid(getForm()) && isValid;
+		}
+		setLabelColorByValidity(isValid);
+		return isValid;
 	}
 
-	private Label label;
+	public LBJLabeledComponent(String name, LBJWizardForm form) {
+		super(name, form);
+	}
 
 	public Label getLabel() {
 		return label;
@@ -19,6 +33,10 @@ public abstract class LBJLabeledComponent extends LBJComponent {
 
 	public void setLabel(Label label) {
 		this.label = label;
+	}
+
+	public void setLabelColorByValidity(boolean isValid) {
+		getLabel().setBackgroundColor(isValid ? TextColor.ANSI.DEFAULT : TextColor.ANSI.RED);
 	}
 
 }

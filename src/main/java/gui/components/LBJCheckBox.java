@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.lanterna.gui2.CheckBox;
+import com.googlecode.lanterna.gui2.Component;
 
-import gui.forms.LBJEntityForm;
-import gui.forms.LBJForm;
+import gui.forms.LBJWizardForm;
 
 public class LBJCheckBox extends LBJValueHolderComponent<Boolean> {
 
 	private List<LBJComponent> relatedComponents;
 	private CheckBox checkBox;
 
-	public LBJCheckBox(String name, LBJForm form) {
+	public LBJCheckBox(String name, LBJWizardForm form) {
 		super(name, form);
 	}
 
@@ -54,6 +54,11 @@ public class LBJCheckBox extends LBJValueHolderComponent<Boolean> {
 
 	public void setCheckBox(CheckBox checkBox) {
 		this.checkBox = checkBox;
+	}
+
+	@Override
+	public Component getComponent() {
+		return getCheckBox();
 	}
 
 }

@@ -1,18 +1,21 @@
 package gui.components;
 
-import gui.forms.LBJForm;
+import gui.forms.LBJWizardForm;
 
 public abstract class LBJComponent {
 
 	private String name;
 	private boolean enabled;
-	private LBJForm form;
+	private LBJWizardForm form;
 
-	public LBJComponent(String name, LBJForm form) {
+	public LBJComponent(String name, LBJWizardForm form) {
 		this.name = name;
 		this.form = form;
+		form.addComponent(this);
 		enabled = true;
 	}
+
+	public abstract boolean isValid();
 
 	public boolean isEnabled() {
 		return enabled;
@@ -22,11 +25,11 @@ public abstract class LBJComponent {
 		this.enabled = enabled;
 	}
 
-	public LBJForm getForm() {
+	public LBJWizardForm getForm() {
 		return form;
 	}
 
-	public void setForm(LBJForm form) {
+	public void setForm(LBJWizardForm form) {
 		this.form = form;
 	}
 

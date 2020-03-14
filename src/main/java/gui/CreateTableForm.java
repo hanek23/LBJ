@@ -95,14 +95,14 @@ public class CreateTableForm implements Runnable, Updatable {
 	}
 
 	private void changeCase() {
-		GuiUtils.upperCase(tableName);
-		GuiUtils.lowerCase(primaryKeyName);
-		GuiUtils.upperCase(primaryKeyConstraint);
-		GuiUtils.upperCase(sequenceName);
+		LBJFormUtils.upperCase(tableName);
+		LBJFormUtils.lowerCase(primaryKeyName);
+		LBJFormUtils.upperCase(primaryKeyConstraint);
+		LBJFormUtils.upperCase(sequenceName);
 	}
 
 	private void initializeComponents() {
-		content = GuiUtils.initializeDefaultContent();
+		content = LBJFormUtils.initializeDefaultContent();
 
 		tableNameLabel = new Label(Labels.TABLE_NAME);
 		tableName = new TextBox();
@@ -129,19 +129,19 @@ public class CreateTableForm implements Runnable, Updatable {
 	}
 
 	private void addComponentsToContent() {
-		GuiUtils.addLabelAndComponentToContent(tableNameLabel, tableName, content);
-		GuiUtils.addLabelAndComponentToContent(primaryKeyNameLabel, primaryKeyName, content);
-		GuiUtils.addLabelAndComponentToContent(primaryKeyConstraintLabel, primaryKeyConstraint, content);
-		GuiUtils.addComponentToContent(databasesLabel, content);
-		GuiUtils.addComponentToContent(oracle, content);
-		GuiUtils.addComponentToContent(mssql, content);
-		GuiUtils.addComponentToContent(postgresql, content);
-		GuiUtils.addLabelAndComponentToContent(sequenceNameLabel, sequenceName, content);
+		LBJFormUtils.addLabelAndComponentToContent(tableNameLabel, tableName, content);
+		LBJFormUtils.addLabelAndComponentToContent(primaryKeyNameLabel, primaryKeyName, content);
+		LBJFormUtils.addLabelAndComponentToContent(primaryKeyConstraintLabel, primaryKeyConstraint, content);
+		LBJFormUtils.addComponentToContent(databasesLabel, content);
+		LBJFormUtils.addComponentToContent(oracle, content);
+		LBJFormUtils.addComponentToContent(mssql, content);
+		LBJFormUtils.addComponentToContent(postgresql, content);
+		LBJFormUtils.addLabelAndComponentToContent(sequenceNameLabel, sequenceName, content);
 	}
 
 	private void addButtonsToContent() {
 		content.addComponent(new EmptySpace());
-		GuiUtils.addDefaultBackButton(content, previousWindow);
+		LBJFormUtils.addDefaultBackButton(content, previousWindow);
 		Button addColumnButton = new Button(Labels.BUTTON_ADD_COLUMN);
 		content.addComponent(addColumnButton.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
 		addColumnButton.addListener(new Listener() {

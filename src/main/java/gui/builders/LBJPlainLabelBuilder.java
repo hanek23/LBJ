@@ -3,18 +3,19 @@ package gui.builders;
 import com.googlecode.lanterna.gui2.Label;
 
 import gui.components.LBJPlainLabel;
-import gui.forms.LBJForm;
+import gui.forms.LBJWizardForm;
 
 public class LBJPlainLabelBuilder {
 
 	private LBJPlainLabel lbjPlainLabel;
 
-	public LBJPlainLabelBuilder(String name, LBJForm form) {
+	public LBJPlainLabelBuilder(String name, LBJWizardForm form) {
 		lbjPlainLabel = new LBJPlainLabel(name, form);
+		lbjPlainLabel.setLabel(new Label(name));
 	}
 
 	public LBJPlainLabelBuilder label(String label) {
-		lbjPlainLabel.setLabel(new Label(label));
+		lbjPlainLabel.getLabel().setText(label);
 		return this;
 	}
 

@@ -1,6 +1,6 @@
 package gui.validators;
 
-public interface LBJValidator<T> {
+public interface LBJValueValidator<T> {
 
 	public boolean isValid(T value);
 

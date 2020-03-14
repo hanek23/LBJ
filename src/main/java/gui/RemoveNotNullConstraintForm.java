@@ -41,7 +41,7 @@ public class RemoveNotNullConstraintForm implements Runnable, Updatable {
 	}
 
 	private void initializeComponents() {
-		content = GuiUtils.initializeDefaultContent();
+		content = LBJFormUtils.initializeDefaultContent();
 
 		tableNameLabel = new Label(Labels.TABLE_NAME);
 		tableName = new TextBox();
@@ -54,14 +54,14 @@ public class RemoveNotNullConstraintForm implements Runnable, Updatable {
 	}
 
 	private void addComponentsToContent() {
-		GuiUtils.addLabelAndComponentToContent(tableNameLabel, tableName, content);
-		GuiUtils.addLabelAndComponentToContent(columnNameLabel, columnName, content);
-		GuiUtils.addLabelAndComponentToContent(columnDataTypeLabel, columnDataType, content);
+		LBJFormUtils.addLabelAndComponentToContent(tableNameLabel, tableName, content);
+		LBJFormUtils.addLabelAndComponentToContent(columnNameLabel, columnName, content);
+		LBJFormUtils.addLabelAndComponentToContent(columnDataTypeLabel, columnDataType, content);
 	}
 
 	private void addButtonsToContent() {
 		content.addComponent(new EmptySpace());
-		GuiUtils.addDefaultBackButton(content, previousWindow);
+		LBJFormUtils.addDefaultBackButton(content, previousWindow);
 
 		Button generateButton = new Button(Labels.BUTTON_GENERATE);
 		content.addComponent(generateButton.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
@@ -108,8 +108,8 @@ public class RemoveNotNullConstraintForm implements Runnable, Updatable {
 	}
 
 	private void changeCase() {
-		GuiUtils.upperCase(tableName);
-		GuiUtils.lowerCase(columnName);
+		LBJFormUtils.upperCase(tableName);
+		LBJFormUtils.lowerCase(columnName);
 	}
 
 	@Override

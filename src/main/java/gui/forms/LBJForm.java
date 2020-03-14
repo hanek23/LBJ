@@ -6,40 +6,83 @@ import java.util.List;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.Window;
 
+import gui.LBJFormUtils;
+import gui.Updatable;
 import gui.components.LBJComponent;
 import gui.components.LBJValueHolderComponent;
+import gui.updaters.LBJFormUpdater;
+import gui.updaters.LBJValueUpdater;
+import gui.validators.LBJFormValidator;
 
-public abstract class LBJForm {
+public abstract class LBJForm implements Updatable, Runnable {
 
-	private LBJForm previousForm;
-	private LBJForm nextForm;
 	private Window window;
 	private boolean visible;
 	private boolean initialized;
 	private Panel content;
 	private List<LBJComponent> components;
+	private List<LBJFormUpdater<LBJForm>> updaters;
+	private List<LBJFormValidator<LBJForm>> validators;
 
-	public LBJForm(Window window, LBJForm previousForm) {
+	public LBJForm(Window window) {
 		this.window = window;
-		this.previousForm = previousForm;
 		initialize();
 		initialized = true;
 	}
 
+	@Override
+	public abstract String toString();
+
 	public void initialize() {
+		setContent(LBJFormUtils.initializeDefaultContent());
 		initializeComponents();
+		addFormUpdaters();
+		addFormValidators();
+		addComponentsToContent();
 		addButtonsToContent();
 	}
 
 	public abstract void initializeComponents();
 
+	public abstract void addFormUpdaters();
+
+	public abstract void addFormValidators();
+
+	public abstract void addComponentsToContent();
+
 	public abstract void addButtonsToContent();
 
-	public abstract void update();
+	@Override
+	public void run() {
+		focus();
+	}
+
+	public void update() {
+		if (!isVisible()) {
+			return;
+		}
+		for (LBJFormUpdater<LBJForm> updater : getUpdaters()) {
+			updater.update(this);
+		}
+		for (LBJComponent component : getComponents()) {
+			if (!(component instanceof LBJValueHolderComponent<?>)) {
+				continue;
+			}
+			for (LBJValueUpdater componentUpdater : ((LBJValueHolderComponent<?>) component).getUpdaters()) {
+				componentUpdater.update((LBJValueHolderComponent) component);
+			}
+		}
+	}
 
 	public boolean validate() {
+		if (!isVisible() || !isInitialized()) {
+			return true;
+		}
 		boolean isFormValid = true;
-		for (LBJComponent component : components) {
+		for (LBJFormValidator<LBJForm> validator : getValidators()) {
+			isFormValid = validator.isValid(this) && isFormValid;
+		}
+		for (LBJComponent component : getComponents()) {
 			if (component instanceof LBJValueHolderComponent<?>) {
 				isFormValid = ((LBJValueHolderComponent<?>) component).isValid() && isFormValid;
 			}
@@ -50,24 +93,6 @@ public abstract class LBJForm {
 	public void focus() {
 		visible = true;
 		window.setComponent(content);
-	}
-
-	public void goToPreviousForm() {
-		visible = false;
-		previousForm.focus();
-	}
-
-	public void goToNextForm() {
-		visible = false;
-		nextForm.focus();
-	}
-
-	public LBJForm getPreviousForm() {
-		return previousForm;
-	}
-
-	public void setPreviousForm(LBJForm previousForm) {
-		this.previousForm = previousForm;
 	}
 
 	public Window getWindow() {
@@ -84,6 +109,14 @@ public abstract class LBJForm {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+
+	public boolean isInitialized() {
+		return initialized;
+	}
+
+	public void setInitialized(boolean initialized) {
+		this.initialized = initialized;
 	}
 
 	public Panel getContent() {
@@ -105,23 +138,26 @@ public abstract class LBJForm {
 		return getComponents().add(component);
 	}
 
-	public LBJForm getNextForm() {
-		return nextForm;
+	public List<LBJFormUpdater<LBJForm>> getUpdaters() {
+		if (updaters == null) {
+			updaters = new ArrayList<>();
+		}
+		return updaters;
 	}
 
-	public void setNextForm(LBJForm nextForm) {
-		this.nextForm = nextForm;
+	public boolean addUpdater(LBJFormUpdater<? extends LBJForm> updater) {
+		return getUpdaters().add((LBJFormUpdater<LBJForm>) updater);
 	}
 
-	public boolean isInitialized() {
-		return initialized;
+	public List<LBJFormValidator<LBJForm>> getValidators() {
+		if (validators == null) {
+			validators = new ArrayList<>();
+		}
+		return validators;
 	}
 
-	public void setInitialized(boolean initialized) {
-		this.initialized = initialized;
+	public boolean addValidator(LBJFormValidator<? extends LBJForm> validator) {
+		return getValidators().add((LBJFormValidator<LBJForm>) validator);
 	}
-
-	@Override
-	public abstract String toString();
 
 }

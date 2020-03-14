@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import gui.validators.LBJUpperCaseStringValidator;
+import gui.validators.LBJUpperCaseValidator;
 
-public class LBJUpperCaseStringValidatorTest {
+public class LBJUpperCaseValidatorTest {
 
-	private LBJUpperCaseStringValidator tested = new LBJUpperCaseStringValidator();
+	private LBJUpperCaseValidator tested = new LBJUpperCaseValidator();
 
 	@Test
 	public void testIsValidTrue() throws Exception {

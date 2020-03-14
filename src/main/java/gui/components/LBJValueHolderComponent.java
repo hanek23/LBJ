@@ -3,32 +3,29 @@ package gui.components;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.gui2.Label;
+import com.googlecode.lanterna.gui2.Component;
 
-import gui.forms.LBJEntityForm;
-import gui.forms.LBJForm;
-import gui.validators.LBJValidator;
+import gui.forms.LBJWizardForm;
+import gui.updaters.LBJValueUpdater;
+import gui.validators.LBJValueValidator;
 
 public abstract class LBJValueHolderComponent<T> extends LBJLabeledComponent {
 
 	private T value;
-	private List<LBJValidator<T>> validators;
+	private List<LBJValueValidator<T>> validators;
+	private List<LBJValueUpdater<T>> updaters;
 
-	public LBJValueHolderComponent(String name, LBJForm form) {
+	public LBJValueHolderComponent(String name, LBJWizardForm form) {
 		super(name, form);
 	}
 
+	@Override
 	public boolean isValid() {
-		boolean isValid = true;
-		for (LBJValidator<T> validator : validators) {
+		boolean isValid = super.isValid();
+		for (LBJValueValidator<T> validator : validators) {
 			isValid = validator.isValid(value) && isValid;
 		}
-		if (isValid) {
-			getLabel().setBackgroundColor(TextColor.ANSI.DEFAULT);
-		} else {
-			getLabel().setBackgroundColor(TextColor.ANSI.RED);
-		}
+		super.setLabelColorByValidity(isValid);
 		return isValid;
 	}
 
@@ -36,15 +33,28 @@ public abstract class LBJValueHolderComponent<T> extends LBJLabeledComponent {
 
 	public abstract void setValue(T value);
 
-	public List<LBJValidator<T>> getValidators() {
+	public List<LBJValueValidator<T>> getValidators() {
 		if (validators == null) {
 			validators = new ArrayList<>();
 		}
 		return validators;
 	}
 
-	public boolean addValidator(LBJValidator<T> validator) {
+	public boolean addValidator(LBJValueValidator<T> validator) {
 		return getValidators().add(validator);
+	}
+
+	public abstract Component getComponent();
+
+	public List<LBJValueUpdater<T>> getUpdaters() {
+		if (updaters == null) {
+			updaters = new ArrayList<>();
+		}
+		return updaters;
+	}
+
+	public boolean addUpdater(LBJValueUpdater<T> updater) {
+		return getUpdaters().add(updater);
 	}
 
 }
