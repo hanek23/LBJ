@@ -14,7 +14,6 @@ import constants.Labels;
 import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJMockForm;
 import gui.components.LBJTextBox;
-import gui.validators.LBJValidatorSupplier;
 
 public class LBJStringLengthValidatorTest {
 
@@ -43,8 +42,7 @@ public class LBJStringLengthValidatorTest {
 	@ParameterizedTest
 	@ValueSource(strings = { "Inky Johnson is a bad somebody", "STAY OF THE WEED" })
 	public void testWithComponentTrue(String validValue) {
-		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm())
-				.addValidator(LBJValidatorSupplier.stringLengthValidator).build();
+		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm()).addLengthValidator().build();
 		textBox.setValue(validValue);
 
 		assertTrue(textBox.isValid());
@@ -56,8 +54,7 @@ public class LBJStringLengthValidatorTest {
 	@ParameterizedTest
 	@ValueSource(strings = { "Rachmaninoff - Piano Concerto 2", "SC30 is the greatest shooter of all time" })
 	public void testWithComponentFalse(String invalidValue) {
-		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm())
-				.addValidator(LBJValidatorSupplier.stringLengthValidator).build();
+		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm()).addLengthValidator().build();
 
 		textBox.setValue(invalidValue);
 

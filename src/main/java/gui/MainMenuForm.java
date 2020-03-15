@@ -99,7 +99,7 @@ public class MainMenuForm implements Runnable {
 				}
 
 				private void update() {
-					for (Updatable updatable : updatableChilds) {
+					for (Updatable updatable : getUpdatableChilds()) {
 						updatable.update();
 					}
 				}

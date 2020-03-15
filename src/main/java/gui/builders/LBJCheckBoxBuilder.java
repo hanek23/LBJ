@@ -4,7 +4,6 @@ import com.googlecode.lanterna.gui2.CheckBox;
 import com.googlecode.lanterna.gui2.Label;
 
 import gui.components.LBJCheckBox;
-import gui.components.LBJTextBox;
 import gui.forms.LBJForm;
 
 /**
@@ -15,7 +14,7 @@ public class LBJCheckBoxBuilder {
 	private LBJCheckBox lbjCheckBox;
 
 	/**
-	 * Starts building a {@link LBJTextBox}. Default value is UNCHECKED! Use
+	 * Starts building a {@link LBJCheckBox}. Default value is UNCHECKED! Use
 	 * {@link LBJCheckBoxBuilder#checked()} for changing that.
 	 * 
 	 * @param name will be used as {@link Label}

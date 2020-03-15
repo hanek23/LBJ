@@ -3,8 +3,10 @@ package gui.components;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.googlecode.lanterna.gui2.CheckBox;
 import com.googlecode.lanterna.gui2.Component;
 import com.googlecode.lanterna.gui2.Label;
+import com.googlecode.lanterna.gui2.TextBox;
 
 import gui.forms.LBJForm;
 import gui.updaters.LBJValueUpdater;
@@ -13,8 +15,8 @@ import gui.validators.LBJValueValidator;
 /**
  * Abstract base for {@link LBJComponent}s that hold some value T like
  * {@link String} or {@link Boolean} and also has a {@link Label} It provides
- * common place for custom {@link LBJValueUpdater}s and
- * {@link LBJValueValidators}s which LBJ Framework calls when they are needed.
+ * place for custom {@link LBJValueUpdater}s and {@link LBJValueValidators}s to
+ * be added which LBJ Framework calls when they are needed.
  */
 public abstract class LBJValueHolderComponent<T> extends LBJLabeledComponent {
 
@@ -25,10 +27,21 @@ public abstract class LBJValueHolderComponent<T> extends LBJLabeledComponent {
 		super(name, form);
 	}
 
+	/**
+	 * Value of the {@link Component} used to implement this type.
+	 */
 	public abstract T getValue();
 
+	/**
+	 * Value of the {@link Component} used to implement this type, see
+	 * {@link LBJValueHolderComponent#getComponent()}.
+	 */
 	public abstract void setValue(T value);
 
+	/**
+	 * Lanterna {@link Component} used to implement this type like {@link TextBox}
+	 * for {@link String} or {@link CheckBox} for {@link Boolean}
+	 */
 	public abstract Component getComponent();
 
 	/**

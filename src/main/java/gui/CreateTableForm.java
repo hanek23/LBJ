@@ -132,10 +132,10 @@ public class CreateTableForm implements Runnable, Updatable {
 		LBJFormUtils.addLabelAndComponentToContent(tableNameLabel, tableName, content);
 		LBJFormUtils.addLabelAndComponentToContent(primaryKeyNameLabel, primaryKeyName, content);
 		LBJFormUtils.addLabelAndComponentToContent(primaryKeyConstraintLabel, primaryKeyConstraint, content);
-		LBJFormUtils.addComponentToContent(databasesLabel, content);
-		LBJFormUtils.addComponentToContent(oracle, content);
-		LBJFormUtils.addComponentToContent(mssql, content);
-		LBJFormUtils.addComponentToContent(postgresql, content);
+		LBJFormUtils.addComponentToContent(content, databasesLabel);
+		LBJFormUtils.addComponentToContent(content, oracle);
+		LBJFormUtils.addComponentToContent(content, mssql);
+		LBJFormUtils.addComponentToContent(content, postgresql);
 		LBJFormUtils.addLabelAndComponentToContent(sequenceNameLabel, sequenceName, content);
 	}
 

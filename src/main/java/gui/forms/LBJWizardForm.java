@@ -10,6 +10,7 @@ public abstract class LBJWizardForm extends LBJForm {
 	public LBJWizardForm(Window window, LBJForm previousForm) {
 		super(window);
 		this.previousForm = previousForm;
+		initialize();
 	}
 
 	public void goToPreviousForm() {

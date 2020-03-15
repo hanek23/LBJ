@@ -17,6 +17,7 @@ public class Labels {
 	public static final String BUTTON_COPY_TO_CLIPBOARD = "Copy to clipboard";
 
 	// MAIN MENU
+	public static final String MAIN_MENU_FORM = "Main menu form";
 	public static final String MAIN_MENU_QUESTION = "What do you want to do?";
 	public static final String MAIN_MENU_ADD_COLUMN = "Add column(s)";
 	public static final String MAIN_MENU_CREATE_TABLE = "Create table";
@@ -24,7 +25,7 @@ public class Labels {
 	public static final String BUTTON_EXIT = "Exit";
 
 	// CREATE TABLE
-	public static final String TABLE_NAME_FORM = "Create table";
+	public static final String TABLE_FORM = "Create table form";
 	public static final String TABLE_NAME = "Table name";
 	public static final String CREATE_TABLE_PRIMARY_KEY_NAME = "Primary key name";
 	public static final String CREATE_TABLE_PRIMARY_KEY_CONSTRAIN = "Primary key constraint name";
@@ -35,6 +36,7 @@ public class Labels {
 	public static final String CREATE_TABLE_SEQUENCE_NAME = "Sequence name";
 
 	// ADD COLUMN
+	public static final String ADD_COLUMN_FORM = "Add column form";
 	public static final String COLUMN_NAME = "Column name";
 	public static final String ADD_COLUMN_INDEX = "Index";
 	public static final String ADD_COLUMN_FOREIGN_KEY = "Foreign key";

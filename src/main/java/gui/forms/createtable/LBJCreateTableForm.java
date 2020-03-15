@@ -18,7 +18,6 @@ import gui.components.LBJPlainLabel;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
-import gui.validators.LBJValidatorSupplier;
 
 public class LBJCreateTableForm extends LBJEntityForm<Table> {
 
@@ -36,20 +35,20 @@ public class LBJCreateTableForm extends LBJEntityForm<Table> {
 	}
 
 	@Override
+	public void initializeContent() {
+		setContent(LBJFormUtils.initializeDefaultContent());
+	}
+
+	@Override
 	public void initializeComponents() {
-		tableNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, this)
-				.addValidator(LBJValidatorSupplier.stringRequiredValidator)
-				.addValidator(LBJValidatorSupplier.stringLengthValidator)
+		tableNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, this).required().addLengthValidator()
 				.addCaseUpdaterAndValidator(NamingConventions.TABLE_NAME_CASE).build();
 
-		primaryKeyNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_NAME, this)
-				.addValidator(LBJValidatorSupplier.stringRequiredValidator)
-				.addValidator(LBJValidatorSupplier.stringLengthValidator)
-				.addCaseUpdaterAndValidator(NamingConventions.PRIMARY_KEY_NAME_CASE).build();
+		primaryKeyNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_NAME, this).required()
+				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.PRIMARY_KEY_NAME_CASE).build();
 
 		primaryKeyConstraintNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN, this)
-				.addValidator(LBJValidatorSupplier.stringRequiredValidator)
-				.addValidator(LBJValidatorSupplier.stringLengthValidator)
+				.required().addLengthValidator()
 				.addCaseUpdaterAndValidator(NamingConventions.PRIMARY_KEY_CONSTRAINT_NAME_CASE).build();
 
 		databasesLabel = new LBJPlainLabelBuilder(Labels.CREATE_TABLE_DATABASES, this).build();
@@ -57,10 +56,8 @@ public class LBJCreateTableForm extends LBJEntityForm<Table> {
 		mssqlCheckBox = new LBJCheckBoxBuilder(Labels.CREATE_TABLE_DATABASES_MSSQL, this).checked().build();
 		postgreCheckBox = new LBJCheckBoxBuilder(Labels.CREATE_TABLE_DATABASES_POSTGRESQL, this).checked().build();
 
-		sequenceNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_SEQUENCE_NAME, this)
-				.addValidator(LBJValidatorSupplier.stringRequiredValidator)
-				.addValidator(LBJValidatorSupplier.stringLengthValidator)
-				.addCaseUpdaterAndValidator(NamingConventions.SEQUENCE_NAME_CASE).build();
+		sequenceNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_SEQUENCE_NAME, this).required()
+				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.SEQUENCE_NAME_CASE).build();
 	}
 
 	@Override
@@ -108,7 +105,7 @@ public class LBJCreateTableForm extends LBJEntityForm<Table> {
 
 	@Override
 	public String toString() {
-		return Labels.TABLE_NAME_FORM;
+		return Labels.TABLE_FORM;
 	}
 
 	public LBJTextBox getTableNameTextBox() {
@@ -174,5 +171,4 @@ public class LBJCreateTableForm extends LBJEntityForm<Table> {
 	public void setSequenceNameTextBox(LBJTextBox sequenceNameTextBox) {
 		this.sequenceNameTextBox = sequenceNameTextBox;
 	}
-
 }

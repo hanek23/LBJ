@@ -6,7 +6,7 @@ import gui.updaters.LBJValueUpdater;
 /**
  * Updates components {@link String} value to upper case.
  */
-public class LBJValueUpperCaseUpdater implements LBJValueUpdater<String> {
+public class LBJUpperCaseUpdater implements LBJValueUpdater<String> {
 
 	@Override
 	public void update(LBJValueHolderComponent<String> component) {

@@ -12,7 +12,7 @@ import constants.Labels;
 import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJMockForm;
 import gui.components.LBJTextBox;
-import gui.validators.LBJValidatorSupplier;
+import gui.suppliers.LBJValidatorSupplier;
 
 public class LBJUpperCaseValidatorTest {
 

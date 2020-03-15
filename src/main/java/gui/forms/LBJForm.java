@@ -6,7 +6,6 @@ import java.util.List;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.Window;
 
-import gui.LBJFormUtils;
 import gui.Updatable;
 import gui.components.LBJComponent;
 import gui.components.LBJValueHolderComponent;
@@ -25,23 +24,24 @@ public abstract class LBJForm implements Updatable, Runnable {
 
 	public LBJForm(Window window) {
 		this.window = window;
-		initialize();
-		initialized = true;
 	}
 
 	@Override
 	public abstract String toString();
 
 	public void initialize() {
-		setContent(LBJFormUtils.initializeDefaultContent());
+		initializeContent();
 		initializeComponents();
 		addFormUpdaters();
 		addFormValidators();
 		addComponentsToContent();
 		addButtonsToContent();
+		initialized = true;
 	}
 
 	public abstract void initializeComponents();
+
+	public abstract void initializeContent();
 
 	public abstract void addFormUpdaters();
 

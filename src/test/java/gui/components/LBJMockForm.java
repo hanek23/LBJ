@@ -41,4 +41,9 @@ public class LBJMockForm extends LBJForm {
 
 	}
 
+	@Override
+	public void initializeContent() {
+		// mock
+	}
+
 }

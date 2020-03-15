@@ -96,7 +96,7 @@ public class GenerateForm implements Runnable {
 
 	private void addComponentsToContent() {
 		LBJFormUtils.addLabelAndComponentToContent(authorLabel, author, content);
-		LBJFormUtils.addComponentToContent(generatedXml, content);
+		LBJFormUtils.addComponentToContent(content, generatedXml);
 		content.addComponent(generatedXml.setPreferredSize(new TerminalSize(0, 0)));
 	}
 

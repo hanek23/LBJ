@@ -1,8 +1,9 @@
-package gui.validators;
+package gui.suppliers;
 
 import constants.NamingConventions.LetterCase;
 import gui.updaters.LBJValueUpdater;
-import gui.updaters.shared.LBJValueUpperCaseUpdater;
+import gui.updaters.shared.LBJUpperCaseUpdater;
+import gui.validators.LBJValueValidator;
 import gui.validators.shared.LBJLowerCaseValidator;
 import gui.validators.shared.LBJRequiredStringValidator;
 import gui.validators.shared.LBJStringLengthValidator;
@@ -32,7 +33,7 @@ public class LBJValidatorSupplier {
 
 	/**
 	 * @return if {@link LetterCase#UPPER} is passed the
-	 *         {@link LBJValueUpperCaseUpdater} is returned. If
+	 *         {@link LBJUpperCaseUpdater} is returned. If
 	 *         {@link LetterCase#LOWER} is passed the {@link LBJLowerCaseValidator}
 	 *         is returned. if {@link LetterCase#NONE} is passed the validator that
 	 *         does nothing is returned.

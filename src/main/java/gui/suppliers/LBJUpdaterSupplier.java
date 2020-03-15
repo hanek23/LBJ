@@ -1,17 +1,18 @@
-package gui.updaters;
+package gui.suppliers;
 
 import constants.NamingConventions.LetterCase;
 import gui.components.LBJValueHolderComponent;
-import gui.updaters.shared.LBJValueLowerCaseUpdater;
-import gui.updaters.shared.LBJValueUpperCaseUpdater;
+import gui.updaters.LBJValueUpdater;
+import gui.updaters.shared.LBJLowerCaseUpdater;
+import gui.updaters.shared.LBJUpperCaseUpdater;
 
 /**
  * Static supplier of all {@link LBJValueUpdater}s.
  */
 public class LBJUpdaterSupplier {
 
-	private static final LBJValueLowerCaseUpdater lowerCaseUpdater = new LBJValueLowerCaseUpdater();
-	private static final LBJValueUpperCaseUpdater upperCaseUpdater = new LBJValueUpperCaseUpdater();
+	private static final LBJLowerCaseUpdater lowerCaseUpdater = new LBJLowerCaseUpdater();
+	private static final LBJUpperCaseUpdater upperCaseUpdater = new LBJUpperCaseUpdater();
 	private static final LBJValueUpdater<String> noUpdater = new LBJValueUpdater<String>() {
 		@Override
 		public void update(LBJValueHolderComponent<String> component) {
@@ -26,9 +27,9 @@ public class LBJUpdaterSupplier {
 
 	/**
 	 * @return if {@link LetterCase#UPPER} is passed the
-	 *         {@link LBJValueUpperCaseUpdater} is returned. If
+	 *         {@link LBJUpperCaseUpdater} is returned. If
 	 *         {@link LetterCase#LOWER} is passed the
-	 *         {@link LBJValueLowerCaseUpdater} is returned. if
+	 *         {@link LBJLowerCaseUpdater} is returned. if
 	 *         {@link LetterCase#NONE} is passed the updater that does nothing is
 	 *         returned.
 	 */

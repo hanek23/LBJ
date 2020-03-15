@@ -9,9 +9,9 @@ import constants.NamingConventions.LetterCase;
 import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJMockForm;
 import gui.components.LBJTextBox;
-import gui.updaters.LBJUpdaterSupplier;
+import gui.suppliers.LBJUpdaterSupplier;
 
-public class LBJValueLowerCaseUpdaterTest {
+public class LBJLowerCaseUpdaterTest {
 
 	@Test
 	public void testUpdate() {

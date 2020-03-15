@@ -10,7 +10,7 @@ import constants.Labels;
 import constants.NamingConventions;
 import gui.components.LBJMockForm;
 import gui.components.LBJTextBox;
-import gui.validators.LBJValidatorSupplier;
+import gui.suppliers.LBJValidatorSupplier;
 import gui.validators.LBJValueValidator;
 
 public class LBJCreateTableFormTest {
@@ -35,7 +35,7 @@ public class LBJCreateTableFormTest {
 		assertThat(tested.getPostgreCheckBox().getLabel().getText())
 				.isEqualTo(Labels.CREATE_TABLE_DATABASES_POSTGRESQL);
 		assertThat(tested.getSequenceNameTextBox().getLabel().getText()).isEqualTo(Labels.CREATE_TABLE_SEQUENCE_NAME);
-		assertThat(tested.toString()).isEqualTo(Labels.TABLE_NAME_FORM);
+		assertThat(tested.toString()).isEqualTo(Labels.TABLE_FORM);
 
 		assertTrue(tested.getOracleCheckBox().isChecked());
 		assertTrue(tested.getMssqlCheckBox().isChecked());
