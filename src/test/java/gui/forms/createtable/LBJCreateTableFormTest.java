@@ -43,23 +43,23 @@ public class LBJCreateTableFormTest {
 
 		assertValidator(tested.getTableNameTextBox(),
 				LBJValidatorSupplier.caseValidator(NamingConventions.TABLE_NAME_CASE));
-		assertValidator(tested.getTableNameTextBox(), LBJValidatorSupplier.stringRequiredValidator);
-		assertValidator(tested.getTableNameTextBox(), LBJValidatorSupplier.stringLengthValidator);
+		assertValidator(tested.getTableNameTextBox(), LBJValidatorSupplier.getStringRequiredValidator());
+		assertValidator(tested.getTableNameTextBox(), LBJValidatorSupplier.getStringLengthValidator());
 
 		assertValidator(tested.getPrimaryKeyNameTextBox(),
 				LBJValidatorSupplier.caseValidator(NamingConventions.PRIMARY_KEY_NAME_CASE));
-		assertValidator(tested.getPrimaryKeyNameTextBox(), LBJValidatorSupplier.stringRequiredValidator);
-		assertValidator(tested.getPrimaryKeyNameTextBox(), LBJValidatorSupplier.stringLengthValidator);
+		assertValidator(tested.getPrimaryKeyNameTextBox(), LBJValidatorSupplier.getStringRequiredValidator());
+		assertValidator(tested.getPrimaryKeyNameTextBox(), LBJValidatorSupplier.getStringLengthValidator());
 
 		assertValidator(tested.getPrimaryKeyConstraintNameTextBox(),
 				LBJValidatorSupplier.caseValidator(NamingConventions.PRIMARY_KEY_CONSTRAINT_NAME_CASE));
-		assertValidator(tested.getPrimaryKeyConstraintNameTextBox(), LBJValidatorSupplier.stringRequiredValidator);
-		assertValidator(tested.getPrimaryKeyConstraintNameTextBox(), LBJValidatorSupplier.stringLengthValidator);
+		assertValidator(tested.getPrimaryKeyConstraintNameTextBox(), LBJValidatorSupplier.getStringRequiredValidator());
+		assertValidator(tested.getPrimaryKeyConstraintNameTextBox(), LBJValidatorSupplier.getStringLengthValidator());
 
 		assertValidator(tested.getSequenceNameTextBox(),
 				LBJValidatorSupplier.caseValidator(NamingConventions.SEQUENCE_NAME_CASE));
-		assertValidator(tested.getSequenceNameTextBox(), LBJValidatorSupplier.stringRequiredValidator);
-		assertValidator(tested.getSequenceNameTextBox(), LBJValidatorSupplier.stringLengthValidator);
+		assertValidator(tested.getSequenceNameTextBox(), LBJValidatorSupplier.getStringRequiredValidator());
+		assertValidator(tested.getSequenceNameTextBox(), LBJValidatorSupplier.getStringLengthValidator());
 
 	}
 

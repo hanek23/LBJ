@@ -18,6 +18,7 @@ import constants.Settings;
 import domain.Table;
 import generator.Generator;
 import generator.Operation;
+import gui.utils.LBJFormUtils;
 
 public class GenerateForm implements Runnable {
 

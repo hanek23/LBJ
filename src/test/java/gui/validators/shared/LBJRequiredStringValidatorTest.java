@@ -43,7 +43,7 @@ public class LBJRequiredStringValidatorTest {
 	@Test
 	public void testWithComponentTrue() {
 		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm())
-				.addValidator(LBJValidatorSupplier.stringRequiredValidator).build();
+				.addValidator(LBJValidatorSupplier.getStringRequiredValidator()).build();
 		textBox.setValue("TABLE_NAME");
 
 		assertTrue(textBox.isValid());
@@ -56,7 +56,7 @@ public class LBJRequiredStringValidatorTest {
 	@ValueSource(strings = { "", " " })
 	public void testWithComponentFalse(String invalidValue) {
 		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm())
-				.addValidator(LBJValidatorSupplier.stringRequiredValidator).build();
+				.addValidator(LBJValidatorSupplier.getStringRequiredValidator()).build();
 
 		textBox.setValue(invalidValue);
 

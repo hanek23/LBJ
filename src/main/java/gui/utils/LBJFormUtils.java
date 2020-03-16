@@ -1,4 +1,4 @@
-package gui;
+package gui.utils;
 
 import org.apache.commons.lang3.StringUtils;
 

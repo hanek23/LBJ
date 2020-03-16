@@ -17,12 +17,12 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 
 import constants.Labels;
-import gui.LBJFormUtils;
 import gui.builders.LBJPlainLabelBuilder;
 import gui.components.LBJPlainLabel;
 import gui.forms.LBJForm;
 import gui.forms.createtable.LBJCreateTableForm;
 import gui.suppliers.LBJFormSupplier;
+import gui.utils.LBJFormUtils;
 
 public class LBJMainMenuForm extends LBJForm {
 

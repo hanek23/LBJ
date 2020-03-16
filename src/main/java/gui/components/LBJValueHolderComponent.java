@@ -1,7 +1,7 @@
 package gui.components;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.googlecode.lanterna.gui2.CheckBox;
 import com.googlecode.lanterna.gui2.Component;
@@ -20,8 +20,8 @@ import gui.validators.LBJValueValidator;
  */
 public abstract class LBJValueHolderComponent<T> extends LBJLabeledComponent {
 
-	private List<LBJValueValidator<T>> validators;
-	private List<LBJValueUpdater<T>> updaters;
+	private Set<LBJValueValidator<T>> validators;
+	private Set<LBJValueUpdater<T>> updaters;
 
 	public LBJValueHolderComponent(String name, LBJForm form) {
 		super(name, form);
@@ -79,9 +79,9 @@ public abstract class LBJValueHolderComponent<T> extends LBJLabeledComponent {
 		}
 	}
 
-	public List<LBJValueValidator<T>> getValidators() {
+	public Set<LBJValueValidator<T>> getValidators() {
 		if (validators == null) {
-			validators = new ArrayList<>();
+			validators = new HashSet<>();
 		}
 		return validators;
 	}
@@ -90,9 +90,13 @@ public abstract class LBJValueHolderComponent<T> extends LBJLabeledComponent {
 		return getValidators().add(validator);
 	}
 
-	public List<LBJValueUpdater<T>> getUpdaters() {
+	public boolean removeValidator(LBJValueValidator<T> validator) {
+		return getValidators().remove(validator);
+	}
+
+	public Set<LBJValueUpdater<T>> getUpdaters() {
 		if (updaters == null) {
-			updaters = new ArrayList<>();
+			updaters = new HashSet<>();
 		}
 		return updaters;
 	}

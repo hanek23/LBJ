@@ -9,7 +9,6 @@ import com.googlecode.lanterna.gui2.Window;
 import constants.Labels;
 import constants.NamingConventions;
 import domain.Table;
-import gui.LBJFormUtils;
 import gui.builders.LBJCheckBoxBuilder;
 import gui.builders.LBJPlainLabelBuilder;
 import gui.builders.LBJTextBoxBuilder;
@@ -18,6 +17,10 @@ import gui.components.LBJPlainLabel;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
+import gui.suppliers.LBJFormSupplier;
+import gui.suppliers.LBJUpdaterSupplier;
+import gui.suppliers.LBJValidatorSupplier;
+import gui.utils.LBJFormUtils;
 
 public class LBJCreateTableForm extends LBJEntityForm<Table> {
 
@@ -62,13 +65,13 @@ public class LBJCreateTableForm extends LBJEntityForm<Table> {
 
 	@Override
 	public void addFormUpdaters() {
-		addUpdater(new LBJCreateTableFormPrimaryKeyUpdater());
-		addUpdater(new LBJCreateTableFormSequenceNameUpdater());
+		addUpdater(LBJUpdaterSupplier.getCreateTablePrimaryKeyUpdater());
+		addUpdater(LBJUpdaterSupplier.getCreateTableSequenceNameUpdater());
 	}
 
 	@Override
 	public void addFormValidators() {
-		addValidator(new LBJCreateTableFormDatabasesValidator());
+		addValidator(LBJValidatorSupplier.getCreateTableDatabasesValidator());
 	}
 
 	@Override
@@ -93,7 +96,12 @@ public class LBJCreateTableForm extends LBJEntityForm<Table> {
 
 			@Override
 			public void onTriggered(Button button) {
-				validate();
+				// if (validate()) {
+				setNextForm(
+						LBJFormSupplier.getAddColumnForm(LBJCreateTableForm.this.getWindow(), LBJCreateTableForm.this));
+				goToNextForm();
+				// }
+
 			}
 		});
 	}
@@ -112,63 +120,32 @@ public class LBJCreateTableForm extends LBJEntityForm<Table> {
 		return tableNameTextBox;
 	}
 
-	public void setTableNameTextBox(LBJTextBox tableNameTextBox) {
-		this.tableNameTextBox = tableNameTextBox;
-	}
-
 	public LBJTextBox getPrimaryKeyNameTextBox() {
 		return primaryKeyNameTextBox;
-	}
-
-	public void setPrimaryKeyNameTextBox(LBJTextBox primaryKeyNameTextBox) {
-		this.primaryKeyNameTextBox = primaryKeyNameTextBox;
 	}
 
 	public LBJTextBox getPrimaryKeyConstraintNameTextBox() {
 		return primaryKeyConstraintNameTextBox;
 	}
 
-	public void setPrimaryKeyConstraintNameTextBox(LBJTextBox primaryKeyConstraintNameTextBox) {
-		this.primaryKeyConstraintNameTextBox = primaryKeyConstraintNameTextBox;
-	}
-
 	public LBJPlainLabel getDatabasesLabel() {
 		return databasesLabel;
-	}
-
-	public void setDatabasesLabel(LBJPlainLabel databasesLabel) {
-		this.databasesLabel = databasesLabel;
 	}
 
 	public LBJCheckBox getOracleCheckBox() {
 		return oracleCheckBox;
 	}
 
-	public void setOracleCheckBox(LBJCheckBox oracleCheckBox) {
-		this.oracleCheckBox = oracleCheckBox;
-	}
-
 	public LBJCheckBox getMssqlCheckBox() {
 		return mssqlCheckBox;
-	}
-
-	public void setMssqlCheckBox(LBJCheckBox mssqlCheckBox) {
-		this.mssqlCheckBox = mssqlCheckBox;
 	}
 
 	public LBJCheckBox getPostgreCheckBox() {
 		return postgreCheckBox;
 	}
 
-	public void setPostgreCheckBox(LBJCheckBox postgreCheckBox) {
-		this.postgreCheckBox = postgreCheckBox;
-	}
-
 	public LBJTextBox getSequenceNameTextBox() {
 		return sequenceNameTextBox;
 	}
 
-	public void setSequenceNameTextBox(LBJTextBox sequenceNameTextBox) {
-		this.sequenceNameTextBox = sequenceNameTextBox;
-	}
 }

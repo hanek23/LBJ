@@ -25,6 +25,7 @@ public class NamingConventions {
 	public static final LetterCase COLUMN_NAME_CASE = LetterCase.LOWER;
 	public static final LetterCase DATA_TYPE_CASE = LetterCase.NONE;
 	public static final LetterCase FOREIGN_KEY_NAME_CASE = LetterCase.UPPER;
+	public static final LetterCase INDEX_NAME_CASE = LetterCase.UPPER;
 
 	public enum LetterCase {
 		UPPER, LOWER, NONE,

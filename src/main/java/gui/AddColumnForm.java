@@ -17,6 +17,7 @@ import domain.Column;
 import domain.ForeignKey;
 import domain.Table;
 import generator.Operation;
+import gui.utils.LBJFormUtils;
 
 public class AddColumnForm implements Runnable, Updatable {
 

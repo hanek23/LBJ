@@ -56,14 +56,14 @@ public class LBJTextBoxBuilder {
 	 * Adds {@link LBJRequiredStringValidator} to this {@link LBJTextBox}
 	 */
 	public LBJTextBoxBuilder required() {
-		return addValidator(LBJValidatorSupplier.stringRequiredValidator);
+		return addValidator(LBJValidatorSupplier.getStringRequiredValidator());
 	}
 
 	/**
 	 * Adds {@link LBJStringLengthValidator} to this {@link LBJTextBox}
 	 */
 	public LBJTextBoxBuilder addLengthValidator() {
-		return addValidator(LBJValidatorSupplier.stringLengthValidator);
+		return addValidator(LBJValidatorSupplier.getStringLengthValidator());
 	}
 
 	/**

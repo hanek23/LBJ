@@ -32,11 +32,6 @@ public class LBJCheckBoxBuilder {
 		return this;
 	}
 
-	public LBJCheckBoxBuilder notChecked() {
-		lbjCheckBox.getCheckBox().setChecked(false);
-		return this;
-	}
-
 	public LBJCheckBox build() {
 		return lbjCheckBox;
 	}

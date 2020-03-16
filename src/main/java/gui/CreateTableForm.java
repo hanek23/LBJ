@@ -15,6 +15,7 @@ import constants.Labels;
 import constants.NamingConventions;
 import domain.Table;
 import generator.Operation;
+import gui.utils.LBJFormUtils;
 
 public class CreateTableForm implements Runnable, Updatable {
 

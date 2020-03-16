@@ -13,6 +13,7 @@ import constants.Labels;
 import domain.Column;
 import domain.Table;
 import generator.Operation;
+import gui.utils.LBJFormUtils;
 
 public class RemoveNotNullConstraintForm implements Runnable, Updatable {
 
