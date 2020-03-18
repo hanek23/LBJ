@@ -45,19 +45,20 @@ public class LBJAddColumnForm extends LBJEntityForm<Column> {
 
 		indexCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_INDEX, this).build();
 
-		indexNameTextBox = new LBJTextBoxBuilder(Labels.COLUMN_DATA_TYPE, this).addLengthValidator()
-				.addCaseUpdaterAndValidator(NamingConventions.INDEX_NAME_CASE).build();
+		indexNameTextBox = new LBJTextBoxBuilder(Labels.COLUMN_DATA_TYPE, this).required().addLengthValidator()
+				.addCaseUpdaterAndValidator(NamingConventions.INDEX_NAME_CASE).disabled().build();
 
 		foreignKeyCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY, this).build();
 
-		referencedTableNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_REFERENCED_TABLE, this)
-				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.TABLE_NAME_CASE).build();
+		referencedTableNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_REFERENCED_TABLE, this).required()
+				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.TABLE_NAME_CASE).disabled().build();
 
-		referencedColumnNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_REFERENCED_COLUMN, this)
-				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.COLUMN_NAME_CASE).build();
+		referencedColumnNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_REFERENCED_COLUMN, this).required()
+				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.COLUMN_NAME_CASE).disabled().build();
 
-		foreignKeyNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY_NAME, this).addLengthValidator()
-				.addCaseUpdaterAndValidator(NamingConventions.FOREIGN_KEY_NAME_CASE).build();
+		foreignKeyNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY_NAME, this).required()
+				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.FOREIGN_KEY_NAME_CASE).disabled()
+				.build();
 	}
 
 	@Override

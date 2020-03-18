@@ -64,7 +64,7 @@ public abstract class LBJForm implements Updatable, Runnable {
 			updater.update(this);
 		}
 		for (LBJComponent component : getComponents()) {
-			if (component instanceof LBJValueHolderComponent<?>) {
+			if (component instanceof LBJValueHolderComponent<?> && component.isEnabled()) {
 				((LBJValueHolderComponent<?>) component).update();
 			}
 		}
@@ -79,7 +79,7 @@ public abstract class LBJForm implements Updatable, Runnable {
 			isFormValid = validator.isValid(this) && isFormValid;
 		}
 		for (LBJComponent component : getComponents()) {
-			if (component instanceof LBJValueHolderComponent<?>) {
+			if (component instanceof LBJValueHolderComponent<?> && component.isEnabled()) {
 				isFormValid = ((LBJValueHolderComponent<?>) component).isValid() && isFormValid;
 			}
 		}
