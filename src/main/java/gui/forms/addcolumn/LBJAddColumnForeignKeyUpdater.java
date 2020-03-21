@@ -24,14 +24,12 @@ public class LBJAddColumnForeignKeyUpdater implements LBJFormUpdater<LBJAddColum
 			return;
 		}
 
-		if (foreignKeyCheckBox.isChecked()) {
-			referencedTable.setEnabled(true);
-			referencedColumn.setEnabled(true);
-			foreignKeyName.setEnabled(true);
-			if (referencedTable.isFocused() || referencedColumn.isFocused()) {
-				foreignKeyName.setValue(NamingConventions.FOREIGN_KEY_NAME_DEFAULT_VALUE + referencedTable.getValue()
-						+ NamingConventions.SEPARATOR + referencedColumn.getValue());
-			}
+		referencedTable.setEnabled(true);
+		referencedColumn.setEnabled(true);
+		foreignKeyName.setEnabled(true);
+		if (referencedTable.isFocused() || referencedColumn.isFocused() || foreignKeyCheckBox.isFocused()) {
+			foreignKeyName.setValue(NamingConventions.FOREIGN_KEY_NAME_DEFAULT_VALUE + referencedTable.getValue()
+					+ NamingConventions.SEPARATOR + referencedColumn.getValue());
 		}
 	}
 

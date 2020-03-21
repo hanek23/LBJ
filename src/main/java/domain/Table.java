@@ -14,15 +14,11 @@ public class Table {
 	private boolean forMssql;
 	private boolean forPostgreSql;
 
-	public Table(String name, String primaryKeyColumnName, String primaryKeyContrainName, boolean forOracle,
-			boolean forMssql, boolean forPostgreSql) {
-		super();
+	public Table(String name, String primaryKeyColumnName, String primaryKeyContrainName) {
 		this.name = name;
 		this.primaryKeyColumnName = primaryKeyColumnName;
 		this.primaryKeyContrainName = primaryKeyContrainName;
-		this.forOracle = forOracle;
-		this.forMssql = forMssql;
-		this.forPostgreSql = forPostgreSql;
+		setForAllDatabases();
 	}
 
 	public Table(String name) {

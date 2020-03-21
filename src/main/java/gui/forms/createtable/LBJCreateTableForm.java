@@ -2,8 +2,6 @@ package gui.forms.createtable;
 
 import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Button.Listener;
-import com.googlecode.lanterna.gui2.EmptySpace;
-import com.googlecode.lanterna.gui2.GridLayout;
 import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
@@ -17,11 +15,19 @@ import gui.components.LBJPlainLabel;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
+import gui.forms.addcolumn.LBJAddColumnForm;
 import gui.suppliers.LBJFormSupplier;
 import gui.suppliers.LBJUpdaterSupplier;
 import gui.suppliers.LBJValidatorSupplier;
 import gui.utils.LBJFormUtils;
 
+/**
+ * Form for creating table. You are able to choose table name, primary key name,
+ * primary key constraint name, for which databses this table should be
+ * (currently supported databases are Oracle, PostgreSQL and MSSQL) and sequence
+ * name. As a next step you can go to {@link LBJAddColumnForm} in which you can
+ * add more collumns.
+ */
 public class LBJCreateTableForm extends LBJEntityForm<Table> {
 
 	private LBJTextBox tableNameTextBox;
@@ -32,6 +38,8 @@ public class LBJCreateTableForm extends LBJEntityForm<Table> {
 	private LBJCheckBox mssqlCheckBox;
 	private LBJCheckBox postgreCheckBox;
 	private LBJTextBox sequenceNameTextBox;
+
+	private Button goToAddColumnButton;
 
 	public LBJCreateTableForm(Window window, LBJForm previousForm) {
 		super(window, previousForm);
@@ -61,6 +69,21 @@ public class LBJCreateTableForm extends LBJEntityForm<Table> {
 
 		sequenceNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_SEQUENCE_NAME, this).required()
 				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.SEQUENCE_NAME_CASE).build();
+
+		goToAddColumnButton = new Button(Labels.BUTTON_ADD_COLUMN);
+		goToAddColumnButton.addListener(new Listener() {
+			@Override
+			public void onTriggered(Button button) {
+				if (validate()) {
+					if (getNextForm() == null) {
+						setNextForm(LBJFormSupplier.getAddColumnForm(LBJCreateTableForm.this.getWindow(),
+								LBJCreateTableForm.this));
+					}
+					goToNextForm();
+				}
+
+			}
+		});
 	}
 
 	@Override
@@ -88,22 +111,9 @@ public class LBJCreateTableForm extends LBJEntityForm<Table> {
 
 	@Override
 	public void addButtonsToContent() {
-		getContent().addComponent(new EmptySpace());
-		LBJFormUtils.addDefaultBackButton(getContent(), getPreviousForm());
-		Button addColumnButton = new Button(Labels.BUTTON_ADD_COLUMN);
-		getContent().addComponent(addColumnButton.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
-		addColumnButton.addListener(new Listener() {
-
-			@Override
-			public void onTriggered(Button button) {
-				// if (validate()) {
-				setNextForm(
-						LBJFormSupplier.getAddColumnForm(LBJCreateTableForm.this.getWindow(), LBJCreateTableForm.this));
-				goToNextForm();
-				// }
-
-			}
-		});
+		LBJFormUtils.addEmptySpace(getContent());
+		LBJFormUtils.addBackButton(getContent(), getPreviousForm());
+		LBJFormUtils.addButtonToConent(getContent(), goToAddColumnButton);
 	}
 
 	@Override

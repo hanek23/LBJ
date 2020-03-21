@@ -12,13 +12,13 @@ import com.googlecode.lanterna.TextColor;
 
 import constants.Labels;
 import gui.builders.LBJTextBoxBuilder;
-import gui.components.LBJMockForm;
 import gui.components.LBJTextBox;
 import gui.suppliers.LBJValidatorSupplier;
+import testutils.LBJMockForm;
 
-public class LBJRequiredStringValidatorTest {
+public class LBJStringRequiredValidatorTest {
 
-	private LBJRequiredStringValidator tested = new LBJRequiredStringValidator();
+	private LBJStringRequiredValidator tested = new LBJStringRequiredValidator();
 
 	@Test
 	public void testIsValidTrue() {

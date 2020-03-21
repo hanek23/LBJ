@@ -2,69 +2,52 @@ package gui.forms.createtable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static testutils.asserts.LBJValueHolderComponentAssert.assertThat;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import constants.Labels;
 import constants.NamingConventions;
-import gui.components.LBJMockForm;
-import gui.components.LBJTextBox;
-import gui.suppliers.LBJValidatorSupplier;
-import gui.validators.LBJValueValidator;
+import testutils.LBJTestUtils;
 
 public class LBJCreateTableFormTest {
 
-	private LBJCreateTableForm tested;
-
-	@BeforeEach
-	public void beforeEach() {
-		tested = new LBJCreateTableForm(null, new LBJMockForm());
-	}
-
 	@Test
 	public void testInitializeComponents() {
-		assertThat(tested.getTableNameTextBox().getLabel().getText()).isEqualTo(Labels.TABLE_NAME);
-		assertThat(tested.getPrimaryKeyNameTextBox().getLabel().getText())
-				.isEqualTo(Labels.CREATE_TABLE_PRIMARY_KEY_NAME);
-		assertThat(tested.getPrimaryKeyConstraintNameTextBox().getLabel().getText())
-				.isEqualTo(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN);
-		assertThat(tested.getDatabasesLabel().getLabel().getText()).isEqualTo(Labels.CREATE_TABLE_DATABASES);
-		assertThat(tested.getOracleCheckBox().getLabel().getText()).isEqualTo(Labels.CREATE_TABLE_DATABASES_ORACLE);
-		assertThat(tested.getMssqlCheckBox().getLabel().getText()).isEqualTo(Labels.CREATE_TABLE_DATABASES_MSSQL);
-		assertThat(tested.getPostgreCheckBox().getLabel().getText())
-				.isEqualTo(Labels.CREATE_TABLE_DATABASES_POSTGRESQL);
-		assertThat(tested.getSequenceNameTextBox().getLabel().getText()).isEqualTo(Labels.CREATE_TABLE_SEQUENCE_NAME);
-		assertThat(tested.toString()).isEqualTo(Labels.TABLE_FORM);
+		LBJCreateTableForm form = LBJTestUtils.getCreateTableForm();
 
-		assertTrue(tested.getOracleCheckBox().isChecked());
-		assertTrue(tested.getMssqlCheckBox().isChecked());
-		assertTrue(tested.getPostgreCheckBox().isChecked());
+		assertThat(form.toString()).isEqualTo(Labels.TABLE_FORM);
+		assertThat(form.getTableNameTextBox()).hasLabel(Labels.TABLE_NAME);
+		assertThat(form.getPrimaryKeyNameTextBox()).hasLabel(Labels.CREATE_TABLE_PRIMARY_KEY_NAME);
+		assertThat(form.getPrimaryKeyConstraintNameTextBox()).hasLabel(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN);
+		assertThat(form.getDatabasesLabel()).hasLabel(Labels.CREATE_TABLE_DATABASES);
+		assertThat(form.getOracleCheckBox()).hasLabel(Labels.CREATE_TABLE_DATABASES_ORACLE);
+		assertThat(form.getMssqlCheckBox()).hasLabel(Labels.CREATE_TABLE_DATABASES_MSSQL);
+		assertThat(form.getPostgreCheckBox()).hasLabel(Labels.CREATE_TABLE_DATABASES_POSTGRESQL);
+		assertThat(form.getSequenceNameTextBox()).hasLabel(Labels.CREATE_TABLE_SEQUENCE_NAME);
+		assertThat(form.getSequenceNameTextBox()).hasLabel(Labels.CREATE_TABLE_SEQUENCE_NAME);
 
-		assertValidator(tested.getTableNameTextBox(),
-				LBJValidatorSupplier.caseValidator(NamingConventions.TABLE_NAME_CASE));
-		assertValidator(tested.getTableNameTextBox(), LBJValidatorSupplier.getStringRequiredValidator());
-		assertValidator(tested.getTableNameTextBox(), LBJValidatorSupplier.getStringLengthValidator());
+		assertTrue(form.getOracleCheckBox().isChecked());
+		assertTrue(form.getMssqlCheckBox().isChecked());
+		assertTrue(form.getPostgreCheckBox().isChecked());
 
-		assertValidator(tested.getPrimaryKeyNameTextBox(),
-				LBJValidatorSupplier.caseValidator(NamingConventions.PRIMARY_KEY_NAME_CASE));
-		assertValidator(tested.getPrimaryKeyNameTextBox(), LBJValidatorSupplier.getStringRequiredValidator());
-		assertValidator(tested.getPrimaryKeyNameTextBox(), LBJValidatorSupplier.getStringLengthValidator());
+		assertThat(form.getTableNameTextBox()).hasCaseValidator(NamingConventions.TABLE_NAME_CASE);
+		assertThat(form.getTableNameTextBox()).hasStringRequiredValidator();
+		assertThat(form.getTableNameTextBox()).hasLengthValidator();
 
-		assertValidator(tested.getPrimaryKeyConstraintNameTextBox(),
-				LBJValidatorSupplier.caseValidator(NamingConventions.PRIMARY_KEY_CONSTRAINT_NAME_CASE));
-		assertValidator(tested.getPrimaryKeyConstraintNameTextBox(), LBJValidatorSupplier.getStringRequiredValidator());
-		assertValidator(tested.getPrimaryKeyConstraintNameTextBox(), LBJValidatorSupplier.getStringLengthValidator());
+		assertThat(form.getPrimaryKeyNameTextBox()).hasCaseValidator(NamingConventions.PRIMARY_KEY_NAME_CASE);
+		assertThat(form.getPrimaryKeyNameTextBox()).hasStringRequiredValidator();
+		assertThat(form.getPrimaryKeyNameTextBox()).hasLengthValidator();
 
-		assertValidator(tested.getSequenceNameTextBox(),
-				LBJValidatorSupplier.caseValidator(NamingConventions.SEQUENCE_NAME_CASE));
-		assertValidator(tested.getSequenceNameTextBox(), LBJValidatorSupplier.getStringRequiredValidator());
-		assertValidator(tested.getSequenceNameTextBox(), LBJValidatorSupplier.getStringLengthValidator());
+		assertThat(form.getPrimaryKeyConstraintNameTextBox())
+				.hasCaseValidator(NamingConventions.PRIMARY_KEY_CONSTRAINT_NAME_CASE);
+		assertThat(form.getPrimaryKeyConstraintNameTextBox()).hasStringRequiredValidator();
+		assertThat(form.getPrimaryKeyConstraintNameTextBox()).hasLengthValidator();
 
-	}
+		assertThat(form.getSequenceNameTextBox()).hasCaseValidator(NamingConventions.SEQUENCE_NAME_CASE);
+		assertThat(form.getSequenceNameTextBox()).hasStringRequiredValidator();
+		assertThat(form.getSequenceNameTextBox()).hasLengthValidator();
 
-	private void assertValidator(LBJTextBox tableNameTextBox, LBJValueValidator<String> caseValidator) {
-		assertThat(tableNameTextBox.getValidators()).contains(caseValidator);
 	}
 
 }

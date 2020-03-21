@@ -5,9 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 
 import constants.NamingConventions;
-import gui.LBJMockWindow;
-import gui.components.LBJMockForm;
 import gui.components.LBJTextBox;
+import testutils.LBJTestUtils;
 
 public class LBJCreateTableFormPrimaryKeyUpdaterTest {
 
@@ -19,7 +18,7 @@ public class LBJCreateTableFormPrimaryKeyUpdaterTest {
 	 */
 	@Test
 	public void testUpdate() {
-		LBJCreateTableForm form = new LBJCreateTableForm(new LBJMockWindow(), new LBJMockForm());
+		LBJCreateTableForm form = LBJTestUtils.getCreateTableForm();
 		form.focus();
 		LBJTextBox tableName = form.getTableNameTextBox();
 		LBJTextBox primaryKeyName = form.getPrimaryKeyNameTextBox();
@@ -29,14 +28,8 @@ public class LBJCreateTableFormPrimaryKeyUpdaterTest {
 		assertThat(primaryKeyName.getValue()).isBlank();
 		assertThat(primaryKeyConstraint.getValue()).isBlank();
 
+		LBJTestUtils.focus(tableName);
 		tableName.setValue(TABLE_NAME);
-		form.update();
-		// Table name is not focused so nothing should update
-		assertThat(tableName.getValue()).isEqualTo(TABLE_NAME);
-		assertThat(primaryKeyName.getValue()).isBlank();
-		assertThat(primaryKeyConstraint.getValue()).isBlank();
-
-		tableName.getTextBox().onEnterFocus(null, null);
 		form.update();
 
 		assertThat(tableName.getValue()).isEqualTo(TABLE_NAME);

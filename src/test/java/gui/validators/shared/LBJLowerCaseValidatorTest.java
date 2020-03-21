@@ -10,9 +10,9 @@ import com.googlecode.lanterna.TextColor;
 
 import constants.Labels;
 import gui.builders.LBJTextBoxBuilder;
-import gui.components.LBJMockForm;
 import gui.components.LBJTextBox;
 import gui.suppliers.LBJValidatorSupplier;
+import testutils.LBJMockForm;
 
 public class LBJLowerCaseValidatorTest {
 

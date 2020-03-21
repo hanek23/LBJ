@@ -2,6 +2,8 @@ package gui.suppliers;
 
 import constants.NamingConventions.LetterCase;
 import gui.components.LBJValueHolderComponent;
+import gui.forms.addcolumn.LBJAddColumnForeignKeyUpdater;
+import gui.forms.addcolumn.LBJAddColumnIndexNameUpdater;
 import gui.forms.createtable.LBJCreateTableFormPrimaryKeyUpdater;
 import gui.forms.createtable.LBJCreateTableFormSequenceNameUpdater;
 import gui.updaters.LBJValueUpdater;
@@ -16,6 +18,10 @@ public class LBJUpdaterSupplier {
 	// CREATE TABLE
 	private static final LBJCreateTableFormPrimaryKeyUpdater CREATE_TABLE_PRIMARY_KEY_UPDATER = new LBJCreateTableFormPrimaryKeyUpdater();
 	private static final LBJCreateTableFormSequenceNameUpdater CREATE_TABLE_SEQUENCE_NAME_UPDATER = new LBJCreateTableFormSequenceNameUpdater();
+
+	// ADD COLUMN
+	private static final LBJAddColumnForeignKeyUpdater ADD_COLUMN_FOREIGN_KEY_UPDATER = new LBJAddColumnForeignKeyUpdater();
+	private static final LBJAddColumnIndexNameUpdater ADD_COLUMN_INDEX_NAME_UPDATER = new LBJAddColumnIndexNameUpdater();
 
 	// SHARED
 	private static final LBJLowerCaseUpdater LOWER_CASE_UPDATER = new LBJLowerCaseUpdater();
@@ -62,6 +68,14 @@ public class LBJUpdaterSupplier {
 
 	public static LBJUpperCaseUpdater getUpperCaseUpdater() {
 		return UPPER_CASE_UPDATER;
+	}
+
+	public static LBJAddColumnForeignKeyUpdater getAddColumnForeignKeyUpdater() {
+		return ADD_COLUMN_FOREIGN_KEY_UPDATER;
+	}
+
+	public static LBJAddColumnIndexNameUpdater getAddColumnIndexNameUpdater() {
+		return ADD_COLUMN_INDEX_NAME_UPDATER;
 	}
 
 }

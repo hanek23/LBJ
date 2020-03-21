@@ -1,7 +1,12 @@
-package gui.components;
+package testutils;
 
 import gui.forms.LBJForm;
+import gui.forms.LBJWizardForm;
 
+/**
+ * Mock form ussually used as {@link LBJWizardForm#setPreviousForm(LBJForm)} in
+ * tests
+ */
 public class LBJMockForm extends LBJForm {
 
 	public LBJMockForm() {

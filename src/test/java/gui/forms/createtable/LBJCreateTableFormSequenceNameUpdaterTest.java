@@ -7,10 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import constants.NamingConventions;
-import gui.LBJMockWindow;
 import gui.components.LBJCheckBox;
-import gui.components.LBJMockForm;
 import gui.components.LBJTextBox;
+import testutils.LBJTestUtils;
 
 public class LBJCreateTableFormSequenceNameUpdaterTest {
 
@@ -18,7 +17,7 @@ public class LBJCreateTableFormSequenceNameUpdaterTest {
 
 	@Test
 	public void testUpdate() {
-		LBJCreateTableForm form = new LBJCreateTableForm(new LBJMockWindow(), new LBJMockForm());
+		LBJCreateTableForm form = LBJTestUtils.getCreateTableForm();
 		form.focus();
 
 		LBJTextBox tableName = form.getTableNameTextBox();
@@ -31,13 +30,8 @@ public class LBJCreateTableFormSequenceNameUpdaterTest {
 		assertTrue(oracle.isChecked());
 		assertTrue(postgre.isChecked());
 
+		LBJTestUtils.focus(tableName);
 		tableName.setValue(TABLE_NAME);
-		form.update();
-
-		// table name is not focused so nothing should have updated
-		assertThat(sequenceName.getValue()).isBlank();
-
-		tableName.getTextBox().onEnterFocus(null, null);
 		form.update();
 
 		assertThat(sequenceName.getValue())

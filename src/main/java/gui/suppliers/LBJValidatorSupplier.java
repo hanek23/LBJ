@@ -6,7 +6,7 @@ import gui.updaters.LBJValueUpdater;
 import gui.updaters.shared.LBJUpperCaseUpdater;
 import gui.validators.LBJValueValidator;
 import gui.validators.shared.LBJLowerCaseValidator;
-import gui.validators.shared.LBJRequiredStringValidator;
+import gui.validators.shared.LBJStringRequiredValidator;
 import gui.validators.shared.LBJStringLengthValidator;
 import gui.validators.shared.LBJUpperCaseValidator;
 
@@ -21,7 +21,7 @@ public class LBJValidatorSupplier {
 	// SHARED
 	private static final LBJLowerCaseValidator LOWER_CASE_VALIDATOR = new LBJLowerCaseValidator();
 	private static final LBJUpperCaseValidator UPPER_CASE_VALIDATOR = new LBJUpperCaseValidator();
-	private static final LBJRequiredStringValidator STRING_REQUIRED_VALIDATOR = new LBJRequiredStringValidator();
+	private static final LBJStringRequiredValidator STRING_REQUIRED_VALIDATOR = new LBJStringRequiredValidator();
 	private static final LBJStringLengthValidator STRING_LENGTH_VALIDATOR = new LBJStringLengthValidator();
 	private static final LBJValueValidator<String> NO_VALIDATOR = new LBJValueValidator<String>() {
 		@Override
@@ -42,7 +42,7 @@ public class LBJValidatorSupplier {
 	 *         {@link LBJLowerCaseValidator} is returned. if {@link LetterCase#NONE}
 	 *         is passed the validator that does nothing is returned.
 	 */
-	public static LBJValueValidator<String> caseValidator(LetterCase letterCase) {
+	public static LBJValueValidator<String> getCaseValidator(LetterCase letterCase) {
 		if (LetterCase.LOWER == letterCase) {
 			return LOWER_CASE_VALIDATOR;
 		}
@@ -52,7 +52,7 @@ public class LBJValidatorSupplier {
 		return NO_VALIDATOR;
 	}
 
-	public static LBJRequiredStringValidator getStringRequiredValidator() {
+	public static LBJStringRequiredValidator getStringRequiredValidator() {
 		return STRING_REQUIRED_VALIDATOR;
 	}
 

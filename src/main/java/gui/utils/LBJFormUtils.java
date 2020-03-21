@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.googlecode.lanterna.gui2.ActionListBox;
 import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Component;
+import com.googlecode.lanterna.gui2.EmptySpace;
 import com.googlecode.lanterna.gui2.GridLayout;
 import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.Panel;
@@ -16,6 +17,7 @@ import gui.components.LBJLabeledComponent;
 import gui.components.LBJPlainLabel;
 import gui.components.LBJValueHolderComponent;
 import gui.forms.LBJForm;
+import gui.suppliers.LBJFormSupplier;
 
 public class LBJFormUtils {
 
@@ -41,8 +43,16 @@ public class LBJFormUtils {
 				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS)));
 	}
 
-	public static void addItemToMenu(ActionListBox menu, LBJForm form) {
-		menu.addItem(form.toString(), form);
+	public static void addItemToMenu(ActionListBox menu, LBJForm form, String label) {
+		menu.addItem(label, form);
+	}
+
+	public static void addEmptySpace(Panel content) {
+		content.addComponent(new EmptySpace());
+	}
+
+	public static void addUpdatableFormToMainMenu(LBJForm form) {
+		LBJFormSupplier.getMainMenuForm().addFormToUpdate(form);
 	}
 
 	// OLD
@@ -66,9 +76,12 @@ public class LBJFormUtils {
 		textBox.setText(StringUtils.upperCase(textBox.getText()));
 	}
 
-	public static void addDefaultBackButton(Panel content, Runnable previousWindow) {
-		content.addComponent(new Button(Labels.BUTTON_BACK, previousWindow)
-				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
+	public static void addBackButton(Panel content, Runnable previousWindow) {
+		addButtonToConent(content, new Button(Labels.BUTTON_BACK, previousWindow));
+	}
+
+	public static void addButtonToConent(Panel content, Button button) {
+		content.addComponent(button.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
 	}
 
 	public static void addLabelToMainMenuContent(Panel content, LBJPlainLabel label) {
@@ -77,6 +90,15 @@ public class LBJFormUtils {
 
 	public static void addMenuToMainMenuContent(Panel content, ActionListBox mainMenu) {
 		content.addComponent(mainMenu);
+	}
+
+	public static void addExitButton(ActionListBox mainMenu) {
+		mainMenu.addItem(Labels.BUTTON_EXIT, new Runnable() {
+			@Override
+			public void run() {
+				System.exit(0);
+			}
+		});
 	}
 
 }

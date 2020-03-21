@@ -4,8 +4,11 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Logger;
 
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.ActionListBox;
 import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.GridLayout;
@@ -13,6 +16,8 @@ import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.Window;
 import com.googlecode.lanterna.gui2.WindowBasedTextGUI;
+import com.googlecode.lanterna.gui2.WindowListener;
+import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 
@@ -20,6 +25,7 @@ import constants.Labels;
 import gui.builders.LBJPlainLabelBuilder;
 import gui.components.LBJPlainLabel;
 import gui.forms.LBJForm;
+import gui.forms.addcolumn.LBJAddColumnForm;
 import gui.forms.createtable.LBJCreateTableForm;
 import gui.suppliers.LBJFormSupplier;
 import gui.utils.LBJFormUtils;
@@ -33,6 +39,7 @@ public class LBJMainMenuForm extends LBJForm {
 	private LBJPlainLabel questionLabel;
 	private ActionListBox mainMenu;
 	private LBJCreateTableForm createTableForm;
+	private LBJAddColumnForm addColumnForm;
 
 	public LBJMainMenuForm() {
 		this(new BasicWindow(Labels.WINDOW_NAME));
@@ -52,25 +59,25 @@ public class LBJMainMenuForm extends LBJForm {
 	public void initializeComponents() {
 		mainMenu = new ActionListBox();
 		questionLabel = new LBJPlainLabelBuilder(Labels.MAIN_MENU_QUESTION, this).build();
-		createTableForm = LBJFormSupplier.getCreateTableForm(getWindow(), this);
+		createTableForm = LBJFormSupplier.getCreateTableForm(getWindow(), this, false);
+		addColumnForm = LBJFormSupplier.getAddColumnForm(getWindow(), this, false);
 
+		addFormToUpdate(createTableForm);
+		addFormToUpdate(addColumnForm);
 	}
 
 	@Override
 	public void addComponentsToContent() {
 		LBJFormUtils.addLabelToMainMenuContent(getContent(), questionLabel);
 		LBJFormUtils.addMenuToMainMenuContent(getContent(), mainMenu);
-		LBJFormUtils.addItemToMenu(mainMenu, createTableForm);
+		LBJFormUtils.addItemToMenu(mainMenu, createTableForm, Labels.MAIN_MENU_CREATE_TABLE);
+		LBJFormUtils.addItemToMenu(mainMenu, addColumnForm, Labels.MAIN_MENU_ADD_COLUMN);
+		LBJFormUtils.addExitButton(mainMenu);
 	}
 
 	@Override
 	public void addButtonsToContent() {
-		mainMenu.addItem(Labels.BUTTON_EXIT, new Runnable() {
-			@Override
-			public void run() {
-				System.exit(0);
-			}
-		});
+		// no buttons in main menu, everything is in ActionListBox - mainMenu
 	}
 
 	@Override
@@ -94,15 +101,42 @@ public class LBJMainMenuForm extends LBJForm {
 		if (terminalStarted) {
 			return;
 		}
-		DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
-		try (Screen screen = terminalFactory.createScreen()) {
+		try (Screen screen = new DefaultTerminalFactory().createScreen()) {
 			screen.startScreen();
 			WindowBasedTextGUI gui = new MultiWindowTextGUI(screen);
 			terminalStarted = true;
+			getWindow().addWindowListener(new WindowListener() {
+
+				@Override
+				public void onUnhandledInput(Window basePane, KeyStroke keyStroke, AtomicBoolean hasBeenHandled) {
+					updateForms();
+				}
+
+				@Override
+				public void onInput(Window basePane, KeyStroke keyStroke, AtomicBoolean deliverEvent) {
+					updateForms();
+				}
+
+				@Override
+				public void onResized(Window window, TerminalSize oldSize, TerminalSize newSize) {
+					updateForms();
+				}
+
+				@Override
+				public void onMoved(Window window, TerminalPosition oldPosition, TerminalPosition newPosition) {
+					updateForms();
+				}
+			});
 			gui.addWindowAndWait(getWindow());
 		} catch (IOException e) {
 			LOGGER.severe("IOException has occurred: " + e.getMessage());
 			throw new IllegalStateException();
+		}
+	}
+
+	public void updateForms() {
+		for (LBJForm lbjForm : getFormsToUpdate()) {
+			lbjForm.update();
 		}
 	}
 
@@ -120,4 +154,5 @@ public class LBJMainMenuForm extends LBJForm {
 	public boolean addFormToUpdate(LBJForm form) {
 		return getFormsToUpdate().add(form);
 	}
+
 }

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import constants.Labels;
 import gui.builders.LBJCheckBoxBuilder;
+import testutils.LBJMockForm;
 
 public class LBJCheckBoxTest {
 

@@ -62,7 +62,7 @@ public class RemoveNotNullConstraintForm implements Runnable, Updatable {
 
 	private void addButtonsToContent() {
 		content.addComponent(new EmptySpace());
-		LBJFormUtils.addDefaultBackButton(content, previousWindow);
+		LBJFormUtils.addBackButton(content, previousWindow);
 
 		Button generateButton = new Button(Labels.BUTTON_GENERATE);
 		content.addComponent(generateButton.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));

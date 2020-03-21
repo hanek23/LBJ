@@ -9,6 +9,7 @@ import com.googlecode.lanterna.TextColor;
 
 import constants.Labels;
 import gui.builders.LBJPlainLabelBuilder;
+import testutils.LBJMockForm;
 
 public class LBJPlainLabelTest {
 

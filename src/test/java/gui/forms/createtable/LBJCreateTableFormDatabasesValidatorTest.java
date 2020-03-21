@@ -6,15 +6,14 @@ import org.junit.jupiter.api.Test;
 
 import com.googlecode.lanterna.TextColor;
 
-import gui.LBJMockWindow;
-import gui.components.LBJMockForm;
 import gui.components.LBJPlainLabel;
+import testutils.LBJTestUtils;
 
 public class LBJCreateTableFormDatabasesValidatorTest {
 
 	@Test
 	public void testIsValid() {
-		LBJCreateTableForm form = new LBJCreateTableForm(new LBJMockWindow(), new LBJMockForm());
+		LBJCreateTableForm form = LBJTestUtils.getCreateTableForm();
 		form.focus();
 		LBJPlainLabel databases = form.getDatabasesLabel();
 		// null is default color

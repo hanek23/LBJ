@@ -36,6 +36,14 @@ public class LBJCheckBox extends LBJValueHolderComponent<Boolean> {
 		checkBox.setChecked(value);
 	}
 
+	public void check() {
+		setValue(true);
+	}
+
+	public void unCheck() {
+		setValue(false);
+	}
+
 	public boolean isChecked() {
 		return getValue();
 	}
@@ -51,6 +59,10 @@ public class LBJCheckBox extends LBJValueHolderComponent<Boolean> {
 	@Override
 	public Component getComponent() {
 		return getCheckBox();
+	}
+
+	public boolean isFocused() {
+		return getCheckBox().isFocused();
 	}
 
 }

@@ -142,7 +142,7 @@ public class CreateTableForm implements Runnable, Updatable {
 
 	private void addButtonsToContent() {
 		content.addComponent(new EmptySpace());
-		LBJFormUtils.addDefaultBackButton(content, previousWindow);
+		LBJFormUtils.addBackButton(content, previousWindow);
 		Button addColumnButton = new Button(Labels.BUTTON_ADD_COLUMN);
 		content.addComponent(addColumnButton.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
 		addColumnButton.addListener(new Listener() {

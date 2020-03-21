@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import constants.Labels;
 import constants.NamingConventions.LetterCase;
 import gui.builders.LBJTextBoxBuilder;
-import gui.components.LBJMockForm;
 import gui.components.LBJTextBox;
 import gui.suppliers.LBJUpdaterSupplier;
+import testutils.LBJMockForm;
 
 public class LBJUpperCaseUpdaterTest {
 

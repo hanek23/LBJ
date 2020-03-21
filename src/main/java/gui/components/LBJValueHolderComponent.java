@@ -1,5 +1,7 @@
 package gui.components;
 
+import java.lang.reflect.ParameterizedType;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -77,6 +79,11 @@ public abstract class LBJValueHolderComponent<T> extends LBJLabeledComponent {
 		for (LBJValueUpdater<T> updater : getUpdaters()) {
 			updater.update(this);
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public Class<T> forType() {
+		return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 
 	public Set<LBJValueValidator<T>> getValidators() {

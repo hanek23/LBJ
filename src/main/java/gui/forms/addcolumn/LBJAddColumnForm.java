@@ -1,6 +1,7 @@
 package gui.forms.addcolumn;
 
-import com.googlecode.lanterna.gui2.EmptySpace;
+import com.googlecode.lanterna.gui2.Button;
+import com.googlecode.lanterna.gui2.Button.Listener;
 import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
@@ -12,8 +13,25 @@ import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
+import gui.forms.createtable.LBJCreateTableForm;
+import gui.forms.mainmenu.LBJMainMenuForm;
+import gui.suppliers.LBJFormSupplier;
+import gui.suppliers.LBJUpdaterSupplier;
 import gui.utils.LBJFormUtils;
 
+/**
+ * <p>
+ * Form for creating columns. You can use it directly from
+ * {@link LBJMainMenuForm} to add column to existing table or thru
+ * {@link LBJCreateTableForm} for adding new columns to newly created table.
+ * </p>
+ * <p>
+ * You can choose table name, column name, data type (if you choose 'boolean',
+ * it will be interpreted as char(1) for databases that requires it), if the
+ * column is or it is not nullable, if it does have or does not have an index
+ * and if it does or does not have a foreign key.
+ * 
+ */
 public class LBJAddColumnForm extends LBJEntityForm<Column> {
 
 	private LBJTextBox tableNameTextBox;
@@ -26,6 +44,8 @@ public class LBJAddColumnForm extends LBJEntityForm<Column> {
 	private LBJTextBox referencedTableNameTextBox;
 	private LBJTextBox referencedColumnNameTextBox;
 	private LBJTextBox foreignKeyNameTextBox;
+
+	private Button goToAddColumnButton;
 
 	public LBJAddColumnForm(Window window, LBJForm previousForm) {
 		super(window, previousForm);
@@ -45,7 +65,7 @@ public class LBJAddColumnForm extends LBJEntityForm<Column> {
 
 		indexCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_INDEX, this).build();
 
-		indexNameTextBox = new LBJTextBoxBuilder(Labels.COLUMN_DATA_TYPE, this).required().addLengthValidator()
+		indexNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_INDEX_NAME, this).required().addLengthValidator()
 				.addCaseUpdaterAndValidator(NamingConventions.INDEX_NAME_CASE).disabled().build();
 
 		foreignKeyCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY, this).build();
@@ -59,6 +79,21 @@ public class LBJAddColumnForm extends LBJEntityForm<Column> {
 		foreignKeyNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY_NAME, this).required()
 				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.FOREIGN_KEY_NAME_CASE).disabled()
 				.build();
+
+		goToAddColumnButton = new Button(Labels.BUTTON_ADD_ANOTHER_COLUMN);
+		goToAddColumnButton.addListener(new Listener() {
+			@Override
+			public void onTriggered(Button button) {
+				if (validate()) {
+					if (getNextForm() == null) {
+						setNextForm(LBJFormSupplier.getAddColumnForm(LBJAddColumnForm.this.getWindow(),
+								LBJAddColumnForm.this));
+					}
+					goToNextForm();
+				}
+
+			}
+		});
 	}
 
 	@Override
@@ -68,14 +103,13 @@ public class LBJAddColumnForm extends LBJEntityForm<Column> {
 
 	@Override
 	public void addFormUpdaters() {
-		// TODO Auto-generated method stub
-
+		addUpdater(LBJUpdaterSupplier.getAddColumnForeignKeyUpdater());
+		addUpdater(LBJUpdaterSupplier.getAddColumnIndexNameUpdater());
 	}
 
 	@Override
 	public void addFormValidators() {
-		// TODO Auto-generated method stub
-
+		// no extra validators
 	}
 
 	@Override
@@ -87,7 +121,6 @@ public class LBJAddColumnForm extends LBJEntityForm<Column> {
 		LBJFormUtils.addComponentToContent(getContent(), indexCheckBox);
 		LBJFormUtils.addComponentToContent(getContent(), indexNameTextBox);
 		LBJFormUtils.addComponentToContent(getContent(), foreignKeyCheckBox);
-		LBJFormUtils.addComponentToContent(getContent(), foreignKeyNameTextBox);
 		LBJFormUtils.addComponentToContent(getContent(), referencedTableNameTextBox);
 		LBJFormUtils.addComponentToContent(getContent(), referencedColumnNameTextBox);
 		LBJFormUtils.addComponentToContent(getContent(), foreignKeyNameTextBox);
@@ -95,9 +128,9 @@ public class LBJAddColumnForm extends LBJEntityForm<Column> {
 
 	@Override
 	public void addButtonsToContent() {
-		getContent().addComponent(new EmptySpace());
-		LBJFormUtils.addDefaultBackButton(getContent(), getPreviousForm());
-
+		LBJFormUtils.addEmptySpace(getContent());
+		LBJFormUtils.addBackButton(getContent(), getPreviousForm());
+		LBJFormUtils.addButtonToConent(getContent(), goToAddColumnButton);
 	}
 
 	@Override

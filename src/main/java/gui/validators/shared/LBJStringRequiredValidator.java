@@ -8,7 +8,7 @@ import gui.validators.LBJValueValidator;
  * Validates that components {@link String} value is not
  * {@link StringUtils#isBlank(CharSequence)}
  */
-public class LBJRequiredStringValidator implements LBJValueValidator<String> {
+public class LBJStringRequiredValidator implements LBJValueValidator<String> {
 
 	@Override
 	public boolean isValid(String value) {
