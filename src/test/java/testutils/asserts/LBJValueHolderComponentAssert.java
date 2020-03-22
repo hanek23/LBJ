@@ -1,5 +1,8 @@
 package testutils.asserts;
 
+import org.assertj.core.api.Assertions;
+import org.assertj.core.util.Objects;
+
 import constants.NamingConventions;
 import gui.components.LBJValueHolderComponent;
 import gui.suppliers.LBJValidatorSupplier;
@@ -24,14 +27,14 @@ public class LBJValueHolderComponentAssert extends LBJLabeledComponentAssert<LBJ
 	}
 
 	private void isForClass(Class<?> clazz) {
-		if (!actual.forType().equals(String.class)) {
+		if (!actual.forType().equals(clazz)) {
 			failWithMessage("Expecting component '%s' to be for type '%s' but it was '%s'", actual,
 					clazz.getSimpleName(), actual.forType().getSimpleName());
 		}
 
 	}
 
-	public LBJValueHolderComponentAssert hasStringRequiredValidator() {
+	public LBJValueHolderComponentAssert isRequired() {
 		isNotNull();
 		isForClass(String.class);
 		hasValidator(LBJValidatorSupplier.getStringRequiredValidator());
@@ -49,6 +52,47 @@ public class LBJValueHolderComponentAssert extends LBJLabeledComponentAssert<LBJ
 		isNotNull();
 		isForClass(String.class);
 		hasValidator(LBJValidatorSupplier.getCaseValidator(letterCase));
+		return this;
+	}
+
+	public LBJValueHolderComponentAssert isBlank() {
+		isNotNull();
+		isForClass(String.class);
+		Assertions.assertThat((String) actual.getValue()).isBlank();
+		return this;
+	}
+
+	public LBJValueHolderComponentAssert isValueEqualTo(Object expected) {
+		isNotNull();
+		if (!Objects.areEqual(actual.getValue(), expected)) {
+			failWithMessage("Expecting component '%s' to have value of '%s' but insted it has value of '%s'", actual,
+					expected, actual.getValue());
+		}
+		return this;
+	}
+
+	public LBJValueHolderComponentAssert isEqualToIgnoringCase(String expected) {
+		isNotNull();
+		isForClass(String.class);
+		Assertions.assertThat((String) actual.getValue()).isEqualToIgnoringCase(expected);
+		return this;
+	}
+
+	public LBJValueHolderComponentAssert isChecked() {
+		isNotNull();
+		isForClass(Boolean.class);
+		if (!(Boolean) actual.getValue()) {
+			failWithMessage("Expecting component '%s' to be checked but it is not", actual);
+		}
+		return this;
+	}
+
+	public LBJValueHolderComponentAssert isNotChecked() {
+		isNotNull();
+		isForClass(Boolean.class);
+		if ((Boolean) actual.getValue()) {
+			failWithMessage("Expecting component '%s' to NOT be checked but it is", actual);
+		}
 		return this;
 	}
 

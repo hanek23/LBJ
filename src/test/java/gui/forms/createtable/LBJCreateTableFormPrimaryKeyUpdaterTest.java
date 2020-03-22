@@ -1,6 +1,6 @@
 package gui.forms.createtable;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static testutils.asserts.LBJValueHolderComponentAssert.assertThat;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,27 +24,26 @@ public class LBJCreateTableFormPrimaryKeyUpdaterTest {
 		LBJTextBox primaryKeyName = form.getPrimaryKeyNameTextBox();
 		LBJTextBox primaryKeyConstraint = form.getPrimaryKeyConstraintNameTextBox();
 
-		assertThat(tableName.getValue()).isBlank();
-		assertThat(primaryKeyName.getValue()).isBlank();
-		assertThat(primaryKeyConstraint.getValue()).isBlank();
+		assertThat(tableName).isBlank();
+		assertThat(primaryKeyName).isBlank();
+		assertThat(primaryKeyConstraint).isBlank();
 
 		LBJTestUtils.focus(tableName);
 		tableName.setValue(TABLE_NAME);
 		form.update();
 
-		assertThat(tableName.getValue()).isEqualTo(TABLE_NAME);
-		assertThat(primaryKeyName.getValue())
-				.isEqualToIgnoringCase(NamingConventions.PRIMARY_KEY_NAME_DEFAULT_VALUE + TABLE_NAME);
-		assertThat(primaryKeyConstraint.getValue())
+		assertThat(tableName).isValueEqualTo(TABLE_NAME);
+		assertThat(primaryKeyName).isEqualToIgnoringCase(NamingConventions.PRIMARY_KEY_NAME_DEFAULT_VALUE + TABLE_NAME);
+		assertThat(primaryKeyConstraint)
 				.isEqualToIgnoringCase(NamingConventions.PRIMARY_KEY_CONSTRAINT_DEFAULT_VALUE + TABLE_NAME);
 
 		tableName.setValue(TABLE_NAME + "A");
 		form.update();
 
-		assertThat(tableName.getValue()).isEqualTo(TABLE_NAME + "A");
-		assertThat(primaryKeyName.getValue())
+		assertThat(tableName).isValueEqualTo(TABLE_NAME + "A");
+		assertThat(primaryKeyName)
 				.isEqualToIgnoringCase(NamingConventions.PRIMARY_KEY_NAME_DEFAULT_VALUE + TABLE_NAME + "A");
-		assertThat(primaryKeyConstraint.getValue())
+		assertThat(primaryKeyConstraint)
 				.isEqualToIgnoringCase(NamingConventions.PRIMARY_KEY_CONSTRAINT_DEFAULT_VALUE + TABLE_NAME + "A");
 	}
 

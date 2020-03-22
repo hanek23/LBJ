@@ -1,8 +1,6 @@
 package gui.components;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static testutils.asserts.LBJValueHolderComponentAssert.assertThat;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,9 +14,9 @@ public class LBJCheckBoxTest {
 	public void testBuilder() {
 		LBJCheckBoxBuilder builder = new LBJCheckBoxBuilder(Labels.CREATE_TABLE_DATABASES_ORACLE, new LBJMockForm());
 
-		assertFalse(builder.build().isChecked());
-		assertTrue(builder.checked().build().isChecked());
-		assertThat(builder.build().getLabel().getText()).isEqualTo(Labels.CREATE_TABLE_DATABASES_ORACLE);
+		assertThat(builder.build()).isNotChecked();
+		assertThat(builder.checked().build()).isChecked();
+		assertThat(builder.build()).hasLabel(Labels.CREATE_TABLE_DATABASES_ORACLE);
 	}
 
 }

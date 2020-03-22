@@ -1,8 +1,6 @@
 package gui.forms.createtable;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static testutils.asserts.LBJValueHolderComponentAssert.assertThat;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,31 +23,29 @@ public class LBJCreateTableFormSequenceNameUpdaterTest {
 		LBJCheckBox postgre = form.getPostgreCheckBox();
 		LBJTextBox sequenceName = form.getSequenceNameTextBox();
 
-		assertTrue(sequenceName.isEnabled());
-		assertThat(sequenceName.getValue()).isBlank();
-		assertTrue(oracle.isChecked());
-		assertTrue(postgre.isChecked());
+		assertThat(sequenceName).isEnabled();
+		assertThat(sequenceName).isBlank();
+		assertThat(oracle).isChecked();
+		assertThat(postgre).isChecked();
 
 		LBJTestUtils.focus(tableName);
 		tableName.setValue(TABLE_NAME);
 		form.update();
 
-		assertThat(sequenceName.getValue())
-				.isEqualToIgnoringCase(NamingConventions.SEQUENCE_NAME_DEFAULT_VALUE + TABLE_NAME);
-		oracle.getCheckBox().setChecked(false);
+		assertThat(sequenceName).isEqualToIgnoringCase(NamingConventions.SEQUENCE_NAME_DEFAULT_VALUE + TABLE_NAME);
+		oracle.unCheck();
 		form.update();
 
-		assertThat(sequenceName.getValue())
-				.isEqualToIgnoringCase(NamingConventions.SEQUENCE_NAME_DEFAULT_VALUE + TABLE_NAME);
-		postgre.getCheckBox().setChecked(false);
+		assertThat(sequenceName).isEqualToIgnoringCase(NamingConventions.SEQUENCE_NAME_DEFAULT_VALUE + TABLE_NAME);
+		postgre.unCheck();
 		form.update();
 
 		// If Oracle and Postgre are not checked sequence name should be disabled
-		assertFalse(sequenceName.isEnabled());
+		assertThat(sequenceName).isNotEnabled();
 
-		oracle.getCheckBox().setChecked(true);
+		oracle.check();
 		form.update();
-		assertTrue(sequenceName.isEnabled());
+		assertThat(sequenceName).isEnabled();
 	}
 
 }

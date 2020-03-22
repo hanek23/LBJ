@@ -18,7 +18,15 @@ public class LBJComponentAssert<COMPONENT extends LBJComponent>
 	public LBJComponentAssert<COMPONENT> isEnabled() {
 		isNotNull();
 		if (!actual.isEnabled()) {
-			failWithMessage("Was expecting that component '%s' is enabled but it was not", actual.getName());
+			failWithMessage("Expecting component '%s' to be enabled but it is not", actual.getName());
+		}
+		return this;
+	}
+
+	public LBJComponentAssert<COMPONENT> isNotEnabled() {
+		isNotNull();
+		if (actual.isEnabled()) {
+			failWithMessage("Expecting component '%s' to NOT be enabled but it is", actual.getName());
 		}
 		return this;
 	}

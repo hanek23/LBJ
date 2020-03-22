@@ -15,6 +15,7 @@ import gui.validators.LBJFormValidator;
 public abstract class LBJForm implements Updatable, Runnable {
 
 	private Window window;
+	// AKA focused
 	private boolean visible;
 	private boolean initialized;
 	private Panel content;
@@ -74,6 +75,8 @@ public abstract class LBJForm implements Updatable, Runnable {
 		if (!isVisible() || !isInitialized()) {
 			return true;
 		}
+		// one last update before validating
+		update();
 		boolean isFormValid = true;
 		for (LBJFormValidator<LBJForm> validator : getValidators()) {
 			isFormValid = validator.isValid(this) && isFormValid;
