@@ -2,7 +2,7 @@ package domain;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class Column {
+public class Column implements Entity {
 
 	private Table table;
 	private String name;

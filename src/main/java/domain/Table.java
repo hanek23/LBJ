@@ -3,7 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Table {
+public class Table implements Entity {
 
 	private String name;
 	private String primaryKeyColumnName;

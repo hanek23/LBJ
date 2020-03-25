@@ -25,27 +25,29 @@ import constants.Labels;
 import gui.builders.LBJPlainLabelBuilder;
 import gui.components.LBJPlainLabel;
 import gui.forms.LBJForm;
-import gui.forms.addcolumn.LBJAddColumnForm;
-import gui.forms.createtable.LBJCreateTableForm;
+import gui.forms.addcolumn.AddColumnForm;
+import gui.forms.createtable.CreateTableForm;
+import gui.forms.removenotnullconstraint.RemoveNotNullConstraintForm;
 import gui.suppliers.LBJFormSupplier;
 import gui.utils.LBJFormUtils;
 
-public class LBJMainMenuForm extends LBJForm {
+public class MainMenuForm extends LBJForm {
 
-	private static final Logger LOGGER = Logger.getLogger(LBJMainMenuForm.class.getSimpleName());
+	private static final Logger LOGGER = Logger.getLogger(MainMenuForm.class.getSimpleName());
 
 	private boolean terminalStarted;
 	private List<LBJForm> formsToUpdate;
 	private LBJPlainLabel questionLabel;
 	private ActionListBox mainMenu;
-	private LBJCreateTableForm createTableForm;
-	private LBJAddColumnForm addColumnForm;
+	private CreateTableForm createTableForm;
+	private AddColumnForm addColumnForm;
+	private RemoveNotNullConstraintForm removeNotNullConstraintForm;
 
-	public LBJMainMenuForm() {
+	public MainMenuForm() {
 		this(new BasicWindow(Labels.WINDOW_NAME));
 	}
 
-	private LBJMainMenuForm(Window window) {
+	private MainMenuForm(Window window) {
 		super(window);
 		initialize();
 	}
@@ -61,9 +63,11 @@ public class LBJMainMenuForm extends LBJForm {
 		questionLabel = new LBJPlainLabelBuilder(Labels.MAIN_MENU_QUESTION, this).build();
 		createTableForm = LBJFormSupplier.getCreateTableForm(getWindow(), this, false);
 		addColumnForm = LBJFormSupplier.getAddColumnForm(getWindow(), this, false);
+		removeNotNullConstraintForm = LBJFormSupplier.getRemoveNotNullConstraintForm(getWindow(), this, false);
 
 		addFormToUpdate(createTableForm);
 		addFormToUpdate(addColumnForm);
+		addFormToUpdate(removeNotNullConstraintForm);
 	}
 
 	@Override
@@ -72,7 +76,8 @@ public class LBJMainMenuForm extends LBJForm {
 		LBJFormUtils.addMenuToMainMenuContent(getContent(), mainMenu);
 		LBJFormUtils.addItemToMenu(mainMenu, createTableForm, Labels.MAIN_MENU_CREATE_TABLE);
 		LBJFormUtils.addItemToMenu(mainMenu, addColumnForm, Labels.MAIN_MENU_ADD_COLUMN);
-		LBJFormUtils.addExitButton(mainMenu);
+		LBJFormUtils.addItemToMenu(mainMenu, removeNotNullConstraintForm, Labels.MAIN_MENU_REMOVE_NOT_NULL_CONSTRAINT);
+		LBJFormUtils.addExitButtonToMainMenu(mainMenu);
 	}
 
 	@Override
@@ -101,10 +106,14 @@ public class LBJMainMenuForm extends LBJForm {
 		if (terminalStarted) {
 			return;
 		}
+		terminalStarted = true;
+		startTerminal();
+	}
+
+	private void startTerminal() {
 		try (Screen screen = new DefaultTerminalFactory().createScreen()) {
 			screen.startScreen();
 			WindowBasedTextGUI gui = new MultiWindowTextGUI(screen);
-			terminalStarted = true;
 			getWindow().addWindowListener(new WindowListener() {
 
 				@Override
@@ -129,7 +138,7 @@ public class LBJMainMenuForm extends LBJForm {
 			});
 			gui.addWindowAndWait(getWindow());
 		} catch (IOException e) {
-			LOGGER.severe("IOException has occurred: " + e.getMessage());
+			LOGGER.severe("While starting terminal IOException has occurred: " + e.getMessage());
 			throw new IllegalStateException();
 		}
 	}

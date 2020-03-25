@@ -1,7 +1,5 @@
 package gui.forms.createtable;
 
-import com.googlecode.lanterna.gui2.Button;
-import com.googlecode.lanterna.gui2.Button.Listener;
 import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
@@ -15,20 +13,19 @@ import gui.components.LBJPlainLabel;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
-import gui.forms.addcolumn.LBJAddColumnForm;
-import gui.suppliers.LBJFormSupplier;
+import gui.forms.addcolumn.AddColumnForm;
 import gui.suppliers.LBJUpdaterSupplier;
 import gui.suppliers.LBJValidatorSupplier;
 import gui.utils.LBJFormUtils;
 
 /**
- * Form for creating table. You are able to choose table name, primary key name,
- * primary key constraint name, for which databses this table should be
- * (currently supported databases are Oracle, PostgreSQL and MSSQL) and sequence
- * name. As a next step you can go to {@link LBJAddColumnForm} in which you can
- * add more collumns.
+ * Form for creating table. You can choose table name, primary key name, primary
+ * key constraint name, for which databses this table should be (currently
+ * supported databases are Oracle, PostgreSQL and MSSQL) and sequence name. As a
+ * next step you can go to {@link AddColumnForm} in which you can add more
+ * columns.
  */
-public class LBJCreateTableForm extends LBJEntityForm<Table> {
+public class CreateTableForm extends LBJEntityForm<Table> {
 
 	private LBJTextBox tableNameTextBox;
 	private LBJTextBox primaryKeyNameTextBox;
@@ -39,15 +36,8 @@ public class LBJCreateTableForm extends LBJEntityForm<Table> {
 	private LBJCheckBox postgreCheckBox;
 	private LBJTextBox sequenceNameTextBox;
 
-	private Button goToAddColumnButton;
-
-	public LBJCreateTableForm(Window window, LBJForm previousForm) {
+	public CreateTableForm(Window window, LBJForm previousForm) {
 		super(window, previousForm);
-	}
-
-	@Override
-	public void initializeContent() {
-		setContent(LBJFormUtils.initializeDefaultContent());
 	}
 
 	@Override
@@ -69,21 +59,6 @@ public class LBJCreateTableForm extends LBJEntityForm<Table> {
 
 		sequenceNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_SEQUENCE_NAME, this).required()
 				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.SEQUENCE_NAME_CASE).build();
-
-		goToAddColumnButton = new Button(Labels.BUTTON_ADD_COLUMN);
-		goToAddColumnButton.addListener(new Listener() {
-			@Override
-			public void onTriggered(Button button) {
-				if (validate()) {
-					if (getNextForm() == null) {
-						setNextForm(LBJFormSupplier.getAddColumnForm(LBJCreateTableForm.this.getWindow(),
-								LBJCreateTableForm.this));
-					}
-					goToNextForm();
-				}
-
-			}
-		});
 	}
 
 	@Override
@@ -113,12 +88,19 @@ public class LBJCreateTableForm extends LBJEntityForm<Table> {
 	public void addButtonsToContent() {
 		LBJFormUtils.addEmptySpace(getContent());
 		LBJFormUtils.addBackButton(getContent(), getPreviousForm());
-		LBJFormUtils.addButtonToConent(getContent(), goToAddColumnButton);
+		LBJFormUtils.addGoToAddColumnFormButton(this);
 	}
 
 	@Override
 	public Table convert() {
-		return null;
+		Table table = new Table(tableNameTextBox.getValue());
+		table.setPrimaryKeyColumnName(primaryKeyNameTextBox.getValue());
+		table.setPrimaryKeyContrainName(primaryKeyConstraintNameTextBox.getValue());
+		table.setForOracle(oracleCheckBox.getValue());
+		table.setForMssql(mssqlCheckBox.getValue());
+		table.setForPostgreSql(postgreCheckBox.getValue());
+		table.setSequenceName(sequenceNameTextBox.getValue());
+		return table;
 	}
 
 	@Override

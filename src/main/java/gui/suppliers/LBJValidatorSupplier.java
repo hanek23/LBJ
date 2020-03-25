@@ -1,7 +1,7 @@
 package gui.suppliers;
 
 import constants.NamingConventions.LetterCase;
-import gui.forms.createtable.LBJCreateTableFormDatabasesValidator;
+import gui.forms.createtable.CreateTableFormDatabasesValidator;
 import gui.updaters.LBJValueUpdater;
 import gui.updaters.shared.LBJUpperCaseUpdater;
 import gui.validators.LBJValueValidator;
@@ -16,7 +16,7 @@ import gui.validators.shared.LBJUpperCaseValidator;
 public class LBJValidatorSupplier {
 
 	// CREATE TABLE
-	private static final LBJCreateTableFormDatabasesValidator CREATE_TABLE_DATABASES_VALIDATOR = new LBJCreateTableFormDatabasesValidator();
+	private static final CreateTableFormDatabasesValidator CREATE_TABLE_DATABASES_VALIDATOR = new CreateTableFormDatabasesValidator();
 
 	// SHARED
 	private static final LBJLowerCaseValidator LOWER_CASE_VALIDATOR = new LBJLowerCaseValidator();
@@ -68,7 +68,7 @@ public class LBJValidatorSupplier {
 		return UPPER_CASE_VALIDATOR;
 	}
 
-	public static LBJCreateTableFormDatabasesValidator getCreateTableDatabasesValidator() {
+	public static CreateTableFormDatabasesValidator getCreateTableDatabasesValidator() {
 		return CREATE_TABLE_DATABASES_VALIDATOR;
 	}
 

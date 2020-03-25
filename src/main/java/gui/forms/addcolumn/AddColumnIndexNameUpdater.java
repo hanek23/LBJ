@@ -5,10 +5,10 @@ import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import gui.updaters.LBJFormUpdater;
 
-public class LBJAddColumnIndexNameUpdater implements LBJFormUpdater<LBJAddColumnForm> {
+public class AddColumnIndexNameUpdater implements LBJFormUpdater<AddColumnForm> {
 
 	@Override
-	public void update(LBJAddColumnForm form) {
+	public void update(AddColumnForm form) {
 		LBJCheckBox indexCheckBox = form.getIndexCheckBox();
 		LBJTextBox indexName = form.getIndexNameTextBox();
 		LBJTextBox tableName = form.getTableNameTextBox();

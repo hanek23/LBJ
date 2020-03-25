@@ -11,14 +11,14 @@ import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import testutils.LBJTestUtils;
 
-public class LBJAddColumnForeignKeyUpdaterTest {
+public class AddColumnForeignKeyUpdaterTest {
 
 	private static final String REFERENCED_TABLE_NAME = "REF_TABLE";
 	private static final String REFERENCED_COLUMN_NAME = "REF_COLUMN";
 
 	@Test
 	public void testUpdate() {
-		LBJAddColumnForm form = LBJTestUtils.getAddColumnForm();
+		AddColumnForm form = LBJTestUtils.getAddColumnForm();
 		form.focus();
 
 		LBJCheckBox foreignKeyCheckBox = form.getForeignKeyCheckBox();

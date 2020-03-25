@@ -5,10 +5,10 @@ import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import gui.updaters.LBJFormUpdater;
 
-public class LBJAddColumnForeignKeyUpdater implements LBJFormUpdater<LBJAddColumnForm> {
+public class AddColumnForeignKeyUpdater implements LBJFormUpdater<AddColumnForm> {
 
 	@Override
-	public void update(LBJAddColumnForm form) {
+	public void update(AddColumnForm form) {
 		LBJCheckBox foreignKeyCheckBox = form.getForeignKeyCheckBox();
 		LBJTextBox referencedTable = form.getReferencedTableNameTextBox();
 		LBJTextBox referencedColumn = form.getReferencedColumnNameTextBox();

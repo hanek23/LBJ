@@ -4,6 +4,7 @@ import java.util.List;
 
 import constants.XmlParts;
 import domain.Column;
+import domain.Entity;
 import domain.Table;
 
 /**
@@ -14,6 +15,10 @@ public class Generator {
 
 	private Generator() {
 		// only static methods
+	}
+
+	public static String generate(Entity entity, String author) {
+		return generate((Table) entity, Operation.CREATE_TABLE, author);
 	}
 
 	public static String generate(Table table, Operation operation, String author) {

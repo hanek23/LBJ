@@ -13,8 +13,8 @@ import gui.updaters.shared.LBJLowerCaseUpdater;
 import gui.updaters.shared.LBJUpperCaseUpdater;
 import gui.validators.LBJValueValidator;
 import gui.validators.shared.LBJLowerCaseValidator;
-import gui.validators.shared.LBJStringRequiredValidator;
 import gui.validators.shared.LBJStringLengthValidator;
+import gui.validators.shared.LBJStringRequiredValidator;
 import gui.validators.shared.LBJUpperCaseValidator;
 
 /**

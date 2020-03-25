@@ -1,29 +1,27 @@
 package gui.forms.addcolumn;
 
-import com.googlecode.lanterna.gui2.Button;
-import com.googlecode.lanterna.gui2.Button.Listener;
 import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
 import constants.NamingConventions;
 import domain.Column;
+import domain.ForeignKey;
 import gui.builders.LBJCheckBoxBuilder;
 import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
-import gui.forms.createtable.LBJCreateTableForm;
-import gui.forms.mainmenu.LBJMainMenuForm;
-import gui.suppliers.LBJFormSupplier;
+import gui.forms.createtable.CreateTableForm;
+import gui.forms.mainmenu.MainMenuForm;
 import gui.suppliers.LBJUpdaterSupplier;
 import gui.utils.LBJFormUtils;
 
 /**
  * <p>
- * Form for creating columns. You can use it directly from
- * {@link LBJMainMenuForm} to add column to existing table or thru
- * {@link LBJCreateTableForm} for adding new columns to newly created table.
+ * Form for creating columns. You can use it directly from {@link MainMenuForm}
+ * to add column to existing table or thru {@link CreateTableForm} for adding
+ * new columns to newly created table.
  * </p>
  * <p>
  * You can choose table name, column name, data type (if you choose 'boolean',
@@ -32,7 +30,7 @@ import gui.utils.LBJFormUtils;
  * and if it does or does not have a foreign key.
  * 
  */
-public class LBJAddColumnForm extends LBJEntityForm<Column> {
+public class AddColumnForm extends LBJEntityForm<Column> {
 
 	private LBJTextBox tableNameTextBox;
 	private LBJTextBox columnNameTextBox;
@@ -45,9 +43,7 @@ public class LBJAddColumnForm extends LBJEntityForm<Column> {
 	private LBJTextBox referencedColumnNameTextBox;
 	private LBJTextBox foreignKeyNameTextBox;
 
-	private Button goToAddColumnButton;
-
-	public LBJAddColumnForm(Window window, LBJForm previousForm) {
+	public AddColumnForm(Window window, LBJForm previousForm) {
 		super(window, previousForm);
 	}
 
@@ -79,26 +75,6 @@ public class LBJAddColumnForm extends LBJEntityForm<Column> {
 		foreignKeyNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY_NAME, this).required()
 				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.FOREIGN_KEY_NAME_CASE).disabled()
 				.build();
-
-		goToAddColumnButton = new Button(Labels.BUTTON_ADD_ANOTHER_COLUMN);
-		goToAddColumnButton.addListener(new Listener() {
-			@Override
-			public void onTriggered(Button button) {
-				if (validate()) {
-					if (getNextForm() == null) {
-						setNextForm(LBJFormSupplier.getAddColumnForm(LBJAddColumnForm.this.getWindow(),
-								LBJAddColumnForm.this));
-					}
-					goToNextForm();
-				}
-
-			}
-		});
-	}
-
-	@Override
-	public void initializeContent() {
-		setContent(LBJFormUtils.initializeDefaultContent());
 	}
 
 	@Override
@@ -130,12 +106,24 @@ public class LBJAddColumnForm extends LBJEntityForm<Column> {
 	public void addButtonsToContent() {
 		LBJFormUtils.addEmptySpace(getContent());
 		LBJFormUtils.addBackButton(getContent(), getPreviousForm());
-		LBJFormUtils.addButtonToConent(getContent(), goToAddColumnButton);
+		LBJFormUtils.addGoToAddColumnFormButton(this);
+		LBJFormUtils.addGenerateButton(this);
 	}
 
 	@Override
 	public Column convert() {
-		return null;
+		Column column = new Column(columnNameTextBox.getValue());
+		column.setDataType(dataTypeTextBox.getValue());
+		column.setNullable(nullableCheckBox.getValue());
+		column.setIndex(indexCheckBox.getValue());
+		column.setIndexName(indexNameTextBox.getValue());
+		if (foreignKeyCheckBox.isChecked()) {
+			ForeignKey key = new ForeignKey(foreignKeyNameTextBox.getValue());
+			key.setReferencedColumn(referencedColumnNameTextBox.getValue());
+			key.setReferencedTable(referencedTableNameTextBox.getValue());
+			column.setForeignKey(key);
+		}
+		return column;
 	}
 
 	@Override

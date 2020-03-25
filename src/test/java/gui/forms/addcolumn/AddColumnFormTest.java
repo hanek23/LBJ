@@ -10,11 +10,11 @@ import constants.NamingConventions;
 import gui.suppliers.LBJUpdaterSupplier;
 import testutils.LBJTestUtils;
 
-public class LBJAddColumnFormTest {
+public class AddColumnFormTest {
 
 	@Test
 	public void testInitializeComponents() {
-		LBJAddColumnForm form = LBJTestUtils.getAddColumnForm();
+		AddColumnForm form = LBJTestUtils.getAddColumnForm();
 
 		// Has all components
 		assertThat(form).hasName(Labels.ADD_COLUMN_FORM);

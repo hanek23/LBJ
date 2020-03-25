@@ -6,13 +6,13 @@ import java.util.List;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.Window;
 
-import gui.Updatable;
 import gui.components.LBJComponent;
 import gui.components.LBJValueHolderComponent;
 import gui.updaters.LBJFormUpdater;
+import gui.utils.LBJFormUtils;
 import gui.validators.LBJFormValidator;
 
-public abstract class LBJForm implements Updatable, Runnable {
+public abstract class LBJForm implements Runnable {
 
 	private Window window;
 	// AKA focused
@@ -42,7 +42,9 @@ public abstract class LBJForm implements Updatable, Runnable {
 
 	public abstract void initializeComponents();
 
-	public abstract void initializeContent();
+	public void initializeContent() {
+		setContent(LBJFormUtils.initializeDefaultContent());
+	}
 
 	public abstract void addFormUpdaters();
 

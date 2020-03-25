@@ -8,7 +8,7 @@ import constants.NamingConventions;
 import gui.components.LBJTextBox;
 import testutils.LBJTestUtils;
 
-public class LBJCreateTableFormPrimaryKeyUpdaterTest {
+public class CreateTableFormPrimaryKeyUpdaterTest {
 
 	private static final String TABLE_NAME = "TABLE_NAME";
 
@@ -18,7 +18,7 @@ public class LBJCreateTableFormPrimaryKeyUpdaterTest {
 	 */
 	@Test
 	public void testUpdate() {
-		LBJCreateTableForm form = LBJTestUtils.getCreateTableForm();
+		CreateTableForm form = LBJTestUtils.getCreateTableForm();
 		form.focus();
 		LBJTextBox tableName = form.getTableNameTextBox();
 		LBJTextBox primaryKeyName = form.getPrimaryKeyNameTextBox();

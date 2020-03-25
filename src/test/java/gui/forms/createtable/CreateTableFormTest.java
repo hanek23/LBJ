@@ -9,11 +9,11 @@ import constants.Labels;
 import constants.NamingConventions;
 import testutils.LBJTestUtils;
 
-public class LBJCreateTableFormTest {
+public class CreateTableFormTest {
 
 	@Test
 	public void testInitializeComponents() {
-		LBJCreateTableForm form = LBJTestUtils.getCreateTableForm();
+		CreateTableForm form = LBJTestUtils.getCreateTableForm();
 
 		assertThat(form).hasName(Labels.TABLE_FORM);
 		assertThat(form).hasComponentWithName(Labels.TABLE_NAME);

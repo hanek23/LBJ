@@ -2,10 +2,10 @@ package gui.suppliers;
 
 import constants.NamingConventions.LetterCase;
 import gui.components.LBJValueHolderComponent;
-import gui.forms.addcolumn.LBJAddColumnForeignKeyUpdater;
-import gui.forms.addcolumn.LBJAddColumnIndexNameUpdater;
-import gui.forms.createtable.LBJCreateTableFormPrimaryKeyUpdater;
-import gui.forms.createtable.LBJCreateTableFormSequenceNameUpdater;
+import gui.forms.addcolumn.AddColumnForeignKeyUpdater;
+import gui.forms.addcolumn.AddColumnIndexNameUpdater;
+import gui.forms.createtable.CreateTableFormPrimaryKeyUpdater;
+import gui.forms.createtable.CreateTableFormSequenceNameUpdater;
 import gui.updaters.LBJValueUpdater;
 import gui.updaters.shared.LBJLowerCaseUpdater;
 import gui.updaters.shared.LBJUpperCaseUpdater;
@@ -16,12 +16,12 @@ import gui.updaters.shared.LBJUpperCaseUpdater;
 public class LBJUpdaterSupplier {
 
 	// CREATE TABLE
-	private static final LBJCreateTableFormPrimaryKeyUpdater CREATE_TABLE_PRIMARY_KEY_UPDATER = new LBJCreateTableFormPrimaryKeyUpdater();
-	private static final LBJCreateTableFormSequenceNameUpdater CREATE_TABLE_SEQUENCE_NAME_UPDATER = new LBJCreateTableFormSequenceNameUpdater();
+	private static final CreateTableFormPrimaryKeyUpdater CREATE_TABLE_PRIMARY_KEY_UPDATER = new CreateTableFormPrimaryKeyUpdater();
+	private static final CreateTableFormSequenceNameUpdater CREATE_TABLE_SEQUENCE_NAME_UPDATER = new CreateTableFormSequenceNameUpdater();
 
 	// ADD COLUMN
-	private static final LBJAddColumnForeignKeyUpdater ADD_COLUMN_FOREIGN_KEY_UPDATER = new LBJAddColumnForeignKeyUpdater();
-	private static final LBJAddColumnIndexNameUpdater ADD_COLUMN_INDEX_NAME_UPDATER = new LBJAddColumnIndexNameUpdater();
+	private static final AddColumnForeignKeyUpdater ADD_COLUMN_FOREIGN_KEY_UPDATER = new AddColumnForeignKeyUpdater();
+	private static final AddColumnIndexNameUpdater ADD_COLUMN_INDEX_NAME_UPDATER = new AddColumnIndexNameUpdater();
 
 	// SHARED
 	private static final LBJLowerCaseUpdater LOWER_CASE_UPDATER = new LBJLowerCaseUpdater();
@@ -54,11 +54,11 @@ public class LBJUpdaterSupplier {
 		return NO_UPDATER;
 	}
 
-	public static LBJCreateTableFormPrimaryKeyUpdater getCreateTablePrimaryKeyUpdater() {
+	public static CreateTableFormPrimaryKeyUpdater getCreateTablePrimaryKeyUpdater() {
 		return CREATE_TABLE_PRIMARY_KEY_UPDATER;
 	}
 
-	public static LBJCreateTableFormSequenceNameUpdater getCreateTableSequenceNameUpdater() {
+	public static CreateTableFormSequenceNameUpdater getCreateTableSequenceNameUpdater() {
 		return CREATE_TABLE_SEQUENCE_NAME_UPDATER;
 	}
 
@@ -70,11 +70,11 @@ public class LBJUpdaterSupplier {
 		return UPPER_CASE_UPDATER;
 	}
 
-	public static LBJAddColumnForeignKeyUpdater getAddColumnForeignKeyUpdater() {
+	public static AddColumnForeignKeyUpdater getAddColumnForeignKeyUpdater() {
 		return ADD_COLUMN_FOREIGN_KEY_UPDATER;
 	}
 
-	public static LBJAddColumnIndexNameUpdater getAddColumnIndexNameUpdater() {
+	public static AddColumnIndexNameUpdater getAddColumnIndexNameUpdater() {
 		return ADD_COLUMN_INDEX_NAME_UPDATER;
 	}
 

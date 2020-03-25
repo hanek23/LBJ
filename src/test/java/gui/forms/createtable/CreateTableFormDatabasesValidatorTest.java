@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 import gui.components.LBJPlainLabel;
 import testutils.LBJTestUtils;
 
-public class LBJCreateTableFormDatabasesValidatorTest {
+public class CreateTableFormDatabasesValidatorTest {
 
 	@Test
 	public void testIsValid() {
-		LBJCreateTableForm form = LBJTestUtils.getCreateTableForm();
+		CreateTableForm form = LBJTestUtils.getCreateTableForm();
 		form.focus();
 		LBJPlainLabel databases = form.getDatabasesLabel();
 		assertThat(databases).isValid();

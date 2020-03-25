@@ -11,7 +11,7 @@ import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import testutils.LBJTestUtils;
 
-public class LBJAddColumnIndexNameUpdaterTest {
+public class AddColumnIndexNameUpdaterTest {
 
 	private static final String TABLE_NAME = "TABLE_NAME";
 	private static final String COLUMN_NAME = "COLUMN";
@@ -19,7 +19,7 @@ public class LBJAddColumnIndexNameUpdaterTest {
 
 	@Test
 	public void testUpdate() {
-		LBJAddColumnForm form = LBJTestUtils.getAddColumnForm();
+		AddColumnForm form = LBJTestUtils.getAddColumnForm();
 		form.focus();
 
 		LBJCheckBox indexCheckBox = form.getIndexCheckBox();

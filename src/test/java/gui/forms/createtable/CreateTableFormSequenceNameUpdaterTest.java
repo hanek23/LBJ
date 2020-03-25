@@ -9,13 +9,13 @@ import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import testutils.LBJTestUtils;
 
-public class LBJCreateTableFormSequenceNameUpdaterTest {
+public class CreateTableFormSequenceNameUpdaterTest {
 
 	private static final String TABLE_NAME = "TABLE_NAME";
 
 	@Test
 	public void testUpdate() {
-		LBJCreateTableForm form = LBJTestUtils.getCreateTableForm();
+		CreateTableForm form = LBJTestUtils.getCreateTableForm();
 		form.focus();
 
 		LBJTextBox tableName = form.getTableNameTextBox();

@@ -4,8 +4,8 @@ import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.Interactable;
 
 import gui.components.LBJValueHolderComponent;
-import gui.forms.addcolumn.LBJAddColumnForm;
-import gui.forms.createtable.LBJCreateTableForm;
+import gui.forms.addcolumn.AddColumnForm;
+import gui.forms.createtable.CreateTableForm;
 
 public class LBJTestUtils {
 
@@ -21,12 +21,12 @@ public class LBJTestUtils {
 		((Interactable) component.getComponent()).takeFocus();
 	}
 
-	public static LBJCreateTableForm getCreateTableForm() {
-		return new LBJCreateTableForm(new BasicWindow(), new LBJMockForm());
+	public static CreateTableForm getCreateTableForm() {
+		return new CreateTableForm(new BasicWindow(), new LBJMockForm());
 	}
 
-	public static LBJAddColumnForm getAddColumnForm() {
-		return new LBJAddColumnForm(new BasicWindow(), new LBJMockForm());
+	public static AddColumnForm getAddColumnForm() {
+		return new AddColumnForm(new BasicWindow(), new LBJMockForm());
 	}
 
 }

@@ -6,13 +6,13 @@ import gui.components.LBJTextBox;
 import gui.updaters.LBJFormUpdater;
 
 /**
- * Custom updater for {@link LBJCreateTableForm} that updates Sequence Name to
+ * Custom updater for {@link CreateTableForm} that updates Sequence Name to
  * value "SEQ_TABLENAME"
  */
-public class LBJCreateTableFormSequenceNameUpdater implements LBJFormUpdater<LBJCreateTableForm> {
+public class CreateTableFormSequenceNameUpdater implements LBJFormUpdater<CreateTableForm> {
 
 	@Override
-	public void update(LBJCreateTableForm form) {
+	public void update(CreateTableForm form) {
 		LBJTextBox tableName = form.getTableNameTextBox();
 		LBJCheckBox oracle = form.getOracleCheckBox();
 		LBJCheckBox postgre = form.getPostgreCheckBox();
