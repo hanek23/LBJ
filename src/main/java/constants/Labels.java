@@ -52,6 +52,8 @@ public class Labels {
 
 	// GENERATE
 	public static final String GENERATE_FORM = "Generate form";
+	public static final String GENERATE_FORM_ONLY_CHANGESETS = "Generete only changesets";
+	public static final String GENERATE_FORM_CHANGESETS_STARTING_ID = "Changesets starting ID";
 	public static final String GENERATE_GENERATED_XML = "Generated XML";
 	public static final String GENERATE_AUTHOR = "Author";
 

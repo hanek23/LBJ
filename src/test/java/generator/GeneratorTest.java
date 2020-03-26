@@ -1,9 +1,13 @@
 package generator;
 
+import java.util.List;
+
 import javax.xml.transform.stream.StreamSource;
 
 import org.junit.jupiter.api.Test;
 import org.xmlunit.assertj.XmlAssert;
+
+import domain.Entity;
 
 public class GeneratorTest {
 
@@ -11,33 +15,34 @@ public class GeneratorTest {
 	private static final String LIQUIBASE_XSD = "/generator/liquibase-3.8.xsd";
 
 	@Test
-	public void testGenerateTestTable1() throws Exception {
-		assertChangeLogEquals(new TestTable1());
+	public void testGenerate1() throws Exception {
+		assertChangeLogEquals(new TestSupplier1());
 	}
 
 	@Test
-	public void testGenerateTestTable2() throws Exception {
-		assertChangeLogEquals(new TestTable2());
+	public void testGenerate2() throws Exception {
+		assertChangeLogEquals(new TestSupplier2());
 	}
 
 	@Test
-	public void testGenerateTestTable3() throws Exception {
-		assertChangeLogEquals(new TestTable3());
+	public void testGenerate3() throws Exception {
+		assertChangeLogEquals(new TestSupplier3());
 	}
 
 	@Test
-	public void testGenerateTestTable4() throws Exception {
-		assertChangeLogEquals(new TestTable4());
+	public void testGenerate4() throws Exception {
+		assertChangeLogEquals(new TestSupplier4());
 	}
 
 	@Test
-	public void testGenerateTestTable5() throws Exception {
-		assertChangeLogEquals(new TestTable5());
+	public void testGenerate5() throws Exception {
+		assertChangeLogEquals(new TestSupplier5());
 	}
 
-	private void assertChangeLogEquals(TestTableSupplier testTableSupplier) throws Exception {
-		String expected = testTableSupplier.getExpectedTable();
-		String actual = Generator.generate(testTableSupplier.getTable(), testTableSupplier.getOperation(), AUTHOR);
+	private void assertChangeLogEquals(EntitiesSupplier testTableSupplier) throws Exception {
+		String expected = testTableSupplier.getExpectedXml();
+		List<Entity> entities = testTableSupplier.getEntities();
+		String actual = Generator.generate(entities, AUTHOR);
 		StreamSource liquibaseXsd = new StreamSource(GeneratorTest.class.getResourceAsStream(LIQUIBASE_XSD));
 
 		XmlAssert.assertThat(actual).isValid();

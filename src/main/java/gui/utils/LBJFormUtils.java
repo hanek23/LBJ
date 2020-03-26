@@ -59,6 +59,7 @@ public class LBJFormUtils {
 	}
 
 	public static void addBackButton(Panel content, Runnable previousWindow) {
+		addEmptySpace(content);
 		addButtonToConent(content, new Button(Labels.BUTTON_BACK, previousWindow));
 	}
 

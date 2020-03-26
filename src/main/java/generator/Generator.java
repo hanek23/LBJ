@@ -3,8 +3,11 @@ package generator;
 import java.util.List;
 
 import constants.XmlParts;
+import domain.AddColumn;
 import domain.Column;
 import domain.Entity;
+import domain.GeneralColumn;
+import domain.RemoveNotNullConstraint;
 import domain.Table;
 
 /**
@@ -17,79 +20,73 @@ public class Generator {
 		// only static methods
 	}
 
-	public static String generate(Entity entity, String author) {
-		return generate((Table) entity, Operation.CREATE_TABLE, author);
-	}
-
-	public static String generate(Table table, Operation operation, String author) {
+	public static String generate(List<Entity> entities, String author) {
 		String changesets = "";
-		if (operation == Operation.REMOVE_NOT_NULL_CONSTRAINT) {
-			changesets = removeNotNullConstraint(table);
-		} else if (operation == Operation.CREATE_TABLE) {
-			changesets = createTable(table);
-		} else if (operation == Operation.ADD_COLUMN) {
-			changesets = addColumns(table.getColumns(), changesets);
+		for (Entity entity : entities) {
+			if (entity instanceof Table) {
+				changesets += createTable((Table) entity);
+				continue;
+			}
+			if (entity instanceof Column) {
+				changesets += createColumnChangeset((GeneralColumn) entity);
+			}
 		}
 		changesets = XmlBuilder.replaceAuthor(changesets, author);
 		return XmlBuilder.toChangelog(changesets);
 	}
 
-	private static String addColumns(List<Column> columns, String changesets) {
-		for (Column column : columns) {
-			changesets += addColumn(column);
+	private static String createColumnChangeset(GeneralColumn column) {
+		if (column.isAddColumn()) {
+			return addColumn((AddColumn) column);
 		}
-		return changesets;
+		if (column.isRemoveNotNullConstraint()) {
+			return removeNotNullConstraint((RemoveNotNullConstraint) column);
+		}
+		throw new IllegalArgumentException("Generator not yet implemeted for: " + column.getClass().getSimpleName());
 	}
 
-	private static String removeNotNullConstraint(Table table) {
-		if (table.getColumns().size() > 1) {
-			throw new UnsupportedOperationException(
-					"I was not taught how to remove multiple not null constraints at once");
-		}
+	private static String removeNotNullConstraint(RemoveNotNullConstraint constraint) {
 		String removeNotNullConstraint = XmlParts.getRemoveNotNullConstraint();
-		removeNotNullConstraint = XmlBuilder.replaceTableName(removeNotNullConstraint, table);
-		removeNotNullConstraint = XmlBuilder.replaceTableNameLowerCase(removeNotNullConstraint, table);
-		removeNotNullConstraint = XmlBuilder.replaceColumnName(removeNotNullConstraint, table.getColumns().get(0));
-		removeNotNullConstraint = XmlBuilder.replaceColumnNameUpperCase(removeNotNullConstraint,
-				table.getColumns().get(0));
-		removeNotNullConstraint = XmlBuilder.replaceColumnDataType(removeNotNullConstraint, table.getColumns().get(0));
+		removeNotNullConstraint = XmlBuilder.replaceTableName(removeNotNullConstraint, constraint.getTableName());
+		removeNotNullConstraint = XmlBuilder.replaceColumnName(removeNotNullConstraint, constraint);
+		removeNotNullConstraint = XmlBuilder.replaceColumnDataType(removeNotNullConstraint, constraint);
 		return removeNotNullConstraint;
 	}
 
-	private static String addColumn(Column column) {
+	private static String addColumn(AddColumn column) {
 		String addColumn = "";
 		addColumn = addColumnBase(column);
 		addColumn = handleConstraints(column, addColumn);
 		addColumn = handleIndex(column, addColumn);
 
-		addColumn = XmlBuilder.replaceTableName(addColumn, column.getTable());
+		addColumn = XmlBuilder.replaceTableName(addColumn, column.getTableName());
 		addColumn = XmlBuilder.replaceColumnName(addColumn, column);
 		addColumn = XmlBuilder.replaceColumnDataType(addColumn, column);
 		return addColumn;
 	}
 
 	/**
-	 * Boolean has different data types across different databases
+	 * Boolean has different data types for different databases
 	 */
-	private static String addColumnBase(Column column) {
+	private static String addColumnBase(AddColumn column) {
 		if (column.isTypeBoolean()) {
 			return addBooleanColumnBase(column);
 		}
 		return XmlParts.getAddColumn();
 	}
 
-	private static String addBooleanColumnBase(Column column) {
+	private static String addBooleanColumnBase(AddColumn column) {
 		String addColumn = "";
-		if (column.getTable().isForOracle() || column.getTable().isForMssql()) {
+		if (column.isForOracle() || column.isForMssql()) {
 			addColumn = XmlParts.getAddColumnBooleanOracleMssql();
 		}
-		if (column.getTable().isForPostgreSql()) {
+		if (column.isForPostgreSql()) {
 			addColumn += XmlParts.getAddColumnBooleanPostgre();
 		}
 		return addColumn;
 	}
 
-	private static String handleIndex(Column column, String addColumn) {
+	private static String handleIndex(AddColumn column, String addColumn) {
 		if (column.hasIndex()) {
 			if (column.isForMssql() || column.isForPostgreSql()) {
 				addColumn += XmlParts.getColumnIndexMssqlPostgre();
@@ -102,7 +99,7 @@ public class Generator {
 		return addColumn;
 	}
 
-	private static String handleConstraints(Column column, String addColumn) {
+	private static String handleConstraints(AddColumn column, String addColumn) {
 		if (column.hasConstrains()) {
 			addColumn = XmlBuilder.addColumnConstraints(addColumn);
 			addColumn = handleForeignKey(column, addColumn);
@@ -113,12 +110,12 @@ public class Generator {
 		return addColumn;
 	}
 
-	private static String handleNullable(Column column, String addColumn) {
+	private static String handleNullable(AddColumn column, String addColumn) {
 		addColumn = XmlBuilder.replaceColumnNullable(addColumn, column);
 		return addColumn;
 	}
 
-	private static String handleForeignKey(Column column, String addColumn) {
+	private static String handleForeignKey(AddColumn column, String addColumn) {
 		if (column.hasForeignKey()) {
 			addColumn = XmlBuilder.addColumnConstraintsForeignKey(addColumn);
 			addColumn = XmlBuilder.replaceColumnForeignKeyName(addColumn, column);
@@ -133,12 +130,10 @@ public class Generator {
 	private static String createTable(Table table) {
 		String createTable = "";
 		createTable = handleTable(table, createTable);
-		createTable = XmlBuilder.replaceTableName(createTable, table);
+		createTable = XmlBuilder.replaceTableName(createTable, table.getName());
 		createTable = XmlBuilder.replaceColumnPrimaryKeyName(createTable, table);
 		createTable = XmlBuilder.replaceConstrainPrimaryKeyName(createTable, table);
 		createTable = XmlBuilder.replaceSequenceName(createTable, table);
-
-		createTable = addColumns(table.getColumns(), createTable);
 
 		return createTable;
 	}

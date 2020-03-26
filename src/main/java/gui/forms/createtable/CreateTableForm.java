@@ -20,10 +20,8 @@ import gui.utils.LBJFormUtils;
 
 /**
  * Form for creating table. You can choose table name, primary key name, primary
- * key constraint name, for which databses this table should be (currently
- * supported databases are Oracle, PostgreSQL and MSSQL) and sequence name. As a
- * next step you can go to {@link AddColumnForm} in which you can add more
- * columns.
+ * key constraint name and sequence name. As a next step you can go to
+ * {@link AddColumnForm} in which you can add more columns.
  */
 public class CreateTableForm extends LBJEntityForm<Table> {
 
@@ -86,7 +84,6 @@ public class CreateTableForm extends LBJEntityForm<Table> {
 
 	@Override
 	public void addButtonsToContent() {
-		LBJFormUtils.addEmptySpace(getContent());
 		LBJFormUtils.addBackButton(getContent(), getPreviousForm());
 		LBJFormUtils.addGoToAddColumnFormButton(this);
 	}

@@ -2,36 +2,32 @@ package domain;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class Column implements Entity {
+public class Column extends AbstractEntity implements AddColumn, RemoveNotNullConstraint {
 
-	private Table table;
 	private String name;
-	private String indexName;
-	private boolean index;
-	private ForeignKey foreignKey;
-	private boolean nullable;
+	private String tableName;
+	private boolean isNullable;
 	private String dataType;
+	private boolean hasIndex;
+	private String indexName;
+	private ForeignKey foreignKey;
+	private ColumnOperation operation;
 
-	public Column(String name, String indexName, ForeignKey foreignKey, boolean nullable, String dataType) {
+	public Column(String name, ColumnOperation operation) {
+		isNullable = true;
 		this.name = name;
-		this.index = !StringUtils.isBlank(indexName);
-		this.indexName = indexName;
-		setForeignKey(foreignKey);
-		this.nullable = nullable;
-		this.dataType = dataType;
+		setForDatabases(ForDatabases.forAll());
+		this.operation = operation;
 	}
 
-	public Column(String name) {
-		nullable = true;
-		this.name = name;
+	@Override
+	public String getTableName() {
+		return tableName;
 	}
 
-	public Table getTable() {
-		return table;
-	}
-
-	public void setTable(Table table) {
-		this.table = table;
+	@Override
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
 	}
 
 	public String getName() {
@@ -46,14 +42,17 @@ public class Column implements Entity {
 		return indexName;
 	}
 
+	@Override
 	public void setIndexName(String indexName) {
 		this.indexName = indexName;
 	}
 
+	@Override
 	public ForeignKey getForeignKey() {
 		return foreignKey;
 	}
 
+	@Override
 	public void setForeignKey(ForeignKey foreignKey) {
 		if (foreignKey != null) {
 			foreignKey.setColumn(this);
@@ -61,59 +60,64 @@ public class Column implements Entity {
 		}
 	}
 
+	@Override
 	public boolean isNullable() {
-		return nullable;
+		return isNullable;
 	}
 
+	@Override
 	public void setNullable(boolean nullable) {
-		this.nullable = nullable;
+		this.isNullable = nullable;
 	}
 
+	@Override
 	public boolean hasForeignKey() {
 		return foreignKey != null;
 	}
 
+	@Override
 	public boolean hasIndex() {
-		return index;
+		return hasIndex;
 	}
 
+	@Override
 	public void setIndex(boolean index) {
-		this.index = index;
+		this.hasIndex = index;
 	}
 
+	@Override
 	public String getDataType() {
 		return dataType;
 	}
 
+	@Override
 	public void setDataType(String dataType) {
 		this.dataType = dataType;
 	}
 
-	/**
-	 * @return true if column is NOT nullable or has foreign key to a different
-	 *         table
-	 */
+	@Override
 	public boolean hasConstrains() {
 		return !isNullable() || hasForeignKey();
 	}
 
-	/**
-	 * @return true if and only if type is "boolean" (case is ignored)
-	 */
+	@Override
 	public boolean isTypeBoolean() {
 		return StringUtils.equalsIgnoreCase(dataType, "boolean");
 	}
 
-	public boolean isForOracle() {
-		return getTable().isForOracle();
+	@Override
+	public ColumnOperation getOperation() {
+		return operation;
 	}
 
-	public boolean isForMssql() {
-		return getTable().isForMssql();
+	@Override
+	public boolean isAddColumn() {
+		return getOperation() == ColumnOperation.ADD_COLUMN;
 	}
 
-	public boolean isForPostgreSql() {
-		return getTable().isForPostgreSql();
+	@Override
+	public boolean isRemoveNotNullConstraint() {
+		return getOperation() == ColumnOperation.REMOVE_NOT_NULL_CONSTRAINT;
 	}
 
 }

@@ -4,7 +4,9 @@ import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
 import constants.NamingConventions;
+import domain.AddColumn;
 import domain.Column;
+import domain.ColumnOperation;
 import domain.ForeignKey;
 import gui.builders.LBJCheckBoxBuilder;
 import gui.builders.LBJTextBoxBuilder;
@@ -30,7 +32,7 @@ import gui.utils.LBJFormUtils;
  * and if it does or does not have a foreign key.
  * 
  */
-public class AddColumnForm extends LBJEntityForm<Column> {
+public class AddColumnForm extends LBJEntityForm<AddColumn> {
 
 	private LBJTextBox tableNameTextBox;
 	private LBJTextBox columnNameTextBox;
@@ -51,6 +53,7 @@ public class AddColumnForm extends LBJEntityForm<Column> {
 	public void initializeComponents() {
 		tableNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, this).required().addLengthValidator()
 				.addCaseUpdaterAndValidator(NamingConventions.TABLE_NAME_CASE).build();
+		setTableNameIfPossible();
 
 		columnNameTextBox = new LBJTextBoxBuilder(Labels.COLUMN_NAME, this).required().addLengthValidator()
 				.addCaseUpdaterAndValidator(NamingConventions.COLUMN_NAME_CASE).build();
@@ -75,6 +78,21 @@ public class AddColumnForm extends LBJEntityForm<Column> {
 		foreignKeyNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY_NAME, this).required()
 				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.FOREIGN_KEY_NAME_CASE).disabled()
 				.build();
+	}
+
+	/**
+	 * If previousForm has Table name textBox, this method will copy that value into
+	 * this form's table name
+	 */
+	private void setTableNameIfPossible() {
+		if (getPreviousForm() instanceof CreateTableForm) {
+			tableNameTextBox.setValue(((CreateTableForm) getPreviousForm()).getTableNameTextBox().getValue());
+			return;
+		}
+		if (getPreviousForm() instanceof AddColumnForm) {
+			tableNameTextBox.setValue(((AddColumnForm) getPreviousForm()).getTableNameTextBox().getValue());
+			return;
+		}
 	}
 
 	@Override
@@ -104,15 +122,14 @@ public class AddColumnForm extends LBJEntityForm<Column> {
 
 	@Override
 	public void addButtonsToContent() {
-		LBJFormUtils.addEmptySpace(getContent());
 		LBJFormUtils.addBackButton(getContent(), getPreviousForm());
 		LBJFormUtils.addGoToAddColumnFormButton(this);
 		LBJFormUtils.addGenerateButton(this);
 	}
 
 	@Override
-	public Column convert() {
-		Column column = new Column(columnNameTextBox.getValue());
+	public AddColumn convert() {
+		AddColumn column = new Column(columnNameTextBox.getValue(), ColumnOperation.ADD_COLUMN);
 		column.setDataType(dataTypeTextBox.getValue());
 		column.setNullable(nullableCheckBox.getValue());
 		column.setIndex(indexCheckBox.getValue());

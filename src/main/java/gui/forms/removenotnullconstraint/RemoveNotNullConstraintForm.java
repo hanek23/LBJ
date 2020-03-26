@@ -5,13 +5,15 @@ import com.googlecode.lanterna.gui2.Window;
 import constants.Labels;
 import constants.NamingConventions;
 import domain.Column;
+import domain.ColumnOperation;
+import domain.RemoveNotNullConstraint;
 import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
 import gui.utils.LBJFormUtils;
 
-public class RemoveNotNullConstraintForm extends LBJEntityForm<Column> {
+public class RemoveNotNullConstraintForm extends LBJEntityForm<RemoveNotNullConstraint> {
 
 	private LBJTextBox tableNameTextBox;
 	private LBJTextBox columnNameTextBox;
@@ -50,15 +52,17 @@ public class RemoveNotNullConstraintForm extends LBJEntityForm<Column> {
 
 	@Override
 	public void addButtonsToContent() {
-		LBJFormUtils.addEmptySpace(getContent());
 		LBJFormUtils.addBackButton(getContent(), getPreviousForm());
 		LBJFormUtils.addGenerateButton(this);
 	}
 
 	@Override
-	public Column convert() {
-		// TODO Auto-generated method stub
-		return null;
+	public RemoveNotNullConstraint convert() {
+		RemoveNotNullConstraint c = new Column(getColumnNameTextBox().getValue(),
+				ColumnOperation.REMOVE_NOT_NULL_CONSTRAINT);
+		c.setDataType(dataTypeTextBox.getValue());
+		c.setTableName(tableNameTextBox.getValue());
+		return c;
 	}
 
 	@Override

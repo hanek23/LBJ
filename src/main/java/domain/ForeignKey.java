@@ -2,8 +2,8 @@ package domain;
 
 public class ForeignKey {
 
-	private String name;
 	private Column column;
+	private String name;
 	private String referencedTable;
 	private String referencedColumn;
 

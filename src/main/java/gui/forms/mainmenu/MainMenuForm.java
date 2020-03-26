@@ -20,8 +20,10 @@ import com.googlecode.lanterna.gui2.WindowListener;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+import com.googlecode.lanterna.terminal.MouseCaptureMode;
 
 import constants.Labels;
+import constants.Settings;
 import gui.builders.LBJPlainLabelBuilder;
 import gui.components.LBJPlainLabel;
 import gui.forms.LBJForm;
@@ -111,7 +113,8 @@ public class MainMenuForm extends LBJForm {
 	}
 
 	private void startTerminal() {
-		try (Screen screen = new DefaultTerminalFactory().createScreen()) {
+		try (Screen screen = new DefaultTerminalFactory().setMouseCaptureMode(MouseCaptureMode.CLICK)
+				.setInitialTerminalSize(Settings.TERMINAL_SIZE).createScreen()) {
 			screen.startScreen();
 			WindowBasedTextGUI gui = new MultiWindowTextGUI(screen);
 			getWindow().addWindowListener(new WindowListener() {

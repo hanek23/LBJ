@@ -3,27 +3,24 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Table implements Entity {
+public class Table extends AbstractEntity {
 
 	private String name;
 	private String primaryKeyColumnName;
 	private String primaryKeyContrainName;
 	private String sequenceName;
 	private List<Column> columns;
-	private boolean forOracle;
-	private boolean forMssql;
-	private boolean forPostgreSql;
 
 	public Table(String name, String primaryKeyColumnName, String primaryKeyContrainName) {
 		this.name = name;
 		this.primaryKeyColumnName = primaryKeyColumnName;
 		this.primaryKeyContrainName = primaryKeyContrainName;
-		setForAllDatabases();
+		setForDatabases(ForDatabases.forAll());
 	}
 
 	public Table(String name) {
 		this.name = name;
-		setForAllDatabases();
+		setForDatabases(ForDatabases.forAll());
 	}
 
 	/**
@@ -32,15 +29,6 @@ public class Table implements Entity {
 	 */
 	public static Table emptyTable() {
 		return new Table("");
-	}
-
-	/**
-	 * Sets forOracle, forMssql and forPostgre to TRUE
-	 */
-	public void setForAllDatabases() {
-		forOracle = true;
-		forMssql = true;
-		forPostgreSql = true;
 	}
 
 	public String getName() {
@@ -62,7 +50,7 @@ public class Table implements Entity {
 		if (column == null) {
 			return false;
 		}
-		column.setTable(this);
+		column.setTableName(name);
 		return getColumns().add(column);
 	}
 
@@ -87,30 +75,6 @@ public class Table implements Entity {
 
 	public void setPrimaryKeyContrainName(String primaryKeyContrainName) {
 		this.primaryKeyContrainName = primaryKeyContrainName;
-	}
-
-	public boolean isForOracle() {
-		return forOracle;
-	}
-
-	public void setForOracle(boolean forOracle) {
-		this.forOracle = forOracle;
-	}
-
-	public boolean isForMssql() {
-		return forMssql;
-	}
-
-	public void setForMssql(boolean forMssql) {
-		this.forMssql = forMssql;
-	}
-
-	public boolean isForPostgreSql() {
-		return forPostgreSql;
-	}
-
-	public void setForPostgreSql(boolean forPostgreSql) {
-		this.forPostgreSql = forPostgreSql;
 	}
 
 	public String getSequenceName() {
