@@ -8,7 +8,7 @@ import domain.ColumnOperation;
 import domain.Entity;
 import domain.ForeignKey;
 
-public class TestSupplier1 extends AbstractEntitiesSupplier {
+public class EntitiesSupplier1 extends AbstractEntitiesSupplier {
 
 	private Column createColumnAction() {
 		Column column = new Column("nderaction", ColumnOperation.ADD_COLUMN);

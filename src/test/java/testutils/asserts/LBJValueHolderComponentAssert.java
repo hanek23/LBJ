@@ -55,6 +55,13 @@ public class LBJValueHolderComponentAssert extends LBJLabeledComponentAssert<LBJ
 		return this;
 	}
 
+	public LBJValueHolderComponentAssert isNumbersOnly() {
+		isNotNull();
+		isForClass(String.class);
+		hasValidator(LBJValidatorSupplier.getNumbersOnlyValidator());
+		return this;
+	}
+
 	public LBJValueHolderComponentAssert isBlank() {
 		isNotNull();
 		isForClass(String.class);

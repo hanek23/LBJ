@@ -15,6 +15,7 @@ import constants.Labels;
 import constants.Settings;
 import domain.Entity;
 import generator.Generator;
+import generator.GeneratorSettings;
 import gui.builders.LBJCheckBoxBuilder;
 import gui.builders.LBJPlainLabelBuilder;
 import gui.builders.LBJTextBoxBuilder;
@@ -23,13 +24,15 @@ import gui.components.LBJPlainLabel;
 import gui.components.LBJTextBox;
 import gui.forms.LBJForm;
 import gui.forms.LBJWizardForm;
+import gui.suppliers.LBJUpdaterSupplier;
+import gui.suppliers.LBJValidatorSupplier;
 import gui.utils.LBJFormUtils;
 import transformers.FormToEntityTransformer;
 
 public class GenerateForm extends LBJWizardForm {
 
 	private LBJTextBox authorTextBox;
-	private LBJCheckBox onlyChangesetsCheckBox;
+	private LBJCheckBox onlyChangeSetsCheckBox;
 	private LBJTextBox startingIdTextBox;
 	private LBJPlainLabel databasesLabel;
 	private LBJCheckBox oracleCheckBox;
@@ -45,19 +48,19 @@ public class GenerateForm extends LBJWizardForm {
 
 	@Override
 	public void initializeComponents() {
-		authorTextBox = new LBJTextBoxBuilder(Labels.GENERATE_AUTHOR, this).required().build();
+		authorTextBox = new LBJTextBoxBuilder(Labels.GENERATE_FORM_AUTHOR, this).required().build();
 
-		onlyChangesetsCheckBox = new LBJCheckBoxBuilder(Labels.GENERATE_FORM_ONLY_CHANGESETS, this).build();
+		onlyChangeSetsCheckBox = new LBJCheckBoxBuilder(Labels.GENERATE_FORM_ONLY_CHANGESETS, this).build();
 
 		startingIdTextBox = new LBJTextBoxBuilder(Labels.GENERATE_FORM_CHANGESETS_STARTING_ID, this).disabled()
-				.required().build();
+				.numbersOnly().required().build();
 
-		databasesLabel = new LBJPlainLabelBuilder(Labels.CREATE_TABLE_DATABASES, this).build();
-		oracleCheckBox = new LBJCheckBoxBuilder(Labels.CREATE_TABLE_DATABASES_ORACLE, this).checked().build();
-		mssqlCheckBox = new LBJCheckBoxBuilder(Labels.CREATE_TABLE_DATABASES_MSSQL, this).checked().build();
-		postgreCheckBox = new LBJCheckBoxBuilder(Labels.CREATE_TABLE_DATABASES_POSTGRESQL, this).checked().build();
+		databasesLabel = new LBJPlainLabelBuilder(Labels.GENERATE_FORM_DATABASES, this).build();
+		oracleCheckBox = new LBJCheckBoxBuilder(Labels.GENERATE_FORM_DATABASES_ORACLE, this).checked().build();
+		mssqlCheckBox = new LBJCheckBoxBuilder(Labels.GENERATE_FORM_DATABASES_MSSQL, this).checked().build();
+		postgreCheckBox = new LBJCheckBoxBuilder(Labels.GENERATE_FORM_DATABASES_POSTGRESQL, this).checked().build();
 
-		generatedXmlTextBox = new LBJTextBoxBuilder(Labels.GENERATE_GENERATED_XML, this).build();
+		generatedXmlTextBox = new LBJTextBoxBuilder(Labels.GENERATE_FORM_GENERATED_XML, this).build();
 
 		copyToClipboardButton = new Button(Labels.BUTTON_COPY_TO_CLIPBOARD);
 		copyToClipboardButton.setEnabled(false);
@@ -80,8 +83,7 @@ public class GenerateForm extends LBJWizardForm {
 					return;
 				}
 				List<Entity> entities = FormToEntityTransformer.transform(GenerateForm.this);
-				generatedXmlTextBox.setValue(Generator.generate(entities, authorTextBox.getValue()));
-				// generatedXmlTextBox.setValue(GenerateForm.mockTable());
+				generatedXmlTextBox.setValue(Generator.generate(entities, createGeneratorSettings()));
 				generatedXmlTextBox.getTextBox().setPreferredSize(new TerminalSize(Settings.GUI_NUMBER_OF_COLUMNS, 10));
 				copyToClipboardButton.setEnabled(true);
 			}
@@ -91,20 +93,20 @@ public class GenerateForm extends LBJWizardForm {
 
 	@Override
 	public void addFormUpdaters() {
-		// no updaters
+		addUpdater(LBJUpdaterSupplier.getGenerateFormStartingIdUpdater());
 
 	}
 
 	@Override
 	public void addFormValidators() {
-		// no validators
+		addValidator(LBJValidatorSupplier.getGenerateFormDatabasesValidator());
 
 	}
 
 	@Override
 	public void addComponentsToContent() {
 		LBJFormUtils.addComponentToContent(getContent(), authorTextBox);
-		LBJFormUtils.addComponentToContent(getContent(), onlyChangesetsCheckBox);
+		LBJFormUtils.addComponentToContent(getContent(), onlyChangeSetsCheckBox);
 		LBJFormUtils.addComponentToContent(getContent(), startingIdTextBox);
 		LBJFormUtils.addComponentToContent(getContent(), databasesLabel);
 		LBJFormUtils.addComponentToContent(getContent(), oracleCheckBox);
@@ -126,6 +128,15 @@ public class GenerateForm extends LBJWizardForm {
 		return Labels.GENERATE_FORM;
 	}
 
+	private GeneratorSettings createGeneratorSettings() {
+		GeneratorSettings settings = new GeneratorSettings();
+		if (onlyChangeSetsCheckBox.isChecked()) {
+			settings.setOnlyChangeSets(true);
+			settings.setStartingId(Integer.parseInt(startingIdTextBox.getValue()));
+		}
+		return settings;
+	}
+
 	public LBJTextBox getAuthorTextBox() {
 		return authorTextBox;
 	}
@@ -134,40 +145,8 @@ public class GenerateForm extends LBJWizardForm {
 		return generatedXmlTextBox;
 	}
 
-	protected static String mockTable() {
-		return "<databaseChangeLog xmlns=\"http://www.liquibase.org/xml/ns/dbchangelog\"\n"
-				+ "	xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
-				+ "	xsi:schemaLocation=\"http://www.liquibase.org/xml/ns/dbchangelog\n"
-				+ "                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd\"\n"
-				+ "	objectQuotingStrategy=\"QUOTE_ONLY_RESERVED_WORDS\">\n"
-				+ "	<changeSet id=\"1\" author=\"hanek23\">\n" + "		<preConditions onFail=\"MARK_RAN\">\n"
-				+ "			<not>\n"
-				+ "				<columnExists tableName=\"NDER_REFERENCE\" columnName=\"nderaction\"/>\n"
-				+ "			</not>\n" + "		</preConditions>\n"
-				+ "		<comment>Add column nderaction to NDER_REFERENCE</comment>\n"
-				+ "		<addColumn tableName=\"NDER_REFERENCE\">\n"
-				+ "			<column name=\"nderaction\" type=\"integer\">\n"
-				+ "				<constraints foreignKeyName=\"F_NDER_REF_ID_NDER_ACTION\" referencedTableName=\"NDER_ACTION\" referencedColumnNames=\"id_nder_action\"/>\n"
-				+ "			</column>\n" + "		</addColumn>\n" + "	</changeSet>\n"
-				+ "	<changeSet id=\"2\" author=\"hanek23\" dbms=\"mssql,postgresql\">\n"
-				+ "		<preConditions onFail=\"MARK_RAN\">\n" + "			<not>\n"
-				+ "				<indexExists indexName=\"I_NDER_REFERENCE_NACTION\"/>\n" + "			</not>\n"
-				+ "		</preConditions>\n"
-				+ "		<comment>Create index I_NDER_REFERENCE_NACTION if it doesn't exist.</comment>\n"
-				+ "		<createIndex tableName=\"NDER_REFERENCE\" indexName=\"I_NDER_REFERENCE_NACTION\">\n"
-				+ "			<column name=\"nderaction\"/>\n" + "		</createIndex>\n" + "	</changeSet>\n"
-				+ "	<changeSet id=\"3\" author=\"hanek23\" dbms=\"oracle\">\n"
-				+ "		<preConditions onFail=\"MARK_RAN\">\n"
-				+ "			<sqlCheck expectedResult=\"0\">SELECT count(1) FROM user_indexes WHERE table_name = 'NDER_REFERENCE' and index_name='I_NDER_REFERENCE_NACTION'</sqlCheck>\n"
-				+ "		</preConditions>\n"
-				+ "		<comment>Create index I_NDER_REFERENCE_NACTION if it doesn't exist.</comment>\n"
-				+ "		<createIndex tableName=\"NDER_REFERENCE\" indexName=\"I_NDER_REFERENCE_NACTION\">\n"
-				+ "			<column name=\"nderaction\"/>\n" + "		</createIndex>\n" + "	</changeSet>\n"
-				+ "</databaseChangeLog>";
-	}
-
 	public LBJCheckBox getOnlyChangesetsCheckBox() {
-		return onlyChangesetsCheckBox;
+		return onlyChangeSetsCheckBox;
 	}
 
 	public LBJTextBox getStartingIdTextBox() {

@@ -8,7 +8,7 @@ import domain.ColumnOperation;
 import domain.Entity;
 import domain.RemoveNotNullConstraint;
 
-public class TestSupplier3 extends AbstractEntitiesSupplier {
+public class EntitiesSupplier3 extends AbstractEntitiesSupplier {
 
 	@Override
 	public List<Entity> getEntities() {

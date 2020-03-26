@@ -6,6 +6,7 @@ import gui.forms.addcolumn.AddColumnForeignKeyUpdater;
 import gui.forms.addcolumn.AddColumnIndexNameUpdater;
 import gui.forms.createtable.CreateTableFormPrimaryKeyUpdater;
 import gui.forms.createtable.CreateTableFormSequenceNameUpdater;
+import gui.forms.generate.GenerateFormStartingIdUpdater;
 import gui.updaters.LBJValueUpdater;
 import gui.updaters.shared.LBJLowerCaseUpdater;
 import gui.updaters.shared.LBJUpperCaseUpdater;
@@ -22,6 +23,9 @@ public class LBJUpdaterSupplier {
 	// ADD COLUMN
 	private static final AddColumnForeignKeyUpdater ADD_COLUMN_FOREIGN_KEY_UPDATER = new AddColumnForeignKeyUpdater();
 	private static final AddColumnIndexNameUpdater ADD_COLUMN_INDEX_NAME_UPDATER = new AddColumnIndexNameUpdater();
+
+	// GENERATE
+	private static final GenerateFormStartingIdUpdater GENERATE_FORM_STARTING_ID_UPDATER = new GenerateFormStartingIdUpdater();
 
 	// SHARED
 	private static final LBJLowerCaseUpdater LOWER_CASE_UPDATER = new LBJLowerCaseUpdater();
@@ -60,6 +64,10 @@ public class LBJUpdaterSupplier {
 
 	public static CreateTableFormSequenceNameUpdater getCreateTableSequenceNameUpdater() {
 		return CREATE_TABLE_SEQUENCE_NAME_UPDATER;
+	}
+
+	public static GenerateFormStartingIdUpdater getGenerateFormStartingIdUpdater() {
+		return GENERATE_FORM_STARTING_ID_UPDATER;
 	}
 
 	public static LBJLowerCaseUpdater getLowerCaseUpdater() {

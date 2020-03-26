@@ -6,6 +6,7 @@ import com.googlecode.lanterna.gui2.Interactable;
 import gui.components.LBJValueHolderComponent;
 import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.createtable.CreateTableForm;
+import gui.forms.generate.GenerateForm;
 
 public class LBJTestUtils {
 
@@ -27,6 +28,10 @@ public class LBJTestUtils {
 
 	public static AddColumnForm getAddColumnForm() {
 		return new AddColumnForm(new BasicWindow(), new LBJMockForm());
+	}
+
+	public static GenerateForm getGenerateForm() {
+		return new GenerateForm(new BasicWindow(), new LBJMockForm());
 	}
 
 }

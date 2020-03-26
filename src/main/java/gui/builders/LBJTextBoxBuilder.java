@@ -13,6 +13,7 @@ import gui.updaters.shared.LBJLowerCaseUpdater;
 import gui.updaters.shared.LBJUpperCaseUpdater;
 import gui.validators.LBJValueValidator;
 import gui.validators.shared.LBJLowerCaseValidator;
+import gui.validators.shared.LBJNumbersOnlyValidator;
 import gui.validators.shared.LBJStringLengthValidator;
 import gui.validators.shared.LBJStringRequiredValidator;
 import gui.validators.shared.LBJUpperCaseValidator;
@@ -77,6 +78,14 @@ public class LBJTextBoxBuilder {
 		}
 		addUpdater(LBJUpdaterSupplier.caseUpdater(letterCase));
 		return addValidator(LBJValidatorSupplier.getCaseValidator(letterCase));
+	}
+
+	/**
+	 * Adds {@link LBJNumbersOnlyValidator}
+	 */
+	public LBJTextBoxBuilder numbersOnly() {
+		addValidator(LBJValidatorSupplier.getNumbersOnlyValidator());
+		return this;
 	}
 
 	public LBJTextBox build() {

@@ -15,13 +15,13 @@ public class LBJPlainLabelTest {
 
 	@Test
 	public void testBuilder() {
-		LBJPlainLabel tested = new LBJPlainLabelBuilder(Labels.CREATE_TABLE_DATABASES, new LBJMockForm()).build();
-		assertThat(tested).hasLabel(Labels.CREATE_TABLE_DATABASES);
+		LBJPlainLabel tested = new LBJPlainLabelBuilder(Labels.GENERATE_FORM_DATABASES, new LBJMockForm()).build();
+		assertThat(tested).hasLabel(Labels.GENERATE_FORM_DATABASES);
 	}
 
 	@Test
 	public void testSetLabelColorByValidity() {
-		LBJPlainLabel tested = new LBJPlainLabelBuilder(Labels.CREATE_TABLE_DATABASES, new LBJMockForm()).build();
+		LBJPlainLabel tested = new LBJPlainLabelBuilder(Labels.GENERATE_FORM_DATABASES, new LBJMockForm()).build();
 		assertThat(tested).isValid();
 
 		// There

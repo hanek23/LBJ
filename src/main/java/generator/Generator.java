@@ -20,7 +20,7 @@ public class Generator {
 		// only static methods
 	}
 
-	public static String generate(List<Entity> entities, String author) {
+	public static String generate(List<Entity> entities, GeneratorSettings settings) {
 		String changesets = "";
 		for (Entity entity : entities) {
 			if (entity instanceof Table) {
@@ -31,7 +31,7 @@ public class Generator {
 				changesets += createColumnChangeset((GeneralColumn) entity);
 			}
 		}
-		changesets = XmlBuilder.replaceAuthor(changesets, author);
+		changesets = XmlBuilder.replaceAuthor(changesets, settings.getAuthor());
 		return XmlBuilder.toChangelog(changesets);
 	}
 

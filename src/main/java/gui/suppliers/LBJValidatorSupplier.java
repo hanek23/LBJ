@@ -1,13 +1,14 @@
 package gui.suppliers;
 
 import constants.NamingConventions.LetterCase;
-import gui.forms.createtable.CreateTableFormDatabasesValidator;
+import gui.forms.generate.GenerateFormDatabasesValidator;
 import gui.updaters.LBJValueUpdater;
 import gui.updaters.shared.LBJUpperCaseUpdater;
 import gui.validators.LBJValueValidator;
 import gui.validators.shared.LBJLowerCaseValidator;
-import gui.validators.shared.LBJStringRequiredValidator;
+import gui.validators.shared.LBJNumbersOnlyValidator;
 import gui.validators.shared.LBJStringLengthValidator;
+import gui.validators.shared.LBJStringRequiredValidator;
 import gui.validators.shared.LBJUpperCaseValidator;
 
 /**
@@ -16,13 +17,14 @@ import gui.validators.shared.LBJUpperCaseValidator;
 public class LBJValidatorSupplier {
 
 	// CREATE TABLE
-	private static final CreateTableFormDatabasesValidator CREATE_TABLE_DATABASES_VALIDATOR = new CreateTableFormDatabasesValidator();
+	private static final GenerateFormDatabasesValidator CREATE_TABLE_DATABASES_VALIDATOR = new GenerateFormDatabasesValidator();
 
 	// SHARED
 	private static final LBJLowerCaseValidator LOWER_CASE_VALIDATOR = new LBJLowerCaseValidator();
 	private static final LBJUpperCaseValidator UPPER_CASE_VALIDATOR = new LBJUpperCaseValidator();
 	private static final LBJStringRequiredValidator STRING_REQUIRED_VALIDATOR = new LBJStringRequiredValidator();
 	private static final LBJStringLengthValidator STRING_LENGTH_VALIDATOR = new LBJStringLengthValidator();
+	private static final LBJNumbersOnlyValidator STRING_NUMBER_ONLY_VALIDATOR = new LBJNumbersOnlyValidator();
 	private static final LBJValueValidator<String> NO_VALIDATOR = new LBJValueValidator<String>() {
 		@Override
 		public boolean isValid(String value) {
@@ -68,8 +70,12 @@ public class LBJValidatorSupplier {
 		return UPPER_CASE_VALIDATOR;
 	}
 
-	public static CreateTableFormDatabasesValidator getCreateTableDatabasesValidator() {
+	public static GenerateFormDatabasesValidator getGenerateFormDatabasesValidator() {
 		return CREATE_TABLE_DATABASES_VALIDATOR;
+	}
+
+	public static LBJNumbersOnlyValidator getNumbersOnlyValidator() {
+		return STRING_NUMBER_ONLY_VALIDATOR;
 	}
 
 }

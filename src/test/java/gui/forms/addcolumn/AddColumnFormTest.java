@@ -13,7 +13,7 @@ import testutils.LBJTestUtils;
 public class AddColumnFormTest {
 
 	@Test
-	public void testInitializeComponents() {
+	public void testInitialize() {
 		AddColumnForm form = LBJTestUtils.getAddColumnForm();
 
 		// Has all components

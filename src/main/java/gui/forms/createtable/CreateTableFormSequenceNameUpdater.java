@@ -1,7 +1,6 @@
 package gui.forms.createtable;
 
 import constants.NamingConventions;
-import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import gui.updaters.LBJFormUpdater;
 
@@ -14,18 +13,12 @@ public class CreateTableFormSequenceNameUpdater implements LBJFormUpdater<Create
 	@Override
 	public void update(CreateTableForm form) {
 		LBJTextBox tableName = form.getTableNameTextBox();
-		LBJCheckBox oracle = form.getOracleCheckBox();
-		LBJCheckBox postgre = form.getPostgreCheckBox();
 		LBJTextBox sequenceName = form.getSequenceNameTextBox();
 
-		if (oracle.isChecked() || postgre.isChecked()) {
-			if (tableName.isFocused()) {
-				sequenceName.setValue(NamingConventions.SEQUENCE_NAME_DEFAULT_VALUE + tableName.getValue());
-			}
-			sequenceName.setEnabled(true);
-		} else {
-			sequenceName.setValue("");
-			sequenceName.setEnabled(false);
+		if (tableName.isFocused()) {
+			// Update only when table name is focused so that user can still choose whatever
+			// name he/she wishes
+			sequenceName.setValue(NamingConventions.SEQUENCE_NAME_DEFAULT_VALUE + tableName.getValue());
 		}
 	}
 

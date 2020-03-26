@@ -12,23 +12,15 @@ import testutils.LBJTestUtils;
 public class CreateTableFormTest {
 
 	@Test
-	public void testInitializeComponents() {
+	public void testInitialize() {
 		CreateTableForm form = LBJTestUtils.getCreateTableForm();
 
 		assertThat(form).hasName(Labels.TABLE_FORM);
 		assertThat(form).hasComponentWithName(Labels.TABLE_NAME);
 		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_PRIMARY_KEY_NAME);
 		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN);
-		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_DATABASES);
-		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_DATABASES_ORACLE);
-		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_DATABASES_MSSQL);
-		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_DATABASES_POSTGRESQL);
 		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_SEQUENCE_NAME);
 		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_SEQUENCE_NAME);
-
-		assertThat(form.getOracleCheckBox()).isChecked();
-		assertThat(form.getMssqlCheckBox()).isChecked();
-		assertThat(form.getPostgreCheckBox()).isChecked();
 
 		assertThat(form.getTableNameTextBox()).hasCaseValidator(NamingConventions.TABLE_NAME_CASE);
 		assertThat(form.getTableNameTextBox()).isRequired();

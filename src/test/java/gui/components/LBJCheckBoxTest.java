@@ -12,11 +12,11 @@ public class LBJCheckBoxTest {
 
 	@Test
 	public void testBuilder() {
-		LBJCheckBoxBuilder builder = new LBJCheckBoxBuilder(Labels.CREATE_TABLE_DATABASES_ORACLE, new LBJMockForm());
+		LBJCheckBoxBuilder builder = new LBJCheckBoxBuilder(Labels.GENERATE_FORM_DATABASES_ORACLE, new LBJMockForm());
 
 		assertThat(builder.build()).isNotChecked();
 		assertThat(builder.checked().build()).isChecked();
-		assertThat(builder.build()).hasLabel(Labels.CREATE_TABLE_DATABASES_ORACLE);
+		assertThat(builder.build()).hasLabel(Labels.GENERATE_FORM_DATABASES_ORACLE);
 	}
 
 }

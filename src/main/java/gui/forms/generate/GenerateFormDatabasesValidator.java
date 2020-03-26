@@ -1,20 +1,20 @@
-package gui.forms.createtable;
+package gui.forms.generate;
 
 import gui.components.LBJCheckBox;
 import gui.components.LBJPlainLabel;
 import gui.validators.LBJFormValidator;
 
 /**
- * Custom validator for {@link CreateTableForm} that validates that at least
- * one checkbox of databases (oracle, mssql, postgre) is checked.
+ * Custom validator for {@link GenerateForm} that validates that at least one
+ * checkbox of databases (oracle, mssql, postgre) is checked.
  */
-public class CreateTableFormDatabasesValidator implements LBJFormValidator<CreateTableForm> {
+public class GenerateFormDatabasesValidator implements LBJFormValidator<GenerateForm> {
 
 	/**
 	 * Validates that at least one database checkbox is checked.
 	 */
 	@Override
-	public boolean isValid(CreateTableForm form) {
+	public boolean isValid(GenerateForm form) {
 		LBJPlainLabel databases = form.getDatabasesLabel();
 		LBJCheckBox oracle = form.getOracleCheckBox();
 		LBJCheckBox postgre = form.getPostgreCheckBox();

@@ -1,4 +1,4 @@
-package gui.forms.createtable;
+package gui.forms.generate;
 
 import static testutils.asserts.LBJLabeledComponentAssert.assertThat;
 
@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 import gui.components.LBJPlainLabel;
 import testutils.LBJTestUtils;
 
-public class CreateTableFormDatabasesValidatorTest {
+public class GenerateFormDatabasesValidatorTest {
 
 	@Test
 	public void testIsValid() {
-		CreateTableForm form = LBJTestUtils.getCreateTableForm();
+		GenerateForm form = LBJTestUtils.getGenerateForm();
 		form.focus();
 		LBJPlainLabel databases = form.getDatabasesLabel();
 		assertThat(databases).isValid();

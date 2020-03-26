@@ -8,7 +8,7 @@ import domain.ColumnOperation;
 import domain.Entity;
 import domain.ForeignKey;
 
-public class TestSupplier2 extends AbstractEntitiesSupplier {
+public class EntitiesSupplier2 extends AbstractEntitiesSupplier {
 
 	private Column createColumnNotification() {
 		Column column = new Column("notification", ColumnOperation.ADD_COLUMN);

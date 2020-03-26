@@ -5,7 +5,6 @@ import static testutils.asserts.LBJValueHolderComponentAssert.assertThat;
 import org.junit.jupiter.api.Test;
 
 import constants.NamingConventions;
-import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import testutils.LBJTestUtils;
 
@@ -19,33 +18,30 @@ public class CreateTableFormSequenceNameUpdaterTest {
 		form.focus();
 
 		LBJTextBox tableName = form.getTableNameTextBox();
-		LBJCheckBox oracle = form.getOracleCheckBox();
-		LBJCheckBox postgre = form.getPostgreCheckBox();
 		LBJTextBox sequenceName = form.getSequenceNameTextBox();
 
 		assertThat(sequenceName).isEnabled();
 		assertThat(sequenceName).isBlank();
-		assertThat(oracle).isChecked();
-		assertThat(postgre).isChecked();
 
 		LBJTestUtils.focus(tableName);
 		tableName.setValue(TABLE_NAME);
 		form.update();
 
 		assertThat(sequenceName).isEqualToIgnoringCase(NamingConventions.SEQUENCE_NAME_DEFAULT_VALUE + TABLE_NAME);
-		oracle.unCheck();
+
+		tableName.setValue(TABLE_NAME + "c");
 		form.update();
 
-		assertThat(sequenceName).isEqualToIgnoringCase(NamingConventions.SEQUENCE_NAME_DEFAULT_VALUE + TABLE_NAME);
-		postgre.unCheck();
+		assertThat(sequenceName)
+				.isEqualToIgnoringCase(NamingConventions.SEQUENCE_NAME_DEFAULT_VALUE + TABLE_NAME + "c");
+
+		LBJTestUtils.focus(sequenceName);
+		sequenceName.setValue("MY SEQUENCE NAME");
 		form.update();
 
-		// If Oracle and Postgre are not checked sequence name should be disabled
-		assertThat(sequenceName).isNotEnabled();
-
-		oracle.check();
-		form.update();
-		assertThat(sequenceName).isEnabled();
+		// Only if table name is focused the value should be updated, so that user can
+		// choose whatever name he/she wishes
+		assertThat(sequenceName).isEqualToIgnoringCase("MY SEQUENCE NAME");
 	}
 
 }

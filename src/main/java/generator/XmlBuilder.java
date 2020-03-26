@@ -18,12 +18,16 @@ public class XmlBuilder {
 	 * puts all of them into changelog.
 	 */
 	public static String toChangelog(String changesets) {
-		int id = 1;
-		while (StringUtils.contains(changesets, XmlParts.REPLACE_ID)) {
-			changesets = replaceId(changesets, id);
-			id++;
-		}
+		changesets = replaceIds(changesets, 1);
 		return StringUtils.replace(XmlParts.getChangelogStart(), XmlParts.REPLACE_CHAGESETS, changesets);
+	}
+
+	private static String replaceIds(String changesets, int startingId) {
+		while (StringUtils.contains(changesets, XmlParts.REPLACE_ID)) {
+			changesets = replaceId(changesets, startingId);
+			startingId++;
+		}
+		return changesets;
 	}
 
 	public static String replaceAuthor(String replaceIn, String author) {

@@ -10,7 +10,7 @@ import domain.ColumnOperation;
 import domain.Entity;
 import domain.ForeignKey;
 
-public class TestSupplier4 extends AbstractEntitiesSupplier {
+public class EntitiesSupplier4 extends AbstractEntitiesSupplier {
 
 	private static final String TABLE_NAME = "NDER_RELATED_ID";
 

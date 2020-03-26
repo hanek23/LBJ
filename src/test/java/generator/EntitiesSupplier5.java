@@ -8,7 +8,7 @@ import java.util.List;
 import domain.ColumnOperation;
 import domain.Entity;
 
-public class TestSupplier5 extends AbstractEntitiesSupplier {
+public class EntitiesSupplier5 extends AbstractEntitiesSupplier {
 
 	private static final String TABLE_NAME = "NDER_REFERENCE";
 
