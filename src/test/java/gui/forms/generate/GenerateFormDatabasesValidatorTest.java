@@ -12,7 +12,6 @@ public class GenerateFormDatabasesValidatorTest {
 	@Test
 	public void testIsValid() {
 		GenerateForm form = LBJTestUtils.getGenerateForm();
-		form.focus();
 		LBJPlainLabel databases = form.getDatabasesLabel();
 		assertThat(databases).isValid();
 

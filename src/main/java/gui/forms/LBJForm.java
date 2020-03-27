@@ -2,6 +2,7 @@ package gui.forms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.Window;
@@ -15,8 +16,6 @@ import gui.validators.LBJFormValidator;
 public abstract class LBJForm implements Runnable {
 
 	private Window window;
-	// AKA focused
-	private boolean visible;
 	private boolean initialized;
 	private Panel content;
 	private List<LBJComponent> components;
@@ -60,7 +59,7 @@ public abstract class LBJForm implements Runnable {
 	}
 
 	public void update() {
-		if (!isVisible()) {
+		if (!isFocused()) {
 			return;
 		}
 		for (LBJFormUpdater<LBJForm> updater : getUpdaters()) {
@@ -74,7 +73,7 @@ public abstract class LBJForm implements Runnable {
 	}
 
 	public boolean validate() {
-		if (!isVisible() || !isInitialized()) {
+		if (!isFocused() || !isInitialized()) {
 			return true;
 		}
 		// one last update before validating
@@ -92,7 +91,6 @@ public abstract class LBJForm implements Runnable {
 	}
 
 	public void focus() {
-		visible = true;
 		window.setComponent(content);
 	}
 
@@ -104,12 +102,8 @@ public abstract class LBJForm implements Runnable {
 		this.window = window;
 	}
 
-	public boolean isVisible() {
-		return visible;
-	}
-
-	public void setVisible(boolean visible) {
-		this.visible = visible;
+	public boolean isFocused() {
+		return Objects.equals(window.getComponent(), content);
 	}
 
 	public boolean isInitialized() {
@@ -146,6 +140,7 @@ public abstract class LBJForm implements Runnable {
 		return updaters;
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean addUpdater(LBJFormUpdater<? extends LBJForm> updater) {
 		return getUpdaters().add((LBJFormUpdater<LBJForm>) updater);
 	}
@@ -157,6 +152,7 @@ public abstract class LBJForm implements Runnable {
 		return validators;
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean addValidator(LBJFormValidator<? extends LBJForm> validator) {
 		return getValidators().add((LBJFormValidator<LBJForm>) validator);
 	}

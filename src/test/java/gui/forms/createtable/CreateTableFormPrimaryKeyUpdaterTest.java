@@ -19,7 +19,6 @@ public class CreateTableFormPrimaryKeyUpdaterTest {
 	@Test
 	public void testUpdate() {
 		CreateTableForm form = LBJTestUtils.getCreateTableForm();
-		form.focus();
 		LBJTextBox tableName = form.getTableNameTextBox();
 		LBJTextBox primaryKeyName = form.getPrimaryKeyNameTextBox();
 		LBJTextBox primaryKeyConstraint = form.getPrimaryKeyConstraintNameTextBox();
@@ -28,19 +27,16 @@ public class CreateTableFormPrimaryKeyUpdaterTest {
 		assertThat(primaryKeyName).isBlank();
 		assertThat(primaryKeyConstraint).isBlank();
 
-		LBJTestUtils.focus(tableName);
-		tableName.setValue(TABLE_NAME);
-		form.update();
+		LBJTestUtils.setValueOf(tableName, TABLE_NAME);
 
-		assertThat(tableName).isValueEqualTo(TABLE_NAME);
+		assertThat(tableName).hasValueEqualTo(TABLE_NAME);
 		assertThat(primaryKeyName).isEqualToIgnoringCase(NamingConventions.PRIMARY_KEY_NAME_DEFAULT_VALUE + TABLE_NAME);
 		assertThat(primaryKeyConstraint)
 				.isEqualToIgnoringCase(NamingConventions.PRIMARY_KEY_CONSTRAINT_DEFAULT_VALUE + TABLE_NAME);
 
-		tableName.setValue(TABLE_NAME + "A");
-		form.update();
+		LBJTestUtils.setValueOf(tableName, TABLE_NAME + "A");
 
-		assertThat(tableName).isValueEqualTo(TABLE_NAME + "A");
+		assertThat(tableName).hasValueEqualTo(TABLE_NAME + "A");
 		assertThat(primaryKeyName)
 				.isEqualToIgnoringCase(NamingConventions.PRIMARY_KEY_NAME_DEFAULT_VALUE + TABLE_NAME + "A");
 		assertThat(primaryKeyConstraint)

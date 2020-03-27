@@ -14,12 +14,10 @@ public abstract class LBJWizardForm extends LBJForm {
 	}
 
 	public void goToPreviousForm() {
-		setVisible(false);
 		previousForm.focus();
 	}
 
 	public void goToNextForm() {
-		setVisible(false);
 		nextForm.focus();
 	}
 

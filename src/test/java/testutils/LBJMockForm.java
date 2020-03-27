@@ -1,5 +1,8 @@
 package testutils;
 
+import com.googlecode.lanterna.gui2.BasicWindow;
+
+import constants.Labels;
 import gui.forms.LBJForm;
 import gui.forms.LBJWizardForm;
 
@@ -10,7 +13,7 @@ import gui.forms.LBJWizardForm;
 public class LBJMockForm extends LBJForm {
 
 	public LBJMockForm() {
-		super(null);
+		super(new BasicWindow(Labels.WINDOW_NAME));
 	}
 
 	@Override

@@ -1,7 +1,5 @@
 package gui.forms.mainmenu;
 
-import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -14,6 +12,7 @@ import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.GridLayout;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
+import com.googlecode.lanterna.gui2.TextGUIThread;
 import com.googlecode.lanterna.gui2.Window;
 import com.googlecode.lanterna.gui2.WindowBasedTextGUI;
 import com.googlecode.lanterna.gui2.WindowListener;
@@ -44,6 +43,7 @@ public class MainMenuForm extends LBJForm {
 	private CreateTableForm createTableForm;
 	private AddColumnForm addColumnForm;
 	private RemoveNotNullConstraintForm removeNotNullConstraintForm;
+	private TextGUIThread thread;
 
 	public MainMenuForm() {
 		this(new BasicWindow(Labels.WINDOW_NAME));
@@ -117,6 +117,7 @@ public class MainMenuForm extends LBJForm {
 				.setInitialTerminalSize(Settings.TERMINAL_SIZE).createScreen()) {
 			screen.startScreen();
 			WindowBasedTextGUI gui = new MultiWindowTextGUI(screen);
+			thread = gui.getGUIThread();
 			getWindow().addWindowListener(new WindowListener() {
 
 				@Override
@@ -140,9 +141,9 @@ public class MainMenuForm extends LBJForm {
 				}
 			});
 			gui.addWindowAndWait(getWindow());
-		} catch (IOException e) {
-			LOGGER.severe("While starting terminal IOException has occurred: " + e.getMessage());
-			throw new IllegalStateException();
+		} catch (Exception e) {
+			LOGGER.severe("Exception has occurred while running terminal");
+			throw new IllegalStateException(e);
 		}
 	}
 
@@ -165,6 +166,34 @@ public class MainMenuForm extends LBJForm {
 
 	public boolean addFormToUpdate(LBJForm form) {
 		return getFormsToUpdate().add(form);
+	}
+
+	public boolean isTerminalStarted() {
+		return terminalStarted;
+	}
+
+	public LBJPlainLabel getQuestionLabel() {
+		return questionLabel;
+	}
+
+	public ActionListBox getMainMenu() {
+		return mainMenu;
+	}
+
+	public CreateTableForm getCreateTableForm() {
+		return createTableForm;
+	}
+
+	public AddColumnForm getAddColumnForm() {
+		return addColumnForm;
+	}
+
+	public RemoveNotNullConstraintForm getRemoveNotNullConstraintForm() {
+		return removeNotNullConstraintForm;
+	}
+
+	public TextGUIThread getThread() {
+		return thread;
 	}
 
 }

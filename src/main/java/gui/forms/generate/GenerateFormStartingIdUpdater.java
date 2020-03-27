@@ -14,7 +14,7 @@ public class GenerateFormStartingIdUpdater implements LBJFormUpdater<GenerateFor
 			startingId.setEnabled(true);
 		} else {
 			startingId.setEnabled(false);
-			startingId.setValue("");
+			startingId.setValue("1");
 		}
 	}
 

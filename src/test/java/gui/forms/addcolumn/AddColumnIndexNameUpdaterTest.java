@@ -20,8 +20,6 @@ public class AddColumnIndexNameUpdaterTest {
 	@Test
 	public void testUpdate() {
 		AddColumnForm form = LBJTestUtils.getAddColumnForm();
-		form.focus();
-
 		LBJCheckBox indexCheckBox = form.getIndexCheckBox();
 		LBJTextBox indexName = form.getIndexNameTextBox();
 		LBJTextBox tableName = form.getTableNameTextBox();
@@ -34,9 +32,7 @@ public class AddColumnIndexNameUpdaterTest {
 		assertFalse(indexCheckBox.isChecked());
 		assertFalse(indexName.isEnabled());
 
-		LBJTestUtils.focus(tableName);
-		tableName.setValue(TABLE_NAME);
-		form.update();
+		LBJTestUtils.setValueOf(tableName, TABLE_NAME);
 
 		assertThat(tableName.getValue()).isEqualToIgnoringCase(TABLE_NAME);
 		// Everything else should have stay the same
@@ -44,9 +40,7 @@ public class AddColumnIndexNameUpdaterTest {
 		assertFalse(indexCheckBox.isChecked());
 		assertFalse(indexName.isEnabled());
 
-		LBJTestUtils.focus(columnName);
-		columnName.setValue(COLUMN_NAME);
-		form.update();
+		LBJTestUtils.setValueOf(columnName, COLUMN_NAME);
 
 		assertThat(tableName.getValue()).isEqualToIgnoringCase(TABLE_NAME);
 		assertThat(columnName.getValue()).isEqualToIgnoringCase(COLUMN_NAME);
@@ -54,9 +48,7 @@ public class AddColumnIndexNameUpdaterTest {
 		assertFalse(indexCheckBox.isChecked());
 		assertFalse(indexName.isEnabled());
 
-		LBJTestUtils.focus(indexCheckBox);
-		indexCheckBox.check();
-		form.update();
+		LBJTestUtils.setValueOf(indexCheckBox, true);
 
 		// Index name should be automatically filled
 		assertThat(tableName.getValue()).isEqualToIgnoringCase(TABLE_NAME);
@@ -66,17 +58,14 @@ public class AddColumnIndexNameUpdaterTest {
 		assertThat(indexName.getValue()).isEqualToIgnoringCase(
 				NamingConventions.INDEX_NAME_DEFAULT_VALUE + TABLE_NAME + NamingConventions.SEPARATOR + COLUMN_NAME);
 
-		LBJTestUtils.focus(indexName);
-		indexName.setValue(NEW_INDEX_NAME);
-		form.update();
+		LBJTestUtils.setValueOf(indexName, NEW_INDEX_NAME);
 
 		// if index name is focused, updater should not interfere and let the user name
 		// it however he wants
 		assertThat(indexName.getValue()).isEqualToIgnoringCase(NEW_INDEX_NAME);
 
 		LBJTestUtils.focus(indexCheckBox);
-		indexCheckBox.unCheck();
-		form.update();
+		LBJTestUtils.setValueOf(indexCheckBox, false);
 
 		assertThat(tableName.getValue()).isEqualToIgnoringCase(TABLE_NAME);
 		assertThat(columnName.getValue()).isEqualToIgnoringCase(COLUMN_NAME);

@@ -30,8 +30,7 @@ public class LBJFormSupplier {
 	/**
 	 * @return One and only instance of {@link CreateTableForm}.
 	 */
-	public static CreateTableForm getCreateTableForm(Window window, LBJForm previousForm,
-			boolean addAsUpdatableForm) {
+	public static CreateTableForm getCreateTableForm(Window window, LBJForm previousForm, boolean addAsUpdatableForm) {
 		if (createTableForm == null) {
 			createTableForm = new CreateTableForm(window, previousForm);
 			if (addAsUpdatableForm) {

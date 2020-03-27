@@ -128,12 +128,11 @@ public class GenerateForm extends LBJWizardForm {
 		return Labels.GENERATE_FORM;
 	}
 
-	private GeneratorSettings createGeneratorSettings() {
+	protected GeneratorSettings createGeneratorSettings() {
 		GeneratorSettings settings = new GeneratorSettings();
-		if (onlyChangeSetsCheckBox.isChecked()) {
-			settings.setOnlyChangeSets(true);
-			settings.setStartingId(Integer.parseInt(startingIdTextBox.getValue()));
-		}
+		settings.setAuthor(authorTextBox.getValue());
+		settings.setOnlyChangeSets(onlyChangeSetsCheckBox.isChecked());
+		settings.setStartingId(Integer.parseInt(startingIdTextBox.getValue()));
 		return settings;
 	}
 

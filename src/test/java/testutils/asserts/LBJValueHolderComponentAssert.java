@@ -69,7 +69,21 @@ public class LBJValueHolderComponentAssert extends LBJLabeledComponentAssert<LBJ
 		return this;
 	}
 
-	public LBJValueHolderComponentAssert isValueEqualTo(Object expected) {
+	public LBJValueHolderComponentAssert isUpperCase() {
+		isNotNull();
+		isForClass(String.class);
+		Assertions.assertThat((String) actual.getValue()).isUpperCase();
+		return this;
+	}
+
+	public LBJValueHolderComponentAssert isLowerCase() {
+		isNotNull();
+		isForClass(String.class);
+		Assertions.assertThat((String) actual.getValue()).isLowerCase();
+		return this;
+	}
+
+	public LBJValueHolderComponentAssert hasValueEqualTo(Object expected) {
 		isNotNull();
 		if (!Objects.areEqual(actual.getValue(), expected)) {
 			failWithMessage("Expecting component '%s' to have value of '%s' but insted it has value of '%s'", actual,

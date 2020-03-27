@@ -11,7 +11,6 @@ import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
 import gui.forms.addcolumn.AddColumnForm;
 import gui.suppliers.LBJUpdaterSupplier;
-import gui.suppliers.LBJValidatorSupplier;
 import gui.utils.LBJFormUtils;
 
 /**
@@ -54,7 +53,7 @@ public class CreateTableForm extends LBJEntityForm<Table> {
 
 	@Override
 	public void addFormValidators() {
-		addValidator(LBJValidatorSupplier.getGenerateFormDatabasesValidator());
+		// no form validators
 	}
 
 	@Override

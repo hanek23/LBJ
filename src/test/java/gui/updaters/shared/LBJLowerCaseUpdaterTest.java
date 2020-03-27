@@ -1,6 +1,6 @@
 package gui.updaters.shared;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static testutils.asserts.LBJValueHolderComponentAssert.assertThat;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,14 +17,15 @@ public class LBJLowerCaseUpdaterTest {
 	public void testUpdate() {
 		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm())
 				.addUpdater(LBJUpdaterSupplier.caseUpdater(LetterCase.LOWER)).build();
+
 		textBox.setValue("TABLE_NAME");
-		assertThat(textBox.getValue()).isUpperCase();
+		assertThat(textBox).isUpperCase();
 
 		textBox.update();
 
-		assertThat(textBox.getValue()).isLowerCase();
+		assertThat(textBox).isLowerCase();
 		textBox.update();
-		assertThat(textBox.getValue()).isLowerCase();
+		assertThat(textBox).isLowerCase();
 	}
 
 }

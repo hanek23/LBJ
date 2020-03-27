@@ -41,6 +41,14 @@ public abstract class LBJValueHolderComponent<T> extends LBJLabeledComponent {
 	public abstract void setValue(T value);
 
 	/**
+	 * Visible for testing!
+	 */
+	@SuppressWarnings("unchecked")
+	public void setRawValue(Object value) {
+		setValue((T) value);
+	}
+
+	/**
 	 * Lanterna {@link Component} used to implement this type like {@link TextBox}
 	 * for {@link String} or {@link CheckBox} for {@link Boolean}
 	 */

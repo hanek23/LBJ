@@ -67,7 +67,7 @@ public class RemoveNotNullConstraintForm extends LBJEntityForm<RemoveNotNullCons
 
 	@Override
 	public String toString() {
-		return Labels.MAIN_MENU_REMOVE_NOT_NULL_CONSTRAINT;
+		return Labels.REMOVE_NOT_NULL_CONSTRAINT_FORM;
 	}
 
 	public LBJTextBox getTableNameTextBox() {

@@ -1,15 +1,11 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Table extends AbstractEntity {
 
 	private String name;
 	private String primaryKeyColumnName;
 	private String primaryKeyContrainName;
 	private String sequenceName;
-	private List<Column> columns;
 
 	public Table(String name, String primaryKeyColumnName, String primaryKeyContrainName) {
 		this.name = name;
@@ -37,28 +33,6 @@ public class Table extends AbstractEntity {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public List<Column> getColumns() {
-		if (columns == null) {
-			columns = new ArrayList<>();
-		}
-		return columns;
-	}
-
-	public boolean addColumn(Column column) {
-		if (column == null) {
-			return false;
-		}
-		column.setTableName(name);
-		return getColumns().add(column);
-	}
-
-	public void removeColumn(Column toRemove) {
-		if (toRemove == null) {
-			return;
-		}
-		getColumns().remove(toRemove);
 	}
 
 	public String getPrimaryKeyColumnName() {

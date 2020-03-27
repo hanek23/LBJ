@@ -13,30 +13,26 @@ public class GenerateFormStartingIdUpdaterTest {
 	@Test
 	public void testUpdate() {
 		GenerateForm form = LBJTestUtils.getGenerateForm();
-		form.focus();
 		LBJCheckBox onlyChangesets = form.getOnlyChangesetsCheckBox();
 		LBJTextBox startingId = form.getStartingIdTextBox();
-		form.update();
 
 		assertThat(onlyChangesets).isEnabled();
 		assertThat(startingId).isNotEnabled();
 		assertThat(onlyChangesets).isNotChecked();
 		assertThat(startingId).isBlank();
 
-		onlyChangesets.check();
-		form.update();
+		LBJTestUtils.setValueOf(onlyChangesets, true);
 
 		assertThat(onlyChangesets).isChecked();
 		assertThat(startingId).isEnabled();
 		assertThat(startingId).isBlank();
 		startingId.setValue("10");
 
-		onlyChangesets.unCheck();
-		form.update();
+		LBJTestUtils.setValueOf(onlyChangesets, false);
 
 		assertThat(onlyChangesets).isNotChecked();
 		assertThat(startingId).isNotEnabled();
-		assertThat(startingId).isBlank();
+		assertThat(startingId).hasValueEqualTo("1");
 	}
 
 }

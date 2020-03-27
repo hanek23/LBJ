@@ -1,5 +1,6 @@
 package gui.forms.addcolumn;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static testutils.asserts.LBJFormAssert.assertThat;
 import static testutils.asserts.LBJValueHolderComponentAssert.assertThat;
 
@@ -7,10 +8,24 @@ import org.junit.jupiter.api.Test;
 
 import constants.Labels;
 import constants.NamingConventions;
+import domain.AddColumn;
 import gui.suppliers.LBJUpdaterSupplier;
 import testutils.LBJTestUtils;
 
 public class AddColumnFormTest {
+
+	private static final String TABLE_NAME = "ACTION";
+	private static final String COLUMN_NAME = "lbj";
+	private static final String COLUMN_DATA_TYPE = "integer";
+	private static final boolean NULLABLE = false;
+	private static final boolean HAS_INDEX = true;
+	private static final String INDEX_NAME = NamingConventions.INDEX_NAME_DEFAULT_VALUE + TABLE_NAME
+			+ NamingConventions.SEPARATOR + COLUMN_NAME;
+	private static final boolean HAS_FOREIGNKEY = true;
+	private static final String REFERENCED_TABLE_NAME = "NBA";
+	private static final String REFERENCED_COLUMN_NAME = "goat";
+	private static final String FOREIGN_KEY_NAME = NamingConventions.FOREIGN_KEY_NAME_DEFAULT_VALUE
+			+ REFERENCED_TABLE_NAME + NamingConventions.SEPARATOR + REFERENCED_COLUMN_NAME;
 
 	@Test
 	public void testInitialize() {
@@ -56,6 +71,37 @@ public class AddColumnFormTest {
 		// and updaters
 		assertThat(form).hasUpdater(LBJUpdaterSupplier.getAddColumnIndexNameUpdater());
 		assertThat(form).hasUpdater(LBJUpdaterSupplier.getAddColumnForeignKeyUpdater());
+	}
+
+	@Test
+	public void testConvert() {
+		AddColumnForm form = LBJTestUtils.getAddColumnForm();
+
+		LBJTestUtils.setValueOf(form.getTableNameTextBox(), TABLE_NAME);
+		LBJTestUtils.setValueOf(form.getColumnNameTextBox(), COLUMN_NAME);
+		LBJTestUtils.setValueOf(form.getDataTypeTextBox(), COLUMN_DATA_TYPE);
+		LBJTestUtils.setValueOf(form.getNullableCheckBox(), NULLABLE);
+		LBJTestUtils.setValueOf(form.getIndexCheckBox(), HAS_INDEX);
+		LBJTestUtils.setValueOf(form.getIndexNameTextBox(), INDEX_NAME);
+		LBJTestUtils.setValueOf(form.getForeignKeyCheckBox(), HAS_FOREIGNKEY);
+		LBJTestUtils.setValueOf(form.getReferencedTableNameTextBox(), REFERENCED_TABLE_NAME);
+		LBJTestUtils.setValueOf(form.getReferencedColumnNameTextBox(), REFERENCED_COLUMN_NAME);
+		LBJTestUtils.setValueOf(form.getForeignKeyNameTextBox(), FOREIGN_KEY_NAME);
+
+		AddColumn column = form.convert();
+		assertThat(column.isAddColumn()).isTrue();
+		// ignoring case because testing case upadaters is not the goal of this test
+		assertThat(column.getTableName()).isEqualToIgnoringCase(TABLE_NAME);
+		assertThat(column.getName()).isEqualToIgnoringCase(COLUMN_NAME);
+		assertThat(column.getDataType()).isEqualToIgnoringCase(COLUMN_DATA_TYPE);
+		assertThat(column.isNullable()).isEqualTo(NULLABLE);
+		assertThat(column.hasIndex()).isEqualTo(HAS_INDEX);
+		assertThat(column.getIndexName()).isEqualToIgnoringCase(INDEX_NAME);
+		assertThat(column.hasForeignKey()).isEqualTo(HAS_FOREIGNKEY);
+		assertThat(column.getForeignKey()).isNotNull();
+		assertThat(column.getForeignKey().getReferencedTable()).isEqualToIgnoringCase(REFERENCED_TABLE_NAME);
+		assertThat(column.getForeignKey().getReferencedColumn()).isEqualToIgnoringCase(REFERENCED_COLUMN_NAME);
+		assertThat(column.getForeignKey().getName()).isEqualToIgnoringCase(FOREIGN_KEY_NAME);
 	}
 
 }

@@ -19,8 +19,6 @@ public class AddColumnForeignKeyUpdaterTest {
 	@Test
 	public void testUpdate() {
 		AddColumnForm form = LBJTestUtils.getAddColumnForm();
-		form.focus();
-
 		LBJCheckBox foreignKeyCheckBox = form.getForeignKeyCheckBox();
 		LBJTextBox referencedTable = form.getReferencedTableNameTextBox();
 		LBJTextBox referencedColumn = form.getReferencedColumnNameTextBox();
@@ -34,9 +32,8 @@ public class AddColumnForeignKeyUpdaterTest {
 		assertFalse(referencedColumn.isEnabled());
 		assertFalse(foreignKeyName.isEnabled());
 
-		LBJTestUtils.focus(foreignKeyCheckBox);
-		foreignKeyCheckBox.check();
-		form.update();
+		LBJTestUtils.setValueOf(foreignKeyCheckBox, true);
+
 		// After checking fk checkbox, all fk text boxes should be enabled but blank.
 		// Only fk name should be ready for updates and have default value
 		assertTrue(foreignKeyCheckBox.isChecked());
@@ -49,9 +46,7 @@ public class AddColumnForeignKeyUpdaterTest {
 		assertThat(foreignKeyName.getValue())
 				.isEqualToIgnoringCase(NamingConventions.FOREIGN_KEY_NAME_DEFAULT_VALUE + NamingConventions.SEPARATOR);
 
-		LBJTestUtils.focus(referencedTable);
-		referencedTable.setValue(REFERENCED_TABLE_NAME);
-		form.update();
+		LBJTestUtils.setValueOf(referencedTable, REFERENCED_TABLE_NAME);
 
 		// After filling referenced table name, updater should update foreign key name
 		// accordingly
@@ -59,9 +54,7 @@ public class AddColumnForeignKeyUpdaterTest {
 		assertThat(foreignKeyName.getValue()).isEqualToIgnoringCase(
 				NamingConventions.FOREIGN_KEY_NAME_DEFAULT_VALUE + REFERENCED_TABLE_NAME + NamingConventions.SEPARATOR);
 
-		LBJTestUtils.focus(referencedColumn);
-		referencedColumn.setValue(REFERENCED_COLUMN_NAME);
-		form.update();
+		LBJTestUtils.setValueOf(referencedColumn, REFERENCED_COLUMN_NAME);
 
 		// After filling referenced column name, updater should update foreign key name
 		// accordingly
@@ -69,9 +62,7 @@ public class AddColumnForeignKeyUpdaterTest {
 		assertThat(foreignKeyName.getValue()).isEqualToIgnoringCase(NamingConventions.FOREIGN_KEY_NAME_DEFAULT_VALUE
 				+ REFERENCED_TABLE_NAME + NamingConventions.SEPARATOR + REFERENCED_COLUMN_NAME);
 
-		LBJTestUtils.focus(foreignKeyCheckBox);
-		foreignKeyCheckBox.unCheck();
-		form.update();
+		LBJTestUtils.setValueOf(foreignKeyCheckBox, false);
 
 		// After unchecking fk check box everything should be as it was at the start.
 		assertFalse(foreignKeyCheckBox.isChecked());
