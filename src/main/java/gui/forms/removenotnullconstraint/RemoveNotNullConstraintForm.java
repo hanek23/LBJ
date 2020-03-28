@@ -1,5 +1,6 @@
 package gui.forms.removenotnullconstraint;
 
+import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
@@ -19,6 +20,8 @@ public class RemoveNotNullConstraintForm extends LBJEntityForm<RemoveNotNullCons
 	private LBJTextBox columnNameTextBox;
 	private LBJTextBox dataTypeTextBox;
 
+	private Button generateButton;
+
 	public RemoveNotNullConstraintForm(Window window, LBJForm previousForm) {
 		super(window, previousForm);
 	}
@@ -31,6 +34,8 @@ public class RemoveNotNullConstraintForm extends LBJEntityForm<RemoveNotNullCons
 				.addCaseUpdaterAndValidator(NamingConventions.COLUMN_NAME_CASE).build();
 		dataTypeTextBox = new LBJTextBoxBuilder(Labels.COLUMN_DATA_TYPE, this).required()
 				.addCaseUpdaterAndValidator(NamingConventions.DATA_TYPE_CASE).build();
+
+		generateButton = LBJFormUtils.createGenerateButton(this);
 	}
 
 	@Override
@@ -52,7 +57,8 @@ public class RemoveNotNullConstraintForm extends LBJEntityForm<RemoveNotNullCons
 
 	@Override
 	public void addButtonsToContent() {
-		LBJFormUtils.createGenerateButton(this);
+		initializeBackButton();
+		LBJFormUtils.addButtonTo(this, generateButton);
 	}
 
 	@Override
@@ -79,6 +85,14 @@ public class RemoveNotNullConstraintForm extends LBJEntityForm<RemoveNotNullCons
 
 	public LBJTextBox getDataTypeTextBox() {
 		return dataTypeTextBox;
+	}
+
+	public Button getGenerateButton() {
+		return generateButton;
+	}
+
+	public void setGenerateButton(Button generateButton) {
+		this.generateButton = generateButton;
 	}
 
 }

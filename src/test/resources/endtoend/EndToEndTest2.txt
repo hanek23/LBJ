@@ -1,0 +1,27 @@
+<dontForget objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+<changeSet author="hanek23" dbms="oracle, mssql" id="23">
+	<preConditions onFail="MARK_RAN">
+		<not>
+			<columnExists columnName="foralldatabases" tableName="LBJ_REFERENCE"/>
+		</not>
+	</preConditions>
+	<addColumn tableName="LBJ_REFERENCE">
+		<column defaultValue="0" name="foralldatabases" type="char(1)">
+			<constraints nullable="false"/>
+		</column>
+	</addColumn>
+</changeSet>
+
+<changeSet author="hanek23" dbms="postgresql" id="24">
+	<preConditions onFail="MARK_RAN">
+		<not>
+			<columnExists columnName="foralldatabases" tableName="LBJ_REFERENCE"/>
+		</not>
+	</preConditions>
+	<addColumn tableName="LBJ_REFERENCE">
+		<column defaultValue="false" name="foralldatabases" type="boolean">
+			<constraints nullable="false"/>
+		</column>
+	</addColumn>
+</changeSet>
+</dontForget>

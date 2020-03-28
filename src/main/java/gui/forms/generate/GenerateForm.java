@@ -27,7 +27,7 @@ import gui.forms.LBJWizardForm;
 import gui.suppliers.LBJUpdaterSupplier;
 import gui.suppliers.LBJValidatorSupplier;
 import gui.utils.LBJFormUtils;
-import transformers.FormToEntityTransformer;
+import transformers.FormsToEntityTransformer;
 
 public class GenerateForm extends LBJWizardForm {
 
@@ -83,7 +83,7 @@ public class GenerateForm extends LBJWizardForm {
 				if (!GenerateForm.this.validate()) {
 					return;
 				}
-				List<Entity> entities = FormToEntityTransformer.transform(GenerateForm.this);
+				List<Entity> entities = FormsToEntityTransformer.transform(GenerateForm.this);
 				generatedXmlTextBox.setValue(Generator.generate(entities, createGeneratorSettings()));
 				generatedXmlTextBox.getTextBox().setPreferredSize(new TerminalSize(Settings.GUI_NUMBER_OF_COLUMNS, 10));
 				copyToClipboardButton.setEnabled(true);
@@ -119,6 +119,7 @@ public class GenerateForm extends LBJWizardForm {
 
 	@Override
 	public void addButtonsToContent() {
+		initializeBackButton();
 		LBJFormUtils.addButtonTo(this, generateButton);
 		LBJFormUtils.addButtonTo(this, copyToClipboardButton);
 	}

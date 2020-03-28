@@ -1,0 +1,52 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
+	objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+	<changeSet id="1" author="hanek23" dbms="oracle">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="N">
+				SELECT NULLABLE
+				FROM USER_TAB_COLUMNS
+				WHERE table_name =
+				'LBJ_RELATED_ID'
+				AND column_name = 'CONTAINER'
+			</sqlCheck>
+		</preConditions>
+		<comment>Remove NOTNULL constraint from column CONTAINER in table LBJ_RELATED_ID if it exists</comment>
+		<dropNotNullConstraint tableName="LBJ_RELATED_ID" columnName="container"
+			columnDataType="integer" />
+	</changeSet>
+
+	<changeSet id="2" author="hanek23" dbms="mssql">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">
+				SELECT is_nullable
+				FROM sys.columns
+				WHERE object_id =
+				OBJECT_ID('LBJ_RELATED_ID')
+				AND name = 'CONTAINER'
+			</sqlCheck>
+		</preConditions>
+		<comment>Remove NOTNULL constraint from column CONTAINER in table LBJ_RELATED_ID if it exists</comment>
+		<dropNotNullConstraint tableName="LBJ_RELATED_ID" columnName="container"
+			columnDataType="integer" />
+	</changeSet>
+
+	<changeSet id="3" author="hanek23" dbms="postgresql">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="NO">
+				SELECT is_nullable
+				FROM information_schema.columns
+				WHERE
+				columns.table_name = 'lbj_related_id'
+				AND columns.column_name = 'container'
+			</sqlCheck>
+		</preConditions>
+		<comment>Remove NOTNULL constraint from column container in table LBJ_RELATED_ID if it exists</comment>
+		<dropNotNullConstraint tableName="LBJ_RELATED_ID" columnName="container"
+			columnDataType="integer" />
+	</changeSet>
+
+</databaseChangeLog>

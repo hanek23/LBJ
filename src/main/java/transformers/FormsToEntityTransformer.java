@@ -10,9 +10,9 @@ import gui.forms.LBJForm;
 import gui.forms.LBJWizardForm;
 import gui.forms.generate.GenerateForm;
 
-public class FormToEntityTransformer {
+public class FormsToEntityTransformer {
 
-	private FormToEntityTransformer() {
+	private FormsToEntityTransformer() {
 		// only static methods
 	}
 

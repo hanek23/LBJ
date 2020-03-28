@@ -9,8 +9,9 @@ import java.util.List;
 import domain.ColumnOperation;
 import domain.Entity;
 import domain.ForeignKey;
+import testutils.AbstractXmlSupplier;
 
-public class EntitiesSupplier4 extends AbstractEntitiesSupplier {
+public class EntitiesSupplier4 extends AbstractXmlSupplier implements EntitiesSupplier {
 
 	private static final String TABLE_NAME = "LBJ_RELATED_ID";
 
@@ -36,8 +37,12 @@ public class EntitiesSupplier4 extends AbstractEntitiesSupplier {
 						new ForeignKey("F_LBJ_REL_REL_ACTION", "LBJ_ACTION", "id_lbj_action"), true, "integer"),
 
 				createColumn("container", ColumnOperation.ADD_COLUMN, TABLE_NAME, "I_LBJ_RELATED_ID_CONT",
-						new ForeignKey("F_LBJ_REL_CONTAINER", "LBJ_CONTAINER", "id_lbj_container"), false,
-						"integer"));
+						new ForeignKey("F_LBJ_REL_CONTAINER", "LBJ_CONTAINER", "id_lbj_container"), false, "integer"));
+	}
+
+	@Override
+	public boolean checkXsd() {
+		return true;
 	}
 
 }

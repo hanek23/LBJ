@@ -1,10 +1,15 @@
 package testutils;
 
+import javax.xml.transform.stream.StreamSource;
+
+import org.xmlunit.assertj.XmlAssert;
+
 import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.Interactable;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
+import generator.GeneratorTest;
 import gui.components.LBJValueHolderComponent;
 import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.createtable.CreateTableForm;
@@ -12,6 +17,8 @@ import gui.forms.generate.GenerateForm;
 import gui.forms.removenotnullconstraint.RemoveNotNullConstraintForm;
 
 public class LBJTestUtils {
+
+	private static final String LIQUIBASE_XSD = "/generator/liquibase-3.8.xsd";
 
 	private LBJTestUtils() {
 		// only static methods
@@ -94,6 +101,15 @@ public class LBJTestUtils {
 		GenerateForm form = new GenerateForm(new BasicWindow(), new LBJMockForm());
 		form.focus();
 		return form;
+	}
+
+	public static void assertLiquibaseXmlEquals(String expected, String actual, boolean checkXsd) {
+		if (checkXsd) {
+			StreamSource liquibaseXsd = new StreamSource(GeneratorTest.class.getResourceAsStream(LIQUIBASE_XSD));
+			XmlAssert.assertThat(actual).isValid();
+			XmlAssert.assertThat(actual).isValidAgainst(liquibaseXsd);
+		}
+		XmlAssert.assertThat(actual).and(expected).normalizeWhitespace().areIdentical();
 	}
 
 }

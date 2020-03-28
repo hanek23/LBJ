@@ -36,6 +36,7 @@ public class XmlParts {
 
 	// PATHS TO TEMPLATES
 	private static final String CHANGELOG_START_TEMPLATE = "/generator/shared/ChangelogStart.txt";
+	private static final String CHANGESETS_START_TEMPLATE = "/generator/shared/ChangesetsStart.txt";
 	private static final String CREATE_TABLE_MSSQL_TEMPLATE = "/generator/createtable/CreateTableMssql.txt";
 	private static final String CREATE_TABLE_ORACLE_POSTGRE_TEMPLATE = "/generator/createtable/CreateTableOraclePostgre.txt";
 	private static final String CREATE_TABLE_SEQUENCE_POSTGRE_TEMPLATE = "/generator/createtable/CreateTableSequencePostgre.txt";
@@ -52,6 +53,10 @@ public class XmlParts {
 
 	public static String getChangelogStart() {
 		return FileUtils.getStringFromFileResource(XmlParts.class, CHANGELOG_START_TEMPLATE);
+	}
+
+	public static String getChangesetsStart() {
+		return FileUtils.getStringFromFileResource(XmlParts.class, CHANGESETS_START_TEMPLATE);
 	}
 
 	public static String getCreateTableMssql() {

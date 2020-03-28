@@ -71,6 +71,7 @@ public class CreateTableForm extends LBJEntityForm<Table> {
 
 	@Override
 	public void addButtonsToContent() {
+		initializeBackButton();
 		LBJFormUtils.addButtonTo(this, addColumnButton);
 	}
 

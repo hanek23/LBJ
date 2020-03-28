@@ -129,6 +129,7 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 
 	@Override
 	public void addButtonsToContent() {
+		initializeBackButton();
 		LBJFormUtils.addButtonTo(this, addColumnButton);
 		LBJFormUtils.addButtonTo(this, generateButton);
 	}
@@ -193,6 +194,22 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 
 	public LBJTextBox getForeignKeyNameTextBox() {
 		return foreignKeyNameTextBox;
+	}
+
+	public Button getAddColumnButton() {
+		return addColumnButton;
+	}
+
+	public void setAddColumnButton(Button addColumnButton) {
+		this.addColumnButton = addColumnButton;
+	}
+
+	public Button getGenerateButton() {
+		return generateButton;
+	}
+
+	public void setGenerateButton(Button generateButton) {
+		this.generateButton = generateButton;
 	}
 
 }

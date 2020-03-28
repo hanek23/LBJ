@@ -15,14 +15,17 @@ import com.googlecode.lanterna.gui2.TextGUIThread.ExceptionHandler;
 import gui.forms.LBJForm;
 import gui.forms.mainmenu.MainMenuForm;
 import gui.suppliers.LBJFormSupplier;
+import testutils.MainMenuTest;
 
-public class LBJTest {
+public class LBJTest extends MainMenuTest {
 
 	private volatile List<Exception> exceptions = new ArrayList<>();
-	private MainMenuForm mainMenuForm = LBJFormSupplier.getMainMenuForm();
+	private MainMenuForm mainMenuForm;
+	private Thread mainMenuThread;
 
 	@Test
 	@Tag("slow")
+	@SuppressWarnings("deprecation")
 	public synchronized void launchTest() throws Exception {
 		initTest();
 		// By requesting GenerateForm at least once it will get added to MainMenuForm
@@ -35,6 +38,7 @@ public class LBJTest {
 			mainMenuForm.focus();
 		}
 		assertNoException();
+		mainMenuThread.stop();
 	}
 
 	private void assertNoException() throws InterruptedException {
@@ -48,15 +52,17 @@ public class LBJTest {
 	}
 
 	private void initTest() throws InterruptedException {
-		mainMenuForm = LBJFormSupplier.getMainMenuForm();
-		Thread t = new Thread(new Runnable() {
+		mainMenuThread = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				LBJ.main(null);
+				mainMenuForm = LBJFormSupplier.getMainMenuForm();
+				mainMenuForm.focus();
+				mainMenuForm.startTerminal();
 			}
 		});
-		t.start();
+		mainMenuThread.start();
 		wait(1000);
+		mainMenuForm.focus();
 		mainMenuForm.getThread().setExceptionHandler(new ExceptionHandler() {
 
 			@Override

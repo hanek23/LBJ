@@ -7,8 +7,8 @@ public class LBJ {
 
 	public static void main(String[] args) {
 		MainMenuForm mainMenuForm = LBJFormSupplier.getMainMenuForm();
+		mainMenuForm.focus();
 		mainMenuForm.startTerminal();
-		mainMenuForm.run();
 	}
 
 }

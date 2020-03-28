@@ -31,8 +31,7 @@ public class Generator {
 				changesets += createColumnChangeset((GeneralColumn) entity);
 			}
 		}
-		changesets = XmlBuilder.replaceAuthor(changesets, settings.getAuthor());
-		return XmlBuilder.toChangelog(changesets);
+		return XmlBuilder.finish(changesets, settings);
 	}
 
 	private static String createColumnChangeset(GeneralColumn column) {

@@ -14,7 +14,6 @@ public class Column extends AbstractEntity implements AddColumn, RemoveNotNullCo
 	private ColumnOperation operation;
 
 	public Column(String name, ColumnOperation operation) {
-		isNullable = true;
 		this.name = name;
 		setForDatabases(ForDatabases.forAll());
 		this.operation = operation;

@@ -13,13 +13,31 @@ public class XmlBuilder {
 		// only static methods
 	}
 
+	public static String finish(String changesets, GeneratorSettings settings) {
+		if (settings.isOnlyChangeSets()) {
+			return XmlBuilder.toChangeSets(changesets, settings);
+		}
+		return XmlBuilder.toChangelog(changesets, settings);
+	}
+
 	/**
-	 * Replaces ID of each changeset with incremental number starting from 1 and
-	 * puts all of them into changelog.
+	 * Replaces author and ID of each changeset with incremental number starting
+	 * from 1 and puts all of them into changelog.
 	 */
-	public static String toChangelog(String changesets) {
+	private static String toChangelog(String changesets, GeneratorSettings settings) {
+		changesets = XmlBuilder.replaceAuthor(changesets, settings.getAuthor());
 		changesets = replaceIds(changesets, 1);
 		return StringUtils.replace(XmlParts.getChangelogStart(), XmlParts.REPLACE_CHAGESETS, changesets);
+	}
+
+	/**
+	 * Replaces author ID of each changeset with incremental number starting from
+	 * passed argumend
+	 */
+	private static String toChangeSets(String changesets, GeneratorSettings settings) {
+		changesets = XmlBuilder.replaceAuthor(changesets, settings.getAuthor());
+		changesets = replaceIds(changesets, settings.getStartingId());
+		return StringUtils.replace(XmlParts.getChangesetsStart(), XmlParts.REPLACE_CHAGESETS, changesets);
 	}
 
 	private static String replaceIds(String changesets, int startingId) {

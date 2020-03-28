@@ -7,8 +7,9 @@ import domain.Column;
 import domain.ColumnOperation;
 import domain.Entity;
 import domain.RemoveNotNullConstraint;
+import testutils.AbstractXmlSupplier;
 
-public class EntitiesSupplier3 extends AbstractEntitiesSupplier {
+public class EntitiesSupplier3 extends AbstractXmlSupplier implements EntitiesSupplier {
 
 	@Override
 	public List<Entity> getEntities() {
@@ -16,6 +17,11 @@ public class EntitiesSupplier3 extends AbstractEntitiesSupplier {
 		column.setDataType("integer");
 		column.setTableName("LBJ_RELATED_ID");
 		return Arrays.asList(column);
+	}
+
+	@Override
+	public boolean checkXsd() {
+		return true;
 	}
 
 }

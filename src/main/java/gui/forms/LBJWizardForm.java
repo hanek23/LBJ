@@ -16,10 +16,9 @@ public abstract class LBJWizardForm extends LBJForm {
 		super(window);
 		this.previousForm = previousForm;
 		initialize();
-		initializeBackButton();
 	}
 
-	private void initializeBackButton() {
+	public void initializeBackButton() {
 		setBackButton(LBJFormUtils.createBackButtonOn(this, getPreviousForm()));
 	}
 

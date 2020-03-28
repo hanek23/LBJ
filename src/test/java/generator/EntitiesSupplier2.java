@@ -7,8 +7,9 @@ import domain.Column;
 import domain.ColumnOperation;
 import domain.Entity;
 import domain.ForeignKey;
+import testutils.AbstractXmlSupplier;
 
-public class EntitiesSupplier2 extends AbstractEntitiesSupplier {
+public class EntitiesSupplier2 extends AbstractXmlSupplier implements EntitiesSupplier {
 
 	private Column createColumnNotification() {
 		Column column = new Column("notification", ColumnOperation.ADD_COLUMN);
@@ -25,6 +26,11 @@ public class EntitiesSupplier2 extends AbstractEntitiesSupplier {
 	public List<Entity> getEntities() {
 		Column column = createColumnNotification();
 		return Arrays.asList(column);
+	}
+
+	@Override
+	public boolean checkXsd() {
+		return true;
 	}
 
 }

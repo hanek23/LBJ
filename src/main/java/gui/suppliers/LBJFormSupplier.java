@@ -15,7 +15,7 @@ public class LBJFormSupplier {
 		// static supplier
 	}
 
-	private static final MainMenuForm mainMenuForm = new MainMenuForm();
+	private static MainMenuForm mainMenuForm;
 	private static CreateTableForm createTableForm;
 	private static GenerateForm generateForm;
 	private static RemoveNotNullConstraintForm removeNotNullConstraintForm;
@@ -24,6 +24,9 @@ public class LBJFormSupplier {
 	 * @return One and only instance of {@link MainMenuForm}.
 	 */
 	public static MainMenuForm getMainMenuForm() {
+		if (mainMenuForm == null) {
+			mainMenuForm = new MainMenuForm();
+		}
 		return mainMenuForm;
 	}
 
@@ -48,6 +51,8 @@ public class LBJFormSupplier {
 			generateForm = new GenerateForm(window, previousForm);
 			mainMenuForm.addFormToUpdate(generateForm);
 		}
+		// So every time the instance of this object points to requsted previous form
+		generateForm.setPreviousForm(previousForm);
 		return generateForm;
 	}
 
@@ -82,6 +87,13 @@ public class LBJFormSupplier {
 
 	public static AddColumnForm getAddColumnForm(Window window, LBJForm previousForm) {
 		return getAddColumnForm(window, previousForm, true);
+	}
+
+	/**
+	 * Only for testing!
+	 */
+	public static void resetMainMenu() {
+		mainMenuForm = null;
 	}
 
 }
