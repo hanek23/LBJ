@@ -1,0 +1,103 @@
+<dontForget objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+	<changeSet author="hanek23" dbms="mssql" id="10">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="TABLE_NAME"/>
+			</not>
+		</preConditions>
+		<comment>Create table TABLE_NAME</comment>
+		<createTable tableName="TABLE_NAME">
+			<column autoIncrement="true" name="id_table_name" type="integer">
+				<constraints primaryKey="true" primaryKeyName="P_TABLE_NAME"/>
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="hanek23" dbms="oracle, postgresql" id="11">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="TABLE_NAME"/>
+			</not>
+		</preConditions>
+		<comment>Create table TABLE_NAME</comment>
+		<createTable tableName="TABLE_NAME">
+			<column name="id_table_name" type="integer">
+				<constraints primaryKey="true" primaryKeyName="P_TABLE_NAME"/>
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="hanek23" dbms="oracle" id="12">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<sequenceExists sequenceName="SEQ_TABLE_NAME"/>
+			</not>
+		</preConditions>
+		<comment>Create sequence SEQ_TABLE_NAME on Oracle if it doesn't exist.</comment>
+		<createSequence cacheSize="20" cycle="false" incrementBy="50" maxValue="999999999999999999999999999" ordered="false" sequenceName="SEQ_TABLE_NAME" startValue="50"/>
+	</changeSet>
+	<changeSet author="hanek23" dbms="postgresql" id="13">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<sequenceExists sequenceName="SEQ_TABLE_NAME"/>
+			</not>
+		</preConditions>
+		<comment>Create sequence SEQ_TABLE_NAME on postgreSQL if it doesn't exist.</comment>
+		<createSequence cacheSize="20" cycle="false" incrementBy="50" maxValue="999999999999999999" sequenceName="SEQ_TABLE_NAME" startValue="50"/>
+	</changeSet>
+	<changeSet author="hanek23" id="14">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists columnName="actionref" tableName="TABLE_NAME"/>
+			</not>
+		</preConditions>
+		<comment>Add column actionref to TABLE_NAME</comment>
+		<addColumn tableName="TABLE_NAME">
+			<column name="actionref" type="integer">
+				<constraints foreignKeyName="FOREIGN_KEY_NAME" referencedColumnNames="id_lbj_table" referencedTableName="LBJ_TABLE"/>
+			</column>
+		</addColumn>
+	</changeSet>
+	<changeSet author="hanek23" dbms="mssql,postgresql" id="15">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<indexExists indexName="INDEX_NAME"/>
+			</not>
+		</preConditions>
+		<comment>Create index INDEX_NAME if it doesn't exist.</comment>
+		<createIndex indexName="INDEX_NAME" tableName="TABLE_NAME">
+			<column name="actionref"/>
+		</createIndex>
+	</changeSet>
+	<changeSet author="hanek23" dbms="oracle" id="16">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'TABLE_NAME' and index_name='INDEX_NAME'</sqlCheck>
+		</preConditions>
+		<comment>Create index INDEX_NAME if it doesn't exist.</comment>
+		<createIndex indexName="INDEX_NAME" tableName="TABLE_NAME">
+			<column name="actionref"/>
+		</createIndex>
+	</changeSet>
+	<changeSet author="hanek23" dbms="oracle, mssql" id="17">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists columnName="isalive" tableName="TABLE_NAME"/>
+			</not>
+		</preConditions>
+		<addColumn tableName="TABLE_NAME">
+			<column defaultValue="0" name="isalive" type="char(1)">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+	</changeSet>
+	<changeSet author="hanek23" dbms="postgresql" id="18">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists columnName="isalive" tableName="TABLE_NAME"/>
+			</not>
+		</preConditions>
+		<addColumn tableName="TABLE_NAME">
+			<column defaultValue="false" name="isalive" type="boolean">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+	</changeSet>
+</dontForget>

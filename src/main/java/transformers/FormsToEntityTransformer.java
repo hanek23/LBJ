@@ -1,6 +1,7 @@
 package transformers;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import domain.Entity;
@@ -27,6 +28,8 @@ public class FormsToEntityTransformer {
 
 			previousForm = ((LBJWizardForm) previousForm).getPreviousForm();
 		}
+		// So that changesets are same order as user typed them in
+		Collections.reverse(entities);
 		return entities;
 	}
 

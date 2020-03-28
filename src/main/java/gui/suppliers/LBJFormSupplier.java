@@ -92,8 +92,11 @@ public class LBJFormSupplier {
 	/**
 	 * Only for testing!
 	 */
-	public static void resetMainMenu() {
+	public static void reset() {
 		mainMenuForm = null;
+		createTableForm = null;
+		removeNotNullConstraintForm = null;
+		generateForm = null;
 	}
 
 }

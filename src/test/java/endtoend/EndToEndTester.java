@@ -25,6 +25,11 @@ public class EndToEndTester extends MainMenuTest {
 		runEndToEndTest(new EndToEndTest3());
 	}
 
+	@Test
+	public void test4() throws Exception {
+		runEndToEndTest(new EndToEndTest4());
+	}
+
 	private void runEndToEndTest(EndToEndTest testCase) throws Exception {
 		testCase.test();
 		String expected = testCase.getExpectedXml();

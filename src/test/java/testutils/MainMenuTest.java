@@ -12,7 +12,7 @@ public abstract class MainMenuTest {
 
 	@BeforeEach
 	public void beforeEach() {
-		LBJFormSupplier.resetMainMenu();
+		LBJFormSupplier.reset();
 	}
 
 }
