@@ -13,11 +13,11 @@ public class EntitiesSupplier2 extends AbstractEntitiesSupplier {
 	private Column createColumnNotification() {
 		Column column = new Column("notification", ColumnOperation.ADD_COLUMN);
 		column.setDataType("integer");
-		column.setForeignKey(new ForeignKey("F_NDER_USER_ID_NDER_ERROR", "NDER_ERROR", "id_nder_error"));
-		column.setIndexName("I_NDER_USER_NOTIF");
+		column.setForeignKey(new ForeignKey("F_LBJ_USER_ID_LBJ_ERROR", "LBJ_ERROR", "id_lbj_error"));
+		column.setIndexName("I_LBJ_USER_NOTIF");
 		column.setIndex(true);
 		column.setNullable(false);
-		column.setTableName("NDER_NSNCONT_USER");
+		column.setTableName("LBJ_NSNCONT_USER");
 		return column;
 	}
 

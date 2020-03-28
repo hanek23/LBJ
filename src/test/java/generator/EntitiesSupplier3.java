@@ -14,7 +14,7 @@ public class EntitiesSupplier3 extends AbstractEntitiesSupplier {
 	public List<Entity> getEntities() {
 		RemoveNotNullConstraint column = new Column("container", ColumnOperation.REMOVE_NOT_NULL_CONSTRAINT);
 		column.setDataType("integer");
-		column.setTableName("NDER_RELATED_ID");
+		column.setTableName("LBJ_RELATED_ID");
 		return Arrays.asList(column);
 	}
 

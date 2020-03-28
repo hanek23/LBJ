@@ -45,15 +45,14 @@ public class RemoveNotNullConstraintForm extends LBJEntityForm<RemoveNotNullCons
 
 	@Override
 	public void addComponentsToContent() {
-		LBJFormUtils.addComponentToContent(getContent(), tableNameTextBox);
-		LBJFormUtils.addComponentToContent(getContent(), columnNameTextBox);
-		LBJFormUtils.addComponentToContent(getContent(), dataTypeTextBox);
+		LBJFormUtils.addComponentTo(this, tableNameTextBox);
+		LBJFormUtils.addComponentTo(this, columnNameTextBox);
+		LBJFormUtils.addComponentTo(this, dataTypeTextBox);
 	}
 
 	@Override
 	public void addButtonsToContent() {
-		LBJFormUtils.addBackButton(getContent(), getPreviousForm());
-		LBJFormUtils.addGenerateButton(this);
+		LBJFormUtils.createGenerateButton(this);
 	}
 
 	@Override

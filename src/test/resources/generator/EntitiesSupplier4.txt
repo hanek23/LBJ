@@ -7,15 +7,15 @@
 	<changeSet id="1" author="hanek23" dbms="mssql">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<tableExists tableName="NDER_RELATED_ID" />
+				<tableExists tableName="LBJ_RELATED_ID" />
 			</not>
 		</preConditions>
 
-		<comment>Create table NDER_RELATED_ID</comment>
-		<createTable tableName="NDER_RELATED_ID">
+		<comment>Create table LBJ_RELATED_ID</comment>
+		<createTable tableName="LBJ_RELATED_ID">
 
-			<column name="id_nder_related_id" type="integer" autoIncrement="true">
-				<constraints primaryKeyName="P_NDER_RELATED_ID" primaryKey="true" />
+			<column name="id_lbj_related_id" type="integer" autoIncrement="true">
+				<constraints primaryKeyName="P_LBJ_RELATED_ID" primaryKey="true" />
 			</column>
 		</createTable>
 	</changeSet>
@@ -23,15 +23,15 @@
 	<changeSet id="2" author="hanek23" dbms="oracle, postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<tableExists tableName="NDER_RELATED_ID" />
+				<tableExists tableName="LBJ_RELATED_ID" />
 			</not>
 		</preConditions>
 
-		<comment>Create table NDER_RELATED_ID</comment>
-		<createTable tableName="NDER_RELATED_ID">
+		<comment>Create table LBJ_RELATED_ID</comment>
+		<createTable tableName="LBJ_RELATED_ID">
 
-			<column name="id_nder_related_id" type="integer">
-				<constraints primaryKeyName="P_NDER_RELATED_ID" primaryKey="true" />
+			<column name="id_lbj_related_id" type="integer">
+				<constraints primaryKeyName="P_LBJ_RELATED_ID" primaryKey="true" />
 			</column>
 
 		</createTable>
@@ -40,33 +40,33 @@
 	<changeSet id="3" author="hanek23" dbms="oracle">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<sequenceExists sequenceName="SEQ_NDER_RELATED_ID" />
+				<sequenceExists sequenceName="SEQ_LBJ_RELATED_ID" />
 			</not>
 		</preConditions>
-		<comment>Create sequence SEQ_NDER_RELATED_ID on Oracle if it doesn't exist.</comment>
-		<createSequence sequenceName="SEQ_NDER_RELATED_ID" startValue="50" incrementBy="50"
+		<comment>Create sequence SEQ_LBJ_RELATED_ID on Oracle if it doesn't exist.</comment>
+		<createSequence sequenceName="SEQ_LBJ_RELATED_ID" startValue="50" incrementBy="50"
 			cacheSize="20" maxValue="999999999999999999999999999" ordered="false" cycle="false" />
 	</changeSet>
 
 	<changeSet id="4" author="hanek23" dbms="postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<sequenceExists sequenceName="SEQ_NDER_RELATED_ID" />
+				<sequenceExists sequenceName="SEQ_LBJ_RELATED_ID" />
 			</not>
 		</preConditions>
-		<comment>Create sequence SEQ_NDER_RELATED_ID on postgreSQL if it doesn't exist.</comment>
-		<createSequence sequenceName="SEQ_NDER_RELATED_ID" startValue="50" incrementBy="50"
+		<comment>Create sequence SEQ_LBJ_RELATED_ID on postgreSQL if it doesn't exist.</comment>
+		<createSequence sequenceName="SEQ_LBJ_RELATED_ID" startValue="50" incrementBy="50"
 			cacheSize="20" maxValue="999999999999999999" cycle="false" />
 	</changeSet>
 
 	<changeSet id="5" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<columnExists tableName="NDER_RELATED_ID" columnName="version_id" />
+				<columnExists tableName="LBJ_RELATED_ID" columnName="version_id" />
 			</not>
 		</preConditions>
-		<comment>Add column version_id to NDER_RELATED_ID</comment>
-		<addColumn tableName="NDER_RELATED_ID">
+		<comment>Add column version_id to LBJ_RELATED_ID</comment>
+		<addColumn tableName="LBJ_RELATED_ID">
 
 			<column name="version_id" type="integer">
 				<constraints nullable="false" />
@@ -77,11 +77,11 @@
 	<changeSet id="6" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<columnExists tableName="NDER_RELATED_ID" columnName="messageid" />
+				<columnExists tableName="LBJ_RELATED_ID" columnName="messageid" />
 			</not>
 		</preConditions>
-		<comment>Add column messageid to NDER_RELATED_ID</comment>
-		<addColumn tableName="NDER_RELATED_ID">
+		<comment>Add column messageid to LBJ_RELATED_ID</comment>
+		<addColumn tableName="LBJ_RELATED_ID">
 
 			<column name="messageid" type="varchar(50)">
 			</column>
@@ -91,11 +91,11 @@
 	<changeSet id="7" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<columnExists tableName="NDER_RELATED_ID" columnName="containersn" />
+				<columnExists tableName="LBJ_RELATED_ID" columnName="containersn" />
 			</not>
 		</preConditions>
-		<comment>Add column containersn to NDER_RELATED_ID</comment>
-		<addColumn tableName="NDER_RELATED_ID">
+		<comment>Add column containersn to LBJ_RELATED_ID</comment>
+		<addColumn tableName="LBJ_RELATED_ID">
 
 			<column name="containersn" type="varchar(9)">
 			</column>
@@ -105,11 +105,11 @@
 	<changeSet id="8" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<columnExists tableName="NDER_RELATED_ID" columnName="actionsn" />
+				<columnExists tableName="LBJ_RELATED_ID" columnName="actionsn" />
 			</not>
 		</preConditions>
-		<comment>Add column actionsn to NDER_RELATED_ID</comment>
-		<addColumn tableName="NDER_RELATED_ID">
+		<comment>Add column actionsn to LBJ_RELATED_ID</comment>
+		<addColumn tableName="LBJ_RELATED_ID">
 
 			<column name="actionsn" type="varchar(9)">
 			</column>
@@ -119,15 +119,15 @@
 	<changeSet id="9" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<columnExists tableName="NDER_RELATED_ID" columnName="relatedmessage" />
+				<columnExists tableName="LBJ_RELATED_ID" columnName="relatedmessage" />
 			</not>
 		</preConditions>
-		<comment>Add column relatedmessage to NDER_RELATED_ID</comment>
-		<addColumn tableName="NDER_RELATED_ID">
+		<comment>Add column relatedmessage to LBJ_RELATED_ID</comment>
+		<addColumn tableName="LBJ_RELATED_ID">
 
 			<column name="relatedmessage" type="integer">
-				<constraints foreignKeyName="F_NDER_REL_REL_MESSAGE"
-					referencedTableName="NDER_MESSAGE" referencedColumnNames="id_nder_message"/>
+				<constraints foreignKeyName="F_LBJ_REL_REL_MESSAGE"
+					referencedTableName="LBJ_MESSAGE" referencedColumnNames="id_lbj_message"/>
 			</column>
 		</addColumn>
 	</changeSet>
@@ -135,21 +135,21 @@
 	<changeSet id="10" author="hanek23" dbms="mssql,postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<indexExists indexName="I_NDER_RELATED_MESSAGE" />
+				<indexExists indexName="I_LBJ_RELATED_MESSAGE" />
 			</not>
 		</preConditions>
-		<comment>Create index I_NDER_RELATED_MESSAGE if it doesn't exist.</comment>
-		<createIndex tableName="NDER_RELATED_ID" indexName="I_NDER_RELATED_MESSAGE">
+		<comment>Create index I_LBJ_RELATED_MESSAGE if it doesn't exist.</comment>
+		<createIndex tableName="LBJ_RELATED_ID" indexName="I_LBJ_RELATED_MESSAGE">
 			<column name="relatedmessage" />
 		</createIndex>
 	</changeSet>
 	
 	<changeSet id="11" author="hanek23" dbms="oracle">
 		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'NDER_RELATED_ID' and index_name='I_NDER_RELATED_MESSAGE'</sqlCheck>
+			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'LBJ_RELATED_ID' and index_name='I_LBJ_RELATED_MESSAGE'</sqlCheck>
 		</preConditions>
-		<comment>Create index I_NDER_RELATED_MESSAGE if it doesn't exist.</comment>
-		<createIndex tableName="NDER_RELATED_ID" indexName="I_NDER_RELATED_MESSAGE">
+		<comment>Create index I_LBJ_RELATED_MESSAGE if it doesn't exist.</comment>
+		<createIndex tableName="LBJ_RELATED_ID" indexName="I_LBJ_RELATED_MESSAGE">
 			<column name="relatedmessage" />
 		</createIndex>
 	</changeSet>
@@ -157,14 +157,14 @@
 	<changeSet id="12" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<columnExists tableName="NDER_RELATED_ID" columnName="relatedcontainer" />
+				<columnExists tableName="LBJ_RELATED_ID" columnName="relatedcontainer" />
 			</not>
 		</preConditions>
-		<comment>Add column relatedcontainer to NDER_RELATED_ID</comment>
-		<addColumn tableName="NDER_RELATED_ID">
+		<comment>Add column relatedcontainer to LBJ_RELATED_ID</comment>
+		<addColumn tableName="LBJ_RELATED_ID">
 			<column name="relatedcontainer" type="integer">
-				<constraints foreignKeyName="F_NDER_REL_REL_CONTAINER"
-					referencedTableName="NDER_CONTAINER" referencedColumnNames="id_nder_container" />
+				<constraints foreignKeyName="F_LBJ_REL_REL_CONTAINER"
+					referencedTableName="LBJ_CONTAINER" referencedColumnNames="id_lbj_container" />
 			</column>
 		</addColumn>
 	</changeSet>
@@ -172,21 +172,21 @@
 	<changeSet id="13" author="hanek23" dbms="mssql,postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<indexExists indexName="I_NDER_RELATED_CONTAINER" />
+				<indexExists indexName="I_LBJ_RELATED_CONTAINER" />
 			</not>
 		</preConditions>
-		<comment>Create index I_NDER_RELATED_CONTAINER if it doesn't exist.</comment>
-		<createIndex tableName="NDER_RELATED_ID" indexName="I_NDER_RELATED_CONTAINER">
+		<comment>Create index I_LBJ_RELATED_CONTAINER if it doesn't exist.</comment>
+		<createIndex tableName="LBJ_RELATED_ID" indexName="I_LBJ_RELATED_CONTAINER">
 			<column name="relatedcontainer" />
 		</createIndex>
 	</changeSet>
 	
 	<changeSet id="14" author="hanek23" dbms="oracle">
 		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'NDER_RELATED_ID' and index_name='I_NDER_RELATED_CONTAINER'</sqlCheck>
+			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'LBJ_RELATED_ID' and index_name='I_LBJ_RELATED_CONTAINER'</sqlCheck>
 		</preConditions>
-		<comment>Create index I_NDER_RELATED_CONTAINER if it doesn't exist.</comment>
-		<createIndex tableName="NDER_RELATED_ID" indexName="I_NDER_RELATED_CONTAINER">
+		<comment>Create index I_LBJ_RELATED_CONTAINER if it doesn't exist.</comment>
+		<createIndex tableName="LBJ_RELATED_ID" indexName="I_LBJ_RELATED_CONTAINER">
 			<column name="relatedcontainer" />
 		</createIndex>
 	</changeSet>
@@ -194,14 +194,14 @@
 	<changeSet id="15" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<columnExists tableName="NDER_RELATED_ID" columnName="relatedaction" />
+				<columnExists tableName="LBJ_RELATED_ID" columnName="relatedaction" />
 			</not>
 		</preConditions>
-		<comment>Add column relatedaction to NDER_RELATED_ID</comment>
-		<addColumn tableName="NDER_RELATED_ID">
+		<comment>Add column relatedaction to LBJ_RELATED_ID</comment>
+		<addColumn tableName="LBJ_RELATED_ID">
 			<column name="relatedaction" type="integer">
-				<constraints foreignKeyName="F_NDER_REL_REL_ACTION"
-					referencedTableName="NDER_ACTION" referencedColumnNames="id_nder_action" />
+				<constraints foreignKeyName="F_LBJ_REL_REL_ACTION"
+					referencedTableName="LBJ_ACTION" referencedColumnNames="id_lbj_action" />
 			</column>
 		</addColumn>
 	</changeSet>
@@ -209,21 +209,21 @@
 	<changeSet id="16" author="hanek23" dbms="mssql,postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<indexExists indexName="I_NDER_RELATED_ACTION" />
+				<indexExists indexName="I_LBJ_RELATED_ACTION" />
 			</not>
 		</preConditions>
-		<comment>Create index I_NDER_RELATED_ACTION if it doesn't exist.</comment>
-		<createIndex tableName="NDER_RELATED_ID" indexName="I_NDER_RELATED_ACTION">
+		<comment>Create index I_LBJ_RELATED_ACTION if it doesn't exist.</comment>
+		<createIndex tableName="LBJ_RELATED_ID" indexName="I_LBJ_RELATED_ACTION">
 			<column name="relatedaction" />
 		</createIndex>
 	</changeSet>
 	
 	<changeSet id="17" author="hanek23" dbms="oracle">
 		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'NDER_RELATED_ID' and index_name='I_NDER_RELATED_ACTION'</sqlCheck>
+			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'LBJ_RELATED_ID' and index_name='I_LBJ_RELATED_ACTION'</sqlCheck>
 		</preConditions>
-		<comment>Create index I_NDER_RELATED_ACTION if it doesn't exist.</comment>
-		<createIndex tableName="NDER_RELATED_ID" indexName="I_NDER_RELATED_ACTION">
+		<comment>Create index I_LBJ_RELATED_ACTION if it doesn't exist.</comment>
+		<createIndex tableName="LBJ_RELATED_ID" indexName="I_LBJ_RELATED_ACTION">
 			<column name="relatedaction" />
 		</createIndex>
 	</changeSet>
@@ -231,14 +231,14 @@
 	<changeSet id="18" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<columnExists tableName="NDER_RELATED_ID" columnName="container" />
+				<columnExists tableName="LBJ_RELATED_ID" columnName="container" />
 			</not>
 		</preConditions>
-		<comment>Add column container to NDER_RELATED_ID</comment>
-		<addColumn tableName="NDER_RELATED_ID">
+		<comment>Add column container to LBJ_RELATED_ID</comment>
+		<addColumn tableName="LBJ_RELATED_ID">
 			<column name="container" type="integer">
-				<constraints foreignKeyName="F_NDER_REL_CONTAINER"
-					referencedTableName="NDER_CONTAINER" referencedColumnNames="id_nder_container" nullable="false" />
+				<constraints foreignKeyName="F_LBJ_REL_CONTAINER"
+					referencedTableName="LBJ_CONTAINER" referencedColumnNames="id_lbj_container" nullable="false" />
 			</column>
 		</addColumn>
 	</changeSet>
@@ -246,21 +246,21 @@
 	<changeSet id="19" author="hanek23" dbms="mssql,postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<indexExists indexName="I_NDER_RELATED_ID_CONT" />
+				<indexExists indexName="I_LBJ_RELATED_ID_CONT" />
 			</not>
 		</preConditions>
-		<comment>Create index I_NDER_RELATED_ID_CONT if it doesn't exist.</comment>
-		<createIndex tableName="NDER_RELATED_ID" indexName="I_NDER_RELATED_ID_CONT">
+		<comment>Create index I_LBJ_RELATED_ID_CONT if it doesn't exist.</comment>
+		<createIndex tableName="LBJ_RELATED_ID" indexName="I_LBJ_RELATED_ID_CONT">
 			<column name="container" />
 		</createIndex>
 	</changeSet>
 	
 	<changeSet id="20" author="hanek23" dbms="oracle">
 		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'NDER_RELATED_ID' and index_name='I_NDER_RELATED_ID_CONT'</sqlCheck>
+			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'LBJ_RELATED_ID' and index_name='I_LBJ_RELATED_ID_CONT'</sqlCheck>
 		</preConditions>
-		<comment>Create index I_NDER_RELATED_ID_CONT if it doesn't exist.</comment>
-		<createIndex tableName="NDER_RELATED_ID" indexName="I_NDER_RELATED_ID_CONT">
+		<comment>Create index I_LBJ_RELATED_ID_CONT if it doesn't exist.</comment>
+		<createIndex tableName="LBJ_RELATED_ID" indexName="I_LBJ_RELATED_ID_CONT">
 			<column name="container" />
 		</createIndex>
 	</changeSet>

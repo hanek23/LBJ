@@ -30,19 +30,20 @@ public class LBJFormUtils {
 		return content;
 	}
 
-	public static void addComponentToContent(Panel content, LBJValueHolderComponent<?> component) {
-		content.addComponent(component.getLabel().setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
-		content.addComponent(component.getComponent()
+	public static void addComponentTo(LBJForm form, LBJValueHolderComponent<?> component) {
+		form.getContent()
+				.addComponent(component.getLabel().setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
+		form.getContent().addComponent(component.getComponent()
 				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
 	}
 
-	public static void addComponentToContent(Panel content, LBJLabeledComponent component) {
-		content.addComponent(component.getLabel()
+	public static void addComponentTo(LBJForm form, LBJLabeledComponent component) {
+		form.getContent().addComponent(component.getLabel()
 				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS)));
 	}
 
-	public static void addHiddenTextAreaToContent(Panel content, LBJValueHolderComponent<?> component) {
-		content.addComponent(component.getComponent().setPreferredSize(new TerminalSize(0, 0))
+	public static void addHiddenTextAreaTo(LBJForm form, LBJValueHolderComponent<?> component) {
+		form.getContent().addComponent(component.getComponent().setPreferredSize(new TerminalSize(0, 0))
 				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS)));
 	}
 
@@ -50,21 +51,23 @@ public class LBJFormUtils {
 		menu.addItem(label, form);
 	}
 
-	public static void addEmptySpace(Panel content) {
-		content.addComponent(new EmptySpace());
+	public static void addEmptySpaceTo(LBJForm form) {
+		form.getContent().addComponent(new EmptySpace());
 	}
 
 	public static void addUpdatableFormToMainMenu(LBJForm form) {
 		LBJFormSupplier.getMainMenuForm().addFormToUpdate(form);
 	}
 
-	public static void addBackButton(Panel content, Runnable previousWindow) {
-		addEmptySpace(content);
-		addButtonToConent(content, new Button(Labels.BUTTON_BACK, previousWindow));
+	public static Button createBackButtonOn(LBJForm form, Runnable previousWindow) {
+		addEmptySpaceTo(form);
+		Button backButton = new Button(Labels.BUTTON_BACK, previousWindow);
+		addButtonTo(form, backButton);
+		return backButton;
 	}
 
-	public static void addButtonToConent(Panel content, Button button) {
-		content.addComponent(button.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
+	public static void addButtonTo(LBJForm form, Button button) {
+		form.getContent().addComponent(button.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
 	}
 
 	public static void addLabelToMainMenuContent(Panel content, LBJPlainLabel label) {
@@ -84,9 +87,9 @@ public class LBJFormUtils {
 		});
 	}
 
-	public static void addGenerateButton(LBJForm form) {
-		Button goToGenerateButton = new Button(Labels.BUTTON_GENERATE);
-		goToGenerateButton.addListener(new Listener() {
+	public static Button createGenerateButton(LBJForm form) {
+		Button generateButton = new Button(Labels.BUTTON_GENERATE);
+		generateButton.addListener(new Listener() {
 			@Override
 			public void onTriggered(Button button) {
 				if (!form.validate()) {
@@ -95,12 +98,12 @@ public class LBJFormUtils {
 				LBJFormSupplier.getGenerateForm(form.getWindow(), form).focus();
 			}
 		});
-		addButtonToConent(form.getContent(), goToGenerateButton);
+		return generateButton;
 	}
 
-	public static void addGoToAddColumnFormButton(LBJWizardForm form) {
-		Button goToAddColumnButton = new Button(Labels.BUTTON_ADD_COLUMN);
-		goToAddColumnButton.addListener(new Listener() {
+	public static Button createAddColumnButton(LBJWizardForm form) {
+		Button addColumnButton = new Button(Labels.BUTTON_ADD_COLUMN);
+		addColumnButton.addListener(new Listener() {
 			@Override
 			public void onTriggered(Button button) {
 				if (form.validate()) {
@@ -112,7 +115,7 @@ public class LBJFormUtils {
 
 			}
 		});
-		addButtonToConent(form.getContent(), goToAddColumnButton);
+		return addColumnButton;
 	}
 
 }

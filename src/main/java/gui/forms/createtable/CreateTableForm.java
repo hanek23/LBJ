@@ -1,5 +1,6 @@
 package gui.forms.createtable;
 
+import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
@@ -25,6 +26,8 @@ public class CreateTableForm extends LBJEntityForm<Table> {
 	private LBJTextBox primaryKeyConstraintNameTextBox;
 	private LBJTextBox sequenceNameTextBox;
 
+	private Button addColumnButton;
+
 	public CreateTableForm(Window window, LBJForm previousForm) {
 		super(window, previousForm);
 	}
@@ -43,6 +46,8 @@ public class CreateTableForm extends LBJEntityForm<Table> {
 
 		sequenceNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_SEQUENCE_NAME, this).required()
 				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.SEQUENCE_NAME_CASE).build();
+
+		addColumnButton = LBJFormUtils.createAddColumnButton(this);
 	}
 
 	@Override
@@ -58,16 +63,15 @@ public class CreateTableForm extends LBJEntityForm<Table> {
 
 	@Override
 	public void addComponentsToContent() {
-		LBJFormUtils.addComponentToContent(getContent(), tableNameTextBox);
-		LBJFormUtils.addComponentToContent(getContent(), primaryKeyNameTextBox);
-		LBJFormUtils.addComponentToContent(getContent(), primaryKeyConstraintNameTextBox);
-		LBJFormUtils.addComponentToContent(getContent(), sequenceNameTextBox);
+		LBJFormUtils.addComponentTo(this, tableNameTextBox);
+		LBJFormUtils.addComponentTo(this, primaryKeyNameTextBox);
+		LBJFormUtils.addComponentTo(this, primaryKeyConstraintNameTextBox);
+		LBJFormUtils.addComponentTo(this, sequenceNameTextBox);
 	}
 
 	@Override
 	public void addButtonsToContent() {
-		LBJFormUtils.addBackButton(getContent(), getPreviousForm());
-		LBJFormUtils.addGoToAddColumnFormButton(this);
+		LBJFormUtils.addButtonTo(this, addColumnButton);
 	}
 
 	@Override
@@ -98,6 +102,14 @@ public class CreateTableForm extends LBJEntityForm<Table> {
 
 	public LBJTextBox getSequenceNameTextBox() {
 		return sequenceNameTextBox;
+	}
+
+	public Button getAddColumnButton() {
+		return addColumnButton;
+	}
+
+	public void setAddColumnButton(Button addColumnButton) {
+		this.addColumnButton = addColumnButton;
 	}
 
 }

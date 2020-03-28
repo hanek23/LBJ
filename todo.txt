@@ -1,2 +1,3 @@
+- use startingID in Generator
 - default value in AddColumnForm
 - configurable naming convetions, default values, automatic updaters by component name

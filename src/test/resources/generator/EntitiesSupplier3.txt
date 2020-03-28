@@ -10,12 +10,12 @@
 				SELECT NULLABLE
 				FROM USER_TAB_COLUMNS
 				WHERE table_name =
-				'NDER_RELATED_ID'
+				'LBJ_RELATED_ID'
 				AND column_name = 'CONTAINER'
 			</sqlCheck>
 		</preConditions>
-		<comment>Remove NOTNULL constraint from column CONTAINER in table NDER_RELATED_ID if it exists</comment>
-		<dropNotNullConstraint tableName="NDER_RELATED_ID" columnName="container"
+		<comment>Remove NOTNULL constraint from column CONTAINER in table LBJ_RELATED_ID if it exists</comment>
+		<dropNotNullConstraint tableName="LBJ_RELATED_ID" columnName="container"
 			columnDataType="integer" />
 	</changeSet>
 
@@ -25,12 +25,12 @@
 				SELECT is_nullable
 				FROM sys.columns
 				WHERE object_id =
-				OBJECT_ID('NDER_RELATED_ID')
+				OBJECT_ID('LBJ_RELATED_ID')
 				AND name = 'CONTAINER'
 			</sqlCheck>
 		</preConditions>
-		<comment>Remove NOTNULL constraint from column CONTAINER in table NDER_RELATED_ID if it exists</comment>
-		<dropNotNullConstraint tableName="NDER_RELATED_ID" columnName="container"
+		<comment>Remove NOTNULL constraint from column CONTAINER in table LBJ_RELATED_ID if it exists</comment>
+		<dropNotNullConstraint tableName="LBJ_RELATED_ID" columnName="container"
 			columnDataType="integer" />
 	</changeSet>
 
@@ -40,12 +40,12 @@
 				SELECT is_nullable
 				FROM information_schema.columns
 				WHERE
-				columns.table_name = 'nder_related_id'
+				columns.table_name = 'lbj_related_id'
 				AND columns.column_name = 'container'
 			</sqlCheck>
 		</preConditions>
-		<comment>Remove NOTNULL constraint from column container in table NDER_RELATED_ID if it exists</comment>
-		<dropNotNullConstraint tableName="NDER_RELATED_ID" columnName="container"
+		<comment>Remove NOTNULL constraint from column container in table LBJ_RELATED_ID if it exists</comment>
+		<dropNotNullConstraint tableName="LBJ_RELATED_ID" columnName="container"
 			columnDataType="integer" />
 	</changeSet>
 

@@ -7,11 +7,11 @@
 	<changeSet id="1" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<columnExists tableName="NDER_REFERENCE" columnName="version_id"/>
+				<columnExists tableName="LBJ_REFERENCE" columnName="version_id"/>
 			</not>
 		</preConditions>
-		<comment>Add column version_id to NDER_REFERENCE</comment>
-		<addColumn tableName="NDER_REFERENCE">
+		<comment>Add column version_id to LBJ_REFERENCE</comment>
+		<addColumn tableName="LBJ_REFERENCE">
 			<column name="version_id" type="integer">
 			</column>
 		</addColumn>
@@ -20,10 +20,10 @@
 	<changeSet id="2" author="hanek23"  dbms="oracle, mssql">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<columnExists tableName="NDER_REFERENCE" columnName="isAlive" />
+				<columnExists tableName="LBJ_REFERENCE" columnName="isAlive" />
 			</not>
 		</preConditions>
-		<addColumn tableName="NDER_REFERENCE">
+		<addColumn tableName="LBJ_REFERENCE">
 			<column name="isAlive" type="char(1)" defaultValue="0">
 				<constraints nullable="false" />
 			</column> 
@@ -33,10 +33,10 @@
 	<changeSet id="3" author="hanek23" dbms="postgresql">
 	<preConditions onFail="MARK_RAN">
 		<not>
-			<columnExists tableName="NDER_REFERENCE" columnName="isAlive" />
+			<columnExists tableName="LBJ_REFERENCE" columnName="isAlive" />
 		</not>
 	</preConditions>
-	<addColumn tableName="NDER_REFERENCE">
+	<addColumn tableName="LBJ_REFERENCE">
 		<column name="isAlive" type="boolean" defaultValue="false">
 			<constraints nullable="false" />
 		</column>

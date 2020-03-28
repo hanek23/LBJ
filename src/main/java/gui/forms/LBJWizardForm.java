@@ -1,16 +1,26 @@
 package gui.forms;
 
+import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Window;
+
+import gui.utils.LBJFormUtils;
 
 public abstract class LBJWizardForm extends LBJForm {
 
 	private LBJForm previousForm;
 	private LBJForm nextForm;
 
+	private Button backButton;
+
 	public LBJWizardForm(Window window, LBJForm previousForm) {
 		super(window);
 		this.previousForm = previousForm;
 		initialize();
+		initializeBackButton();
+	}
+
+	private void initializeBackButton() {
+		setBackButton(LBJFormUtils.createBackButtonOn(this, getPreviousForm()));
 	}
 
 	public void goToPreviousForm() {
@@ -35,6 +45,14 @@ public abstract class LBJWizardForm extends LBJForm {
 
 	public void setNextForm(LBJForm nextForm) {
 		this.nextForm = nextForm;
+	}
+
+	public Button getBackButton() {
+		return backButton;
+	}
+
+	public void setBackButton(Button backButton) {
+		this.backButton = backButton;
 	}
 
 }

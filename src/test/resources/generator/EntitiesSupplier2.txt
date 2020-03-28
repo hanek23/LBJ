@@ -7,14 +7,14 @@
 	<changeSet id="1" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<columnExists tableName="NDER_NSNCONT_USER" columnName="notification"/>
+				<columnExists tableName="LBJ_NSNCONT_USER" columnName="notification"/>
 			</not>
 		</preConditions>
-		<comment>Add column notification to NDER_NSNCONT_USER</comment>
-		<addColumn tableName="NDER_NSNCONT_USER">
+		<comment>Add column notification to LBJ_NSNCONT_USER</comment>
+		<addColumn tableName="LBJ_NSNCONT_USER">
 			<column name="notification" type="integer">
-				<constraints foreignKeyName="F_NDER_USER_ID_NDER_ERROR"
-					referencedTableName="NDER_ERROR" referencedColumnNames="id_nder_error" nullable="false" />
+				<constraints foreignKeyName="F_LBJ_USER_ID_LBJ_ERROR"
+					referencedTableName="LBJ_ERROR" referencedColumnNames="id_lbj_error" nullable="false" />
 			</column>
 		</addColumn>
 	</changeSet>
@@ -22,21 +22,21 @@
 	<changeSet id="2" author="hanek23" dbms="mssql,postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<indexExists indexName="I_NDER_USER_NOTIF" />
+				<indexExists indexName="I_LBJ_USER_NOTIF" />
 			</not>
 		</preConditions>
-		<comment>Create index I_NDER_USER_NOTIF if it doesn't exist.</comment>
-		<createIndex tableName="NDER_NSNCONT_USER" indexName="I_NDER_USER_NOTIF">
+		<comment>Create index I_LBJ_USER_NOTIF if it doesn't exist.</comment>
+		<createIndex tableName="LBJ_NSNCONT_USER" indexName="I_LBJ_USER_NOTIF">
 			<column name="notification" />
 		</createIndex>
 	</changeSet>
 	
 	<changeSet id="3" author="hanek23" dbms="oracle">
 		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'NDER_NSNCONT_USER' and index_name='I_NDER_USER_NOTIF'</sqlCheck>
+			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'LBJ_NSNCONT_USER' and index_name='I_LBJ_USER_NOTIF'</sqlCheck>
 		</preConditions>
-		<comment>Create index I_NDER_USER_NOTIF if it doesn't exist.</comment>
-		<createIndex tableName="NDER_NSNCONT_USER" indexName="I_NDER_USER_NOTIF">
+		<comment>Create index I_LBJ_USER_NOTIF if it doesn't exist.</comment>
+		<createIndex tableName="LBJ_NSNCONT_USER" indexName="I_LBJ_USER_NOTIF">
 			<column name="notification" />
 		</createIndex>
 	</changeSet>

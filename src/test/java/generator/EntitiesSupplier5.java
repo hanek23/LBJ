@@ -10,7 +10,7 @@ import domain.Entity;
 
 public class EntitiesSupplier5 extends AbstractEntitiesSupplier {
 
-	private static final String TABLE_NAME = "NDER_REFERENCE";
+	private static final String TABLE_NAME = "LBJ_REFERENCE";
 
 	@Override
 	public List<Entity> getEntities() {

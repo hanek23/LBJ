@@ -38,9 +38,10 @@ public class GenerateForm extends LBJWizardForm {
 	private LBJCheckBox oracleCheckBox;
 	private LBJCheckBox mssqlCheckBox;
 	private LBJCheckBox postgreCheckBox;
-	private Button generateButton;
 	private LBJTextBox generatedXmlTextBox;
+
 	private Button copyToClipboardButton;
+	private Button generateButton;
 
 	public GenerateForm(Window window, LBJForm previousForm) {
 		super(window, previousForm);
@@ -105,22 +106,21 @@ public class GenerateForm extends LBJWizardForm {
 
 	@Override
 	public void addComponentsToContent() {
-		LBJFormUtils.addComponentToContent(getContent(), authorTextBox);
-		LBJFormUtils.addComponentToContent(getContent(), onlyChangeSetsCheckBox);
-		LBJFormUtils.addComponentToContent(getContent(), startingIdTextBox);
-		LBJFormUtils.addComponentToContent(getContent(), databasesLabel);
-		LBJFormUtils.addComponentToContent(getContent(), oracleCheckBox);
-		LBJFormUtils.addComponentToContent(getContent(), mssqlCheckBox);
-		LBJFormUtils.addComponentToContent(getContent(), postgreCheckBox);
-		LBJFormUtils.addHiddenTextAreaToContent(getContent(), generatedXmlTextBox);
+		LBJFormUtils.addComponentTo(this, authorTextBox);
+		LBJFormUtils.addComponentTo(this, onlyChangeSetsCheckBox);
+		LBJFormUtils.addComponentTo(this, startingIdTextBox);
+		LBJFormUtils.addComponentTo(this, databasesLabel);
+		LBJFormUtils.addComponentTo(this, oracleCheckBox);
+		LBJFormUtils.addComponentTo(this, mssqlCheckBox);
+		LBJFormUtils.addComponentTo(this, postgreCheckBox);
+		LBJFormUtils.addHiddenTextAreaTo(this, generatedXmlTextBox);
 
 	}
 
 	@Override
 	public void addButtonsToContent() {
-		LBJFormUtils.addBackButton(getContent(), getPreviousForm());
-		LBJFormUtils.addButtonToConent(getContent(), generateButton);
-		LBJFormUtils.addButtonToConent(getContent(), copyToClipboardButton);
+		LBJFormUtils.addButtonTo(this, generateButton);
+		LBJFormUtils.addButtonTo(this, copyToClipboardButton);
 	}
 
 	@Override

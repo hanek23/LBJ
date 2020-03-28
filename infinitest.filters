@@ -1,0 +1,2 @@
+# Exclude tests with JUnit5 tag "slow"
+excludeGroups slow

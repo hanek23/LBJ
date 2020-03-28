@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.googlecode.lanterna.gui2.TextGUIThread.ExceptionHandler;
@@ -17,12 +18,17 @@ import gui.suppliers.LBJFormSupplier;
 
 public class LBJTest {
 
-	private List<Exception> exceptions = new ArrayList<>();
+	private volatile List<Exception> exceptions = new ArrayList<>();
 	private MainMenuForm mainMenuForm = LBJFormSupplier.getMainMenuForm();
 
 	@Test
+	@Tag("slow")
 	public synchronized void launchTest() throws Exception {
 		initTest();
+		// By requesting GenerateForm at least once it will get added to MainMenuForm
+		// formsToUpdate and will get tested.
+		LBJFormSupplier.getGenerateForm(mainMenuForm.getWindow(), mainMenuForm);
+		// Tries to access every from from main menu
 		for (LBJForm form : mainMenuForm.getFormsToUpdate()) {
 			form.focus();
 			wait(100);

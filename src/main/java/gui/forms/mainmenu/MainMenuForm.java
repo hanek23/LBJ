@@ -102,17 +102,7 @@ public class MainMenuForm extends LBJForm {
 		setContent(new Panel(new GridLayout(1)));
 	}
 
-	@Override
-	public void focus() {
-		super.focus();
-		if (terminalStarted) {
-			return;
-		}
-		terminalStarted = true;
-		startTerminal();
-	}
-
-	private void startTerminal() {
+	public void startTerminal() {
 		try (Screen screen = new DefaultTerminalFactory().setMouseCaptureMode(MouseCaptureMode.CLICK)
 				.setInitialTerminalSize(Settings.TERMINAL_SIZE).createScreen()) {
 			screen.startScreen();

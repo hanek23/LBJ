@@ -6,34 +6,34 @@
 	<changeSet id="1" author="hanek23">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<columnExists tableName="NDER_REFERENCE" columnName="nderaction"/>
+				<columnExists tableName="LBJ_REFERENCE" columnName="action"/>
 			</not>
 		</preConditions>
-		<comment>Add column nderaction to NDER_REFERENCE</comment>
-		<addColumn tableName="NDER_REFERENCE">
-			<column name="nderaction" type="integer">
-				<constraints foreignKeyName="F_NDER_REF_ID_NDER_ACTION" referencedTableName="NDER_ACTION" referencedColumnNames="id_nder_action"/>
+		<comment>Add column action to LBJ_REFERENCE</comment>
+		<addColumn tableName="LBJ_REFERENCE">
+			<column name="action" type="integer">
+				<constraints foreignKeyName="F_LBJ_REF_ID_LBJ_ACTION" referencedTableName="LBJ_ACTION" referencedColumnNames="id_lbj_action"/>
 			</column>
 		</addColumn>
 	</changeSet>
 	<changeSet id="2" author="hanek23" dbms="mssql,postgresql">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<indexExists indexName="I_NDER_REFERENCE_NACTION"/>
+				<indexExists indexName="I_LBJ_REFERENCE_NACTION"/>
 			</not>
 		</preConditions>
-		<comment>Create index I_NDER_REFERENCE_NACTION if it doesn't exist.</comment>
-		<createIndex tableName="NDER_REFERENCE" indexName="I_NDER_REFERENCE_NACTION">
-			<column name="nderaction"/>
+		<comment>Create index I_LBJ_REFERENCE_NACTION if it doesn't exist.</comment>
+		<createIndex tableName="LBJ_REFERENCE" indexName="I_LBJ_REFERENCE_NACTION">
+			<column name="action"/>
 		</createIndex>
 	</changeSet>
 	<changeSet id="3" author="hanek23" dbms="oracle">
 		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'NDER_REFERENCE' and index_name='I_NDER_REFERENCE_NACTION'</sqlCheck>
+			<sqlCheck expectedResult="0">SELECT count(1) FROM user_indexes WHERE table_name = 'LBJ_REFERENCE' and index_name='I_LBJ_REFERENCE_NACTION'</sqlCheck>
 		</preConditions>
-		<comment>Create index I_NDER_REFERENCE_NACTION if it doesn't exist.</comment>
-		<createIndex tableName="NDER_REFERENCE" indexName="I_NDER_REFERENCE_NACTION">
-			<column name="nderaction"/>
+		<comment>Create index I_LBJ_REFERENCE_NACTION if it doesn't exist.</comment>
+		<createIndex tableName="LBJ_REFERENCE" indexName="I_LBJ_REFERENCE_NACTION">
+			<column name="action"/>
 		</createIndex>
 	</changeSet>
 </databaseChangeLog>

@@ -11,12 +11,12 @@ import domain.ForeignKey;
 public class EntitiesSupplier1 extends AbstractEntitiesSupplier {
 
 	private Column createColumnAction() {
-		Column column = new Column("nderaction", ColumnOperation.ADD_COLUMN);
+		Column column = new Column("action", ColumnOperation.ADD_COLUMN);
 		column.setDataType("integer");
-		column.setForeignKey(new ForeignKey("F_NDER_REF_ID_NDER_ACTION", "NDER_ACTION", "id_nder_action"));
-		column.setIndexName("I_NDER_REFERENCE_NACTION");
+		column.setForeignKey(new ForeignKey("F_LBJ_REF_ID_LBJ_ACTION", "LBJ_ACTION", "id_lbj_action"));
+		column.setIndexName("I_LBJ_REFERENCE_NACTION");
 		column.setIndex(true);
-		column.setTableName("NDER_REFERENCE");
+		column.setTableName("LBJ_REFERENCE");
 		return column;
 	}
 

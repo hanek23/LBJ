@@ -30,7 +30,7 @@ public class LBJLowerCaseValidatorTest {
 
 	@Test
 	public void testIsValidFalse2() {
-		assertFalse(tested.isValid("Id_Nder_Container"));
+		assertFalse(tested.isValid("Id_Lbj_Container"));
 	}
 
 	@Test

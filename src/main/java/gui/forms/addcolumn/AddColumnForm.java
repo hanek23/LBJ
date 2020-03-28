@@ -1,5 +1,6 @@
 package gui.forms.addcolumn;
 
+import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
@@ -45,6 +46,9 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 	private LBJTextBox referencedColumnNameTextBox;
 	private LBJTextBox foreignKeyNameTextBox;
 
+	private Button addColumnButton;
+	private Button generateButton;
+
 	public AddColumnForm(Window window, LBJForm previousForm) {
 		super(window, previousForm);
 	}
@@ -78,6 +82,9 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 		foreignKeyNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY_NAME, this).required()
 				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.FOREIGN_KEY_NAME_CASE).disabled()
 				.build();
+
+		addColumnButton = LBJFormUtils.createAddColumnButton(this);
+		generateButton = LBJFormUtils.createGenerateButton(this);
 	}
 
 	/**
@@ -108,23 +115,22 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 
 	@Override
 	public void addComponentsToContent() {
-		LBJFormUtils.addComponentToContent(getContent(), tableNameTextBox);
-		LBJFormUtils.addComponentToContent(getContent(), columnNameTextBox);
-		LBJFormUtils.addComponentToContent(getContent(), dataTypeTextBox);
-		LBJFormUtils.addComponentToContent(getContent(), nullableCheckBox);
-		LBJFormUtils.addComponentToContent(getContent(), indexCheckBox);
-		LBJFormUtils.addComponentToContent(getContent(), indexNameTextBox);
-		LBJFormUtils.addComponentToContent(getContent(), foreignKeyCheckBox);
-		LBJFormUtils.addComponentToContent(getContent(), referencedTableNameTextBox);
-		LBJFormUtils.addComponentToContent(getContent(), referencedColumnNameTextBox);
-		LBJFormUtils.addComponentToContent(getContent(), foreignKeyNameTextBox);
+		LBJFormUtils.addComponentTo(this, tableNameTextBox);
+		LBJFormUtils.addComponentTo(this, columnNameTextBox);
+		LBJFormUtils.addComponentTo(this, dataTypeTextBox);
+		LBJFormUtils.addComponentTo(this, nullableCheckBox);
+		LBJFormUtils.addComponentTo(this, indexCheckBox);
+		LBJFormUtils.addComponentTo(this, indexNameTextBox);
+		LBJFormUtils.addComponentTo(this, foreignKeyCheckBox);
+		LBJFormUtils.addComponentTo(this, referencedTableNameTextBox);
+		LBJFormUtils.addComponentTo(this, referencedColumnNameTextBox);
+		LBJFormUtils.addComponentTo(this, foreignKeyNameTextBox);
 	}
 
 	@Override
 	public void addButtonsToContent() {
-		LBJFormUtils.addBackButton(getContent(), getPreviousForm());
-		LBJFormUtils.addGoToAddColumnFormButton(this);
-		LBJFormUtils.addGenerateButton(this);
+		LBJFormUtils.addButtonTo(this, addColumnButton);
+		LBJFormUtils.addButtonTo(this, generateButton);
 	}
 
 	@Override
