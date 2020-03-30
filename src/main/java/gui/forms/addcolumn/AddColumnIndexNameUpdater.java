@@ -5,6 +5,9 @@ import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import gui.updaters.LBJFormUpdater;
 
+/**
+ * Updates index name according to table and column names.
+ */
 public class AddColumnIndexNameUpdater implements LBJFormUpdater<AddColumnForm> {
 
 	@Override

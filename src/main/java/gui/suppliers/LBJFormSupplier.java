@@ -9,6 +9,9 @@ import gui.forms.generate.GenerateForm;
 import gui.forms.mainmenu.MainMenuForm;
 import gui.forms.removenotnullconstraint.RemoveNotNullConstraintForm;
 
+/**
+ * Static supplier of all {@link LBJForm}s
+ */
 public class LBJFormSupplier {
 
 	private LBJFormSupplier() {
@@ -23,7 +26,7 @@ public class LBJFormSupplier {
 	/**
 	 * @return One and only instance of {@link MainMenuForm}.
 	 */
-	public static MainMenuForm getMainMenuForm() {
+	public static synchronized MainMenuForm getMainMenuForm() {
 		if (mainMenuForm == null) {
 			mainMenuForm = new MainMenuForm();
 		}
@@ -33,7 +36,8 @@ public class LBJFormSupplier {
 	/**
 	 * @return One and only instance of {@link CreateTableForm}.
 	 */
-	public static CreateTableForm getCreateTableForm(Window window, LBJForm previousForm, boolean addAsUpdatableForm) {
+	public static synchronized CreateTableForm getCreateTableForm(Window window, LBJForm previousForm,
+			boolean addAsUpdatableForm) {
 		if (createTableForm == null) {
 			createTableForm = new CreateTableForm(window, previousForm);
 			if (addAsUpdatableForm) {
@@ -46,7 +50,7 @@ public class LBJFormSupplier {
 	/**
 	 * @return One and only instance of {@link GenerateForm}.
 	 */
-	public static GenerateForm getGenerateForm(Window window, LBJForm previousForm) {
+	public static synchronized GenerateForm getGenerateForm(Window window, LBJForm previousForm) {
 		if (generateForm == null) {
 			generateForm = new GenerateForm(window, previousForm);
 			mainMenuForm.addFormToUpdate(generateForm);
@@ -74,8 +78,8 @@ public class LBJFormSupplier {
 	/**
 	 * @return One and only instance of {@link RemoveNotNullConstraintForm}.
 	 */
-	public static RemoveNotNullConstraintForm getRemoveNotNullConstraintForm(Window window, LBJForm previousForm,
-			boolean addAsUpdatableForm) {
+	public static synchronized RemoveNotNullConstraintForm getRemoveNotNullConstraintForm(Window window,
+			LBJForm previousForm, boolean addAsUpdatableForm) {
 		if (removeNotNullConstraintForm == null) {
 			removeNotNullConstraintForm = new RemoveNotNullConstraintForm(window, previousForm);
 			if (addAsUpdatableForm) {

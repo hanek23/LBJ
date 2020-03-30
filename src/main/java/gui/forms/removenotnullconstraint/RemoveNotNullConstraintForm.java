@@ -12,8 +12,15 @@ import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
+import gui.forms.generate.GenerateForm;
 import gui.utils.LBJFormUtils;
 
+/**
+ * Form for removing not null constraint from column. There are only 3
+ * {@link LBJTextBox} all of which are required. They are table name, column
+ * name and data type. Only next step is to go to {@link GenerateForm} as you
+ * cannot, at the moment, remove multiple not null constraints at once.
+ */
 public class RemoveNotNullConstraintForm extends LBJEntityForm<RemoveNotNullConstraint> {
 
 	private LBJTextBox tableNameTextBox;

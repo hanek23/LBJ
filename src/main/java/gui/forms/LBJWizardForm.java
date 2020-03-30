@@ -5,6 +5,10 @@ import com.googlecode.lanterna.gui2.Window;
 
 import gui.utils.LBJFormUtils;
 
+/**
+ * Adds possibility to go back and forth between forms using {@link #backButton}
+ * to {@link LBJForm}.
+ */
 public abstract class LBJWizardForm extends LBJForm {
 
 	private LBJForm previousForm;

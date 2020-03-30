@@ -1,13 +1,13 @@
 package generator;
 
+/**
+ * Encapsulates settings for XML generation using {@link Generator}.
+ */
 public class GeneratorSettings {
 
 	private String author;
 	private boolean onlyChangeSets;
 	private int startingId;
-
-	public GeneratorSettings() {
-	}
 
 	public GeneratorSettings(String author, boolean onlyChangeSets, int startingId) {
 		this.author = author;

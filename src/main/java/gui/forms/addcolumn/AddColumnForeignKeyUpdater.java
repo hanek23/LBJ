@@ -5,6 +5,10 @@ import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import gui.updaters.LBJFormUpdater;
 
+/**
+ * Updates foreign key according to referenced table name and referenced column
+ * name
+ */
 public class AddColumnForeignKeyUpdater implements LBJFormUpdater<AddColumnForm> {
 
 	@Override

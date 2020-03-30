@@ -7,24 +7,9 @@ public class Table extends AbstractEntity {
 	private String primaryKeyContrainName;
 	private String sequenceName;
 
-	public Table(String name, String primaryKeyColumnName, String primaryKeyContrainName) {
-		this.name = name;
-		this.primaryKeyColumnName = primaryKeyColumnName;
-		this.primaryKeyContrainName = primaryKeyContrainName;
-		setForDatabases(ForDatabases.forAll());
-	}
-
 	public Table(String name) {
 		this.name = name;
 		setForDatabases(ForDatabases.forAll());
-	}
-
-	/**
-	 * @return Table with empty table name, zero columns and for all supported
-	 *         databases (Oracle, MSSQL and Postgres).
-	 */
-	public static Table emptyTable() {
-		return new Table("");
 	}
 
 	public String getName() {

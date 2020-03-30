@@ -2,18 +2,12 @@ package gui.components;
 
 import com.googlecode.lanterna.gui2.CheckBox;
 import com.googlecode.lanterna.gui2.Component;
-import com.googlecode.lanterna.gui2.Label;
 
 import gui.forms.LBJForm;
-import gui.updaters.LBJValueUpdater;
-import gui.validators.LBJValueValidator;
 
 /**
- * Main purpouse of this class is to encapsulate {@link CheckBox} and
- * {@link Label} in one class for ease of use. Since it extends
- * {@link LBJValueHolderComponent} it can have custom {@link LBJValueUpdater}s
- * and {@link LBJValueValidator}s which calls will be handled by LBJ framework
- * on each update of {@link LBJForm} that this component is on.
+ * Boolean implementation of {@link LBJValueHolderComponent} using
+ * {@link CheckBox}.
  */
 public class LBJCheckBox extends LBJValueHolderComponent<Boolean> {
 

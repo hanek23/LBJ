@@ -1,5 +1,9 @@
 package domain;
 
+/**
+ * Each entity like {@link Table} or {@link Column} has little differences
+ * across databases, so this abstract parent is extracting that database info.
+ */
 public abstract class AbstractEntity implements Entity {
 
 	private ForDatabases forDatabases;

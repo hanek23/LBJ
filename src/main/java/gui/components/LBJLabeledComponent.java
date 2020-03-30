@@ -7,7 +7,7 @@ import gui.forms.LBJForm;
 
 /**
  * Abstract base for all {@link LBJComponent}s that have {@link Label}.
- * {@link Label}'s text serves as component's name.
+ * {@link Label}'s text also serves as component's name.
  */
 public abstract class LBJLabeledComponent extends LBJComponent {
 

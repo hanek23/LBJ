@@ -21,8 +21,8 @@ public interface AddColumn extends GeneralColumn, Entity {
 	public void setIndex(boolean index);
 
 	/**
-	 * @return true if column is NOT nullable or has foreign key to a different
-	 *         table
+	 * @return true if either {@link #hasIndex()} or {@link #hasForeignKey()} return
+	 *         true
 	 */
 	public boolean hasConstrains();
 

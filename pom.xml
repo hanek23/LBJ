@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.hanek.lbj</groupId>
+	<groupId>hanek.lbj</groupId>
 	<artifactId>lbj</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
@@ -12,6 +12,7 @@
 	</properties>
 
 	<dependencies>
+		<!-- custom patch for lanterna before https://github.com/mabe02/lanterna/issues/452 is resolved -->
 		<dependency>
 			<groupId>com.googlecode.lanterna</groupId>
 			<artifactId>lanterna</artifactId>

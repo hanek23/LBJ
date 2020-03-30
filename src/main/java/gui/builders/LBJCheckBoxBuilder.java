@@ -17,7 +17,7 @@ public class LBJCheckBoxBuilder {
 	 * Starts building a {@link LBJCheckBox}. Default value is UNCHECKED! Use
 	 * {@link LBJCheckBoxBuilder#checked()} for changing that.
 	 * 
-	 * @param name will be used as {@link Label}
+	 * @param name will be used as component name as well as {@link Label}
 	 * @param form on which is this component used.
 	 * 
 	 */
@@ -27,6 +27,9 @@ public class LBJCheckBoxBuilder {
 		lbjCheckBox.setLabel(new Label(name));
 	}
 
+	/**
+	 * Changes value to CHECKED aka TRUE
+	 */
 	public LBJCheckBoxBuilder checked() {
 		lbjCheckBox.getCheckBox().setChecked(true);
 		return this;

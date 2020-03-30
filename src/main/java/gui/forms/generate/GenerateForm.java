@@ -29,6 +29,15 @@ import gui.suppliers.LBJValidatorSupplier;
 import gui.utils.LBJFormUtils;
 import transformers.FormsToEntityTransformer;
 
+/**
+ * Final form of this application. On this form you must specify Author, also
+ * you can specify if you want to generate only changesets and if so from which
+ * ID you want the changesets to start. Lastly you can specify for which
+ * databases you want the changelog/changesets to be for. After that you can
+ * click Generate button and copy generated XML to your clipboard using button
+ * Copy to clipboard.
+ *
+ */
 public class GenerateForm extends LBJWizardForm {
 
 	private LBJTextBox authorTextBox;
@@ -130,11 +139,8 @@ public class GenerateForm extends LBJWizardForm {
 	}
 
 	protected GeneratorSettings createGeneratorSettings() {
-		GeneratorSettings settings = new GeneratorSettings();
-		settings.setAuthor(authorTextBox.getValue());
-		settings.setOnlyChangeSets(onlyChangeSetsCheckBox.isChecked());
-		settings.setStartingId(Integer.parseInt(startingIdTextBox.getValue()));
-		return settings;
+		return new GeneratorSettings(authorTextBox.getValue(), onlyChangeSetsCheckBox.isChecked(),
+				Integer.parseInt(startingIdTextBox.getValue()));
 	}
 
 	public LBJTextBox getAuthorTextBox() {

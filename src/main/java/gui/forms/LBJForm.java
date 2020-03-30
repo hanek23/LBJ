@@ -10,9 +10,20 @@ import com.googlecode.lanterna.gui2.Window;
 import gui.components.LBJComponent;
 import gui.components.LBJValueHolderComponent;
 import gui.updaters.LBJFormUpdater;
+import gui.updaters.LBJValueUpdater;
 import gui.utils.LBJFormUtils;
 import gui.validators.LBJFormValidator;
+import gui.validators.LBJValueValidator;
+import main.LBJ;
 
+/**
+ * Abstract base for all forms in {@link LBJ} application. It serves as shared
+ * place for {@link LBJFormUpdater} and {@link LBJFormValidator} to execute. It
+ * keeps information about all {@link LBJComponent}s present form so that
+ * {@link #validate()} and {@link #update()} methods can execute
+ * {@link LBJFormValidator}/{@link LBJFormUpdater} as well as any
+ * {@link LBJValueValidator}/{@link LBJValueUpdater} each component might have.
+ */
 public abstract class LBJForm implements Runnable {
 
 	private Window window;

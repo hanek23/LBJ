@@ -8,9 +8,13 @@ import domain.GeneralColumn;
 import domain.RemoveNotNullConstraint;
 import domain.Table;
 
-public class XmlBuilder {
+/**
+ * Supplies {@link Generator} with {@link XmlParts}. Also does replacements of
+ * names, ids, author and so on.
+ */
+public class XmlPartsSupplier {
 
-	private XmlBuilder() {
+	private XmlPartsSupplier() {
 		// only static methods
 	}
 
@@ -21,9 +25,9 @@ public class XmlBuilder {
 	 */
 	public static String finish(String changesets, GeneratorSettings settings) {
 		if (settings.isOnlyChangeSets()) {
-			return XmlBuilder.toChangeSets(changesets, settings);
+			return XmlPartsSupplier.toChangeSets(changesets, settings);
 		}
-		return XmlBuilder.toChangelog(changesets, settings);
+		return XmlPartsSupplier.toChangelog(changesets, settings);
 	}
 
 	/**
@@ -31,7 +35,7 @@ public class XmlBuilder {
 	 * from 1 and puts all of them into changelog.
 	 */
 	private static String toChangelog(String changesets, GeneratorSettings settings) {
-		changesets = XmlBuilder.replaceAuthor(changesets, settings.getAuthor());
+		changesets = XmlPartsSupplier.replaceAuthor(changesets, settings.getAuthor());
 		changesets = replaceIds(changesets, 1);
 		return StringUtils.replace(XmlParts.getChangelogStart(), XmlParts.REPLACE_CHAGESETS, changesets);
 	}
@@ -41,7 +45,7 @@ public class XmlBuilder {
 	 * passed argumend
 	 */
 	private static String toChangeSets(String changesets, GeneratorSettings settings) {
-		changesets = XmlBuilder.replaceAuthor(changesets, settings.getAuthor());
+		changesets = XmlPartsSupplier.replaceAuthor(changesets, settings.getAuthor());
 		changesets = replaceIds(changesets, settings.getStartingId());
 		return StringUtils.replace(XmlParts.getChangesetsStart(), XmlParts.REPLACE_CHAGESETS, changesets);
 	}
@@ -194,7 +198,6 @@ public class XmlBuilder {
 		if (constraint.isForPostgre()) {
 			xmlConstraint += XmlParts.getRemoveNotNullConstraintPostgre();
 		}
-
 		return xmlConstraint;
 	}
 

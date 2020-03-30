@@ -4,6 +4,10 @@ import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import gui.updaters.LBJFormUpdater;
 
+/**
+ * Custom updater for {@link GenerateForm} that enables startingID text if you
+ * check that you want to generate only changesets.
+ */
 public class GenerateFormStartingIdUpdater implements LBJFormUpdater<GenerateForm> {
 
 	@Override

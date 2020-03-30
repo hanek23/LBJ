@@ -9,6 +9,7 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.ActionListBox;
 import com.googlecode.lanterna.gui2.BasicWindow;
+import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.GridLayout;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Panel;
@@ -20,6 +21,7 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.MouseCaptureMode;
+import com.googlecode.lanterna.terminal.Terminal;
 
 import constants.Labels;
 import constants.Settings;
@@ -32,6 +34,20 @@ import gui.forms.removenotnullconstraint.RemoveNotNullConstraintForm;
 import gui.suppliers.LBJFormSupplier;
 import gui.utils.LBJFormUtils;
 
+/**
+ * <p>
+ * Main menu for this application. Main purpose of this form other than getting
+ * to another form is to update other forms as this is where {@link Terminal} is
+ * running is updating all other forms on any application event such as user
+ * input, resize or move. To be able to update all forms it has to have their
+ * reference in {@link #formsToUpdate} see {@link #updateForms()}.
+ * <p>
+ * Other small difference of this form is that it does not have any
+ * {@link Button}s as it has all "links" to other forms stored in
+ * {@link ActionListBox} as {@link Runnable}s ({@link LBJForm} implements
+ * {@link Runnable}). Because of that mouse support is currently not available
+ * on this form.
+ */
 public class MainMenuForm extends LBJForm {
 
 	private static final Logger LOGGER = Logger.getLogger(MainMenuForm.class.getSimpleName());

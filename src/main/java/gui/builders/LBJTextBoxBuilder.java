@@ -28,7 +28,7 @@ public class LBJTextBoxBuilder {
 	/**
 	 * Starts building a {@link LBJTextBox}.
 	 * 
-	 * @param name will be used as {@link Label}
+	 * @param name will be used as component name as well as {@link Label}
 	 * @param form on which is this component used.
 	 * 
 	 */
@@ -43,11 +43,17 @@ public class LBJTextBoxBuilder {
 		return this;
 	}
 
+	/**
+	 * Adds custom validator to the component
+	 */
 	public LBJTextBoxBuilder addValidator(LBJValueValidator<String> validator) {
 		lbjTextBox.addValidator(validator);
 		return this;
 	}
 
+	/**
+	 * Adds custom updater to the component
+	 */
 	public LBJTextBoxBuilder addUpdater(LBJValueUpdater<String> updater) {
 		lbjTextBox.addUpdater(updater);
 		return this;

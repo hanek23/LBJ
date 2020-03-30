@@ -15,6 +15,7 @@ import gui.components.LBJPlainLabel;
 import gui.components.LBJValueHolderComponent;
 import gui.forms.LBJForm;
 import gui.forms.LBJWizardForm;
+import gui.forms.mainmenu.MainMenuForm;
 import gui.suppliers.LBJFormSupplier;
 
 public class LBJFormUtils {
@@ -23,6 +24,12 @@ public class LBJFormUtils {
 		// only static methods
 	}
 
+	/**
+	 * Initialize default content with fixed number of columns
+	 * ({@link Settings#GUI_NUMBER_OF_COLUMNS}) and vertical spacing
+	 * ({@link Settings#GUI_VERTICAL_SPACING}). Almost every form should use this
+	 * content except of {@link MainMenuForm} which is little different.
+	 */
 	public static Panel initializeDefaultContent() {
 		Panel content = new Panel(new GridLayout(Settings.GUI_NUMBER_OF_COLUMNS));
 		GridLayout gridLayout = (GridLayout) content.getLayoutManager();
@@ -51,19 +58,15 @@ public class LBJFormUtils {
 		menu.addItem(label, form);
 	}
 
-	public static void addEmptySpaceTo(LBJForm form) {
-		form.getContent().addComponent(new EmptySpace());
-	}
-
-	public static void addUpdatableFormToMainMenu(LBJForm form) {
-		LBJFormSupplier.getMainMenuForm().addFormToUpdate(form);
-	}
-
 	public static Button createBackButtonOn(LBJForm form, Runnable previousWindow) {
 		addEmptySpaceTo(form);
 		Button backButton = new Button(Labels.BUTTON_BACK, previousWindow);
 		addButtonTo(form, backButton);
 		return backButton;
+	}
+
+	private static void addEmptySpaceTo(LBJForm form) {
+		form.getContent().addComponent(new EmptySpace());
 	}
 
 	public static void addButtonTo(LBJForm form, Button button) {

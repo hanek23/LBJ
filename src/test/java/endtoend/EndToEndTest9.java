@@ -41,7 +41,7 @@ public class EndToEndTest9 extends AbstractXmlSupplier implements EndToEndTest {
 		LBJTestUtils.setValueOf(generateForm.getAuthorTextBox(), "hanek23");
 		// only changesets
 		LBJTestUtils.setValueOf(generateForm.getOnlyChangesetsCheckBox(), ONLY_CHANGESETS);
-		// starting from 2
+		// starting from 123
 		LBJTestUtils.setValueOf(generateForm.getStartingIdTextBox(), "123");
 		// only for oracle
 		LBJTestUtils.setValueOf(generateForm.getOracleCheckBox(), false);

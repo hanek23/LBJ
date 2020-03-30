@@ -31,7 +31,7 @@ public class LBJTest extends LBJFormTest {
 		// By requesting GenerateForm at least once it will get added to MainMenuForm
 		// formsToUpdate and will get tested.
 		LBJFormSupplier.getGenerateForm(mainMenuForm.getWindow(), mainMenuForm);
-		// Tries to access every from from main menu
+		// Tries to access every form available
 		for (LBJForm form : mainMenuForm.getFormsToUpdate()) {
 			form.focus();
 			wait(100);

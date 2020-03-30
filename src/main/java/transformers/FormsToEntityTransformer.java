@@ -11,6 +11,10 @@ import gui.forms.LBJForm;
 import gui.forms.LBJWizardForm;
 import gui.forms.generate.GenerateForm;
 
+/**
+ * From {@link GenerateForm} converts linked {@link LBJEntityForm}s to their
+ * {@link Entity} and adds info about databases ({@link ForDatabases}.
+ */
 public class FormsToEntityTransformer {
 
 	private FormsToEntityTransformer() {
