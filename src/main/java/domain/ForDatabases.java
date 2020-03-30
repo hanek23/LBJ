@@ -4,7 +4,7 @@ public class ForDatabases {
 
 	private boolean forOracle;
 	private boolean forMssql;
-	private boolean forPostgreSql;
+	private boolean forPostgre;
 
 	public static ForDatabases forAll() {
 		ForDatabases forDatabases = new ForDatabases();
@@ -30,12 +30,12 @@ public class ForDatabases {
 		this.forMssql = forMssql;
 	}
 
-	public boolean isForPostgreSql() {
-		return forPostgreSql;
+	public boolean isForPostgre() {
+		return forPostgre;
 	}
 
 	public void setForPostgreSql(boolean forPostgreSql) {
-		this.forPostgreSql = forPostgreSql;
+		this.forPostgre = forPostgreSql;
 	}
 
 }

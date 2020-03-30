@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import constants.XmlParts;
 import domain.AddColumn;
 import domain.GeneralColumn;
+import domain.RemoveNotNullConstraint;
 import domain.Table;
 
 public class XmlBuilder {
@@ -13,6 +14,11 @@ public class XmlBuilder {
 		// only static methods
 	}
 
+	/**
+	 * Finishes {@link Generator} job according to {@link GeneratorSettings} like
+	 * putting changesets into changelog or leaving them be and replacing author and
+	 * IDs.
+	 */
 	public static String finish(String changesets, GeneratorSettings settings) {
 		if (settings.isOnlyChangeSets()) {
 			return XmlBuilder.toChangeSets(changesets, settings);
@@ -48,11 +54,11 @@ public class XmlBuilder {
 		return changesets;
 	}
 
-	public static String replaceAuthor(String replaceIn, String author) {
+	private static String replaceAuthor(String replaceIn, String author) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_AUTHOR, author);
 	}
 
-	public static String replaceId(String replaceIn, int id) {
+	private static String replaceId(String replaceIn, int id) {
 		return StringUtils.replaceOnce(replaceIn, XmlParts.REPLACE_ID, String.valueOf(id));
 	}
 
@@ -114,7 +120,7 @@ public class XmlBuilder {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_NULLABLE_VALUE, "false");
 	}
 
-	public static String addColumnConstraints(String replaceIn) {
+	public static String addColumnConstraintsBase(String replaceIn) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_CONSTRAINS, XmlParts.getAddColumnConstraints());
 	}
 
@@ -129,6 +135,67 @@ public class XmlBuilder {
 	public static String addColumnConstraintsForeignKey(String replaceIn) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_FOREIGN_KEY,
 				XmlParts.getAddColumnConstraintsForeignKey());
+	}
+
+	public static String getTableBase(Table table) {
+		String xmlTable = "";
+		if (table.isForMssql()) {
+			xmlTable += XmlParts.getCreateTableMssql();
+		}
+		if (table.isForOracle() || table.isForPostgre()) {
+			xmlTable += XmlParts.getCreateTableOraclePostgre();
+			if (table.isForOracle()) {
+				xmlTable += XmlParts.getCreateTableSequenceOracle();
+			}
+			if (table.isForPostgre()) {
+				xmlTable += XmlParts.getCreateTableSequencePostgre();
+			}
+		}
+		return xmlTable;
+	}
+
+	public static String getColumnBase(AddColumn column) {
+		if (column.isTypeBoolean()) {
+			return getBooleanColumnBase(column);
+		}
+		return XmlParts.getGeneralColumnBase();
+	}
+
+	private static String getBooleanColumnBase(AddColumn booleanColumn) {
+		String xmlColumn = "";
+		if (booleanColumn.isForOracle() || booleanColumn.isForMssql()) {
+			xmlColumn = XmlParts.getBooleanCollumnOracleMssql();
+		}
+		if (booleanColumn.isForPostgre()) {
+			xmlColumn += XmlParts.getBooleanColumnPostgre();
+		}
+		return xmlColumn;
+	}
+
+	public static String getColumnIndexBase(AddColumn column) {
+		String xmlIndex = "";
+		if (column.isForMssql() || column.isForPostgre()) {
+			xmlIndex += XmlParts.getColumnIndexMssqlPostgre();
+		}
+		if (column.isForOracle()) {
+			xmlIndex += XmlParts.getColumnIndexOracle();
+		}
+		return xmlIndex;
+	}
+
+	public static String getRemoveNotNullConstraintBase(RemoveNotNullConstraint constraint) {
+		String xmlConstraint = "";
+		if (constraint.isForOracle()) {
+			xmlConstraint += XmlParts.getRemoveNotNullConstraintOracle();
+		}
+		if (constraint.isForMssql()) {
+			xmlConstraint += XmlParts.getRemoveNotNullConstraintMssql();
+		}
+		if (constraint.isForPostgre()) {
+			xmlConstraint += XmlParts.getRemoveNotNullConstraintPostgre();
+		}
+
+		return xmlConstraint;
 	}
 
 }

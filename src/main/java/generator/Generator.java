@@ -2,7 +2,6 @@ package generator;
 
 import java.util.List;
 
-import constants.XmlParts;
 import domain.AddColumn;
 import domain.Column;
 import domain.Entity;
@@ -11,8 +10,8 @@ import domain.RemoveNotNullConstraint;
 import domain.Table;
 
 /**
- * Class for converting {@link Table}, {@link Column} etc. to Liquibase
- * changelog.
+ * Class for converting {@link Table}, {@link AddColumn},
+ * {@link RemoveNotNullConstraint} etc. to Liquibase changelog or changesets.
  */
 public class Generator {
 
@@ -41,11 +40,12 @@ public class Generator {
 		if (column.isRemoveNotNullConstraint()) {
 			return removeNotNullConstraint((RemoveNotNullConstraint) column);
 		}
-		throw new IllegalArgumentException("Generator not yet implemeted for: " + column.getClass().getSimpleName());
+		throw new UnsupportedOperationException(
+				"Generator not yet implemeted for: " + column.getClass().getSimpleName());
 	}
 
 	private static String removeNotNullConstraint(RemoveNotNullConstraint constraint) {
-		String removeNotNullConstraint = XmlParts.getRemoveNotNullConstraint();
+		String removeNotNullConstraint = XmlBuilder.getRemoveNotNullConstraintBase(constraint);
 		removeNotNullConstraint = XmlBuilder.replaceTableName(removeNotNullConstraint, constraint.getTableName());
 		removeNotNullConstraint = XmlBuilder.replaceColumnName(removeNotNullConstraint, constraint);
 		removeNotNullConstraint = XmlBuilder.replaceColumnDataType(removeNotNullConstraint, constraint);
@@ -53,103 +53,53 @@ public class Generator {
 	}
 
 	private static String addColumn(AddColumn column) {
-		String addColumn = "";
-		addColumn = addColumnBase(column);
-		addColumn = handleConstraints(column, addColumn);
-		addColumn = handleIndex(column, addColumn);
+		String xmlColumn = XmlBuilder.getColumnBase(column);
+		xmlColumn = handleConstraints(column, xmlColumn);
+		xmlColumn = handleIndex(column, xmlColumn);
 
-		addColumn = XmlBuilder.replaceTableName(addColumn, column.getTableName());
-		addColumn = XmlBuilder.replaceColumnName(addColumn, column);
-		addColumn = XmlBuilder.replaceColumnDataType(addColumn, column);
-		return addColumn;
+		xmlColumn = XmlBuilder.replaceTableName(xmlColumn, column.getTableName());
+		xmlColumn = XmlBuilder.replaceColumnName(xmlColumn, column);
+		xmlColumn = XmlBuilder.replaceColumnDataType(xmlColumn, column);
+		return xmlColumn;
 	}
 
-	/**
-	 * Boolean has different data types for different databases
-	 */
-	private static String addColumnBase(AddColumn column) {
-		if (column.isTypeBoolean()) {
-			return addBooleanColumnBase(column);
-		}
-		return XmlParts.getAddColumn();
-	}
-
-	private static String addBooleanColumnBase(AddColumn column) {
-		String addColumn = "";
-		if (column.isForOracle() || column.isForMssql()) {
-			addColumn = XmlParts.getAddColumnBooleanOracleMssql();
-		}
-		if (column.isForPostgreSql()) {
-			addColumn += XmlParts.getAddColumnBooleanPostgre();
-		}
-		return addColumn;
-	}
-
-	private static String handleIndex(AddColumn column, String addColumn) {
+	private static String handleIndex(AddColumn column, String xmlColumn) {
 		if (column.hasIndex()) {
-			if (column.isForMssql() || column.isForPostgreSql()) {
-				addColumn += XmlParts.getColumnIndexMssqlPostgre();
-			}
-			if (column.isForOracle()) {
-				addColumn += XmlParts.getColumnIndexOracle();
-			}
-			addColumn = XmlBuilder.replaceColumnIndexName(addColumn, column);
+			xmlColumn += XmlBuilder.getColumnIndexBase(column);
+			xmlColumn = XmlBuilder.replaceColumnIndexName(xmlColumn, column);
 		}
-		return addColumn;
+		return xmlColumn;
 	}
 
-	private static String handleConstraints(AddColumn column, String addColumn) {
+	private static String handleConstraints(AddColumn column, String xmlColumn) {
 		if (column.hasConstrains()) {
-			addColumn = XmlBuilder.addColumnConstraints(addColumn);
-			addColumn = handleForeignKey(column, addColumn);
-			addColumn = handleNullable(column, addColumn);
+			xmlColumn = XmlBuilder.addColumnConstraintsBase(xmlColumn);
+			xmlColumn = handleForeignKey(column, xmlColumn);
+			xmlColumn = XmlBuilder.replaceColumnNullable(xmlColumn, column);
 		} else {
-			addColumn = XmlBuilder.removeConstraints(addColumn);
+			xmlColumn = XmlBuilder.removeConstraints(xmlColumn);
 		}
-		return addColumn;
+		return xmlColumn;
 	}
 
-	private static String handleNullable(AddColumn column, String addColumn) {
-		addColumn = XmlBuilder.replaceColumnNullable(addColumn, column);
-		return addColumn;
-	}
-
-	private static String handleForeignKey(AddColumn column, String addColumn) {
+	private static String handleForeignKey(AddColumn column, String xmlColumn) {
 		if (column.hasForeignKey()) {
-			addColumn = XmlBuilder.addColumnConstraintsForeignKey(addColumn);
-			addColumn = XmlBuilder.replaceColumnForeignKeyName(addColumn, column);
-			addColumn = XmlBuilder.replaceColumnForeignKeyReferencedColumn(addColumn, column);
-			addColumn = XmlBuilder.replaceColumnForeignKeyReferencedTable(addColumn, column);
+			xmlColumn = XmlBuilder.addColumnConstraintsForeignKey(xmlColumn);
+			xmlColumn = XmlBuilder.replaceColumnForeignKeyName(xmlColumn, column);
+			xmlColumn = XmlBuilder.replaceColumnForeignKeyReferencedColumn(xmlColumn, column);
+			xmlColumn = XmlBuilder.replaceColumnForeignKeyReferencedTable(xmlColumn, column);
 		} else {
-			addColumn = XmlBuilder.removeColumnForeignKeyConstraint(addColumn);
+			xmlColumn = XmlBuilder.removeColumnForeignKeyConstraint(xmlColumn);
 		}
-		return addColumn;
+		return xmlColumn;
 	}
 
 	private static String createTable(Table table) {
-		String createTable = "";
-		createTable = handleTable(table, createTable);
+		String createTable = XmlBuilder.getTableBase(table);
 		createTable = XmlBuilder.replaceTableName(createTable, table.getName());
 		createTable = XmlBuilder.replaceColumnPrimaryKeyName(createTable, table);
 		createTable = XmlBuilder.replaceConstrainPrimaryKeyName(createTable, table);
 		createTable = XmlBuilder.replaceSequenceName(createTable, table);
-
-		return createTable;
-	}
-
-	private static String handleTable(Table table, String createTable) {
-		if (table.isForMssql()) {
-			createTable += XmlParts.getCreateTableMssql();
-		}
-		if (table.isForOracle() || table.isForPostgreSql()) {
-			createTable += XmlParts.getCreateTableOraclePostgre();
-			if (table.isForOracle()) {
-				createTable += XmlParts.getCreateTableSequenceOracle();
-			}
-			if (table.isForPostgreSql()) {
-				createTable += XmlParts.getCreateTableSequencePostgre();
-			}
-		}
 		return createTable;
 	}
 

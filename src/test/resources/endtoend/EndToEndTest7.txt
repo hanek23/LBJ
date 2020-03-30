@@ -1,0 +1,16 @@
+<dontForget objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+	
+	<changeSet author="hanek23" dbms="postgresql" id="99">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists columnName="forpostgre" tableName="LBJ_REFERENCE"/>
+			</not>
+		</preConditions>
+		<addColumn tableName="LBJ_REFERENCE">
+			<column defaultValue="false" name="forpostgre" type="boolean">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+	</changeSet>
+	
+</dontForget>

@@ -9,9 +9,9 @@ import testutils.LBJTestUtils;
 import testutils.asserts.LBJFormAssert;
 
 /**
- * Removing not null constraint, for oracle, whole changelog
+ * Removing not null constraint, for mssql, whole changelog
  */
-public class EndToEndTest3 extends AbstractXmlSupplier implements EndToEndTest {
+public class EndToEndTest8 extends AbstractXmlSupplier implements EndToEndTest {
 
 	private static final boolean ONLY_CHANGESETS = false;
 
@@ -42,8 +42,8 @@ public class EndToEndTest3 extends AbstractXmlSupplier implements EndToEndTest {
 		// whole changelog
 		LBJTestUtils.setValueOf(generateForm.getOnlyChangesetsCheckBox(), ONLY_CHANGESETS);
 		// only for oracle
-		LBJTestUtils.setValueOf(generateForm.getOracleCheckBox(), true);
-		LBJTestUtils.setValueOf(generateForm.getMssqlCheckBox(), false);
+		LBJTestUtils.setValueOf(generateForm.getOracleCheckBox(), false);
+		LBJTestUtils.setValueOf(generateForm.getMssqlCheckBox(), true);
 		LBJTestUtils.setValueOf(generateForm.getPostgreCheckBox(), false);
 
 		LBJFormAssert.assertThat(generateForm).isValid();

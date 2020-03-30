@@ -13,6 +13,8 @@ import testutils.asserts.LBJFormAssert;
  */
 public class EndToEndTest2 extends AbstractXmlSupplier implements EndToEndTest {
 
+	private static final boolean ONLY_CHANGESETS = true;
+
 	@Override
 	public void test() {
 		MainMenuForm mainMenuForm = LBJFormSupplier.getMainMenuForm();
@@ -38,7 +40,7 @@ public class EndToEndTest2 extends AbstractXmlSupplier implements EndToEndTest {
 
 		LBJTestUtils.setValueOf(generateForm.getAuthorTextBox(), "hanek23");
 		// only changesets
-		LBJTestUtils.setValueOf(generateForm.getOnlyChangesetsCheckBox(), true);
+		LBJTestUtils.setValueOf(generateForm.getOnlyChangesetsCheckBox(), ONLY_CHANGESETS);
 		// starting from 23
 		LBJTestUtils.setValueOf(generateForm.getStartingIdTextBox(), "23");
 		// for all databases
@@ -53,7 +55,7 @@ public class EndToEndTest2 extends AbstractXmlSupplier implements EndToEndTest {
 
 	@Override
 	public boolean checkXsd() {
-		return false;
+		return !ONLY_CHANGESETS;
 	}
 
 }

@@ -9,11 +9,11 @@ import testutils.LBJTestUtils;
 import testutils.asserts.LBJFormAssert;
 
 /**
- * Removing not null constraint, for oracle, whole changelog
+ * Removing not null constraint, for postgre, only changesets, starting ID = 123
  */
-public class EndToEndTest3 extends AbstractXmlSupplier implements EndToEndTest {
+public class EndToEndTest9 extends AbstractXmlSupplier implements EndToEndTest {
 
-	private static final boolean ONLY_CHANGESETS = false;
+	private static final boolean ONLY_CHANGESETS = true;
 
 	@Override
 	public void test() {
@@ -39,12 +39,14 @@ public class EndToEndTest3 extends AbstractXmlSupplier implements EndToEndTest {
 		LBJFormAssert.assertThat(generateForm).isFocused();
 
 		LBJTestUtils.setValueOf(generateForm.getAuthorTextBox(), "hanek23");
-		// whole changelog
+		// only changesets
 		LBJTestUtils.setValueOf(generateForm.getOnlyChangesetsCheckBox(), ONLY_CHANGESETS);
+		// starting from 2
+		LBJTestUtils.setValueOf(generateForm.getStartingIdTextBox(), "123");
 		// only for oracle
-		LBJTestUtils.setValueOf(generateForm.getOracleCheckBox(), true);
+		LBJTestUtils.setValueOf(generateForm.getOracleCheckBox(), false);
 		LBJTestUtils.setValueOf(generateForm.getMssqlCheckBox(), false);
-		LBJTestUtils.setValueOf(generateForm.getPostgreCheckBox(), false);
+		LBJTestUtils.setValueOf(generateForm.getPostgreCheckBox(), true);
 
 		LBJFormAssert.assertThat(generateForm).isValid();
 		LBJTestUtils.click(generateForm.getGenerateButton());

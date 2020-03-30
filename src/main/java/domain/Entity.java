@@ -10,7 +10,7 @@ public interface Entity {
 
 	public void setForMssql(boolean forMssql);
 
-	public boolean isForPostgreSql();
+	public boolean isForPostgre();
 
 	public void setForPostgreSql(boolean forPostgreSql);
 

@@ -13,7 +13,7 @@ public class XmlParts {
 		// only static methods and constants
 	}
 
-	// REPLACEMENTS
+	// Replacements
 	public static final String REPLACE_CHAGESETS = "$CHANGESETS$";
 	public static final String REPLACE_AUTHOR = "$AUTHOR$";
 	public static final String REPLACE_ID = "$ID$";
@@ -34,22 +34,28 @@ public class XmlParts {
 	public static final String REPLACE_COLUMN_NULLABLE = "$NULLABLE$";
 	public static final String REPLACE_COLUMN_NULLABLE_VALUE = "$NULLABLE_VALUE$";
 
-	// PATHS TO TEMPLATES
+	// Paths to templates
 	private static final String CHANGELOG_START_TEMPLATE = "/generator/shared/ChangelogStart.txt";
 	private static final String CHANGESETS_START_TEMPLATE = "/generator/shared/ChangesetsStart.txt";
+
 	private static final String CREATE_TABLE_MSSQL_TEMPLATE = "/generator/createtable/CreateTableMssql.txt";
 	private static final String CREATE_TABLE_ORACLE_POSTGRE_TEMPLATE = "/generator/createtable/CreateTableOraclePostgre.txt";
 	private static final String CREATE_TABLE_SEQUENCE_POSTGRE_TEMPLATE = "/generator/createtable/CreateTableSequencePostgre.txt";
 	private static final String CREATE_TABLE_SEQUENCE_ORACLE_TEMPLATE = "/generator/createtable/CreateTableSequenceOracle.txt";
+
 	private static final String COLUMN_INDEX_MSSQL_POSTGRE_TEMPLATE = "/generator/shared/CreateIndexMssqlPostgre.txt";
 	private static final String COLUMN_INDEX_ORACLE_TEMPLATE = "/generator/shared/CreateIndexOracle.txt";
+
 	private static final String ADD_COLUMN_TEMPLATE = "/generator/addcolumn/AddColumn.txt";
 	private static final String ADD_COLUMN_BOOLEAN_ORACLE_MSSQL_TEMPLATE = "/generator/addcolumn/AddColumnBooleanOracleMssql.txt";
 	private static final String ADD_COLUMN_BOOLEAN_POSTGRE_TEMPLATE = "/generator/addcolumn/AddColumnBooleanPostgre.txt";
 	private static final String ADD_COLUMN_CONSTRAINTS_TEMPLATE = "/generator/addcolumn/AddColumnConstraints.txt";
 	private static final String ADD_COLUMN_CONSTRAINTS_FOREIGN_KEY_TEMPLATE = "/generator/addcolumn/AddColumnConstraintsForeignKey.txt";
 	private static final String ADD_COLUMN_CONSTRAINTS_NULLABLE_TEMPLATE = "/generator/addcolumn/AddColumnConstraintsNullable.txt";
-	private static final String REMOVE_NOT_NULL_CONSTRAINT_TEMPLATE = "/generator/removenotnullconstraint/RemoveNotNullConstraint.txt";
+
+	private static final String REMOVE_NOT_NULL_CONSTRAINT_ORACLE_TEMPLATE = "/generator/removenotnullconstraint/RemoveNotNullConstraintOracle.txt";
+	private static final String REMOVE_NOT_NULL_CONSTRAINT_MSSQL_TEMPLATE = "/generator/removenotnullconstraint/RemoveNotNullConstraintMssql.txt";
+	private static final String REMOVE_NOT_NULL_CONSTRAINT_POSTGRE_TEMPLATE = "/generator/removenotnullconstraint/RemoveNotNullConstraintPostgre.txt";
 
 	public static String getChangelogStart() {
 		return FileUtils.getStringFromFileResource(XmlParts.class, CHANGELOG_START_TEMPLATE);
@@ -83,20 +89,28 @@ public class XmlParts {
 		return FileUtils.getStringFromFileResource(XmlParts.class, COLUMN_INDEX_ORACLE_TEMPLATE);
 	}
 
-	public static String getAddColumn() {
+	public static String getGeneralColumnBase() {
 		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_COLUMN_TEMPLATE);
 	}
 
-	public static String getAddColumnBooleanOracleMssql() {
+	public static String getBooleanCollumnOracleMssql() {
 		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_COLUMN_BOOLEAN_ORACLE_MSSQL_TEMPLATE);
 	}
 
-	public static String getAddColumnBooleanPostgre() {
+	public static String getBooleanColumnPostgre() {
 		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_COLUMN_BOOLEAN_POSTGRE_TEMPLATE);
 	}
 
-	public static String getRemoveNotNullConstraint() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, REMOVE_NOT_NULL_CONSTRAINT_TEMPLATE);
+	public static String getRemoveNotNullConstraintOracle() {
+		return FileUtils.getStringFromFileResource(XmlParts.class, REMOVE_NOT_NULL_CONSTRAINT_ORACLE_TEMPLATE);
+	}
+
+	public static String getRemoveNotNullConstraintMssql() {
+		return FileUtils.getStringFromFileResource(XmlParts.class, REMOVE_NOT_NULL_CONSTRAINT_MSSQL_TEMPLATE);
+	}
+
+	public static String getRemoveNotNullConstraintPostgre() {
+		return FileUtils.getStringFromFileResource(XmlParts.class, REMOVE_NOT_NULL_CONSTRAINT_POSTGRE_TEMPLATE);
 	}
 
 	public static String getAddColumnConstraints() {

@@ -1,0 +1,14 @@
+<changeSet id="$ID$" author="$AUTHOR$" dbms="postgresql">
+	<preConditions onFail="MARK_RAN">
+		<sqlCheck expectedResult="NO">
+			SELECT is_nullable
+			FROM information_schema.columns
+			WHERE
+			columns.table_name = '$TABLE_NAME_LOWER_CASE$'
+			AND columns.column_name = '$COLUMN_NAME$'
+		</sqlCheck>
+	</preConditions>
+	<comment>Remove NOTNULL constraint from column $COLUMN_NAME$ in table $TABLE_NAME$ if it exists</comment>
+	<dropNotNullConstraint tableName="$TABLE_NAME$" columnName="$COLUMN_NAME$"
+		columnDataType="$COLUMN_TYPE$" />
+</changeSet>

@@ -1,0 +1,18 @@
+<dontForget objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+	<changeSet id="123" author="hanek23" dbms="postgresql">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="NO">
+				SELECT is_nullable
+				FROM information_schema.columns
+				WHERE
+				columns.table_name = 'lbj_related_id'
+				AND columns.column_name = 'container'
+			</sqlCheck>
+		</preConditions>
+		<comment>Remove NOTNULL constraint from column container in table LBJ_RELATED_ID if it exists</comment>
+		<dropNotNullConstraint tableName="LBJ_RELATED_ID" columnName="container"
+			columnDataType="integer" />
+	</changeSet>
+
+</dontForget>

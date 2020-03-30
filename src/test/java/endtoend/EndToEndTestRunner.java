@@ -5,10 +5,10 @@ import java.awt.datatransfer.DataFlavor;
 
 import org.junit.jupiter.api.Test;
 
+import testutils.LBJFormTest;
 import testutils.LBJTestUtils;
-import testutils.MainMenuTest;
 
-public class EndToEndTester extends MainMenuTest {
+public class EndToEndTestRunner extends LBJFormTest {
 
 	@Test
 	public void test1() throws Exception {
@@ -30,6 +30,31 @@ public class EndToEndTester extends MainMenuTest {
 		runEndToEndTest(new EndToEndTest4());
 	}
 
+	@Test
+	public void test5() throws Exception {
+		runEndToEndTest(new EndToEndTest5());
+	}
+
+	@Test
+	public void test6() throws Exception {
+		runEndToEndTest(new EndToEndTest6());
+	}
+
+	@Test
+	public void test7() throws Exception {
+		runEndToEndTest(new EndToEndTest7());
+	}
+
+	@Test
+	public void test8() throws Exception {
+		runEndToEndTest(new EndToEndTest8());
+	}
+
+	@Test
+	public void test9() throws Exception {
+		runEndToEndTest(new EndToEndTest9());
+	}
+
 	private void runEndToEndTest(EndToEndTest testCase) throws Exception {
 		testCase.test();
 		String expected = testCase.getExpectedXml();
@@ -37,7 +62,7 @@ public class EndToEndTester extends MainMenuTest {
 		LBJTestUtils.assertLiquibaseXmlEquals(expected, actual, testCase.checkXsd());
 	}
 
-	public static String getStringFromClipboard() throws Exception {
+	private static String getStringFromClipboard() throws Exception {
 		return (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
 	}
 

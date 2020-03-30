@@ -32,11 +32,11 @@ public abstract class AbstractEntity implements Entity {
 		forDatabases.setForMssql(forMssql);
 	}
 
-	public boolean isForPostgreSql() {
+	public boolean isForPostgre() {
 		if (forDatabases == null) {
 			return false;
 		}
-		return forDatabases.isForPostgreSql();
+		return forDatabases.isForPostgre();
 	}
 
 	public void setForPostgreSql(boolean forPostgreSql) {

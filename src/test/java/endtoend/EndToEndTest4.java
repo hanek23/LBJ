@@ -21,6 +21,7 @@ import testutils.asserts.LBJFormAssert;
 public class EndToEndTest4 extends AbstractXmlSupplier implements EndToEndTest {
 
 	private static final String TABLE_NAME = "TABLE_NAME";
+	private static final boolean ONLY_CHANGESETS = true;
 
 	@Override
 	public void test() {
@@ -122,7 +123,7 @@ public class EndToEndTest4 extends AbstractXmlSupplier implements EndToEndTest {
 		LBJFormAssert.assertThat(generateForm).isNotValid();
 
 		// only changesets
-		LBJTestUtils.setValueOf(generateForm.getOnlyChangesetsCheckBox(), true);
+		LBJTestUtils.setValueOf(generateForm.getOnlyChangesetsCheckBox(), ONLY_CHANGESETS);
 		// starting from 10
 		LBJTestUtils.setValueOf(generateForm.getStartingIdTextBox(), "10");
 		// for all databases
@@ -140,7 +141,7 @@ public class EndToEndTest4 extends AbstractXmlSupplier implements EndToEndTest {
 
 	@Override
 	public boolean checkXsd() {
-		return false;
+		return !ONLY_CHANGESETS;
 	}
 
 }

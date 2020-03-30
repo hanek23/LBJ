@@ -18,9 +18,9 @@ import gui.forms.generate.GenerateForm;
 import gui.forms.mainmenu.MainMenuForm;
 import gui.suppliers.LBJFormSupplier;
 import testutils.LBJTestUtils;
-import testutils.MainMenuTest;
+import testutils.LBJFormTest;
 
-public class FormsToEntityTransformerTest extends MainMenuTest {
+public class FormsToEntityTransformerTest extends LBJFormTest {
 
 	@Test
 	public void testTransform() {
@@ -86,7 +86,7 @@ public class FormsToEntityTransformerTest extends MainMenuTest {
 	private void assertDatabases(List<Entity> entities, boolean forOracle, boolean forMssql, boolean forPostgre) {
 		for (Entity entity : entities) {
 			if (entity.isForOracle() == forOracle && entity.isForMssql() == forMssql
-					&& entity.isForPostgreSql() == forPostgre) {
+					&& entity.isForPostgre() == forPostgre) {
 				continue;
 			}
 			fail();
