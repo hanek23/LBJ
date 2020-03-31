@@ -1,12 +1,13 @@
-package generator;
+package constants;
 
 import org.apache.commons.lang3.StringUtils;
 
-import constants.XmlParts;
 import domain.AddColumn;
 import domain.GeneralColumn;
 import domain.RemoveNotNullConstraint;
 import domain.Table;
+import generator.Generator;
+import generator.GeneratorSettings;
 
 /**
  * Supplies {@link Generator} with {@link XmlParts}. Also does replacements of

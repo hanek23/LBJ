@@ -2,6 +2,8 @@ package generator;
 
 import java.util.List;
 
+import constants.XmlParts;
+import constants.XmlPartsSupplier;
 import domain.AddColumn;
 import domain.Column;
 import domain.Entity;
