@@ -1,11 +1,11 @@
-<changeSet id="$ID$" author="$AUTHOR$" dbms="mssql,postgresql">
+<changeSet id="${ID}$" author="${AUTHOR}$" dbms="mssql,postgresql">
 	<preConditions onFail="MARK_RAN">
 		<not>
-			<indexExists indexName="$INDEX_NAME$" />
+			<indexExists indexName="${INDEX_NAME}$" />
 		</not>
 	</preConditions>
-	<comment>Create index $INDEX_NAME$ if it doesn't exist.</comment>
-	<createIndex tableName="$TABLE_NAME$" indexName="$INDEX_NAME$">
-		<column name="$COLUMN_NAME$" />
+	<comment>Create index ${INDEX_NAME}$ if it doesn't exist.</comment>
+	<createIndex tableName="${TABLE_NAME}$" indexName="${INDEX_NAME}$">
+		<column name="${COLUMN_NAME}$" />
 	</createIndex>
 </changeSet>

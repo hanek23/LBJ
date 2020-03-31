@@ -1,3 +1,3 @@
 <dontForget objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-	$CHANGESETS$
+	${CHANGESETS}$
 </dontForget>

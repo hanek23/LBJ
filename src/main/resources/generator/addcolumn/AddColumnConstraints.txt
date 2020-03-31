@@ -1,1 +1,1 @@
-<constraints $COLUMN_FOREIGN_KEY$ $NULLABLE$ />
+<constraints ${COLUMN_FOREIGN_KEY}$ ${NULLABLE}$ />

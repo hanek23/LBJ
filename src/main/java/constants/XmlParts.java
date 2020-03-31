@@ -14,25 +14,36 @@ public class XmlParts {
 	}
 
 	// Replacements
-	protected static final String REPLACE_CHAGESETS = "$CHANGESETS$";
-	protected static final String REPLACE_AUTHOR = "$AUTHOR$";
-	protected static final String REPLACE_ID = "$ID$";
-	protected static final String REPLACE_TABLE_NAME = "$TABLE_NAME$";
-	protected static final String REPLACE_TABLE_NAME_LOWER_CASE = "$TABLE_NAME_LOWER_CASE$";
-	protected static final String REPLACE_COLUMN_PRIMARY_KEY_NAME = "$COLUMN_PK_NAME$";
-	protected static final String REPLACE_CONSTRAIN_PRIMARY_KEY_NAME = "$CONSTRAIN_PK_NAME$";
-	protected static final String REPLACE_SEQUENCE_NAME = "$SEQUENCE_NAME$";
-	protected static final String REPLACE_COLUMN_NAME = "$COLUMN_NAME$";
-	protected static final String REPLACE_COLUMN_NAME_UPPER_CASE = "$COLUMN_NAME_UPPER_CASE$";
-	protected static final String REPLACE_COLUMN_DATA_TYPE = "$COLUMN_TYPE$";
-	protected static final String REPLACE_COLUMN_FOREIGN_KEY_NAME = "$COLUMN_FK_NAME$";
-	protected static final String REPLACE_COLUMN_FOREIGN_KEY_REFERECED_TABLE_NAME = "$REFERENCED_TABLE_NAME$";
-	protected static final String REPLACE_COLUMN_FOREIGN_KEY_REFERECED_COLUMN_NAME = "$REFERENCED_COLUMN_NAME$";
-	protected static final String REPLACE_COLUMN_CONSTRAINS = "$COLUMN_CONSTRAINS$";
-	protected static final String REPLACE_COLUMN_INDEX_NAME = "$INDEX_NAME$";
-	protected static final String REPLACE_COLUMN_FOREIGN_KEY = "$COLUMN_FOREIGN_KEY$";
-	protected static final String REPLACE_COLUMN_NULLABLE = "$NULLABLE$";
-	protected static final String REPLACE_COLUMN_NULLABLE_VALUE = "$NULLABLE_VALUE$";
+	private static final String XML_REPLACE_START = "${";
+	private static final String XML_REPLACE_END = "}$";
+	protected static final String REPLACE_CHAGESETS = XML_REPLACE_START + "CHANGESETS" + XML_REPLACE_END;
+	protected static final String REPLACE_AUTHOR = XML_REPLACE_START + "AUTHOR" + XML_REPLACE_END;
+	protected static final String REPLACE_ID = XML_REPLACE_START + "ID" + XML_REPLACE_END;
+	protected static final String REPLACE_TABLE_NAME = XML_REPLACE_START + "TABLE_NAME" + XML_REPLACE_END;
+	protected static final String REPLACE_TABLE_NAME_LOWER_CASE = XML_REPLACE_START + "TABLE_NAME_LOWER_CASE"
+			+ XML_REPLACE_END;
+	protected static final String REPLACE_COLUMN_PRIMARY_KEY_NAME = XML_REPLACE_START + "COLUMN_PK_NAME"
+			+ XML_REPLACE_END;
+	protected static final String REPLACE_CONSTRAIN_PRIMARY_KEY_NAME = XML_REPLACE_START + "CONSTRAIN_PK_NAME"
+			+ XML_REPLACE_END;
+	protected static final String REPLACE_SEQUENCE_NAME = XML_REPLACE_START + "SEQUENCE_NAME" + XML_REPLACE_END;
+	protected static final String REPLACE_COLUMN_NAME = XML_REPLACE_START + "COLUMN_NAME" + XML_REPLACE_END;
+	protected static final String REPLACE_COLUMN_NAME_UPPER_CASE = XML_REPLACE_START + "COLUMN_NAME_UPPER_CASE"
+			+ XML_REPLACE_END;
+	protected static final String REPLACE_COLUMN_DATA_TYPE = XML_REPLACE_START + "COLUMN_TYPE" + XML_REPLACE_END;
+	protected static final String REPLACE_COLUMN_FOREIGN_KEY_NAME = XML_REPLACE_START + "COLUMN_FK_NAME"
+			+ XML_REPLACE_END;
+	protected static final String REPLACE_COLUMN_FOREIGN_KEY_REFERECED_TABLE_NAME = XML_REPLACE_START
+			+ "REFERENCED_TABLE_NAME" + XML_REPLACE_END;
+	protected static final String REPLACE_COLUMN_FOREIGN_KEY_REFERECED_COLUMN_NAME = XML_REPLACE_START
+			+ "REFERENCED_COLUMN_NAME" + XML_REPLACE_END;
+	protected static final String REPLACE_COLUMN_CONSTRAINS = XML_REPLACE_START + "COLUMN_CONSTRAINS" + XML_REPLACE_END;
+	protected static final String REPLACE_COLUMN_INDEX_NAME = XML_REPLACE_START + "INDEX_NAME" + XML_REPLACE_END;
+	protected static final String REPLACE_COLUMN_FOREIGN_KEY = XML_REPLACE_START + "COLUMN_FOREIGN_KEY"
+			+ XML_REPLACE_END;
+	protected static final String REPLACE_COLUMN_NULLABLE = XML_REPLACE_START + "NULLABLE" + XML_REPLACE_END;
+	protected static final String REPLACE_COLUMN_NULLABLE_VALUE = XML_REPLACE_START + "NULLABLE_VALUE"
+			+ XML_REPLACE_END;
 
 	// Paths to templates
 	private static final String CHANGELOG_START_TEMPLATE = "/generator/shared/ChangelogStart.txt";

@@ -1,14 +1,14 @@
-<changeSet id="$ID$" author="$AUTHOR$" dbms="oracle">
+<changeSet id="${ID}$" author="${AUTHOR}$" dbms="oracle">
 	<preConditions onFail="MARK_RAN">
 		<sqlCheck expectedResult="N">
 			SELECT NULLABLE
 			FROM USER_TAB_COLUMNS
 			WHERE table_name =
-			'$TABLE_NAME$'
-			AND column_name = '$COLUMN_NAME_UPPER_CASE$'
+			'${TABLE_NAME}$'
+			AND column_name = '${COLUMN_NAME_UPPER_CASE}$'
 		</sqlCheck>
 	</preConditions>
-	<comment>Remove NOTNULL constraint from column $COLUMN_NAME_UPPER_CASE$ in table $TABLE_NAME$ if it exists</comment>
-	<dropNotNullConstraint tableName="$TABLE_NAME$" columnName="$COLUMN_NAME$"
-		columnDataType="$COLUMN_TYPE$" />
+	<comment>Remove NOTNULL constraint from column ${COLUMN_NAME_UPPER_CASE}$ in table ${TABLE_NAME}$ if it exists</comment>
+	<dropNotNullConstraint tableName="${TABLE_NAME}$" columnName="${COLUMN_NAME}$"
+		columnDataType="${COLUMN_TYPE}$" />
 </changeSet>

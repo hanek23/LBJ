@@ -1,15 +1,15 @@
-<changeSet id="$ID$" author="$AUTHOR$" dbms="oracle, postgresql">
+<changeSet id="${ID}$" author="${AUTHOR}$" dbms="oracle, postgresql">
 	<preConditions onFail="MARK_RAN">
 		<not>
-			<tableExists tableName="$TABLE_NAME$" />
+			<tableExists tableName="${TABLE_NAME}$" />
 		</not>
 	</preConditions>
 
-	<comment>Create table $TABLE_NAME$</comment>
-	<createTable tableName="$TABLE_NAME$">
+	<comment>Create table ${TABLE_NAME}$</comment>
+	<createTable tableName="${TABLE_NAME}$">
 
-		<column name="$COLUMN_PK_NAME$" type="integer">
-			<constraints primaryKeyName="$CONSTRAIN_PK_NAME$" primaryKey="true" />
+		<column name="${COLUMN_PK_NAME}$" type="integer">
+			<constraints primaryKeyName="${CONSTRAIN_PK_NAME}$" primaryKey="true" />
 		</column>
 
 	</createTable>

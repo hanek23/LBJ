@@ -1,13 +1,13 @@
-<changeSet id="$ID$" author="$AUTHOR$">
+<changeSet id="${ID}$" author="${AUTHOR}$">
 	<preConditions onFail="MARK_RAN">
 		<not>
-			<columnExists tableName="$TABLE_NAME$" columnName="$COLUMN_NAME$" />
+			<columnExists tableName="${TABLE_NAME}$" columnName="${COLUMN_NAME}$" />
 		</not>
 	</preConditions>
-	<comment>Add column $COLUMN_NAME$ to $TABLE_NAME$</comment>
-	<addColumn tableName="$TABLE_NAME$">
-		<column name="$COLUMN_NAME$" type="$COLUMN_TYPE$">
-			$COLUMN_CONSTRAINS$
+	<comment>Add column ${COLUMN_NAME}$ to ${TABLE_NAME}$</comment>
+	<addColumn tableName="${TABLE_NAME}$">
+		<column name="${COLUMN_NAME}$" type="${COLUMN_TYPE}$">
+			${COLUMN_CONSTRAINS}$
 		</column>
 	</addColumn>
 </changeSet>
