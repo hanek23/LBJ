@@ -24,8 +24,8 @@ public class AddColumnIndexNameUpdater implements LBJFormUpdater<AddColumnForm> 
 		}
 		indexName.setEnabled(true);
 		if (tableName.isFocused() || columnName.isFocused() || indexCheckBox.isFocused()) {
-			indexName.setValue(NamingConventions.INDEX_NAME_DEFAULT_VALUE + tableName.getValue()
-					+ NamingConventions.SEPARATOR + columnName.getValue());
+			indexName.setValue(NamingConventions.INDEX_NAME + tableName.getValue() + NamingConventions.SEPARATOR
+					+ columnName.getValue());
 		}
 
 	}

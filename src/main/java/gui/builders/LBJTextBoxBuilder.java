@@ -10,6 +10,7 @@ import gui.suppliers.LBJUpdaterSupplier;
 import gui.suppliers.LBJValidatorSupplier;
 import gui.updaters.LBJValueUpdater;
 import gui.updaters.shared.LBJLowerCaseUpdater;
+import gui.updaters.shared.LBJNamingConventionUpdater;
 import gui.updaters.shared.LBJUpperCaseUpdater;
 import gui.validators.LBJValueValidator;
 import gui.validators.shared.LBJLowerCaseValidator;
@@ -91,6 +92,15 @@ public class LBJTextBoxBuilder {
 	 */
 	public LBJTextBoxBuilder numbersOnly() {
 		addValidator(LBJValidatorSupplier.getNumbersOnlyValidator());
+		return this;
+	}
+
+	/**
+	 * Adds {@link LBJNamingConventionUpdater}
+	 */
+	public LBJTextBoxBuilder addNamingConventionUpdater(String namingConvention) {
+		lbjTextBox.setNamingConvention(namingConvention);
+		addUpdater(LBJValidatorSupplier.getNamingConventionUpdater());
 		return this;
 	}
 

@@ -40,6 +40,8 @@ public abstract class LBJValueHolderComponent<T> extends LBJLabeledComponent {
 	 */
 	public abstract void setValue(T value);
 
+	public abstract boolean isFocused();
+
 	/**
 	 * Visible for testing!
 	 */

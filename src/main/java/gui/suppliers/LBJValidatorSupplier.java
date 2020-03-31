@@ -3,6 +3,7 @@ package gui.suppliers;
 import constants.NamingConventions.LetterCase;
 import gui.forms.generate.GenerateFormDatabasesValidator;
 import gui.updaters.LBJValueUpdater;
+import gui.updaters.shared.LBJNamingConventionUpdater;
 import gui.updaters.shared.LBJUpperCaseUpdater;
 import gui.validators.LBJValueValidator;
 import gui.validators.shared.LBJLowerCaseValidator;
@@ -25,6 +26,7 @@ public class LBJValidatorSupplier {
 	private static final LBJStringRequiredValidator STRING_REQUIRED_VALIDATOR = new LBJStringRequiredValidator();
 	private static final LBJStringLengthValidator STRING_LENGTH_VALIDATOR = new LBJStringLengthValidator();
 	private static final LBJNumbersOnlyValidator STRING_NUMBER_ONLY_VALIDATOR = new LBJNumbersOnlyValidator();
+	private static final LBJNamingConventionUpdater NAMING_CONVENTION_UPDATER = new LBJNamingConventionUpdater();
 	private static final LBJValueValidator<String> NO_VALIDATOR = new LBJValueValidator<String>() {
 		@Override
 		public boolean isValid(String value) {
@@ -76,6 +78,10 @@ public class LBJValidatorSupplier {
 
 	public static LBJNumbersOnlyValidator getNumbersOnlyValidator() {
 		return STRING_NUMBER_ONLY_VALIDATOR;
+	}
+
+	public static LBJNamingConventionUpdater getNamingConventionUpdater() {
+		return NAMING_CONVENTION_UPDATER;
 	}
 
 }

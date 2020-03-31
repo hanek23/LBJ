@@ -12,6 +12,7 @@ import gui.forms.LBJForm;
 public class LBJTextBox extends LBJValueHolderComponent<String> {
 
 	private TextBox textBox;
+	private String namingConvention;
 
 	public LBJTextBox(String name, LBJForm form) {
 		super(name, form);
@@ -48,6 +49,14 @@ public class LBJTextBox extends LBJValueHolderComponent<String> {
 
 	public boolean isFocused() {
 		return getTextBox().isFocused();
+	}
+
+	public String getNamingConvention() {
+		return namingConvention;
+	}
+
+	public void setNamingConvention(String namingConvention) {
+		this.namingConvention = namingConvention;
 	}
 
 }

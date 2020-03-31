@@ -56,7 +56,7 @@ public class AddColumnIndexNameUpdaterTest {
 		assertTrue(indexCheckBox.isChecked());
 		assertTrue(indexName.isEnabled());
 		assertThat(indexName.getValue()).isEqualToIgnoringCase(
-				NamingConventions.INDEX_NAME_DEFAULT_VALUE + TABLE_NAME + NamingConventions.SEPARATOR + COLUMN_NAME);
+				NamingConventions.INDEX_NAME + TABLE_NAME + NamingConventions.SEPARATOR + COLUMN_NAME);
 
 		LBJTestUtils.setValueOf(indexName, NEW_INDEX_NAME);
 

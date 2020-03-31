@@ -32,7 +32,7 @@ public class AddColumnForeignKeyUpdater implements LBJFormUpdater<AddColumnForm>
 		referencedColumn.setEnabled(true);
 		foreignKeyName.setEnabled(true);
 		if (referencedTable.isFocused() || referencedColumn.isFocused() || foreignKeyCheckBox.isFocused()) {
-			foreignKeyName.setValue(NamingConventions.FOREIGN_KEY_NAME_DEFAULT_VALUE + referencedTable.getValue()
+			foreignKeyName.setValue(NamingConventions.FOREIGN_KEY_NAME + referencedTable.getValue()
 					+ NamingConventions.SEPARATOR + referencedColumn.getValue());
 		}
 	}
