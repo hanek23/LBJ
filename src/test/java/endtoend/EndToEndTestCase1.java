@@ -9,11 +9,11 @@ import testutils.LBJTestUtils;
 import testutils.asserts.LBJFormAssert;
 
 /**
- * One boolean column only for postgre, only changesets, starting ID = 99
+ * One column with index and foreign key, for all databases, whole changelog
  */
-public class EndToEndTest7 extends AbstractXmlSupplier implements EndToEndTest {
+public class EndToEndTestCase1 extends AbstractXmlSupplier implements EndToEndTestCase {
 
-	private static final boolean ONLY_CHANGESETS = true;
+	private static final boolean ONLY_CHANGESETS = false;
 
 	@Override
 	public void test() {
@@ -28,24 +28,32 @@ public class EndToEndTest7 extends AbstractXmlSupplier implements EndToEndTest {
 		addColumnForm.focus();
 		LBJFormAssert.assertThat(addColumnForm).isFocused();
 
-		// boolean column
+		// Column
 		LBJTestUtils.setValueOf(addColumnForm.getTableNameTextBox(), "LBJ_REFERENCE");
-		LBJTestUtils.setValueOf(addColumnForm.getColumnNameTextBox(), "forPostgre");
-		LBJTestUtils.setValueOf(addColumnForm.getDataTypeTextBox(), "boolean");
-		LBJFormAssert.assertThat(addColumnForm).isValid();
+		LBJTestUtils.setValueOf(addColumnForm.getColumnNameTextBox(), "action");
+		LBJTestUtils.setValueOf(addColumnForm.getDataTypeTextBox(), "integer");
+		// nullable
+		LBJTestUtils.setValueOf(addColumnForm.getNullableCheckBox(), true);
+		// with index
+		LBJTestUtils.setValueOf(addColumnForm.getIndexCheckBox(), true);
+		LBJTestUtils.setValueOf(addColumnForm.getIndexNameTextBox(), "I_LBJ_REFERENCE_NACTION");
+		// and foreign key
+		LBJTestUtils.setValueOf(addColumnForm.getForeignKeyCheckBox(), true);
+		LBJTestUtils.setValueOf(addColumnForm.getReferencedTableNameTextBox(), "LBJ_ACTION");
+		LBJTestUtils.setValueOf(addColumnForm.getReferencedColumnNameTextBox(), "id_lbj_action");
+		LBJTestUtils.setValueOf(addColumnForm.getForeignKeyNameTextBox(), "F_LBJ_REF_ID_LBJ_ACTION");
 
+		LBJFormAssert.assertThat(addColumnForm).isValid();
 		LBJTestUtils.click(addColumnForm.getGenerateButton());
 		GenerateForm generateForm = LBJFormSupplier.getGenerateForm(addColumnForm.getWindow(), addColumnForm);
 		LBJFormAssert.assertThat(generateForm).isFocused();
 
 		LBJTestUtils.setValueOf(generateForm.getAuthorTextBox(), "hanek23");
-		// only changesets
+		// whole changelog
 		LBJTestUtils.setValueOf(generateForm.getOnlyChangesetsCheckBox(), ONLY_CHANGESETS);
-		// starting from 99
-		LBJTestUtils.setValueOf(generateForm.getStartingIdTextBox(), "99");
-		// only for postgre
-		LBJTestUtils.setValueOf(generateForm.getOracleCheckBox(), false);
-		LBJTestUtils.setValueOf(generateForm.getMssqlCheckBox(), false);
+		// for all databases
+		LBJTestUtils.setValueOf(generateForm.getOracleCheckBox(), true);
+		LBJTestUtils.setValueOf(generateForm.getMssqlCheckBox(), true);
 		LBJTestUtils.setValueOf(generateForm.getPostgreCheckBox(), true);
 
 		LBJFormAssert.assertThat(generateForm).isValid();

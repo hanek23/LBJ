@@ -9,9 +9,9 @@ import testutils.LBJTestUtils;
 import testutils.asserts.LBJFormAssert;
 
 /**
- * One boolean column only for mssql, only changesets, starting ID = 2
+ * One boolean column for all databases, only changesets, starting ID = 23
  */
-public class EndToEndTest6 extends AbstractXmlSupplier implements EndToEndTest {
+public class EndToEndTestCase2 extends AbstractXmlSupplier implements EndToEndTestCase {
 
 	private static final boolean ONLY_CHANGESETS = true;
 
@@ -28,9 +28,9 @@ public class EndToEndTest6 extends AbstractXmlSupplier implements EndToEndTest {
 		addColumnForm.focus();
 		LBJFormAssert.assertThat(addColumnForm).isFocused();
 
-		// boolean column
+		// boolean column 1
 		LBJTestUtils.setValueOf(addColumnForm.getTableNameTextBox(), "LBJ_REFERENCE");
-		LBJTestUtils.setValueOf(addColumnForm.getColumnNameTextBox(), "forMssql");
+		LBJTestUtils.setValueOf(addColumnForm.getColumnNameTextBox(), "forAllDatabases");
 		LBJTestUtils.setValueOf(addColumnForm.getDataTypeTextBox(), "boolean");
 		LBJFormAssert.assertThat(addColumnForm).isValid();
 
@@ -41,12 +41,12 @@ public class EndToEndTest6 extends AbstractXmlSupplier implements EndToEndTest {
 		LBJTestUtils.setValueOf(generateForm.getAuthorTextBox(), "hanek23");
 		// only changesets
 		LBJTestUtils.setValueOf(generateForm.getOnlyChangesetsCheckBox(), ONLY_CHANGESETS);
-		// starting from 2
-		LBJTestUtils.setValueOf(generateForm.getStartingIdTextBox(), "2");
-		// only for mssql
-		LBJTestUtils.setValueOf(generateForm.getOracleCheckBox(), false);
+		// starting from 23
+		LBJTestUtils.setValueOf(generateForm.getStartingIdTextBox(), "23");
+		// for all databases
+		LBJTestUtils.setValueOf(generateForm.getOracleCheckBox(), true);
 		LBJTestUtils.setValueOf(generateForm.getMssqlCheckBox(), true);
-		LBJTestUtils.setValueOf(generateForm.getPostgreCheckBox(), false);
+		LBJTestUtils.setValueOf(generateForm.getPostgreCheckBox(), true);
 
 		LBJFormAssert.assertThat(generateForm).isValid();
 		LBJTestUtils.click(generateForm.getGenerateButton());

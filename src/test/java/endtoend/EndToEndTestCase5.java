@@ -9,11 +9,11 @@ import testutils.LBJTestUtils;
 import testutils.asserts.LBJFormAssert;
 
 /**
- * One boolean column for all databases, only changesets, starting ID = 23
+ * One boolean column only for oracle, whole changelog
  */
-public class EndToEndTest2 extends AbstractXmlSupplier implements EndToEndTest {
+public class EndToEndTestCase5 extends AbstractXmlSupplier implements EndToEndTestCase {
 
-	private static final boolean ONLY_CHANGESETS = true;
+	private static final boolean ONLY_CHANGESETS = false;
 
 	@Override
 	public void test() {
@@ -28,9 +28,9 @@ public class EndToEndTest2 extends AbstractXmlSupplier implements EndToEndTest {
 		addColumnForm.focus();
 		LBJFormAssert.assertThat(addColumnForm).isFocused();
 
-		// boolean column 1
+		// boolean column
 		LBJTestUtils.setValueOf(addColumnForm.getTableNameTextBox(), "LBJ_REFERENCE");
-		LBJTestUtils.setValueOf(addColumnForm.getColumnNameTextBox(), "forAllDatabases");
+		LBJTestUtils.setValueOf(addColumnForm.getColumnNameTextBox(), "forOracle");
 		LBJTestUtils.setValueOf(addColumnForm.getDataTypeTextBox(), "boolean");
 		LBJFormAssert.assertThat(addColumnForm).isValid();
 
@@ -39,14 +39,12 @@ public class EndToEndTest2 extends AbstractXmlSupplier implements EndToEndTest {
 		LBJFormAssert.assertThat(generateForm).isFocused();
 
 		LBJTestUtils.setValueOf(generateForm.getAuthorTextBox(), "hanek23");
-		// only changesets
+		// whole changelog
 		LBJTestUtils.setValueOf(generateForm.getOnlyChangesetsCheckBox(), ONLY_CHANGESETS);
-		// starting from 23
-		LBJTestUtils.setValueOf(generateForm.getStartingIdTextBox(), "23");
-		// for all databases
+		// only for oracle
 		LBJTestUtils.setValueOf(generateForm.getOracleCheckBox(), true);
-		LBJTestUtils.setValueOf(generateForm.getMssqlCheckBox(), true);
-		LBJTestUtils.setValueOf(generateForm.getPostgreCheckBox(), true);
+		LBJTestUtils.setValueOf(generateForm.getMssqlCheckBox(), false);
+		LBJTestUtils.setValueOf(generateForm.getPostgreCheckBox(), false);
 
 		LBJFormAssert.assertThat(generateForm).isValid();
 		LBJTestUtils.click(generateForm.getGenerateButton());

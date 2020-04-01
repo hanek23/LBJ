@@ -18,7 +18,7 @@ import testutils.asserts.LBJFormAssert;
  * but first clicking all kinds of buttons on all forms to test their
  * functionality
  */
-public class EndToEndTest4 extends AbstractXmlSupplier implements EndToEndTest {
+public class EndToEndTestCase4 extends AbstractXmlSupplier implements EndToEndTestCase {
 
 	private static final String TABLE_NAME = "TABLE_NAME";
 	private static final boolean ONLY_CHANGESETS = true;

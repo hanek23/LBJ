@@ -1,17 +1,17 @@
 package endtoend;
 
-import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.generate.GenerateForm;
 import gui.forms.mainmenu.MainMenuForm;
+import gui.forms.removenotnullconstraint.RemoveNotNullConstraintForm;
 import gui.suppliers.LBJFormSupplier;
 import testutils.AbstractXmlSupplier;
 import testutils.LBJTestUtils;
 import testutils.asserts.LBJFormAssert;
 
 /**
- * One boolean column only for oracle, whole changelog
+ * Removing not null constraint, for oracle, whole changelog
  */
-public class EndToEndTest5 extends AbstractXmlSupplier implements EndToEndTest {
+public class EndToEndTestCase3 extends AbstractXmlSupplier implements EndToEndTestCase {
 
 	private static final boolean ONLY_CHANGESETS = false;
 
@@ -19,23 +19,23 @@ public class EndToEndTest5 extends AbstractXmlSupplier implements EndToEndTest {
 	public void test() {
 		MainMenuForm mainMenuForm = LBJFormSupplier.getMainMenuForm();
 		mainMenuForm.focus();
-		AddColumnForm addColumnForm = mainMenuForm.getAddColumnForm();
-		addColumnForm.focus();
+		RemoveNotNullConstraintForm removeNotNullConstraintForm = mainMenuForm.getRemoveNotNullConstraintForm();
+		removeNotNullConstraintForm.focus();
 
-		LBJFormAssert.assertThat(addColumnForm).isFocused();
-		LBJTestUtils.click(addColumnForm.getBackButton());
+		LBJFormAssert.assertThat(removeNotNullConstraintForm).isFocused();
+		LBJTestUtils.click(removeNotNullConstraintForm.getBackButton());
 		LBJFormAssert.assertThat(mainMenuForm).isFocused();
-		addColumnForm.focus();
-		LBJFormAssert.assertThat(addColumnForm).isFocused();
+		removeNotNullConstraintForm.focus();
+		LBJFormAssert.assertThat(removeNotNullConstraintForm).isFocused();
 
-		// boolean column
-		LBJTestUtils.setValueOf(addColumnForm.getTableNameTextBox(), "LBJ_REFERENCE");
-		LBJTestUtils.setValueOf(addColumnForm.getColumnNameTextBox(), "forOracle");
-		LBJTestUtils.setValueOf(addColumnForm.getDataTypeTextBox(), "boolean");
-		LBJFormAssert.assertThat(addColumnForm).isValid();
+		LBJTestUtils.setValueOf(removeNotNullConstraintForm.getTableNameTextBox(), "LBJ_RELATED_ID");
+		LBJTestUtils.setValueOf(removeNotNullConstraintForm.getColumnNameTextBox(), "container");
+		LBJTestUtils.setValueOf(removeNotNullConstraintForm.getDataTypeTextBox(), "integer");
+		LBJFormAssert.assertThat(removeNotNullConstraintForm).isValid();
 
-		LBJTestUtils.click(addColumnForm.getGenerateButton());
-		GenerateForm generateForm = LBJFormSupplier.getGenerateForm(addColumnForm.getWindow(), addColumnForm);
+		LBJTestUtils.click(removeNotNullConstraintForm.getGenerateButton());
+		GenerateForm generateForm = LBJFormSupplier.getGenerateForm(removeNotNullConstraintForm.getWindow(),
+				removeNotNullConstraintForm);
 		LBJFormAssert.assertThat(generateForm).isFocused();
 
 		LBJTestUtils.setValueOf(generateForm.getAuthorTextBox(), "hanek23");

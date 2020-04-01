@@ -63,8 +63,6 @@ public class LBJTest extends LBJFormTest {
 		mainMenuThread.start();
 		wait(1000);
 		mainMenuForm.focus();
-		System.out.println("asd");
-		System.out.println("+ěščřžýáíáéď");
 		mainMenuForm.getThread().setExceptionHandler(new ExceptionHandler() {
 
 			@Override
