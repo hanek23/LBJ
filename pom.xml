@@ -73,6 +73,8 @@
 				<configuration>
 					<printSummary>true</printSummary>
 					<encoding>UTF-8</encoding>
+					<inputEncoding>UTF-8</inputEncoding>
+					<outputEncoding>UTF-8</outputEncoding>
 				</configuration>
 			</plugin>
 			<plugin>
