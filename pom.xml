@@ -12,8 +12,8 @@
 	</properties>
 
 	<dependencies>
-		<!-- custom patch for lanterna before https://github.com/mabe02/lanterna/issues/452 
-			is resolved. Replace version with 3.0.2 if you do not have this patch -->
+		<!-- custom patch for lanterna before https://github.com/mabe02/lanterna/issues/452 is resolved. Replace 
+			version with 3.0.2 if you do not have this patch -->
 		<dependency>
 			<groupId>com.googlecode.lanterna</groupId>
 			<artifactId>lanterna</artifactId>
@@ -64,6 +64,11 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M3</version>
+			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
