@@ -1,3 +1,2 @@
 - default value in AddColumnForm
-- configurable naming convetions, default values, 
-- automatic updaters by component name using default values
+- configurable naming convetions, default values
