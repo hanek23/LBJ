@@ -12,7 +12,7 @@ import constants.Labels;
 import constants.Settings;
 import gui.components.LBJLabeledComponent;
 import gui.components.LBJPlainLabel;
-import gui.components.LBJValueHolderComponent;
+import gui.components.LBJValueComponent;
 import gui.forms.LBJForm;
 import gui.forms.LBJWizardForm;
 import gui.forms.mainmenu.MainMenuForm;
@@ -37,7 +37,7 @@ public class LBJFormUtils {
 		return content;
 	}
 
-	public static void addComponentTo(LBJForm form, LBJValueHolderComponent<?> component) {
+	public static void addComponentTo(LBJForm form, LBJValueComponent<?> component) {
 		form.getContent()
 				.addComponent(component.getLabel().setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
 		form.getContent().addComponent(component.getComponent()
@@ -49,7 +49,7 @@ public class LBJFormUtils {
 				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS)));
 	}
 
-	public static void addHiddenTextAreaTo(LBJForm form, LBJValueHolderComponent<?> component) {
+	public static void addHiddenTextAreaTo(LBJForm form, LBJValueComponent<?> component) {
 		form.getContent().addComponent(component.getComponent().setPreferredSize(new TerminalSize(0, 0))
 				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS)));
 	}

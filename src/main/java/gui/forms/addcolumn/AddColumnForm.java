@@ -17,7 +17,6 @@ import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
 import gui.forms.createtable.CreateTableForm;
 import gui.forms.mainmenu.MainMenuForm;
-import gui.suppliers.LBJUpdaterSupplier;
 import gui.utils.LBJFormUtils;
 
 /**
@@ -69,19 +68,24 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 		indexCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_INDEX, this).build();
 
 		indexNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_INDEX_NAME, this).required().addLengthValidator()
+
+				.addNamingConventionUpdater(NamingConventions.INDEX_NAME).activatorComponent(indexCheckBox)
 				.addCaseUpdaterAndValidator(NamingConventions.INDEX_NAME_CASE).disabled().build();
 
 		foreignKeyCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY, this).build();
 
 		referencedTableNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_REFERENCED_TABLE, this).required()
-				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.TABLE_NAME_CASE).disabled().build();
+				.addLengthValidator().activatorComponent(foreignKeyCheckBox)
+				.addCaseUpdaterAndValidator(NamingConventions.TABLE_NAME_CASE).disabled().build();
 
 		referencedColumnNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_REFERENCED_COLUMN, this).required()
-				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.COLUMN_NAME_CASE).disabled().build();
+				.addLengthValidator().activatorComponent(foreignKeyCheckBox)
+				.addCaseUpdaterAndValidator(NamingConventions.COLUMN_NAME_CASE).disabled().build();
 
 		foreignKeyNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY_NAME, this).required()
-				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.FOREIGN_KEY_NAME_CASE).disabled()
-				.build();
+				.addLengthValidator().addNamingConventionUpdater(NamingConventions.FOREIGN_KEY_NAME)
+				.activatorComponent(foreignKeyCheckBox)
+				.addCaseUpdaterAndValidator(NamingConventions.FOREIGN_KEY_NAME_CASE).disabled().build();
 
 		addColumnButton = LBJFormUtils.createAddColumnButton(this);
 		generateButton = LBJFormUtils.createGenerateButton(this);
@@ -104,13 +108,12 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 
 	@Override
 	public void addFormUpdaters() {
-		addUpdater(LBJUpdaterSupplier.getAddColumnForeignKeyUpdater());
-		addUpdater(LBJUpdaterSupplier.getAddColumnIndexNameUpdater());
+		// no form updaters
 	}
 
 	@Override
 	public void addFormValidators() {
-		// no extra validators
+		// no form validators
 	}
 
 	@Override

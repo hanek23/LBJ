@@ -11,7 +11,6 @@ import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
 import gui.forms.addcolumn.AddColumnForm;
-import gui.suppliers.LBJUpdaterSupplier;
 import gui.utils.LBJFormUtils;
 
 /**
@@ -38,22 +37,23 @@ public class CreateTableForm extends LBJEntityForm<Table> {
 				.addCaseUpdaterAndValidator(NamingConventions.TABLE_NAME_CASE).build();
 
 		primaryKeyNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_NAME, this).required()
-				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.PRIMARY_KEY_NAME_CASE).build();
+				.addNamingConventionUpdater(NamingConventions.PRIMARY_KEY_NAME)
+				.addCaseUpdaterAndValidator(NamingConventions.PRIMARY_KEY_NAME_CASE).addLengthValidator().build();
 
 		primaryKeyConstraintNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN, this)
-				.required().addLengthValidator()
+				.required().addLengthValidator().addNamingConventionUpdater(NamingConventions.PRIMARY_KEY_CONSTRAINT)
 				.addCaseUpdaterAndValidator(NamingConventions.PRIMARY_KEY_CONSTRAINT_NAME_CASE).build();
 
 		sequenceNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_SEQUENCE_NAME, this).required()
-				.addLengthValidator().addCaseUpdaterAndValidator(NamingConventions.SEQUENCE_NAME_CASE).build();
+				.addCaseUpdaterAndValidator(NamingConventions.SEQUENCE_NAME_CASE).addLengthValidator()
+				.addNamingConventionUpdater(NamingConventions.SEQUENCE_NAME).build();
 
 		addColumnButton = LBJFormUtils.createAddColumnButton(this);
 	}
 
 	@Override
 	public void addFormUpdaters() {
-		addUpdater(LBJUpdaterSupplier.getCreateTablePrimaryKeyUpdater());
-		addUpdater(LBJUpdaterSupplier.getCreateTableSequenceNameUpdater());
+		// no form updaters
 	}
 
 	@Override

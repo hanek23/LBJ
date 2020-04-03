@@ -24,7 +24,6 @@ import gui.components.LBJPlainLabel;
 import gui.components.LBJTextBox;
 import gui.forms.LBJForm;
 import gui.forms.LBJWizardForm;
-import gui.suppliers.LBJUpdaterSupplier;
 import gui.suppliers.LBJValidatorSupplier;
 import gui.utils.LBJFormUtils;
 import transformers.FormsToEntityTransformer;
@@ -62,8 +61,8 @@ public class GenerateForm extends LBJWizardForm {
 
 		onlyChangeSetsCheckBox = new LBJCheckBoxBuilder(Labels.GENERATE_FORM_ONLY_CHANGESETS, this).build();
 
-		startingIdTextBox = new LBJTextBoxBuilder(Labels.GENERATE_FORM_CHANGESETS_STARTING_ID, this).disabled()
-				.numbersOnly().required().build();
+		startingIdTextBox = new LBJTextBoxBuilder(Labels.GENERATE_FORM_CHANGESETS_STARTING_ID, this).defaultValue("1")
+				.disabled().numbersOnly().required().activatorComponent(onlyChangeSetsCheckBox).build();
 
 		databasesLabel = new LBJPlainLabelBuilder(Labels.GENERATE_FORM_DATABASES, this).build();
 		oracleCheckBox = new LBJCheckBoxBuilder(Labels.GENERATE_FORM_DATABASES_ORACLE, this).checked().build();
@@ -103,14 +102,12 @@ public class GenerateForm extends LBJWizardForm {
 
 	@Override
 	public void addFormUpdaters() {
-		addUpdater(LBJUpdaterSupplier.getGenerateFormStartingIdUpdater());
-
+		// no form updaters
 	}
 
 	@Override
 	public void addFormValidators() {
 		addValidator(LBJValidatorSupplier.getGenerateFormDatabasesValidator());
-
 	}
 
 	@Override

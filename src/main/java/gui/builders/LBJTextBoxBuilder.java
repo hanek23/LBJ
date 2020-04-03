@@ -5,10 +5,13 @@ import com.googlecode.lanterna.gui2.TextBox;
 
 import constants.NamingConventions.LetterCase;
 import gui.components.LBJTextBox;
+import gui.components.LBJValueComponent;
 import gui.forms.LBJForm;
 import gui.suppliers.LBJUpdaterSupplier;
 import gui.suppliers.LBJValidatorSupplier;
+import gui.updaters.LBJComponentUpdater;
 import gui.updaters.LBJValueUpdater;
+import gui.updaters.shared.LBJActivatorComponentUpdater;
 import gui.updaters.shared.LBJLowerCaseUpdater;
 import gui.updaters.shared.LBJNamingConventionUpdater;
 import gui.updaters.shared.LBJUpperCaseUpdater;
@@ -44,19 +47,45 @@ public class LBJTextBoxBuilder {
 		return this;
 	}
 
-	/**
-	 * Adds custom validator to the component
-	 */
-	public LBJTextBoxBuilder addValidator(LBJValueValidator<String> validator) {
-		lbjTextBox.addValidator(validator);
+	public LBJTextBoxBuilder defaultValue(String defaultValue) {
+		lbjTextBox.setDefaultValue(defaultValue);
 		return this;
 	}
 
 	/**
-	 * Adds custom updater to the component
+	 * Adds custom {@link LBJValueValidator} to the component
 	 */
-	public LBJTextBoxBuilder addUpdater(LBJValueUpdater<String> updater) {
+	public LBJTextBoxBuilder addValueValidator(LBJValueValidator<String> validator) {
+		lbjTextBox.addValueValidator(validator);
+		return this;
+	}
+
+	/**
+	 * Adds custom {@link LBJValueUpdater} to the component
+	 */
+	public LBJTextBoxBuilder addValueUpdater(LBJValueUpdater<String> updater) {
+		lbjTextBox.addValueUpdater(updater);
+		return this;
+	}
+
+	/**
+	 * Adds custom {@link LBJComponentUpdater} to the component
+	 */
+	public LBJTextBoxBuilder addUpdater(LBJComponentUpdater updater) {
 		lbjTextBox.addUpdater(updater);
+		return this;
+	}
+
+	/**
+	 * Adds component (usually {@link Checkbox}) to this component so that when
+	 * value of this activatorComponent changes to <code>true</code>, this component
+	 * will get activated. Also adds {@link LBJActivatorComponentUpdater} which does
+	 * the work.
+	 * 
+	 */
+	public LBJTextBoxBuilder activatorComponent(LBJValueComponent<Boolean> activatorComponent) {
+		lbjTextBox.setActivatorComponent(activatorComponent);
+		addUpdater(LBJUpdaterSupplier.getActivatorComponentUpdater());
 		return this;
 	}
 
@@ -64,14 +93,14 @@ public class LBJTextBoxBuilder {
 	 * Adds {@link LBJStringRequiredValidator} to this {@link LBJTextBox}
 	 */
 	public LBJTextBoxBuilder required() {
-		return addValidator(LBJValidatorSupplier.getStringRequiredValidator());
+		return addValueValidator(LBJValidatorSupplier.getStringRequiredValidator());
 	}
 
 	/**
 	 * Adds {@link LBJStringLengthValidator} to this {@link LBJTextBox}
 	 */
 	public LBJTextBoxBuilder addLengthValidator() {
-		return addValidator(LBJValidatorSupplier.getStringLengthValidator());
+		return addValueValidator(LBJValidatorSupplier.getStringLengthValidator());
 	}
 
 	/**
@@ -83,15 +112,15 @@ public class LBJTextBoxBuilder {
 		if (LetterCase.NONE == letterCase) {
 			return this;
 		}
-		addUpdater(LBJUpdaterSupplier.caseUpdater(letterCase));
-		return addValidator(LBJValidatorSupplier.getCaseValidator(letterCase));
+		addValueUpdater(LBJUpdaterSupplier.caseUpdater(letterCase));
+		return addValueValidator(LBJValidatorSupplier.getCaseValidator(letterCase));
 	}
 
 	/**
 	 * Adds {@link LBJNumbersOnlyValidator}
 	 */
 	public LBJTextBoxBuilder numbersOnly() {
-		addValidator(LBJValidatorSupplier.getNumbersOnlyValidator());
+		addValueValidator(LBJValidatorSupplier.getNumbersOnlyValidator());
 		return this;
 	}
 
@@ -100,12 +129,27 @@ public class LBJTextBoxBuilder {
 	 */
 	public LBJTextBoxBuilder addNamingConventionUpdater(String namingConvention) {
 		lbjTextBox.setNamingConvention(namingConvention);
-		addUpdater(LBJValidatorSupplier.getNamingConventionUpdater());
+		addValueUpdater(LBJValidatorSupplier.getNamingConventionUpdater());
 		return this;
 	}
 
 	public LBJTextBox build() {
+		lbjTextBox.getValueUpdaters().sort(LBJTextBoxBuilder::compareUpdaters);
 		return lbjTextBox;
+	}
+
+	/**
+	 * Case validators should always be the last one that gets called by
+	 * {@link LBJValueComponent#update()}
+	 */
+	private static int compareUpdaters(LBJValueUpdater<String> u1, LBJValueUpdater<String> u2) {
+		if (u1 instanceof LBJLowerCaseUpdater || u1 instanceof LBJUpperCaseUpdater) {
+			return 1;
+		}
+		if (u2 instanceof LBJLowerCaseUpdater || u2 instanceof LBJUpperCaseUpdater) {
+			return -1;
+		}
+		return 0;
 	}
 
 }

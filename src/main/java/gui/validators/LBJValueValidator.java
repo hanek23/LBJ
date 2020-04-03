@@ -1,9 +1,9 @@
 package gui.validators;
 
-import gui.components.LBJValueHolderComponent;
+import gui.components.LBJValueComponent;
 
 /**
- * {@link LBJValueHolderComponent}'s value validator.
+ * {@link LBJValueComponent}'s value validator.
  */
 public interface LBJValueValidator<T> {
 

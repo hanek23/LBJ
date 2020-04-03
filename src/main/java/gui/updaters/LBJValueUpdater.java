@@ -1,12 +1,12 @@
 package gui.updaters;
 
-import gui.components.LBJValueHolderComponent;
+import gui.components.LBJValueComponent;
 
 /**
- * {@link LBJValueHolderComponent}'s value updater.
+ * {@link LBJValueComponent}'s value updater.
  */
 public interface LBJValueUpdater<T> {
 
-	void update(LBJValueHolderComponent<T> component);
+	void update(LBJValueComponent<T> component);
 
 }

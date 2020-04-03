@@ -2,7 +2,7 @@ package gui.updaters.shared;
 
 import org.apache.commons.lang3.StringUtils;
 
-import gui.components.LBJValueHolderComponent;
+import gui.components.LBJValueComponent;
 import gui.updaters.LBJValueUpdater;
 
 /**
@@ -11,7 +11,7 @@ import gui.updaters.LBJValueUpdater;
 public class LBJLowerCaseUpdater implements LBJValueUpdater<String> {
 
 	@Override
-	public void update(LBJValueHolderComponent<String> component) {
+	public void update(LBJValueComponent<String> component) {
 		component.setValue(StringUtils.lowerCase(component.getValue()));
 	}
 

@@ -17,9 +17,10 @@ public class NamingConventions {
 	public static final String START = "€{";
 	public static final String END = "}€";
 
-	public static final String PRIMARY_KEY_NAME_DEFAULT_VALUE = "id" + SEPARATOR;
-	public static final String PRIMARY_KEY_CONSTRAINT_DEFAULT_VALUE = "P" + SEPARATOR;
-	public static final String SEQUENCE_NAME_DEFAULT_VALUE = "SEQ" + SEPARATOR;
+	public static final String PRIMARY_KEY_NAME = "id" + SEPARATOR + toNamingConvention(Labels.TABLE_NAME);
+	public static final String PRIMARY_KEY_CONSTRAINT = "P" + SEPARATOR
+			+ toNamingConvention(Labels.TABLE_NAME);
+	public static final String SEQUENCE_NAME = "SEQ" + SEPARATOR + toNamingConvention(Labels.TABLE_NAME);
 	public static final String INDEX_NAME = "I" + SEPARATOR + toNamingConvention(Labels.TABLE_NAME) + SEPARATOR
 			+ toNamingConvention(Labels.COLUMN_NAME);
 

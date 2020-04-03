@@ -6,10 +6,10 @@ import com.googlecode.lanterna.gui2.Component;
 import gui.forms.LBJForm;
 
 /**
- * Boolean implementation of {@link LBJValueHolderComponent} using
+ * Boolean implementation of {@link LBJValueComponent} using
  * {@link CheckBox}.
  */
-public class LBJCheckBox extends LBJValueHolderComponent<Boolean> {
+public class LBJCheckBox extends LBJValueComponent<Boolean> {
 
 	private CheckBox checkBox;
 

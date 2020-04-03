@@ -46,7 +46,7 @@ public class LBJUpperCaseValidatorTest {
 	@Test
 	public void testWithComponentTrue() {
 		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm())
-				.addValidator(LBJValidatorSupplier.getUpperCasevalidator()).build();
+				.addValueValidator(LBJValidatorSupplier.getUpperCasevalidator()).build();
 		textBox.setValue("TABLE_NAME");
 
 		assertTrue(textBox.isValid());
@@ -58,7 +58,7 @@ public class LBJUpperCaseValidatorTest {
 	@Test
 	public void testWithComponentFalse() {
 		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm())
-				.addValidator(LBJValidatorSupplier.getUpperCasevalidator()).build();
+				.addValueValidator(LBJValidatorSupplier.getUpperCasevalidator()).build();
 		textBox.setValue("TABLE_NAMe");
 
 		assertFalse(textBox.isValid());

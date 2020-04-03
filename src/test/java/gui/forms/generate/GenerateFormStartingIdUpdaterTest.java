@@ -19,13 +19,13 @@ public class GenerateFormStartingIdUpdaterTest {
 		assertThat(onlyChangesets).isEnabled();
 		assertThat(startingId).isNotEnabled();
 		assertThat(onlyChangesets).isNotChecked();
-		assertThat(startingId).isBlank();
+		assertThat(startingId).hasValueEqualTo("1");
 
 		LBJTestUtils.setValueOf(onlyChangesets, true);
 
 		assertThat(onlyChangesets).isChecked();
 		assertThat(startingId).isEnabled();
-		assertThat(startingId).isBlank();
+		assertThat(startingId).hasValueEqualTo("1");
 		startingId.setValue("10");
 
 		LBJTestUtils.setValueOf(onlyChangesets, false);

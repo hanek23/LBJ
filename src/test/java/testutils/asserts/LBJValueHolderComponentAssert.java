@@ -4,22 +4,22 @@ import org.assertj.core.api.Assertions;
 import org.assertj.core.util.Objects;
 
 import constants.NamingConventions;
-import gui.components.LBJValueHolderComponent;
+import gui.components.LBJValueComponent;
 import gui.suppliers.LBJValidatorSupplier;
 import gui.validators.LBJValueValidator;
 
-public class LBJValueHolderComponentAssert extends LBJLabeledComponentAssert<LBJValueHolderComponent<?>> {
+public class LBJValueHolderComponentAssert extends LBJLabeledComponentAssert<LBJValueComponent<?>> {
 
-	public LBJValueHolderComponentAssert(LBJValueHolderComponent<?> actual, Class<?> selfType) {
+	public LBJValueHolderComponentAssert(LBJValueComponent<?> actual, Class<?> selfType) {
 		super(actual, selfType);
 	}
 
-	public static LBJValueHolderComponentAssert assertThat(LBJValueHolderComponent<?> actual) {
+	public static LBJValueHolderComponentAssert assertThat(LBJValueComponent<?> actual) {
 		return new LBJValueHolderComponentAssert(actual, LBJValueHolderComponentAssert.class);
 	}
 
 	public LBJValueHolderComponentAssert hasValidator(LBJValueValidator<?> validator) {
-		if (!actual.getValidators().contains(validator)) {
+		if (!actual.getValueValidators().contains(validator)) {
 			failWithMessage("Expecting component '%s' to have validator of type '%s', but it does not", actual,
 					validator.getClass().getSimpleName());
 		}

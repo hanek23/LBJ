@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import constants.NamingConventions;
 import gui.components.LBJComponent;
 import gui.components.LBJTextBox;
-import gui.components.LBJValueHolderComponent;
+import gui.components.LBJValueComponent;
 import gui.forms.LBJForm;
 import gui.updaters.LBJValueUpdater;
 
@@ -24,7 +24,8 @@ import gui.updaters.LBJValueUpdater;
 public class LBJNamingConventionUpdater implements LBJValueUpdater<String> {
 
 	@Override
-	public void update(LBJValueHolderComponent<String> component) {
+	@SuppressWarnings("unchecked")
+	public void update(LBJValueComponent<String> component) {
 		// Default implementation of LBJValueHolderComponent<String> is LBJTextBox
 		LBJTextBox textBox = (LBJTextBox) component;
 		String[] componentNames = NamingConventions.fromNamingConvention(textBox.getNamingConvention());
@@ -33,7 +34,8 @@ public class LBJNamingConventionUpdater implements LBJValueUpdater<String> {
 		// if there are duplicate names of components we have got bigger problems
 		// somewhere else
 		boolean isOneFocused = componentByName.values().stream()
-				.anyMatch(c -> ((LBJValueHolderComponent<String>) c).isFocused());
+				.anyMatch(c -> ((LBJValueComponent<String>) c).isFocused());
+		isOneFocused |= component.isActivatorComponentFocused();
 		if (!isOneFocused) {
 			// Only updating value if one of related components is focused. This way user
 			// can still choose whatever name he/she wishes regardless of naming
@@ -41,11 +43,15 @@ public class LBJNamingConventionUpdater implements LBJValueUpdater<String> {
 			return;
 		}
 		String value = textBox.getNamingConvention();
+		boolean allRelatedValuesBlank = true;
 		for (Entry<String, LBJComponent> entry : componentByName.entrySet()) {
+			String relatedComponentValue = ((LBJTextBox) entry.getValue()).getValue();
+			allRelatedValuesBlank &= StringUtils.isBlank(relatedComponentValue);
 			value = StringUtils.replace(value, NamingConventions.toNamingConvention(entry.getKey()),
-					((LBJTextBox) entry.getValue()).getValue());
+					relatedComponentValue);
 		}
-		component.setValue(value);
+		// If all related components are blank, default value should be shown
+		textBox.setValue(allRelatedValuesBlank ? textBox.getDefaultValue() : value);
 	}
 
 	private Map<String, LBJComponent> getComponentByNameOn(LBJForm form, String[] names) {

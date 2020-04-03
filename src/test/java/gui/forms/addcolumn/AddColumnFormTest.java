@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import constants.Labels;
 import constants.NamingConventions;
 import domain.AddColumn;
-import gui.suppliers.LBJUpdaterSupplier;
 import testutils.LBJTestUtils;
 
 public class AddColumnFormTest {
@@ -19,13 +18,13 @@ public class AddColumnFormTest {
 	private static final String COLUMN_DATA_TYPE = "integer";
 	private static final boolean NULLABLE = false;
 	private static final boolean HAS_INDEX = true;
-	private static final String INDEX_NAME = NamingConventions.INDEX_NAME + TABLE_NAME
-			+ NamingConventions.SEPARATOR + COLUMN_NAME;
+	private static final String INDEX_NAME = NamingConventions.INDEX_NAME + TABLE_NAME + NamingConventions.SEPARATOR
+			+ COLUMN_NAME;
 	private static final boolean HAS_FOREIGNKEY = true;
 	private static final String REFERENCED_TABLE_NAME = "NBA";
 	private static final String REFERENCED_COLUMN_NAME = "goat";
-	private static final String FOREIGN_KEY_NAME = NamingConventions.FOREIGN_KEY_NAME
-			+ REFERENCED_TABLE_NAME + NamingConventions.SEPARATOR + REFERENCED_COLUMN_NAME;
+	private static final String FOREIGN_KEY_NAME = NamingConventions.FOREIGN_KEY_NAME + REFERENCED_TABLE_NAME
+			+ NamingConventions.SEPARATOR + REFERENCED_COLUMN_NAME;
 
 	@Test
 	public void testInitialize() {
@@ -68,9 +67,6 @@ public class AddColumnFormTest {
 		assertThat(form.getForeignKeyNameTextBox()).isRequired()
 				.hasCaseValidator(NamingConventions.FOREIGN_KEY_NAME_CASE).hasLengthValidator();
 
-		// and updaters
-		assertThat(form).hasUpdater(LBJUpdaterSupplier.getAddColumnIndexNameUpdater());
-		assertThat(form).hasUpdater(LBJUpdaterSupplier.getAddColumnForeignKeyUpdater());
 	}
 
 	@Test

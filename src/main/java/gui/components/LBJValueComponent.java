@@ -2,8 +2,8 @@ package gui.components;
 
 import java.lang.reflect.ParameterizedType;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.googlecode.lanterna.gui2.CheckBox;
 import com.googlecode.lanterna.gui2.Component;
@@ -17,15 +17,15 @@ import gui.validators.LBJValueValidator;
 /**
  * Abstract base for {@link LBJComponent}s that hold some value T like
  * {@link String} or {@link Boolean} and also has a {@link Label} It provides
- * place for custom {@link LBJValueUpdater}s and {@link LBJValueValidators}s to
+ * place for custom {@link LBJValueUpdater}s and {@link LBJValueValidator}s to
  * be added which LBJ Framework calls when they are needed.
  */
-public abstract class LBJValueHolderComponent<T> extends LBJLabeledComponent {
+public abstract class LBJValueComponent<T> extends LBJLabeledComponent {
 
-	private Set<LBJValueValidator<T>> validators;
-	private Set<LBJValueUpdater<T>> updaters;
+	private List<LBJValueValidator<T>> valueValidators;
+	private List<LBJValueUpdater<T>> valueUpdaters;
 
-	public LBJValueHolderComponent(String name, LBJForm form) {
+	public LBJValueComponent(String name, LBJForm form) {
 		super(name, form);
 	}
 
@@ -36,7 +36,7 @@ public abstract class LBJValueHolderComponent<T> extends LBJLabeledComponent {
 
 	/**
 	 * Value of the {@link Component} used to implement this type, see
-	 * {@link LBJValueHolderComponent#getComponent()}.
+	 * {@link LBJValueComponent#getComponent()}.
 	 */
 	public abstract void setValue(T value);
 
@@ -71,7 +71,7 @@ public abstract class LBJValueHolderComponent<T> extends LBJLabeledComponent {
 			return true;
 		}
 		boolean isValid = true;
-		for (LBJValueValidator<T> validator : getValidators()) {
+		for (LBJValueValidator<T> validator : getValueValidators()) {
 			isValid = validator.isValid(getValue()) && isValid;
 		}
 		super.setLabelColorByValidity(isValid);
@@ -79,14 +79,16 @@ public abstract class LBJValueHolderComponent<T> extends LBJLabeledComponent {
 	}
 
 	/**
-	 * If component is enabled iterates throught all updaters associated with this
-	 * component and updates value of this component.
+	 * If component is enabled it iterates throught all updaters associated with
+	 * this component and updates its value
 	 */
+	@Override
 	public void update() {
+		super.update();
 		if (!isEnabled()) {
 			return;
 		}
-		for (LBJValueUpdater<T> updater : getUpdaters()) {
+		for (LBJValueUpdater<T> updater : getValueUpdaters()) {
 			updater.update(this);
 		}
 	}
@@ -96,30 +98,30 @@ public abstract class LBJValueHolderComponent<T> extends LBJLabeledComponent {
 		return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 
-	public Set<LBJValueValidator<T>> getValidators() {
-		if (validators == null) {
-			validators = new HashSet<>();
+	public List<LBJValueValidator<T>> getValueValidators() {
+		if (valueValidators == null) {
+			valueValidators = new ArrayList<>();
 		}
-		return validators;
+		return valueValidators;
 	}
 
-	public boolean addValidator(LBJValueValidator<T> validator) {
-		return getValidators().add(validator);
+	public boolean addValueValidator(LBJValueValidator<T> validator) {
+		return getValueValidators().add(validator);
 	}
 
-	public boolean removeValidator(LBJValueValidator<T> validator) {
-		return getValidators().remove(validator);
+	public boolean removeValueValidator(LBJValueValidator<T> validator) {
+		return getValueValidators().remove(validator);
 	}
 
-	public Set<LBJValueUpdater<T>> getUpdaters() {
-		if (updaters == null) {
-			updaters = new HashSet<>();
+	public List<LBJValueUpdater<T>> getValueUpdaters() {
+		if (valueUpdaters == null) {
+			valueUpdaters = new ArrayList<>();
 		}
-		return updaters;
+		return valueUpdaters;
 	}
 
-	public boolean addUpdater(LBJValueUpdater<T> updater) {
-		return getUpdaters().add(updater);
+	public boolean addValueUpdater(LBJValueUpdater<T> updater) {
+		return getValueUpdaters().add(updater);
 	}
 
 }

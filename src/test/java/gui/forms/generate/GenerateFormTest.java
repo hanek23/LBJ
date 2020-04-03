@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import constants.Labels;
 import generator.GeneratorSettings;
-import gui.suppliers.LBJUpdaterSupplier;
 import gui.suppliers.LBJValidatorSupplier;
 import testutils.LBJTestUtils;
 
@@ -43,8 +42,6 @@ public class GenerateFormTest {
 		assertThat(form.getStartingIdTextBox()).isRequired().isNumbersOnly();
 		assertThat(form).hasValidator(LBJValidatorSupplier.getGenerateFormDatabasesValidator());
 
-		// and updaters
-		assertThat(form).hasUpdater(LBJUpdaterSupplier.getGenerateFormStartingIdUpdater());
 	}
 
 	@Test

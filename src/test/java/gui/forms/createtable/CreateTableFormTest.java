@@ -15,9 +15,9 @@ public class CreateTableFormTest {
 
 	private static final String TABLE_NAME = "ACTION";
 	private static final String PRIMARY_KEY_NAME = "id";
-	private static final String PRIMARY_KEY_CONSTRAINT_NAME = NamingConventions.PRIMARY_KEY_CONSTRAINT_DEFAULT_VALUE
+	private static final String PRIMARY_KEY_CONSTRAINT_NAME = NamingConventions.PRIMARY_KEY_CONSTRAINT
 			+ TABLE_NAME;
-	private static final String SEQUENCE_NAME = NamingConventions.SEQUENCE_NAME_DEFAULT_VALUE + TABLE_NAME;
+	private static final String SEQUENCE_NAME = NamingConventions.SEQUENCE_NAME + TABLE_NAME;
 
 	@Test
 	public void testInitialize() {

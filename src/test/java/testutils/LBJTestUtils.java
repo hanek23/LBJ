@@ -10,7 +10,7 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
 import generator.GeneratorTest;
-import gui.components.LBJValueHolderComponent;
+import gui.components.LBJValueComponent;
 import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.createtable.CreateTableForm;
 import gui.forms.generate.GenerateForm;
@@ -24,7 +24,7 @@ public class LBJTestUtils {
 		// only static methods
 	}
 
-	public static void focus(LBJValueHolderComponent<?> component) {
+	public static void focus(LBJValueComponent<?> component) {
 		if (!(component.getComponent() instanceof Interactable)) {
 			throw new IllegalArgumentException("I can only focus interactable components!");
 		}
@@ -35,7 +35,7 @@ public class LBJTestUtils {
 	/**
 	 * Hits enter on component
 	 */
-	public static void click(LBJValueHolderComponent<?> component) {
+	public static void click(LBJValueComponent<?> component) {
 		if (!(component.getComponent() instanceof Interactable)) {
 			throw new IllegalArgumentException("I can only click on interactable components!");
 		}
@@ -53,7 +53,7 @@ public class LBJTestUtils {
 	 * First it will focus the component then it will set value of component and
 	 * updates form to simulate actual user input.
 	 */
-	public static void setValueOf(LBJValueHolderComponent<?> component, Object value) {
+	public static void setValueOf(LBJValueComponent<?> component, Object value) {
 		if (component == null || component.getForm() == null || value == null) {
 			throw new IllegalArgumentException("I aint working with null values");
 		}

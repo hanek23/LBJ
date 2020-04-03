@@ -2,7 +2,6 @@ package endtoend;
 
 import static testutils.asserts.LBJValueHolderComponentAssert.assertThat;
 
-import constants.NamingConventions;
 import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.createtable.CreateTableForm;
 import gui.forms.generate.GenerateForm;
@@ -22,6 +21,10 @@ public class EndToEndTestCase4 extends AbstractXmlSupplier implements EndToEndTe
 
 	private static final String TABLE_NAME = "TABLE_NAME";
 	private static final boolean ONLY_CHANGESETS = true;
+
+	private static final String PRIMARY_KEY_START = "id_";
+	private static final String PRIMARY_KEY_CONSTRAINT_START = "P_";
+	private static final String SEQUENCE_START = "SEQ_";
 
 	@Override
 	public void test() {
@@ -48,12 +51,10 @@ public class EndToEndTestCase4 extends AbstractXmlSupplier implements EndToEndTe
 
 		// Fill just Table name, rest should be filled out by updaters
 		LBJTestUtils.setValueOf(createTableForm.getTableNameTextBox(), "TABLE_NAME");
-		assertThat(createTableForm.getPrimaryKeyNameTextBox())
-				.isEqualToIgnoringCase(NamingConventions.PRIMARY_KEY_NAME_DEFAULT_VALUE + TABLE_NAME);
+		assertThat(createTableForm.getPrimaryKeyNameTextBox()).isEqualToIgnoringCase(PRIMARY_KEY_START + TABLE_NAME);
 		assertThat(createTableForm.getPrimaryKeyConstraintNameTextBox())
-				.isEqualToIgnoringCase(NamingConventions.PRIMARY_KEY_CONSTRAINT_DEFAULT_VALUE + TABLE_NAME);
-		assertThat(createTableForm.getSequenceNameTextBox())
-				.isEqualToIgnoringCase(NamingConventions.SEQUENCE_NAME_DEFAULT_VALUE + TABLE_NAME);
+				.isEqualToIgnoringCase(PRIMARY_KEY_CONSTRAINT_START + TABLE_NAME);
+		assertThat(createTableForm.getSequenceNameTextBox()).isEqualToIgnoringCase(SEQUENCE_START + TABLE_NAME);
 
 		// Going back to main menu and back to create table
 		LBJFormAssert.assertThat(createTableForm).isValid();
@@ -63,12 +64,10 @@ public class EndToEndTestCase4 extends AbstractXmlSupplier implements EndToEndTe
 		LBJFormAssert.assertThat(mainMenuForm).isFocused();
 		createTableForm.focus();
 		LBJFormAssert.assertThat(createTableForm).isFocused();
-		assertThat(createTableForm.getPrimaryKeyNameTextBox())
-				.isEqualToIgnoringCase(NamingConventions.PRIMARY_KEY_NAME_DEFAULT_VALUE + TABLE_NAME);
+		assertThat(createTableForm.getPrimaryKeyNameTextBox()).isEqualToIgnoringCase(PRIMARY_KEY_START + TABLE_NAME);
 		assertThat(createTableForm.getPrimaryKeyConstraintNameTextBox())
-				.isEqualToIgnoringCase(NamingConventions.PRIMARY_KEY_CONSTRAINT_DEFAULT_VALUE + TABLE_NAME);
-		assertThat(createTableForm.getSequenceNameTextBox())
-				.isEqualToIgnoringCase(NamingConventions.SEQUENCE_NAME_DEFAULT_VALUE + TABLE_NAME);
+				.isEqualToIgnoringCase(PRIMARY_KEY_CONSTRAINT_START + TABLE_NAME);
+		assertThat(createTableForm.getSequenceNameTextBox()).isEqualToIgnoringCase(SEQUENCE_START + TABLE_NAME);
 		LBJFormAssert.assertThat(createTableForm).isValid();
 
 		// Go to add column

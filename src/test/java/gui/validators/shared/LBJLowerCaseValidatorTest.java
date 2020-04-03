@@ -46,7 +46,7 @@ public class LBJLowerCaseValidatorTest {
 	@Test
 	public void testWithComponentTrue() {
 		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm())
-				.addValidator(LBJValidatorSupplier.getLowerCasevalidator()).build();
+				.addValueValidator(LBJValidatorSupplier.getLowerCasevalidator()).build();
 		textBox.setValue("table_name");
 
 		assertTrue(textBox.isValid());
@@ -58,7 +58,7 @@ public class LBJLowerCaseValidatorTest {
 	@Test
 	public void testWithComponentFalse() {
 		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm())
-				.addValidator(LBJValidatorSupplier.getLowerCasevalidator()).build();
+				.addValueValidator(LBJValidatorSupplier.getLowerCasevalidator()).build();
 		textBox.setValue("table_namE");
 
 		assertFalse(textBox.isValid());

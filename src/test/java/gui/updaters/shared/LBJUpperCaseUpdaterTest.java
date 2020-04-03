@@ -16,7 +16,7 @@ public class LBJUpperCaseUpdaterTest {
 	@Test
 	public void testUpdate() {
 		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm())
-				.addUpdater(LBJUpdaterSupplier.caseUpdater(LetterCase.UPPER)).build();
+				.addValueUpdater(LBJUpdaterSupplier.caseUpdater(LetterCase.UPPER)).build();
 
 		textBox.setValue("table_name");
 		assertThat(textBox).isLowerCase();

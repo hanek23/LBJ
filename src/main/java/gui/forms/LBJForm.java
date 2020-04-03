@@ -8,7 +8,7 @@ import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.Window;
 
 import gui.components.LBJComponent;
-import gui.components.LBJValueHolderComponent;
+import gui.components.LBJValueComponent;
 import gui.updaters.LBJFormUpdater;
 import gui.updaters.LBJValueUpdater;
 import gui.utils.LBJFormUtils;
@@ -77,9 +77,7 @@ public abstract class LBJForm implements Runnable {
 			updater.update(this);
 		}
 		for (LBJComponent component : getComponents()) {
-			if (component instanceof LBJValueHolderComponent<?> && component.isEnabled()) {
-				((LBJValueHolderComponent<?>) component).update();
-			}
+			component.update();
 		}
 	}
 
@@ -94,8 +92,8 @@ public abstract class LBJForm implements Runnable {
 			isFormValid = validator.isValid(this) && isFormValid;
 		}
 		for (LBJComponent component : getComponents()) {
-			if (component instanceof LBJValueHolderComponent<?> && component.isEnabled()) {
-				isFormValid = ((LBJValueHolderComponent<?>) component).isValid() && isFormValid;
+			if (component instanceof LBJValueComponent<?>) {
+				isFormValid = ((LBJValueComponent<?>) component).isValid() && isFormValid;
 			}
 		}
 		return isFormValid;
