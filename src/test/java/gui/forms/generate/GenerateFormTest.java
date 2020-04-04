@@ -2,7 +2,7 @@ package gui.forms.generate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static testutils.asserts.LBJFormAssert.assertThat;
-import static testutils.asserts.LBJValueHolderComponentAssert.assertThat;
+import static testutils.asserts.LBJValueComponentAssert.assertThat;
 
 import org.junit.jupiter.api.Test;
 

@@ -21,7 +21,15 @@ public class LBJFormAssert extends AbstractAssert<LBJFormAssert, LBJForm> {
 	public LBJFormAssert isFocused() {
 		isNotNull();
 		if (!actual.isFocused()) {
-			failWithMessage("Expecting form '%s' to be focused but it was not", actual);
+			failWithMessage("Expecting form '%s' to be focused but it is not", actual);
+		}
+		return this;
+	}
+
+	public LBJFormAssert isNotFocused() {
+		isNotNull();
+		if (actual.isFocused()) {
+			failWithMessage("Expecting form '%s' to NOT be focused but it is", actual);
 		}
 		return this;
 	}

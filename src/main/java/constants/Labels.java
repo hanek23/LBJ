@@ -22,18 +22,20 @@ public class Labels {
 	public static final String ADD_COLUMN_FORM = "Add column form";
 	public static final String REMOVE_NOT_NULL_CONSTRAINT_FORM = "Remove not null constraint form";
 	public static final String GENERATE_FORM = "Generate form";
+	public static final String PREFERENCES_FORM = "Preferences form";
 
 	// MAIN MENU
 	public static final String MAIN_MENU_QUESTION = "What do you want to do?";
 	public static final String MAIN_MENU_ADD_COLUMN = "Add column(s)";
 	public static final String MAIN_MENU_CREATE_TABLE = "Create table";
 	public static final String MAIN_MENU_REMOVE_NOT_NULL_CONSTRAINT = "Remove not null constraint";
+	public static final String MAIN_MENU_PREFERENCES = "Preferences";
 	public static final String BUTTON_EXIT = "Exit";
 
 	// CREATE TABLE
 	public static final String TABLE_NAME = "Table name";
 	public static final String CREATE_TABLE_PRIMARY_KEY_NAME = "Primary key name";
-	public static final String CREATE_TABLE_PRIMARY_KEY_CONSTRAIN = "Primary key constraint name";
+	public static final String CREATE_TABLE_PRIMARY_KEY_CONSTRAIN_NAME = "Primary key constraint name";
 	public static final String CREATE_TABLE_SEQUENCE_NAME = "Sequence name";
 
 	// ADD COLUMN
@@ -56,5 +58,9 @@ public class Labels {
 	public static final String GENERATE_FORM_DATABASES_MSSQL = "MSSQL";
 	public static final String GENERATE_FORM_DATABASES_POSTGRESQL = "PostgreSQL";
 	public static final String GENERATE_FORM_GENERATED_XML = "Generated XML";
+
+	// PREFERENCES
+	public static final String BUTTON_PREFERENCES_APPLY = "Apply and return";
+	public static final String BUTTON_PREFERENCES_RESET = "Reset to default";
 
 }

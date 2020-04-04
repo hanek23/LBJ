@@ -30,6 +30,7 @@ import gui.components.LBJPlainLabel;
 import gui.forms.LBJForm;
 import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.createtable.CreateTableForm;
+import gui.forms.preferences.PreferencesForm;
 import gui.forms.removenotnullconstraint.RemoveNotNullConstraintForm;
 import gui.suppliers.LBJFormSupplier;
 import gui.utils.LBJFormUtils;
@@ -46,7 +47,7 @@ import gui.utils.LBJFormUtils;
  * {@link Button}s as it has all "links" to other forms stored in
  * {@link ActionListBox} as {@link Runnable}s ({@link LBJForm} implements
  * {@link Runnable}). Because of that mouse support is currently not available
- * on this form.
+ * on this form (it looks better tho).
  */
 public class MainMenuForm extends LBJForm {
 
@@ -59,6 +60,7 @@ public class MainMenuForm extends LBJForm {
 	private CreateTableForm createTableForm;
 	private AddColumnForm addColumnForm;
 	private RemoveNotNullConstraintForm removeNotNullConstraintForm;
+	private PreferencesForm preferencesForm;
 	private TextGUIThread thread;
 
 	public MainMenuForm() {
@@ -82,24 +84,32 @@ public class MainMenuForm extends LBJForm {
 		createTableForm = LBJFormSupplier.getCreateTableForm(getWindow(), this, false);
 		addColumnForm = LBJFormSupplier.getAddColumnForm(getWindow(), this, false);
 		removeNotNullConstraintForm = LBJFormSupplier.getRemoveNotNullConstraintForm(getWindow(), this, false);
+		preferencesForm = LBJFormSupplier.getPreferencesForm(getWindow(), this, false);
 
 		addFormToUpdate(createTableForm);
 		addFormToUpdate(addColumnForm);
 		addFormToUpdate(removeNotNullConstraintForm);
+		addFormToUpdate(preferencesForm);
 	}
 
 	@Override
-	public void addComponentsToContent() {
+	public void initializeButtons() {
+		// no buttons in main menu, everything is in ActionListBox - mainMenu
+	}
+
+	@Override
+	public void addComponents() {
 		LBJFormUtils.addLabelToMainMenuContent(getContent(), questionLabel);
 		LBJFormUtils.addMenuToMainMenuContent(getContent(), mainMenu);
 		LBJFormUtils.addItemToMenu(mainMenu, createTableForm, Labels.MAIN_MENU_CREATE_TABLE);
 		LBJFormUtils.addItemToMenu(mainMenu, addColumnForm, Labels.MAIN_MENU_ADD_COLUMN);
 		LBJFormUtils.addItemToMenu(mainMenu, removeNotNullConstraintForm, Labels.MAIN_MENU_REMOVE_NOT_NULL_CONSTRAINT);
+		LBJFormUtils.addItemToMenu(mainMenu, preferencesForm, Labels.MAIN_MENU_PREFERENCES);
 		LBJFormUtils.addExitButtonToMainMenu(mainMenu);
 	}
 
 	@Override
-	public void addButtonsToContent() {
+	public void addButtons() {
 		// no buttons in main menu, everything is in ActionListBox - mainMenu
 	}
 

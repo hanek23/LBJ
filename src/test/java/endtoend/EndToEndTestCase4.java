@@ -1,6 +1,6 @@
 package endtoend;
 
-import static testutils.asserts.LBJValueHolderComponentAssert.assertThat;
+import static testutils.asserts.LBJValueComponentAssert.assertThat;
 
 import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.createtable.CreateTableForm;

@@ -2,7 +2,7 @@ package gui.forms.addcolumn;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static testutils.asserts.LBJFormAssert.assertThat;
-import static testutils.asserts.LBJValueHolderComponentAssert.assertThat;
+import static testutils.asserts.LBJValueComponentAssert.assertThat;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,12 +18,12 @@ public class AddColumnFormTest {
 	private static final String COLUMN_DATA_TYPE = "integer";
 	private static final boolean NULLABLE = false;
 	private static final boolean HAS_INDEX = true;
-	private static final String INDEX_NAME = NamingConventions.INDEX_NAME + TABLE_NAME + NamingConventions.SEPARATOR
+	private static final String INDEX_NAME = NamingConventions.DEFAULT_INDEX_NAME + TABLE_NAME + NamingConventions.SEPARATOR
 			+ COLUMN_NAME;
 	private static final boolean HAS_FOREIGNKEY = true;
 	private static final String REFERENCED_TABLE_NAME = "NBA";
 	private static final String REFERENCED_COLUMN_NAME = "goat";
-	private static final String FOREIGN_KEY_NAME = NamingConventions.FOREIGN_KEY_NAME + REFERENCED_TABLE_NAME
+	private static final String FOREIGN_KEY_NAME = NamingConventions.DEFAULT_FOREIGN_KEY_NAME + REFERENCED_TABLE_NAME
 			+ NamingConventions.SEPARATOR + REFERENCED_COLUMN_NAME;
 
 	@Test

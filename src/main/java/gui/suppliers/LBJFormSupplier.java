@@ -7,6 +7,7 @@ import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.createtable.CreateTableForm;
 import gui.forms.generate.GenerateForm;
 import gui.forms.mainmenu.MainMenuForm;
+import gui.forms.preferences.PreferencesForm;
 import gui.forms.removenotnullconstraint.RemoveNotNullConstraintForm;
 
 /**
@@ -22,6 +23,7 @@ public class LBJFormSupplier {
 	private static CreateTableForm createTableForm;
 	private static GenerateForm generateForm;
 	private static RemoveNotNullConstraintForm removeNotNullConstraintForm;
+	private static PreferencesForm preferencesForm;
 
 	/**
 	 * @return One and only instance of {@link MainMenuForm}.
@@ -75,6 +77,10 @@ public class LBJFormSupplier {
 		return form;
 	}
 
+	public static AddColumnForm getAddColumnForm(Window window, LBJForm previousForm) {
+		return getAddColumnForm(window, previousForm, true);
+	}
+
 	/**
 	 * @return One and only instance of {@link RemoveNotNullConstraintForm}.
 	 */
@@ -89,8 +95,14 @@ public class LBJFormSupplier {
 		return removeNotNullConstraintForm;
 	}
 
-	public static AddColumnForm getAddColumnForm(Window window, LBJForm previousForm) {
-		return getAddColumnForm(window, previousForm, true);
+	public static PreferencesForm getPreferencesForm(Window window, LBJForm previousForm, boolean addAsUpdatableForm) {
+		if (preferencesForm == null) {
+			preferencesForm = new PreferencesForm(window, previousForm);
+			if (addAsUpdatableForm) {
+				mainMenuForm.addFormToUpdate(preferencesForm);
+			}
+		}
+		return preferencesForm;
 	}
 
 	/**
@@ -101,6 +113,7 @@ public class LBJFormSupplier {
 		createTableForm = null;
 		removeNotNullConstraintForm = null;
 		generateForm = null;
+		preferencesForm = null;
 	}
 
 }

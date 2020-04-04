@@ -37,17 +37,22 @@ public class CreateTableForm extends LBJEntityForm<Table> {
 				.addCaseUpdaterAndValidator(NamingConventions.TABLE_NAME_CASE).build();
 
 		primaryKeyNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_NAME, this).required()
-				.addNamingConventionUpdater(NamingConventions.PRIMARY_KEY_NAME)
+				.addNamingConventionUpdater(NamingConventions.getPrimaryKeyName())
 				.addCaseUpdaterAndValidator(NamingConventions.PRIMARY_KEY_NAME_CASE).addLengthValidator().build();
 
-		primaryKeyConstraintNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN, this)
-				.required().addLengthValidator().addNamingConventionUpdater(NamingConventions.PRIMARY_KEY_CONSTRAINT)
+		primaryKeyConstraintNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN_NAME, this)
+				.required().addLengthValidator()
+				.addNamingConventionUpdater(NamingConventions.getPrimaryKeyConstraintName())
 				.addCaseUpdaterAndValidator(NamingConventions.PRIMARY_KEY_CONSTRAINT_NAME_CASE).build();
 
 		sequenceNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_SEQUENCE_NAME, this).required()
 				.addCaseUpdaterAndValidator(NamingConventions.SEQUENCE_NAME_CASE).addLengthValidator()
-				.addNamingConventionUpdater(NamingConventions.SEQUENCE_NAME).build();
+				.addNamingConventionUpdater(NamingConventions.getSequenceName()).build();
 
+	}
+
+	@Override
+	public void initializeButtons() {
 		addColumnButton = LBJFormUtils.createAddColumnButton(this);
 	}
 
@@ -62,7 +67,7 @@ public class CreateTableForm extends LBJEntityForm<Table> {
 	}
 
 	@Override
-	public void addComponentsToContent() {
+	public void addComponents() {
 		LBJFormUtils.addComponentTo(this, tableNameTextBox);
 		LBJFormUtils.addComponentTo(this, primaryKeyNameTextBox);
 		LBJFormUtils.addComponentTo(this, primaryKeyConstraintNameTextBox);
@@ -70,7 +75,7 @@ public class CreateTableForm extends LBJEntityForm<Table> {
 	}
 
 	@Override
-	public void addButtonsToContent() {
+	public void addButtons() {
 		initializeBackButton();
 		LBJFormUtils.addButtonTo(this, addColumnButton);
 	}
@@ -82,6 +87,22 @@ public class CreateTableForm extends LBJEntityForm<Table> {
 		table.setPrimaryKeyContrainName(primaryKeyConstraintNameTextBox.getValue());
 		table.setSequenceName(sequenceNameTextBox.getValue());
 		return table;
+	}
+
+	@Override
+	public void run() {
+		applyPreferences();
+		super.run();
+	}
+
+	/**
+	 * Applies potential new Naming convention as preferences could have been
+	 * changed since last visit
+	 */
+	private void applyPreferences() {
+		primaryKeyNameTextBox.setNamingConvention(NamingConventions.getPrimaryKeyName());
+		primaryKeyConstraintNameTextBox.setNamingConvention(NamingConventions.getPrimaryKeyConstraintName());
+		sequenceNameTextBox.setNamingConvention(NamingConventions.getSequenceName());
 	}
 
 	@Override

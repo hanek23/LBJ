@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.Window;
 
+import gui.builders.LBJCheckBoxBuilder;
+import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJComponent;
 import gui.components.LBJValueComponent;
 import gui.updaters.LBJFormUpdater;
@@ -43,26 +46,53 @@ public abstract class LBJForm implements Runnable {
 	public void initialize() {
 		initializeContent();
 		initializeComponents();
+		initializeButtons();
 		addFormUpdaters();
 		addFormValidators();
-		addComponentsToContent();
-		addButtonsToContent();
+		addComponents();
+		addButtons();
 		initialized = true;
 	}
-
-	public abstract void initializeComponents();
 
 	public void initializeContent() {
 		setContent(LBJFormUtils.initializeDefaultContent());
 	}
 
+	/**
+	 * Inside this method you should initialize your components using for example
+	 * {@link LBJTextBoxBuilder} or {@link LBJCheckBoxBuilder}
+	 */
+	public abstract void initializeComponents();
+
+	/**
+	 * Inside this method you should initialize {@link Button} as well as their
+	 * {@link Runnable}
+	 */
+	public abstract void initializeButtons();
+
+	/**
+	 * Here you can add special {@link LBJFormUpdater} that will operate on this
+	 * form
+	 */
 	public abstract void addFormUpdaters();
 
+	/**
+	 * Here you can add special {@link LBJFormValidator} that will operate on this
+	 * form
+	 */
 	public abstract void addFormValidators();
 
-	public abstract void addComponentsToContent();
+	/**
+	 * Using {@link LBJFormUtils} you can add your components to this form so that
+	 * they can be seen.
+	 */
+	public abstract void addComponents();
 
-	public abstract void addButtonsToContent();
+	/**
+	 * Using {@link LBJFormUtils} you can add your buttons to this form so that they
+	 * can be seen.
+	 */
+	public abstract void addButtons();
 
 	@Override
 	public void run() {

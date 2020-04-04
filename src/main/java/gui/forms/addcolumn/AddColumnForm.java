@@ -68,8 +68,7 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 		indexCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_INDEX, this).build();
 
 		indexNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_INDEX_NAME, this).required().addLengthValidator()
-
-				.addNamingConventionUpdater(NamingConventions.INDEX_NAME).activatorComponent(indexCheckBox)
+				.addNamingConventionUpdater(NamingConventions.getIndexName()).activatorComponent(indexCheckBox)
 				.addCaseUpdaterAndValidator(NamingConventions.INDEX_NAME_CASE).disabled().build();
 
 		foreignKeyCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY, this).build();
@@ -83,10 +82,14 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 				.addCaseUpdaterAndValidator(NamingConventions.COLUMN_NAME_CASE).disabled().build();
 
 		foreignKeyNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY_NAME, this).required()
-				.addLengthValidator().addNamingConventionUpdater(NamingConventions.FOREIGN_KEY_NAME)
+				.addLengthValidator().addNamingConventionUpdater(NamingConventions.getForeignKeyName())
 				.activatorComponent(foreignKeyCheckBox)
 				.addCaseUpdaterAndValidator(NamingConventions.FOREIGN_KEY_NAME_CASE).disabled().build();
 
+	}
+
+	@Override
+	public void initializeButtons() {
 		addColumnButton = LBJFormUtils.createAddColumnButton(this);
 		generateButton = LBJFormUtils.createGenerateButton(this);
 	}
@@ -117,7 +120,7 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 	}
 
 	@Override
-	public void addComponentsToContent() {
+	public void addComponents() {
 		LBJFormUtils.addComponentTo(this, tableNameTextBox);
 		LBJFormUtils.addComponentTo(this, columnNameTextBox);
 		LBJFormUtils.addComponentTo(this, dataTypeTextBox);
@@ -131,7 +134,7 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 	}
 
 	@Override
-	public void addButtonsToContent() {
+	public void addButtons() {
 		initializeBackButton();
 		LBJFormUtils.addButtonTo(this, addColumnButton);
 		LBJFormUtils.addButtonTo(this, generateButton);
@@ -152,6 +155,21 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 			column.setForeignKey(key);
 		}
 		return column;
+	}
+
+	@Override
+	public void run() {
+		applyPreferences();
+		super.run();
+	}
+
+	/**
+	 * Applies potential new Naming convention as preferences could have been
+	 * changed since last visit
+	 */
+	private void applyPreferences() {
+		indexNameTextBox.setNamingConvention(NamingConventions.getIndexName());
+		foreignKeyNameTextBox.setNamingConvention(NamingConventions.getForeignKeyName());
 	}
 
 	@Override

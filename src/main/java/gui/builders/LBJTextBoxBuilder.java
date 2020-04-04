@@ -47,8 +47,19 @@ public class LBJTextBoxBuilder {
 		return this;
 	}
 
+	/**
+	 * Value of this component when it is disabled.
+	 */
 	public LBJTextBoxBuilder defaultValue(String defaultValue) {
 		lbjTextBox.setDefaultValue(defaultValue);
+		return this;
+	}
+
+	/**
+	 * Value of this component when it is initialized
+	 */
+	public LBJTextBoxBuilder value(String value) {
+		lbjTextBox.setValue(value);
 		return this;
 	}
 

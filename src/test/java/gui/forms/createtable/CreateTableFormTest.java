@@ -2,22 +2,23 @@ package gui.forms.createtable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static testutils.asserts.LBJFormAssert.assertThat;
-import static testutils.asserts.LBJValueHolderComponentAssert.assertThat;
+import static testutils.asserts.LBJValueComponentAssert.assertThat;
 
 import org.junit.jupiter.api.Test;
 
 import constants.Labels;
 import constants.NamingConventions;
 import domain.Table;
+import testutils.LBJFormTest;
 import testutils.LBJTestUtils;
 
-public class CreateTableFormTest {
+public class CreateTableFormTest extends LBJFormTest {
 
 	private static final String TABLE_NAME = "ACTION";
 	private static final String PRIMARY_KEY_NAME = "id";
-	private static final String PRIMARY_KEY_CONSTRAINT_NAME = NamingConventions.PRIMARY_KEY_CONSTRAINT
+	private static final String PRIMARY_KEY_CONSTRAINT_NAME = NamingConventions.DEFAULT_PRIMARY_KEY_CONSTRAINT_NAME
 			+ TABLE_NAME;
-	private static final String SEQUENCE_NAME = NamingConventions.SEQUENCE_NAME + TABLE_NAME;
+	private static final String SEQUENCE_NAME = NamingConventions.DEFAULT_SEQUENCE_NAME + TABLE_NAME;
 
 	@Test
 	public void testInitialize() {
@@ -26,26 +27,21 @@ public class CreateTableFormTest {
 		assertThat(form).hasName(Labels.TABLE_FORM);
 		assertThat(form).hasComponentWithName(Labels.TABLE_NAME);
 		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_PRIMARY_KEY_NAME);
-		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN);
+		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN_NAME);
 		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_SEQUENCE_NAME);
 		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_SEQUENCE_NAME);
 
-		assertThat(form.getTableNameTextBox()).hasCaseValidator(NamingConventions.TABLE_NAME_CASE);
-		assertThat(form.getTableNameTextBox()).isRequired();
-		assertThat(form.getTableNameTextBox()).hasLengthValidator();
+		assertThat(form.getTableNameTextBox()).isRequired().hasLengthValidator()
+				.hasCaseValidator(NamingConventions.TABLE_NAME_CASE);
 
-		assertThat(form.getPrimaryKeyNameTextBox()).hasCaseValidator(NamingConventions.PRIMARY_KEY_NAME_CASE);
-		assertThat(form.getPrimaryKeyNameTextBox()).isRequired();
-		assertThat(form.getPrimaryKeyNameTextBox()).hasLengthValidator();
+		assertThat(form.getPrimaryKeyNameTextBox()).isRequired().hasLengthValidator()
+				.hasCaseValidator(NamingConventions.PRIMARY_KEY_NAME_CASE);
 
-		assertThat(form.getPrimaryKeyConstraintNameTextBox())
+		assertThat(form.getPrimaryKeyConstraintNameTextBox()).isRequired().hasLengthValidator()
 				.hasCaseValidator(NamingConventions.PRIMARY_KEY_CONSTRAINT_NAME_CASE);
-		assertThat(form.getPrimaryKeyConstraintNameTextBox()).isRequired();
-		assertThat(form.getPrimaryKeyConstraintNameTextBox()).hasLengthValidator();
 
-		assertThat(form.getSequenceNameTextBox()).hasCaseValidator(NamingConventions.SEQUENCE_NAME_CASE);
-		assertThat(form.getSequenceNameTextBox()).isRequired();
-		assertThat(form.getSequenceNameTextBox()).hasLengthValidator();
+		assertThat(form.getSequenceNameTextBox()).isRequired().hasLengthValidator()
+				.hasCaseValidator(NamingConventions.SEQUENCE_NAME_CASE);
 
 	}
 

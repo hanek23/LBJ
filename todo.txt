@@ -1,2 +1,2 @@
-- default value in AddColumnForm
-- configurable naming convetions, default values
+- While saving preferences check if referenced component exists 
+- Default value in AddColumnForm

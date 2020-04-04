@@ -14,6 +14,7 @@ public class LBJMockForm extends LBJForm {
 
 	public LBJMockForm() {
 		super(new BasicWindow(Labels.WINDOW_NAME));
+		initialize();
 	}
 
 	@Override
@@ -24,6 +25,11 @@ public class LBJMockForm extends LBJForm {
 	@Override
 	public void initializeComponents() {
 		// no components
+	}
+
+	@Override
+	public void initializeButtons() {
+		// no buttons
 	}
 
 	@Override
@@ -38,13 +44,13 @@ public class LBJMockForm extends LBJForm {
 	}
 
 	@Override
-	public void addComponentsToContent() {
+	public void addComponents() {
 		// no components
 
 	}
 
 	@Override
-	public void addButtonsToContent() {
+	public void addButtons() {
 		// no buttons
 
 	}

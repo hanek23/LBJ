@@ -65,7 +65,7 @@ public class LBJFormUtils {
 		return backButton;
 	}
 
-	private static void addEmptySpaceTo(LBJForm form) {
+	public static void addEmptySpaceTo(LBJForm form) {
 		form.getContent().addComponent(new EmptySpace());
 	}
 

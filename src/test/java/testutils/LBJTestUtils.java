@@ -4,7 +4,6 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.xmlunit.assertj.XmlAssert;
 
-import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.Interactable;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
@@ -14,6 +13,7 @@ import gui.components.LBJValueComponent;
 import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.createtable.CreateTableForm;
 import gui.forms.generate.GenerateForm;
+import gui.forms.preferences.PreferencesForm;
 import gui.forms.removenotnullconstraint.RemoveNotNullConstraintForm;
 
 public class LBJTestUtils {
@@ -35,17 +35,8 @@ public class LBJTestUtils {
 	/**
 	 * Hits enter on component
 	 */
-	public static void click(LBJValueComponent<?> component) {
-		if (!(component.getComponent() instanceof Interactable)) {
-			throw new IllegalArgumentException("I can only click on interactable components!");
-		}
-		click((Interactable) component.getComponent());
-	}
-
-	/**
-	 * Hits enter on component
-	 */
 	public static void click(Interactable interactable) {
+		interactable.takeFocus();
 		interactable.handleInput(new KeyStroke(KeyType.Enter));
 	}
 
@@ -71,7 +62,8 @@ public class LBJTestUtils {
 	 * @return {@link CreateTableForm} that is already focused
 	 */
 	public static CreateTableForm getCreateTableForm() {
-		CreateTableForm form = new CreateTableForm(new BasicWindow(), new LBJMockForm());
+		LBJMockForm mockForm = new LBJMockForm();
+		CreateTableForm form = new CreateTableForm(mockForm.getWindow(), mockForm);
 		form.focus();
 		return form;
 	}
@@ -80,7 +72,8 @@ public class LBJTestUtils {
 	 * @return {@link AddColumnForm} that is already focused
 	 */
 	public static AddColumnForm getAddColumnForm() {
-		AddColumnForm form = new AddColumnForm(new BasicWindow(), new LBJMockForm());
+		LBJMockForm mockForm = new LBJMockForm();
+		AddColumnForm form = new AddColumnForm(mockForm.getWindow(), mockForm);
 		form.focus();
 		return form;
 	}
@@ -89,7 +82,8 @@ public class LBJTestUtils {
 	 * @return {@link RemoveNotNullConstraintForm} that is already focused
 	 */
 	public static RemoveNotNullConstraintForm getRemoveNotNullConstraintForm() {
-		RemoveNotNullConstraintForm form = new RemoveNotNullConstraintForm(new BasicWindow(), new LBJMockForm());
+		LBJMockForm mockForm = new LBJMockForm();
+		RemoveNotNullConstraintForm form = new RemoveNotNullConstraintForm(mockForm.getWindow(), mockForm);
 		form.focus();
 		return form;
 	}
@@ -98,7 +92,18 @@ public class LBJTestUtils {
 	 * @return {@link GenerateForm} that is already focused
 	 */
 	public static GenerateForm getGenerateForm() {
-		GenerateForm form = new GenerateForm(new BasicWindow(), new LBJMockForm());
+		LBJMockForm mockForm = new LBJMockForm();
+		GenerateForm form = new GenerateForm(mockForm.getWindow(), mockForm);
+		form.focus();
+		return form;
+	}
+
+	/**
+	 * @return {@link PreferencesForm} that is already focused
+	 */
+	public static PreferencesForm getPreferencesForm() {
+		LBJMockForm mockForm = new LBJMockForm();
+		PreferencesForm form = new PreferencesForm(mockForm.getWindow(), mockForm);
 		form.focus();
 		return form;
 	}

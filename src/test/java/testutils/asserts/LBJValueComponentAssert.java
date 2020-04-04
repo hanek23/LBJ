@@ -8,17 +8,17 @@ import gui.components.LBJValueComponent;
 import gui.suppliers.LBJValidatorSupplier;
 import gui.validators.LBJValueValidator;
 
-public class LBJValueHolderComponentAssert extends LBJLabeledComponentAssert<LBJValueComponent<?>> {
+public class LBJValueComponentAssert extends LBJLabeledComponentAssert<LBJValueComponent<?>> {
 
-	public LBJValueHolderComponentAssert(LBJValueComponent<?> actual, Class<?> selfType) {
+	public LBJValueComponentAssert(LBJValueComponent<?> actual, Class<?> selfType) {
 		super(actual, selfType);
 	}
 
-	public static LBJValueHolderComponentAssert assertThat(LBJValueComponent<?> actual) {
-		return new LBJValueHolderComponentAssert(actual, LBJValueHolderComponentAssert.class);
+	public static LBJValueComponentAssert assertThat(LBJValueComponent<?> actual) {
+		return new LBJValueComponentAssert(actual, LBJValueComponentAssert.class);
 	}
 
-	public LBJValueHolderComponentAssert hasValidator(LBJValueValidator<?> validator) {
+	public LBJValueComponentAssert hasValidator(LBJValueValidator<?> validator) {
 		if (!actual.getValueValidators().contains(validator)) {
 			failWithMessage("Expecting component '%s' to have validator of type '%s', but it does not", actual,
 					validator.getClass().getSimpleName());
@@ -34,56 +34,56 @@ public class LBJValueHolderComponentAssert extends LBJLabeledComponentAssert<LBJ
 
 	}
 
-	public LBJValueHolderComponentAssert isRequired() {
+	public LBJValueComponentAssert isRequired() {
 		isNotNull();
 		isForClass(String.class);
 		hasValidator(LBJValidatorSupplier.getStringRequiredValidator());
 		return this;
 	}
 
-	public LBJValueHolderComponentAssert hasLengthValidator() {
+	public LBJValueComponentAssert hasLengthValidator() {
 		isNotNull();
 		isForClass(String.class);
 		hasValidator(LBJValidatorSupplier.getStringLengthValidator());
 		return this;
 	}
 
-	public LBJValueHolderComponentAssert hasCaseValidator(NamingConventions.LetterCase letterCase) {
+	public LBJValueComponentAssert hasCaseValidator(NamingConventions.LetterCase letterCase) {
 		isNotNull();
 		isForClass(String.class);
 		hasValidator(LBJValidatorSupplier.getCaseValidator(letterCase));
 		return this;
 	}
 
-	public LBJValueHolderComponentAssert isNumbersOnly() {
+	public LBJValueComponentAssert isNumbersOnly() {
 		isNotNull();
 		isForClass(String.class);
 		hasValidator(LBJValidatorSupplier.getNumbersOnlyValidator());
 		return this;
 	}
 
-	public LBJValueHolderComponentAssert isBlank() {
+	public LBJValueComponentAssert isBlank() {
 		isNotNull();
 		isForClass(String.class);
 		Assertions.assertThat((String) actual.getValue()).isBlank();
 		return this;
 	}
 
-	public LBJValueHolderComponentAssert isUpperCase() {
+	public LBJValueComponentAssert isUpperCase() {
 		isNotNull();
 		isForClass(String.class);
 		Assertions.assertThat((String) actual.getValue()).isUpperCase();
 		return this;
 	}
 
-	public LBJValueHolderComponentAssert isLowerCase() {
+	public LBJValueComponentAssert isLowerCase() {
 		isNotNull();
 		isForClass(String.class);
 		Assertions.assertThat((String) actual.getValue()).isLowerCase();
 		return this;
 	}
 
-	public LBJValueHolderComponentAssert hasValueEqualTo(Object expected) {
+	public LBJValueComponentAssert hasValueEqualTo(Object expected) {
 		isNotNull();
 		if (!Objects.areEqual(actual.getValue(), expected)) {
 			failWithMessage("Expecting component '%s' to have value of '%s' but insted it has value of '%s'", actual,
@@ -92,14 +92,14 @@ public class LBJValueHolderComponentAssert extends LBJLabeledComponentAssert<LBJ
 		return this;
 	}
 
-	public LBJValueHolderComponentAssert isEqualToIgnoringCase(String expected) {
+	public LBJValueComponentAssert isEqualToIgnoringCase(String expected) {
 		isNotNull();
 		isForClass(String.class);
 		Assertions.assertThat((String) actual.getValue()).isEqualToIgnoringCase(expected);
 		return this;
 	}
 
-	public LBJValueHolderComponentAssert isChecked() {
+	public LBJValueComponentAssert isChecked() {
 		isNotNull();
 		isForClass(Boolean.class);
 		if (!(Boolean) actual.getValue()) {
@@ -108,7 +108,7 @@ public class LBJValueHolderComponentAssert extends LBJLabeledComponentAssert<LBJ
 		return this;
 	}
 
-	public LBJValueHolderComponentAssert isNotChecked() {
+	public LBJValueComponentAssert isNotChecked() {
 		isNotNull();
 		isForClass(Boolean.class);
 		if ((Boolean) actual.getValue()) {

@@ -71,6 +71,10 @@ public class GenerateForm extends LBJWizardForm {
 
 		generatedXmlTextBox = new LBJTextBoxBuilder(Labels.GENERATE_FORM_GENERATED_XML, this).build();
 
+	}
+
+	@Override
+	public void initializeButtons() {
 		copyToClipboardButton = new Button(Labels.BUTTON_COPY_TO_CLIPBOARD);
 		copyToClipboardButton.setEnabled(false);
 		copyToClipboardButton.addListener(new Listener() {
@@ -111,7 +115,7 @@ public class GenerateForm extends LBJWizardForm {
 	}
 
 	@Override
-	public void addComponentsToContent() {
+	public void addComponents() {
 		LBJFormUtils.addComponentTo(this, authorTextBox);
 		LBJFormUtils.addComponentTo(this, onlyChangeSetsCheckBox);
 		LBJFormUtils.addComponentTo(this, startingIdTextBox);
@@ -124,7 +128,7 @@ public class GenerateForm extends LBJWizardForm {
 	}
 
 	@Override
-	public void addButtonsToContent() {
+	public void addButtons() {
 		initializeBackButton();
 		LBJFormUtils.addButtonTo(this, generateButton);
 		LBJFormUtils.addButtonTo(this, copyToClipboardButton);

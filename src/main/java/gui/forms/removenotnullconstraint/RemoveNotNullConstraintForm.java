@@ -41,7 +41,10 @@ public class RemoveNotNullConstraintForm extends LBJEntityForm<RemoveNotNullCons
 				.addCaseUpdaterAndValidator(NamingConventions.COLUMN_NAME_CASE).build();
 		dataTypeTextBox = new LBJTextBoxBuilder(Labels.COLUMN_DATA_TYPE, this).required()
 				.addCaseUpdaterAndValidator(NamingConventions.DATA_TYPE_CASE).build();
+	}
 
+	@Override
+	public void initializeButtons() {
 		generateButton = LBJFormUtils.createGenerateButton(this);
 	}
 
@@ -56,14 +59,14 @@ public class RemoveNotNullConstraintForm extends LBJEntityForm<RemoveNotNullCons
 	}
 
 	@Override
-	public void addComponentsToContent() {
+	public void addComponents() {
 		LBJFormUtils.addComponentTo(this, tableNameTextBox);
 		LBJFormUtils.addComponentTo(this, columnNameTextBox);
 		LBJFormUtils.addComponentTo(this, dataTypeTextBox);
 	}
 
 	@Override
-	public void addButtonsToContent() {
+	public void addButtons() {
 		initializeBackButton();
 		LBJFormUtils.addButtonTo(this, generateButton);
 	}

@@ -3,7 +3,7 @@ package gui.updaters.shared;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static testutils.asserts.LBJValueHolderComponentAssert.assertThat;
+import static testutils.asserts.LBJValueComponentAssert.assertThat;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,13 +12,14 @@ import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.createtable.CreateTableForm;
+import testutils.LBJFormTest;
 import testutils.LBJTestUtils;
 
 /**
  * Ignoring case when testing values. Testing case updaters and validators is
  * not the goal.
  */
-public class LBJNamingConventionUpdaterTest {
+public class LBJNamingConventionUpdaterTest extends LBJFormTest {
 
 	private static final String TABLE_NAME = "TABLE_NAME";
 	private static final String COLUMN_NAME = "COLUMN";

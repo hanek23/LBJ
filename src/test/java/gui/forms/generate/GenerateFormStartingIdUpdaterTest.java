@@ -1,6 +1,6 @@
 package gui.forms.generate;
 
-import static testutils.asserts.LBJValueHolderComponentAssert.assertThat;
+import static testutils.asserts.LBJValueComponentAssert.assertThat;
 
 import org.junit.jupiter.api.Test;
 
