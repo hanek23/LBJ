@@ -24,7 +24,6 @@ public class LBJNamingConventionUpdaterTest extends LBJFormTest {
 	private static final String TABLE_NAME = "TABLE_NAME";
 	private static final String COLUMN_NAME = "COLUMN";
 	private static final String REFERENCED_TABLE_NAME = "REF_TABLE";
-	private static final String REFERENCED_COLUMN_NAME = "REF_COLUMN";
 	private static final String SEQUENCE_NAME = "MY SEQUENCE NAME";
 	private static final String NEW_INDEX_NAME = "INDEX_NAME";
 
@@ -38,6 +37,8 @@ public class LBJNamingConventionUpdaterTest extends LBJFormTest {
 	public void testUpdateAddColumnForeignKey() {
 		AddColumnForm form = LBJTestUtils.getAddColumnForm();
 		LBJCheckBox foreignKeyCheckBox = form.getForeignKeyCheckBox();
+		LBJTextBox tableName = form.getTableNameTextBox();
+		LBJTextBox columnName = form.getColumnNameTextBox();
 		LBJTextBox referencedTable = form.getReferencedTableNameTextBox();
 		LBJTextBox referencedColumn = form.getReferencedColumnNameTextBox();
 		LBJTextBox foreignKeyName = form.getForeignKeyNameTextBox();
@@ -64,20 +65,21 @@ public class LBJNamingConventionUpdaterTest extends LBJFormTest {
 		assertThat(foreignKeyName.getValue()).isBlank();
 
 		LBJTestUtils.setValueOf(referencedTable, REFERENCED_TABLE_NAME);
+		LBJTestUtils.setValueOf(tableName, TABLE_NAME);
 
 		// After filling referenced table name, updater should update foreign key name
 		// accordingly
 		assertThat(referencedTable.getValue()).isEqualToIgnoringCase(REFERENCED_TABLE_NAME);
-		assertThat(foreignKeyName.getValue())
-				.isEqualToIgnoringCase(FOREIGN_KEY_START + REFERENCED_TABLE_NAME + NamingConventions.SEPARATOR);
+		assertThat(foreignKeyName.getValue()).isEqualToIgnoringCase(FOREIGN_KEY_START + TABLE_NAME
+				+ NamingConventions.SEPARATOR + REFERENCED_TABLE_NAME + NamingConventions.SEPARATOR);
 
-		LBJTestUtils.setValueOf(referencedColumn, REFERENCED_COLUMN_NAME);
+		LBJTestUtils.setValueOf(columnName, COLUMN_NAME);
 
-		// After filling referenced column name, updater should update foreign key name
+		// After filling column name, updater should update foreign key name
 		// accordingly
-		assertThat(referencedColumn.getValue()).isEqualToIgnoringCase(REFERENCED_COLUMN_NAME);
-		assertThat(foreignKeyName.getValue()).isEqualToIgnoringCase(
-				FOREIGN_KEY_START + REFERENCED_TABLE_NAME + NamingConventions.SEPARATOR + REFERENCED_COLUMN_NAME);
+		assertThat(columnName.getValue()).isEqualToIgnoringCase(COLUMN_NAME);
+		assertThat(foreignKeyName.getValue()).isEqualToIgnoringCase(FOREIGN_KEY_START + TABLE_NAME
+				+ NamingConventions.SEPARATOR + REFERENCED_TABLE_NAME + NamingConventions.SEPARATOR + COLUMN_NAME);
 
 		LBJTestUtils.setValueOf(foreignKeyCheckBox, false);
 
