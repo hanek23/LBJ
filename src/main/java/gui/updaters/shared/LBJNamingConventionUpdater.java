@@ -33,6 +33,13 @@ public class LBJNamingConventionUpdater implements LBJValueUpdater<String> {
 		// Probably should check if it is really String value holder component but meh,
 		// if there are duplicate names of components we have got bigger problems
 		// somewhere else
+		if (componentByName.isEmpty() && StringUtils.isBlank(textBox.getValue())) {
+			// naming convention might not depend on any component (for example someone
+			// might want their index name always start with I_ but that is it) so when that
+			// is the case and value is empty we will set this as a value
+			textBox.setValue(textBox.getNamingConvention());
+			return;
+		}
 		boolean isOneFocused = componentByName.values().stream()
 				.anyMatch(c -> ((LBJValueComponent<String>) c).isFocused());
 		isOneFocused |= component.isActivatorComponentFocused();
@@ -56,15 +63,15 @@ public class LBJNamingConventionUpdater implements LBJValueUpdater<String> {
 
 	private Map<String, LBJComponent> getComponentByNameOn(LBJForm form, String[] names) {
 		Map<String, LBJComponent> componentByName = new HashMap<>();
+		if (names == null) {
+			return componentByName;
+		}
 		for (String name : names) {
 			for (LBJComponent component : form.getComponents()) {
 				if (component.getName().equalsIgnoreCase(name)) {
 					componentByName.put(name, component);
 					break;
 				}
-			}
-			if (!componentByName.containsKey(name)) {
-				throw new IllegalArgumentException("No component with name: " + name + " found");
 			}
 		}
 		return componentByName;
