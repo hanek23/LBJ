@@ -1,14 +1,16 @@
 package domain;
 
-public class Table extends AbstractEntity {
+public class Table extends AbstractEntity implements CreateTable, DropTable {
 
 	private String name;
 	private String primaryKeyColumnName;
 	private String primaryKeyContrainName;
 	private String sequenceName;
+	private TableOperation operation;
 
-	public Table(String name) {
+	public Table(String name, TableOperation operation) {
 		this.name = name;
+		this.operation = operation;
 		setForDatabases(ForDatabases.forAll());
 	}
 
@@ -42,6 +44,24 @@ public class Table extends AbstractEntity {
 
 	public void setSequenceName(String sequenceName) {
 		this.sequenceName = sequenceName;
+	}
+
+	public TableOperation getOperation() {
+		return operation;
+	}
+
+	public void setOperation(TableOperation operation) {
+		this.operation = operation;
+	}
+
+	@Override
+	public boolean isCreateTable() {
+		return getOperation() == TableOperation.CREATE;
+	}
+
+	@Override
+	public boolean isDropTable() {
+		return getOperation() == TableOperation.DROP;
 	}
 
 }

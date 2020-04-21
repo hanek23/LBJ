@@ -9,17 +9,18 @@ import org.junit.jupiter.api.Test;
 import constants.Labels;
 import constants.NamingConventions;
 import domain.AddColumn;
+import testutils.LBJFormTest;
 import testutils.LBJTestUtils;
 
-public class AddColumnFormTest {
+public class AddColumnFormTest extends LBJFormTest{
 
 	private static final String TABLE_NAME = "ACTION";
 	private static final String COLUMN_NAME = "lbj";
 	private static final String COLUMN_DATA_TYPE = "integer";
 	private static final boolean NULLABLE = false;
 	private static final boolean HAS_INDEX = true;
-	private static final String INDEX_NAME = NamingConventions.DEFAULT_INDEX_NAME + TABLE_NAME + NamingConventions.SEPARATOR
-			+ COLUMN_NAME;
+	private static final String INDEX_NAME = NamingConventions.DEFAULT_INDEX_NAME + TABLE_NAME
+			+ NamingConventions.SEPARATOR + COLUMN_NAME;
 	private static final boolean HAS_FOREIGNKEY = true;
 	private static final String REFERENCED_TABLE_NAME = "NBA";
 	private static final String REFERENCED_COLUMN_NAME = "goat";

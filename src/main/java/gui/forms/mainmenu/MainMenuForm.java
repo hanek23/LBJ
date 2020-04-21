@@ -30,8 +30,10 @@ import gui.components.LBJPlainLabel;
 import gui.forms.LBJForm;
 import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.createtable.CreateTableForm;
+import gui.forms.dropcolumn.DropColumnForm;
+import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
+import gui.forms.droptable.DropTableForm;
 import gui.forms.preferences.PreferencesForm;
-import gui.forms.removenotnullconstraint.RemoveNotNullConstraintForm;
 import gui.suppliers.LBJFormSupplier;
 import gui.utils.LBJFormUtils;
 
@@ -53,13 +55,14 @@ public class MainMenuForm extends LBJForm {
 
 	private static final Logger LOGGER = Logger.getLogger(MainMenuForm.class.getSimpleName());
 
-	private boolean terminalStarted;
 	private List<LBJForm> formsToUpdate;
 	private LBJPlainLabel questionLabel;
 	private ActionListBox mainMenu;
 	private CreateTableForm createTableForm;
+	private DropTableForm dropTableForm;
 	private AddColumnForm addColumnForm;
-	private RemoveNotNullConstraintForm removeNotNullConstraintForm;
+	private DropColumnForm dropColumnForm;
+	private DropNotNullConstraintForm dropNotNullConstraintForm;
 	private PreferencesForm preferencesForm;
 	private TextGUIThread thread;
 
@@ -82,13 +85,17 @@ public class MainMenuForm extends LBJForm {
 		mainMenu = new ActionListBox();
 		questionLabel = new LBJPlainLabelBuilder(Labels.MAIN_MENU_QUESTION, this).build();
 		createTableForm = LBJFormSupplier.getCreateTableForm(getWindow(), this, false);
+		dropTableForm = LBJFormSupplier.getDropTableForm(getWindow(), this, false);
 		addColumnForm = LBJFormSupplier.getAddColumnForm(getWindow(), this, false);
-		removeNotNullConstraintForm = LBJFormSupplier.getRemoveNotNullConstraintForm(getWindow(), this, false);
+		dropColumnForm = LBJFormSupplier.getDropColumnForm(getWindow(), this, false);
+		dropNotNullConstraintForm = LBJFormSupplier.getDropNotNullConstraintForm(getWindow(), this, false);
 		preferencesForm = LBJFormSupplier.getPreferencesForm(getWindow(), this, false);
 
 		addFormToUpdate(createTableForm);
+		addFormToUpdate(dropTableForm);
 		addFormToUpdate(addColumnForm);
-		addFormToUpdate(removeNotNullConstraintForm);
+		addFormToUpdate(dropColumnForm);
+		addFormToUpdate(dropNotNullConstraintForm);
 		addFormToUpdate(preferencesForm);
 	}
 
@@ -102,8 +109,10 @@ public class MainMenuForm extends LBJForm {
 		LBJFormUtils.addLabelToMainMenuContent(getContent(), questionLabel);
 		LBJFormUtils.addMenuToMainMenuContent(getContent(), mainMenu);
 		LBJFormUtils.addItemToMenu(mainMenu, createTableForm, Labels.MAIN_MENU_CREATE_TABLE);
+		LBJFormUtils.addItemToMenu(mainMenu, dropTableForm, Labels.MAIN_MENU_DROP_TABLE);
 		LBJFormUtils.addItemToMenu(mainMenu, addColumnForm, Labels.MAIN_MENU_ADD_COLUMN);
-		LBJFormUtils.addItemToMenu(mainMenu, removeNotNullConstraintForm, Labels.MAIN_MENU_REMOVE_NOT_NULL_CONSTRAINT);
+		LBJFormUtils.addItemToMenu(mainMenu, dropColumnForm, Labels.MAIN_MENU_DROP_COLUMN);
+		LBJFormUtils.addItemToMenu(mainMenu, dropNotNullConstraintForm, Labels.MAIN_MENU_DROP_NOT_NULL_CONSTRAINT);
 		LBJFormUtils.addItemToMenu(mainMenu, preferencesForm, Labels.MAIN_MENU_PREFERENCES);
 		LBJFormUtils.addExitButtonToMainMenu(mainMenu);
 	}
@@ -189,32 +198,24 @@ public class MainMenuForm extends LBJForm {
 		return getFormsToUpdate().add(form);
 	}
 
-	public boolean isTerminalStarted() {
-		return terminalStarted;
-	}
-
-	public LBJPlainLabel getQuestionLabel() {
-		return questionLabel;
-	}
-
-	public ActionListBox getMainMenu() {
-		return mainMenu;
-	}
-
-	public CreateTableForm getCreateTableForm() {
-		return createTableForm;
+	public TextGUIThread getThread() {
+		return thread;
 	}
 
 	public AddColumnForm getAddColumnForm() {
 		return addColumnForm;
 	}
 
-	public RemoveNotNullConstraintForm getRemoveNotNullConstraintForm() {
-		return removeNotNullConstraintForm;
+	public DropNotNullConstraintForm getDropNotNullConstraintForm() {
+		return dropNotNullConstraintForm;
 	}
 
-	public TextGUIThread getThread() {
-		return thread;
+	public CreateTableForm getCreateTableForm() {
+		return createTableForm;
+	}
+
+	public DropColumnForm getDropColumnForm() {
+		return dropColumnForm;
 	}
 
 }

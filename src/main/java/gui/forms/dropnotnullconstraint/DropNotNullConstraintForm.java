@@ -1,4 +1,4 @@
-package gui.forms.removenotnullconstraint;
+package gui.forms.dropnotnullconstraint;
 
 import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Window;
@@ -7,7 +7,7 @@ import constants.Labels;
 import constants.NamingConventions;
 import domain.Column;
 import domain.ColumnOperation;
-import domain.RemoveNotNullConstraint;
+import domain.DropNotNullConstraint;
 import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
@@ -21,7 +21,7 @@ import gui.utils.LBJFormUtils;
  * name and data type. Only next step is to go to {@link GenerateForm} as you
  * cannot, at the moment, remove multiple not null constraints at once.
  */
-public class RemoveNotNullConstraintForm extends LBJEntityForm<RemoveNotNullConstraint> {
+public class DropNotNullConstraintForm extends LBJEntityForm<DropNotNullConstraint> {
 
 	private LBJTextBox tableNameTextBox;
 	private LBJTextBox columnNameTextBox;
@@ -29,7 +29,7 @@ public class RemoveNotNullConstraintForm extends LBJEntityForm<RemoveNotNullCons
 
 	private Button generateButton;
 
-	public RemoveNotNullConstraintForm(Window window, LBJForm previousForm) {
+	public DropNotNullConstraintForm(Window window, LBJForm previousForm) {
 		super(window, previousForm);
 	}
 
@@ -72,9 +72,9 @@ public class RemoveNotNullConstraintForm extends LBJEntityForm<RemoveNotNullCons
 	}
 
 	@Override
-	public RemoveNotNullConstraint convert() {
-		RemoveNotNullConstraint c = new Column(getColumnNameTextBox().getValue(),
-				ColumnOperation.REMOVE_NOT_NULL_CONSTRAINT);
+	public DropNotNullConstraint convert() {
+		DropNotNullConstraint c = new Column(getColumnNameTextBox().getValue(),
+				ColumnOperation.DROP_NOT_NULL_CONSTRAINT);
 		c.setDataType(dataTypeTextBox.getValue());
 		c.setTableName(tableNameTextBox.getValue());
 		return c;
@@ -99,10 +99,6 @@ public class RemoveNotNullConstraintForm extends LBJEntityForm<RemoveNotNullCons
 
 	public Button getGenerateButton() {
 		return generateButton;
-	}
-
-	public void setGenerateButton(Button generateButton) {
-		this.generateButton = generateButton;
 	}
 
 }

@@ -1,0 +1,7 @@
+<changeSet id="${ID}$" author="${AUTHOR}$" dbms="oracle">
+	<preConditions onFail="MARK_RAN">
+		<sqlCheck expectedResult="1">SELECT count(1) FROM user_indexes WHERE table_name = '${TABLE_NAME}$' and index_name='${INDEX_NAME}$'</sqlCheck>
+	</preConditions>
+	<comment>Drop index ${INDEX_NAME}$ from table ${TABLE_NAME}$ if it exists</comment>
+	<dropIndex tableName="${TABLE_NAME}$" indexName="${INDEX_NAME}$"/>
+</changeSet>

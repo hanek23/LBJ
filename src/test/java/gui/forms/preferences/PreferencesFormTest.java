@@ -19,7 +19,7 @@ public class PreferencesFormTest extends LBJFormTest {
 		assertThat(form).hasName(Labels.PREFERENCES_FORM);
 		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_PRIMARY_KEY_NAME);
 		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN_NAME);
-		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_SEQUENCE_NAME);
+		assertThat(form).hasComponentWithName(Labels.TABLE_SEQUENCE_NAME);
 		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_INDEX_NAME);
 		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_FOREIGN_KEY_NAME);
 

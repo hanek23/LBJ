@@ -38,7 +38,7 @@ public class PreferencesForm extends LBJWizardForm {
 		primaryKeyConstraintName = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN_NAME, this)
 				.value(NamingConventions.getPrimaryKeyConstraintName()).required().build();
 
-		sequenceName = new LBJTextBoxBuilder(Labels.CREATE_TABLE_SEQUENCE_NAME, this)
+		sequenceName = new LBJTextBoxBuilder(Labels.TABLE_SEQUENCE_NAME, this)
 				.value(NamingConventions.getSequenceName()).required().build();
 
 		indexName = new LBJTextBoxBuilder(Labels.ADD_COLUMN_INDEX_NAME, this).value(NamingConventions.getIndexName())
@@ -139,32 +139,16 @@ public class PreferencesForm extends LBJWizardForm {
 		return primaryKeyName;
 	}
 
-	public void setPrimaryKeyName(LBJTextBox primaryKeyName) {
-		this.primaryKeyName = primaryKeyName;
-	}
-
 	public LBJTextBox getPrimaryKeyConstraintName() {
 		return primaryKeyConstraintName;
-	}
-
-	public void setPrimaryKeyConstraintName(LBJTextBox primaryKeyConstraintName) {
-		this.primaryKeyConstraintName = primaryKeyConstraintName;
 	}
 
 	public LBJTextBox getSequenceName() {
 		return sequenceName;
 	}
 
-	public void setSequenceName(LBJTextBox sequenceName) {
-		this.sequenceName = sequenceName;
-	}
-
 	public LBJTextBox getIndexName() {
 		return indexName;
-	}
-
-	public void setIndexName(LBJTextBox indexName) {
-		this.indexName = indexName;
 	}
 
 	public LBJTextBox getForeignKeyName() {
@@ -175,28 +159,17 @@ public class PreferencesForm extends LBJWizardForm {
 		this.foreignKeyName = foreignKeyName;
 	}
 
+	@Override
 	public Button getBackButton() {
 		return backButton;
-	}
-
-	public void setBackButton(Button backButton) {
-		this.backButton = backButton;
 	}
 
 	public Button getApplyButton() {
 		return applyButton;
 	}
 
-	public void setApplyButton(Button applyButton) {
-		this.applyButton = applyButton;
-	}
-
 	public Button getResetToDefaultButton() {
 		return resetToDefaultButton;
-	}
-
-	public void setResetToDefaultButton(Button resetToDefaultButton) {
-		this.resetToDefaultButton = resetToDefaultButton;
 	}
 
 }

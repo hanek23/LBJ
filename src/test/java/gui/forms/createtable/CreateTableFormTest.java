@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import constants.Labels;
 import constants.NamingConventions;
-import domain.Table;
+import domain.CreateTable;
 import testutils.LBJFormTest;
 import testutils.LBJTestUtils;
 
@@ -24,12 +24,11 @@ public class CreateTableFormTest extends LBJFormTest {
 	public void testInitialize() {
 		CreateTableForm form = LBJTestUtils.getCreateTableForm();
 
-		assertThat(form).hasName(Labels.TABLE_FORM);
+		assertThat(form).hasName(Labels.CREATE_TABLE_FORM);
 		assertThat(form).hasComponentWithName(Labels.TABLE_NAME);
 		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_PRIMARY_KEY_NAME);
 		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN_NAME);
-		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_SEQUENCE_NAME);
-		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_SEQUENCE_NAME);
+		assertThat(form).hasComponentWithName(Labels.TABLE_SEQUENCE_NAME);
 
 		assertThat(form.getTableNameTextBox()).isRequired().hasLengthValidator()
 				.hasCaseValidator(NamingConventions.TABLE_NAME_CASE);
@@ -54,7 +53,7 @@ public class CreateTableFormTest extends LBJFormTest {
 		LBJTestUtils.setValueOf(form.getPrimaryKeyConstraintNameTextBox(), PRIMARY_KEY_CONSTRAINT_NAME);
 		LBJTestUtils.setValueOf(form.getSequenceNameTextBox(), SEQUENCE_NAME);
 
-		Table table = form.convert();
+		CreateTable table = form.convert();
 		// ignoring case because testing case upadaters is not the goal of this test
 		assertThat(table.getName()).isEqualToIgnoringCase(TABLE_NAME);
 		assertThat(table.getPrimaryKeyColumnName()).isEqualToIgnoringCase(PRIMARY_KEY_NAME);

@@ -12,7 +12,7 @@ import testutils.AbstractXmlSupplier;
 public class EntitiesSupplier1 extends AbstractXmlSupplier implements EntitiesSupplier {
 
 	private Column createColumnAction() {
-		Column column = new Column("action", ColumnOperation.ADD_COLUMN);
+		Column column = new Column("action", ColumnOperation.ADD);
 		column.setNullable(true);
 		column.setDataType("integer");
 		column.setForeignKey(new ForeignKey("F_LBJ_REF_ID_LBJ_ACTION", "LBJ_ACTION", "id_lbj_action"));

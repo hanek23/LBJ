@@ -6,6 +6,7 @@
 				<columnExists columnName="formssql" tableName="LBJ_REFERENCE"/>
 			</not>
 		</preConditions>
+		<comment>Add column formssql to LBJ_REFERENCE</comment>
 		<addColumn tableName="LBJ_REFERENCE">
 			<column defaultValue="0" name="formssql" type="char(1)">
 				<constraints nullable="false"/>

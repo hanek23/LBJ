@@ -104,8 +104,8 @@ public class LBJFormUtils {
 		return generateButton;
 	}
 
-	public static Button createAddColumnButton(LBJWizardForm form) {
-		Button addColumnButton = new Button(Labels.BUTTON_ADD_COLUMN);
+	public static Button createAddColumnButton(LBJWizardForm form, boolean another) {
+		Button addColumnButton = new Button(another ? Labels.BUTTON_ADD_ANOTHER_COLUMN : Labels.BUTTON_ADD_COLUMN);
 		addColumnButton.addListener(new Listener() {
 			@Override
 			public void onTriggered(Button button) {
@@ -119,6 +119,23 @@ public class LBJFormUtils {
 			}
 		});
 		return addColumnButton;
+	}
+
+	public static Button createDropColumnButton(LBJWizardForm form) {
+		Button addDropButton = new Button(Labels.BUTTON_DROP_ANOTHER_COLUMN);
+		addDropButton.addListener(new Listener() {
+			@Override
+			public void onTriggered(Button button) {
+				if (form.validate()) {
+					if (form.getNextForm() == null) {
+						form.setNextForm(LBJFormSupplier.getDropColumnForm(form.getWindow(), form));
+					}
+					form.goToNextForm();
+				}
+
+			}
+		});
+		return addDropButton;
 	}
 
 }

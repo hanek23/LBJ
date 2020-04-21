@@ -5,7 +5,9 @@ import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
 import constants.NamingConventions;
+import domain.CreateTable;
 import domain.Table;
+import domain.TableOperation;
 import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
@@ -18,7 +20,7 @@ import gui.utils.LBJFormUtils;
  * key constraint name and sequence name. As a next step you can go to
  * {@link AddColumnForm} in which you can add more columns.
  */
-public class CreateTableForm extends LBJEntityForm<Table> {
+public class CreateTableForm extends LBJEntityForm<CreateTable> {
 
 	private LBJTextBox tableNameTextBox;
 	private LBJTextBox primaryKeyNameTextBox;
@@ -45,7 +47,7 @@ public class CreateTableForm extends LBJEntityForm<Table> {
 				.addNamingConventionUpdater(NamingConventions.getPrimaryKeyConstraintName())
 				.addCaseUpdaterAndValidator(NamingConventions.PRIMARY_KEY_CONSTRAINT_NAME_CASE).build();
 
-		sequenceNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_SEQUENCE_NAME, this).required()
+		sequenceNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_SEQUENCE_NAME, this).required()
 				.addCaseUpdaterAndValidator(NamingConventions.SEQUENCE_NAME_CASE).addLengthValidator()
 				.addNamingConventionUpdater(NamingConventions.getSequenceName()).build();
 
@@ -53,7 +55,7 @@ public class CreateTableForm extends LBJEntityForm<Table> {
 
 	@Override
 	public void initializeButtons() {
-		addColumnButton = LBJFormUtils.createAddColumnButton(this);
+		addColumnButton = LBJFormUtils.createAddColumnButton(this, true);
 	}
 
 	@Override
@@ -81,8 +83,8 @@ public class CreateTableForm extends LBJEntityForm<Table> {
 	}
 
 	@Override
-	public Table convert() {
-		Table table = new Table(tableNameTextBox.getValue());
+	public CreateTable convert() {
+		CreateTable table = new Table(tableNameTextBox.getValue(), TableOperation.CREATE);
 		table.setPrimaryKeyColumnName(primaryKeyNameTextBox.getValue());
 		table.setPrimaryKeyContrainName(primaryKeyConstraintNameTextBox.getValue());
 		table.setSequenceName(sequenceNameTextBox.getValue());
@@ -107,7 +109,7 @@ public class CreateTableForm extends LBJEntityForm<Table> {
 
 	@Override
 	public String toString() {
-		return Labels.TABLE_FORM;
+		return Labels.CREATE_TABLE_FORM;
 	}
 
 	public LBJTextBox getTableNameTextBox() {
@@ -128,10 +130,6 @@ public class CreateTableForm extends LBJEntityForm<Table> {
 
 	public Button getAddColumnButton() {
 		return addColumnButton;
-	}
-
-	public void setAddColumnButton(Button addColumnButton) {
-		this.addColumnButton = addColumnButton;
 	}
 
 }

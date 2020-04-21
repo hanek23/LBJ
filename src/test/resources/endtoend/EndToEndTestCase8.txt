@@ -14,7 +14,7 @@
 				AND name = 'CONTAINER'
 			</sqlCheck>
 		</preConditions>
-		<comment>Remove NOTNULL constraint from column CONTAINER in table LBJ_RELATED_ID if it exists</comment>
+		<comment>Drop NOTNULL constraint from column CONTAINER in table LBJ_RELATED_ID if it exists</comment>
 		<dropNotNullConstraint tableName="LBJ_RELATED_ID" columnName="container"
 			columnDataType="integer" />
 	</changeSet>

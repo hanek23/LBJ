@@ -8,7 +8,7 @@
 			AND columns.column_name = '${COLUMN_NAME}$'
 		</sqlCheck>
 	</preConditions>
-	<comment>Remove NOTNULL constraint from column ${COLUMN_NAME}$ in table ${TABLE_NAME}$ if it exists</comment>
+	<comment>Drop NOTNULL constraint from column ${COLUMN_NAME}$ in table ${TABLE_NAME}$ if it exists</comment>
 	<dropNotNullConstraint tableName="${TABLE_NAME}$" columnName="${COLUMN_NAME}$"
 		columnDataType="${COLUMN_TYPE}$" />
 </changeSet>

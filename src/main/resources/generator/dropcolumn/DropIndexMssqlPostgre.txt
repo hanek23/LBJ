@@ -2,6 +2,6 @@
 	<preConditions onFail="MARK_RAN">
 		<indexExists indexName="${INDEX_NAME}$" />
 	</preConditions>
-	<comment>Drop index ${INDEX_NAME}$ from table ${TABLE_NAME}$ if it exists.</comment>
-	<dropIndex tableName="${TABLE_NAME}$" indexName=${INDEX_NAME$/>
+	<comment>Drop index ${INDEX_NAME}$ from table ${TABLE_NAME}$ if it exists</comment>
+	<dropIndex tableName="${TABLE_NAME}$" indexName="${INDEX_NAME}$"/>
 </changeSet>

@@ -4,6 +4,7 @@
 			<columnExists tableName="${TABLE_NAME}$" columnName="${COLUMN_NAME}$" />
 		</not>
 	</preConditions>
+	<comment>Add column ${COLUMN_NAME}$ to ${TABLE_NAME}$</comment>
 	<addColumn tableName="${TABLE_NAME}$">
 		<column name="${COLUMN_NAME}$" type="boolean" defaultValue="false">
 			${COLUMN_CONSTRAINS}$

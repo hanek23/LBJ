@@ -4,9 +4,9 @@ import static testutils.asserts.LBJValueComponentAssert.assertThat;
 
 import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.createtable.CreateTableForm;
+import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
 import gui.forms.generate.GenerateForm;
 import gui.forms.mainmenu.MainMenuForm;
-import gui.forms.removenotnullconstraint.RemoveNotNullConstraintForm;
 import gui.suppliers.LBJFormSupplier;
 import testutils.AbstractXmlSupplier;
 import testutils.LBJTestUtils;
@@ -30,18 +30,18 @@ public class EndToEndTestCase4 extends AbstractXmlSupplier implements EndToEndTe
 	public void test() {
 		MainMenuForm mainMenuForm = LBJFormSupplier.getMainMenuForm();
 		mainMenuForm.focus();
-		RemoveNotNullConstraintForm removeNotNullConstraintForm = mainMenuForm.getRemoveNotNullConstraintForm();
-		removeNotNullConstraintForm.focus();
-		LBJFormAssert.assertThat(removeNotNullConstraintForm).isFocused();
-		LBJFormAssert.assertThat(removeNotNullConstraintForm).isNotValid();
+		DropNotNullConstraintForm dropNotNullConstraintForm = mainMenuForm.getDropNotNullConstraintForm();
+		dropNotNullConstraintForm.focus();
+		LBJFormAssert.assertThat(dropNotNullConstraintForm).isFocused();
+		LBJFormAssert.assertThat(dropNotNullConstraintForm).isNotValid();
 
 		// Just fill this form and go back to main menu, final xml should not contain
 		// this
-		LBJTestUtils.setValueOf(removeNotNullConstraintForm.getTableNameTextBox(), "LBJ_RELATED_ID");
-		LBJTestUtils.setValueOf(removeNotNullConstraintForm.getColumnNameTextBox(), "container");
-		LBJTestUtils.setValueOf(removeNotNullConstraintForm.getDataTypeTextBox(), "integer");
-		LBJFormAssert.assertThat(removeNotNullConstraintForm).isValid();
-		LBJTestUtils.click(removeNotNullConstraintForm.getBackButton());
+		LBJTestUtils.setValueOf(dropNotNullConstraintForm.getTableNameTextBox(), "LBJ_RELATED_ID");
+		LBJTestUtils.setValueOf(dropNotNullConstraintForm.getColumnNameTextBox(), "container");
+		LBJTestUtils.setValueOf(dropNotNullConstraintForm.getDataTypeTextBox(), "integer");
+		LBJFormAssert.assertThat(dropNotNullConstraintForm).isValid();
+		LBJTestUtils.click(dropNotNullConstraintForm.getBackButton());
 
 		LBJFormAssert.assertThat(mainMenuForm).isFocused();
 		CreateTableForm createTableForm = mainMenuForm.getCreateTableForm();

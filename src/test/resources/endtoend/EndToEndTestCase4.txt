@@ -82,6 +82,7 @@
 				<columnExists columnName="isalive" tableName="TABLE_NAME"/>
 			</not>
 		</preConditions>
+		<comment>Add column isalive to TABLE_NAME</comment>
 		<addColumn tableName="TABLE_NAME">
 			<column defaultValue="0" name="isalive" type="char(1)">
 				<constraints nullable="false"/>
@@ -94,6 +95,7 @@
 				<columnExists columnName="isalive" tableName="TABLE_NAME"/>
 			</not>
 		</preConditions>
+		<comment>Add column isalive to TABLE_NAME</comment>
 		<addColumn tableName="TABLE_NAME">
 			<column defaultValue="false" name="isalive" type="boolean">
 				<constraints nullable="false"/>

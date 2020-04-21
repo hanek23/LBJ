@@ -3,9 +3,12 @@ package constants;
 import org.apache.commons.lang3.StringUtils;
 
 import domain.AddColumn;
+import domain.Column;
+import domain.CreateTable;
+import domain.DropColumn;
+import domain.DropNotNullConstraint;
 import domain.GeneralColumn;
-import domain.RemoveNotNullConstraint;
-import domain.Table;
+import domain.GeneralTable;
 import generator.Generator;
 import generator.GeneratorSettings;
 
@@ -73,17 +76,17 @@ public class XmlPartsSupplier {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_TABLE_NAME, tableName);
 	}
 
-	public static String replaceColumnPrimaryKeyName(String replaceIn, Table table) {
+	public static String replaceColumnPrimaryKeyName(String replaceIn, CreateTable table) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_PRIMARY_KEY_NAME,
 				table.getPrimaryKeyColumnName());
 	}
 
-	public static String replaceConstrainPrimaryKeyName(String replaceIn, Table table) {
+	public static String replaceConstrainPrimaryKeyName(String replaceIn, CreateTable table) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_CONSTRAIN_PRIMARY_KEY_NAME,
 				table.getPrimaryKeyContrainName());
 	}
 
-	public static String replaceSequenceName(String replaceIn, Table table) {
+	public static String replaceSequenceName(String replaceIn, GeneralTable table) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_SEQUENCE_NAME, table.getSequenceName());
 	}
 
@@ -97,22 +100,22 @@ public class XmlPartsSupplier {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_DATA_TYPE, column.getDataType());
 	}
 
-	public static String replaceColumnForeignKeyName(String replaceIn, AddColumn column) {
+	public static String replaceColumnForeignKeyName(String replaceIn, Column column) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_FOREIGN_KEY_NAME,
 				column.getForeignKey().getName());
 	}
 
-	public static String replaceColumnForeignKeyReferencedTable(String replaceIn, AddColumn column) {
+	public static String replaceColumnForeignKeyReferencedTable(String replaceIn, Column column) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_FOREIGN_KEY_REFERECED_TABLE_NAME,
 				column.getForeignKey().getReferencedTable());
 	}
 
-	public static String replaceColumnForeignKeyReferencedColumn(String replaceIn, AddColumn column) {
+	public static String replaceColumnForeignKeyReferencedColumn(String replaceIn, Column column) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_FOREIGN_KEY_REFERECED_COLUMN_NAME,
 				column.getForeignKey().getReferencedColumn());
 	}
 
-	public static String replaceColumnIndexName(String replaceIn, AddColumn column) {
+	public static String replaceColumnIndexName(String replaceIn, Column column) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_INDEX_NAME, column.getIndexName());
 	}
 
@@ -142,7 +145,7 @@ public class XmlPartsSupplier {
 				XmlParts.getAddColumnConstraintsForeignKey());
 	}
 
-	public static String getTableBase(Table table) {
+	public static String getTableBase(CreateTable table) {
 		String xmlTable = "";
 		if (table.isForMssql()) {
 			xmlTable += XmlParts.getCreateTableMssql();
@@ -158,12 +161,39 @@ public class XmlPartsSupplier {
 		}
 		return xmlTable;
 	}
+	
+	public static String getDropTableBase() {
+		return XmlParts.getDropTableBase();
+	}
+	
+	public static String getDropSequenceBase() {
+		return XmlParts.getDropSequenceBase();
+	}
 
-	public static String getColumnBase(AddColumn column) {
+	public static String getAddColumnBase(AddColumn column) {
 		if (column.isTypeBoolean()) {
 			return getBooleanColumnBase(column);
 		}
-		return XmlParts.getGeneralColumnBase();
+		return XmlParts.getAddGeneralColumnBase();
+	}
+
+	public static String getDropForeignKeyBase() {
+		return XmlParts.getDropForeignKey();
+	}
+
+	public static String getDropColumnBase() {
+		return XmlParts.getDropColumnBase();
+	}
+
+	public static String getDropIndexBase(DropColumn column) {
+		String dropIndex = "";
+		if (column.isForMssql() || column.isForPostgre()) {
+			dropIndex += XmlParts.getDropIndexMssqlPostgre();
+		}
+		if (column.isForOracle()) {
+			dropIndex += XmlParts.getDropIndexOracle();
+		}
+		return dropIndex;
 	}
 
 	private static String getBooleanColumnBase(AddColumn booleanColumn) {
@@ -188,16 +218,16 @@ public class XmlPartsSupplier {
 		return xmlIndex;
 	}
 
-	public static String getRemoveNotNullConstraintBase(RemoveNotNullConstraint constraint) {
+	public static String getDropNotNullConstraintBase(DropNotNullConstraint constraint) {
 		String xmlConstraint = "";
 		if (constraint.isForOracle()) {
-			xmlConstraint += XmlParts.getRemoveNotNullConstraintOracle();
+			xmlConstraint += XmlParts.getDropNotNullConstraintOracle();
 		}
 		if (constraint.isForMssql()) {
-			xmlConstraint += XmlParts.getRemoveNotNullConstraintMssql();
+			xmlConstraint += XmlParts.getDropNotNullConstraintMssql();
 		}
 		if (constraint.isForPostgre()) {
-			xmlConstraint += XmlParts.getRemoveNotNullConstraintPostgre();
+			xmlConstraint += XmlParts.getDropNotNullConstraintPostgre();
 		}
 		return xmlConstraint;
 	}

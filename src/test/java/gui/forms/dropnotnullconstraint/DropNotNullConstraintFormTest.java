@@ -1,4 +1,4 @@
-package gui.forms.removenotnullconstraint;
+package gui.forms.dropnotnullconstraint;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static testutils.asserts.LBJFormAssert.assertThat;
@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import constants.Labels;
 import constants.NamingConventions;
-import domain.RemoveNotNullConstraint;
+import domain.DropNotNullConstraint;
 import testutils.LBJTestUtils;
 
-public class RemoveNotNullConstraintFormTest {
+public class DropNotNullConstraintFormTest {
 
 	private static final String TABLE_NAME = "ACTION";
 	private static final String COLUMN_NAME = "lbj";
@@ -19,7 +19,7 @@ public class RemoveNotNullConstraintFormTest {
 
 	@Test
 	public void testInitialize() {
-		RemoveNotNullConstraintForm form = LBJTestUtils.getRemoveNotNullConstraintForm();
+		DropNotNullConstraintForm form = LBJTestUtils.getDropNotNullConstraintForm();
 
 		// Has all components
 		assertThat(form).hasName(Labels.REMOVE_NOT_NULL_CONSTRAINT_FORM);
@@ -38,14 +38,14 @@ public class RemoveNotNullConstraintFormTest {
 
 	@Test
 	public void testConvert() {
-		RemoveNotNullConstraintForm form = LBJTestUtils.getRemoveNotNullConstraintForm();
+		DropNotNullConstraintForm form = LBJTestUtils.getDropNotNullConstraintForm();
 
 		LBJTestUtils.setValueOf(form.getTableNameTextBox(), TABLE_NAME);
 		LBJTestUtils.setValueOf(form.getColumnNameTextBox(), COLUMN_NAME);
 		LBJTestUtils.setValueOf(form.getDataTypeTextBox(), COLUMN_DATA_TYPE);
 
-		RemoveNotNullConstraint column = form.convert();
-		assertThat(column.isRemoveNotNullConstraint()).isTrue();
+		DropNotNullConstraint column = form.convert();
+		assertThat(column.isDropNotNullConstraint()).isTrue();
 		// ignoring case because testing case upadaters is not the goal of this test
 		assertThat(column.getTableName()).isEqualToIgnoringCase(TABLE_NAME);
 		assertThat(column.getName()).isEqualToIgnoringCase(COLUMN_NAME);

@@ -6,14 +6,14 @@ import java.util.List;
 import domain.Column;
 import domain.ColumnOperation;
 import domain.Entity;
-import domain.RemoveNotNullConstraint;
+import domain.DropNotNullConstraint;
 import testutils.AbstractXmlSupplier;
 
 public class EntitiesSupplier3 extends AbstractXmlSupplier implements EntitiesSupplier {
 
 	@Override
 	public List<Entity> getEntities() {
-		RemoveNotNullConstraint column = new Column("container", ColumnOperation.REMOVE_NOT_NULL_CONSTRAINT);
+		DropNotNullConstraint column = new Column("container", ColumnOperation.DROP_NOT_NULL_CONSTRAINT);
 		column.setDataType("integer");
 		column.setTableName("LBJ_RELATED_ID");
 		return Arrays.asList(column);

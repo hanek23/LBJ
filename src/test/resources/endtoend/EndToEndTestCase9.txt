@@ -10,7 +10,7 @@
 				AND columns.column_name = 'container'
 			</sqlCheck>
 		</preConditions>
-		<comment>Remove NOTNULL constraint from column container in table LBJ_RELATED_ID if it exists</comment>
+		<comment>Drop NOTNULL constraint from column container in table LBJ_RELATED_ID if it exists</comment>
 		<dropNotNullConstraint tableName="LBJ_RELATED_ID" columnName="container"
 			columnDataType="integer" />
 	</changeSet>

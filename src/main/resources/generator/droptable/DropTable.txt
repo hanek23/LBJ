@@ -1,0 +1,7 @@
+<changeSet id="${ID}$" author="${AUTHOR}$">
+	<preConditions onFail="MARK_RAN">
+		<tableExists tableName="${TABLE_NAME}$" />
+	</preConditions>
+	<comment>Drop table "${TABLE_NAME}$" if it exists</comment>
+	<dropTable tableName="${TABLE_NAME}$" />
+</changeSet>

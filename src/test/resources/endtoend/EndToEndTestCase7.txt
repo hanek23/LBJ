@@ -6,6 +6,7 @@
 				<columnExists columnName="forpostgre" tableName="LBJ_REFERENCE"/>
 			</not>
 		</preConditions>
+		<comment>Add column forpostgre to LBJ_REFERENCE</comment>
 		<addColumn tableName="LBJ_REFERENCE">
 			<column defaultValue="false" name="forpostgre" type="boolean">
 				<constraints nullable="false"/>

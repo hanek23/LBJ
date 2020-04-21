@@ -10,6 +10,7 @@
 				<columnExists columnName="fororacle" tableName="LBJ_REFERENCE"/>
 			</not>
 		</preConditions>
+		<comment>Add column fororacle to LBJ_REFERENCE</comment>
 		<addColumn tableName="LBJ_REFERENCE">
 			<column defaultValue="0" name="fororacle" type="char(1)">
 				<constraints nullable="false"/>

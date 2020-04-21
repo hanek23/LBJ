@@ -2,10 +2,15 @@ package generator;
 
 import org.apache.commons.lang3.StringUtils;
 
+import domain.AddColumn;
 import domain.Column;
 import domain.ColumnOperation;
+import domain.CreateTable;
+import domain.DropColumn;
+import domain.DropTable;
 import domain.ForeignKey;
 import domain.Table;
+import domain.TableOperation;
 
 public class EntitySupplierUtils {
 
@@ -13,9 +18,9 @@ public class EntitySupplierUtils {
 		// only static methods
 	}
 
-	public static Column createColumn(String name, ColumnOperation operation, String tableName, String indexName,
-			ForeignKey foreignKey, boolean nullable, String dataType) {
-		Column column = new Column(name, operation);
+	public static AddColumn addColumn(String name, String tableName, String indexName, ForeignKey foreignKey,
+			boolean nullable, String dataType) {
+		AddColumn column = new Column(name, ColumnOperation.ADD);
 		column.setTableName(tableName);
 		column.setDataType(dataType);
 		column.setNullable(nullable);
@@ -25,11 +30,26 @@ public class EntitySupplierUtils {
 		return column;
 	}
 
-	public static Table createTable(String name, String primaryKeyColumnName, String primaryKeyContrainName,
+	public static DropColumn dropColumn(String name, String tableName, String indexName, ForeignKey foreignKey) {
+		Column column = new Column(name, ColumnOperation.DROP);
+		column.setTableName(tableName);
+		column.setIndex(!StringUtils.isBlank(indexName));
+		column.setIndexName(indexName);
+		column.setForeignKey(foreignKey);
+		return column;
+	}
+
+	public static CreateTable createTable(String name, String primaryKeyColumnName, String primaryKeyContrainName,
 			String sequenceName) {
-		Table table = new Table(name);
+		CreateTable table = new Table(name, TableOperation.CREATE);
 		table.setPrimaryKeyColumnName(primaryKeyColumnName);
 		table.setPrimaryKeyContrainName(primaryKeyContrainName);
+		table.setSequenceName(sequenceName);
+		return table;
+	}
+
+	public static DropTable dropTable(String name, String sequenceName) {
+		DropTable table = new Table(name, TableOperation.DROP);
 		table.setSequenceName(sequenceName);
 		return table;
 	}

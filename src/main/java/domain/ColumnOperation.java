@@ -2,6 +2,6 @@ package domain;
 
 public enum ColumnOperation {
 
-	ADD_COLUMN, REMOVE_NOT_NULL_CONSTRAINT;
+	ADD, DROP, DROP_NOT_NULL_CONSTRAINT;
 
 }

@@ -90,7 +90,7 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 
 	@Override
 	public void initializeButtons() {
-		addColumnButton = LBJFormUtils.createAddColumnButton(this);
+		addColumnButton = LBJFormUtils.createAddColumnButton(this, false);
 		generateButton = LBJFormUtils.createGenerateButton(this);
 	}
 
@@ -142,7 +142,7 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 
 	@Override
 	public AddColumn convert() {
-		AddColumn column = new Column(columnNameTextBox.getValue(), ColumnOperation.ADD_COLUMN);
+		AddColumn column = new Column(columnNameTextBox.getValue(), ColumnOperation.ADD);
 		column.setTableName(tableNameTextBox.getValue());
 		column.setDataType(dataTypeTextBox.getValue());
 		column.setNullable(nullableCheckBox.getValue());
@@ -221,16 +221,8 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 		return addColumnButton;
 	}
 
-	public void setAddColumnButton(Button addColumnButton) {
-		this.addColumnButton = addColumnButton;
-	}
-
 	public Button getGenerateButton() {
 		return generateButton;
-	}
-
-	public void setGenerateButton(Button generateButton) {
-		this.generateButton = generateButton;
 	}
 
 }

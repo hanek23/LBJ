@@ -25,5 +25,10 @@ public interface AddColumn extends GeneralColumn, Entity {
 	 *         true
 	 */
 	public boolean hasConstrains();
+	
+	/**
+	 * @return true if and only if type is "boolean" (case is ignored)
+	 */
+	public boolean isTypeBoolean();
 
 }

@@ -14,15 +14,12 @@ public interface GeneralColumn {
 
 	public void setDataType(String dataType);
 
-	/**
-	 * @return true if and only if type is "boolean" (case is ignored)
-	 */
-	public boolean isTypeBoolean();
-
 	public ColumnOperation getOperation();
 
 	public boolean isAddColumn();
 
-	public boolean isRemoveNotNullConstraint();
+	public boolean isDropNotNullConstraint();
+	
+	public boolean isDropColumn();
 
 }

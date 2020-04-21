@@ -23,6 +23,7 @@
 				<columnExists tableName="LBJ_REFERENCE" columnName="isAlive" />
 			</not>
 		</preConditions>
+		<comment>Add column isAlive to LBJ_REFERENCE</comment>
 		<addColumn tableName="LBJ_REFERENCE">
 			<column name="isAlive" type="char(1)" defaultValue="0">
 				<constraints nullable="false" />
@@ -36,6 +37,7 @@
 			<columnExists tableName="LBJ_REFERENCE" columnName="isAlive" />
 		</not>
 	</preConditions>
+	<comment>Add column isAlive to LBJ_REFERENCE</comment>
 	<addColumn tableName="LBJ_REFERENCE">
 		<column name="isAlive" type="boolean" defaultValue="false">
 			<constraints nullable="false" />

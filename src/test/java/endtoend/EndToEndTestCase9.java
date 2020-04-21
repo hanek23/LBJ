@@ -1,8 +1,8 @@
 package endtoend;
 
+import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
 import gui.forms.generate.GenerateForm;
 import gui.forms.mainmenu.MainMenuForm;
-import gui.forms.removenotnullconstraint.RemoveNotNullConstraintForm;
 import gui.suppliers.LBJFormSupplier;
 import testutils.AbstractXmlSupplier;
 import testutils.LBJTestUtils;
@@ -19,23 +19,23 @@ public class EndToEndTestCase9 extends AbstractXmlSupplier implements EndToEndTe
 	public void test() {
 		MainMenuForm mainMenuForm = LBJFormSupplier.getMainMenuForm();
 		mainMenuForm.focus();
-		RemoveNotNullConstraintForm removeNotNullConstraintForm = mainMenuForm.getRemoveNotNullConstraintForm();
-		removeNotNullConstraintForm.focus();
+		DropNotNullConstraintForm dropNotNullConstraintForm = mainMenuForm.getDropNotNullConstraintForm();
+		dropNotNullConstraintForm.focus();
 
-		LBJFormAssert.assertThat(removeNotNullConstraintForm).isFocused();
-		LBJTestUtils.click(removeNotNullConstraintForm.getBackButton());
+		LBJFormAssert.assertThat(dropNotNullConstraintForm).isFocused();
+		LBJTestUtils.click(dropNotNullConstraintForm.getBackButton());
 		LBJFormAssert.assertThat(mainMenuForm).isFocused();
-		removeNotNullConstraintForm.focus();
-		LBJFormAssert.assertThat(removeNotNullConstraintForm).isFocused();
+		dropNotNullConstraintForm.focus();
+		LBJFormAssert.assertThat(dropNotNullConstraintForm).isFocused();
 
-		LBJTestUtils.setValueOf(removeNotNullConstraintForm.getTableNameTextBox(), "LBJ_RELATED_ID");
-		LBJTestUtils.setValueOf(removeNotNullConstraintForm.getColumnNameTextBox(), "container");
-		LBJTestUtils.setValueOf(removeNotNullConstraintForm.getDataTypeTextBox(), "integer");
-		LBJFormAssert.assertThat(removeNotNullConstraintForm).isValid();
+		LBJTestUtils.setValueOf(dropNotNullConstraintForm.getTableNameTextBox(), "LBJ_RELATED_ID");
+		LBJTestUtils.setValueOf(dropNotNullConstraintForm.getColumnNameTextBox(), "container");
+		LBJTestUtils.setValueOf(dropNotNullConstraintForm.getDataTypeTextBox(), "integer");
+		LBJFormAssert.assertThat(dropNotNullConstraintForm).isValid();
 
-		LBJTestUtils.click(removeNotNullConstraintForm.getGenerateButton());
-		GenerateForm generateForm = LBJFormSupplier.getGenerateForm(removeNotNullConstraintForm.getWindow(),
-				removeNotNullConstraintForm);
+		LBJTestUtils.click(dropNotNullConstraintForm.getGenerateButton());
+		GenerateForm generateForm = LBJFormSupplier.getGenerateForm(dropNotNullConstraintForm.getWindow(),
+				dropNotNullConstraintForm);
 		LBJFormAssert.assertThat(generateForm).isFocused();
 
 		LBJTestUtils.setValueOf(generateForm.getAuthorTextBox(), "hanek23");

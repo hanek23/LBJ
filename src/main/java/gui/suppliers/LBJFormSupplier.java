@@ -5,10 +5,12 @@ import com.googlecode.lanterna.gui2.Window;
 import gui.forms.LBJForm;
 import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.createtable.CreateTableForm;
+import gui.forms.dropcolumn.DropColumnForm;
+import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
+import gui.forms.droptable.DropTableForm;
 import gui.forms.generate.GenerateForm;
 import gui.forms.mainmenu.MainMenuForm;
 import gui.forms.preferences.PreferencesForm;
-import gui.forms.removenotnullconstraint.RemoveNotNullConstraintForm;
 
 /**
  * Static supplier of all {@link LBJForm}s
@@ -21,8 +23,9 @@ public class LBJFormSupplier {
 
 	private static MainMenuForm mainMenuForm;
 	private static CreateTableForm createTableForm;
+	private static DropTableForm dropTableForm;
 	private static GenerateForm generateForm;
-	private static RemoveNotNullConstraintForm removeNotNullConstraintForm;
+	private static DropNotNullConstraintForm dropNotNullConstraintForm;
 	private static PreferencesForm preferencesForm;
 
 	/**
@@ -82,17 +85,32 @@ public class LBJFormSupplier {
 	}
 
 	/**
-	 * @return One and only instance of {@link RemoveNotNullConstraintForm}.
+	 * @return Always new instance of {@link DropColumnForm}.
 	 */
-	public static synchronized RemoveNotNullConstraintForm getRemoveNotNullConstraintForm(Window window,
+	public static DropColumnForm getDropColumnForm(Window window, LBJForm previousForm, boolean addAsUpdatableForm) {
+		DropColumnForm form = new DropColumnForm(window, previousForm);
+		if (addAsUpdatableForm) {
+			mainMenuForm.addFormToUpdate(form);
+		}
+		return form;
+	}
+
+	public static DropColumnForm getDropColumnForm(Window window, LBJForm previousForm) {
+		return getDropColumnForm(window, previousForm, true);
+	}
+
+	/**
+	 * @return One and only instance of {@link DropNotNullConstraintForm}.
+	 */
+	public static synchronized DropNotNullConstraintForm getDropNotNullConstraintForm(Window window,
 			LBJForm previousForm, boolean addAsUpdatableForm) {
-		if (removeNotNullConstraintForm == null) {
-			removeNotNullConstraintForm = new RemoveNotNullConstraintForm(window, previousForm);
+		if (dropNotNullConstraintForm == null) {
+			dropNotNullConstraintForm = new DropNotNullConstraintForm(window, previousForm);
 			if (addAsUpdatableForm) {
-				mainMenuForm.addFormToUpdate(removeNotNullConstraintForm);
+				mainMenuForm.addFormToUpdate(dropNotNullConstraintForm);
 			}
 		}
-		return removeNotNullConstraintForm;
+		return dropNotNullConstraintForm;
 	}
 
 	public static PreferencesForm getPreferencesForm(Window window, LBJForm previousForm, boolean addAsUpdatableForm) {
@@ -106,12 +124,26 @@ public class LBJFormSupplier {
 	}
 
 	/**
+	 * @return One and only instance of {@link DropTableForm}.
+	 */
+	public static synchronized DropTableForm getDropTableForm(Window window, LBJForm previousForm,
+			boolean addAsUpdatableForm) {
+		if (dropTableForm == null) {
+			dropTableForm = new DropTableForm(window, previousForm);
+			if (addAsUpdatableForm) {
+				mainMenuForm.addFormToUpdate(createTableForm);
+			}
+		}
+		return dropTableForm;
+	}
+
+	/**
 	 * Only for testing!
 	 */
 	public static void reset() {
 		mainMenuForm = null;
 		createTableForm = null;
-		removeNotNullConstraintForm = null;
+		dropNotNullConstraintForm = null;
 		generateForm = null;
 		preferencesForm = null;
 	}

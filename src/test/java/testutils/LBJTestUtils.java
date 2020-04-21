@@ -12,9 +12,11 @@ import generator.GeneratorTest;
 import gui.components.LBJValueComponent;
 import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.createtable.CreateTableForm;
+import gui.forms.dropcolumn.DropColumnForm;
+import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
+import gui.forms.droptable.DropTableForm;
 import gui.forms.generate.GenerateForm;
 import gui.forms.preferences.PreferencesForm;
-import gui.forms.removenotnullconstraint.RemoveNotNullConstraintForm;
 
 public class LBJTestUtils {
 
@@ -69,6 +71,16 @@ public class LBJTestUtils {
 	}
 
 	/**
+	 * @return {@link DropTableForm} that is already focused
+	 */
+	public static DropTableForm getDropTableForm() {
+		LBJMockForm mockForm = new LBJMockForm();
+		DropTableForm form = new DropTableForm(mockForm.getWindow(), mockForm);
+		form.focus();
+		return form;
+	}
+
+	/**
 	 * @return {@link AddColumnForm} that is already focused
 	 */
 	public static AddColumnForm getAddColumnForm() {
@@ -79,11 +91,21 @@ public class LBJTestUtils {
 	}
 
 	/**
-	 * @return {@link RemoveNotNullConstraintForm} that is already focused
+	 * @return {@link DropColumnForm} that is already focused
 	 */
-	public static RemoveNotNullConstraintForm getRemoveNotNullConstraintForm() {
+	public static DropColumnForm getDropColumnForm() {
 		LBJMockForm mockForm = new LBJMockForm();
-		RemoveNotNullConstraintForm form = new RemoveNotNullConstraintForm(mockForm.getWindow(), mockForm);
+		DropColumnForm form = new DropColumnForm(mockForm.getWindow(), mockForm);
+		form.focus();
+		return form;
+	}
+
+	/**
+	 * @return {@link DropNotNullConstraintForm} that is already focused
+	 */
+	public static DropNotNullConstraintForm getDropNotNullConstraintForm() {
+		LBJMockForm mockForm = new LBJMockForm();
+		DropNotNullConstraintForm form = new DropNotNullConstraintForm(mockForm.getWindow(), mockForm);
 		form.focus();
 		return form;
 	}

@@ -1,5 +1,7 @@
 package endtoend;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.awt.Toolkit;
 import java.awt.datatransfer.DataFlavor;
 
@@ -8,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import testutils.LBJFormTest;
 import testutils.LBJTestUtils;
 
-public class EndToEndTest extends LBJFormTest {
+public class EndToEndTestRunner extends LBJFormTest {
 
 	@Test
 	public void test1() throws Exception {
@@ -55,10 +57,22 @@ public class EndToEndTest extends LBJFormTest {
 		runEndToEndTest(new EndToEndTestCase9());
 	}
 
+	@Test
+	public void test10() throws Exception {
+		runEndToEndTest(new EndToEndTestCase10());
+	}
+
+	@Test
+	public void test11() throws Exception {
+		runEndToEndTest(new EndToEndTestCase11());
+	}
+
 	private void runEndToEndTest(EndToEndTestCase testCase) throws Exception {
 		testCase.test();
 		String expected = testCase.getExpectedXml();
 		String actual = getStringFromClipboard();
+		// used for replacement of names
+		assertThat(actual).doesNotContain("$");
 		LBJTestUtils.assertLiquibaseXmlEquals(expected, actual, testCase.checkXsd());
 	}
 
