@@ -1,2 +1,0 @@
-- While saving preferences check if referenced component exists 
-- Default value in AddColumnForm

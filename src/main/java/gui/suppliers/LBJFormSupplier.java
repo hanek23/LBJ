@@ -143,6 +143,7 @@ public class LBJFormSupplier {
 	public static void reset() {
 		mainMenuForm = null;
 		createTableForm = null;
+		dropTableForm = null;
 		dropNotNullConstraintForm = null;
 		generateForm = null;
 		preferencesForm = null;
