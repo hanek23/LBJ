@@ -1,6 +1,5 @@
 package gui.utils;
 
-import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.ActionListBox;
 import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Button.Listener;
@@ -37,20 +36,31 @@ public class LBJFormUtils {
 		return content;
 	}
 
-	public static void addComponentTo(LBJForm form, LBJValueComponent<?> component) {
+	/**
+	 * Label and value will be in the same row
+	 */
+	public static void addValueAndLabeledComponentTo(LBJForm form, LBJValueComponent<?> component) {
 		form.getContent()
-				.addComponent(component.getLabel().setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
+				.addComponent(component.getLabel().setLayoutData(GridLayout.createHorizontallyFilledLayoutData(2)));
 		form.getContent().addComponent(component.getComponent()
-				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 1)));
+				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS - 2)));
 	}
 
-	public static void addComponentTo(LBJForm form, LBJLabeledComponent component) {
-		form.getContent().addComponent(component.getLabel()
+	/**
+	 * Label and value will be in seperate rows
+	 */
+	public static void addSeperateValueAndLabeledComponentTo(LBJForm form, LBJValueComponent<?> component) {
+		addLabeledComponentTo(form, component);
+		addValueComponentTo(form, component);
+	}
+
+	public static void addLabeledComponentTo(LBJForm form, LBJLabeledComponent label) {
+		form.getContent().addComponent(label.getLabel()
 				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS)));
 	}
 
-	public static void addHiddenTextAreaTo(LBJForm form, LBJValueComponent<?> component) {
-		form.getContent().addComponent(component.getComponent().setPreferredSize(new TerminalSize(0, 0))
+	public static void addValueComponentTo(LBJForm form, LBJValueComponent<?> component) {
+		form.getContent().addComponent(component.getComponent()
 				.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS)));
 	}
 
@@ -73,6 +83,11 @@ public class LBJFormUtils {
 		form.getContent().addComponent(button.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(1)));
 	}
 
+	public static void addButtonToSeperateRow(LBJForm form, Button button) {
+		form.getContent().addComponent(
+				button.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS)));
+	}
+
 	public static void addLabelToMainMenuContent(Panel content, LBJPlainLabel label) {
 		content.addComponent(label.getLabel());
 	}
@@ -82,12 +97,7 @@ public class LBJFormUtils {
 	}
 
 	public static void addExitButtonToMainMenu(ActionListBox mainMenu) {
-		mainMenu.addItem(Labels.BUTTON_EXIT, new Runnable() {
-			@Override
-			public void run() {
-				System.exit(0);
-			}
-		});
+		mainMenu.addItem(Labels.BUTTON_EXIT, () -> System.exit(0));
 	}
 
 	public static Button createGenerateButton(LBJForm form) {
@@ -106,16 +116,12 @@ public class LBJFormUtils {
 
 	public static Button createAddColumnButton(LBJWizardForm form, boolean another) {
 		Button addColumnButton = new Button(another ? Labels.BUTTON_ADD_ANOTHER_COLUMN : Labels.BUTTON_ADD_COLUMN);
-		addColumnButton.addListener(new Listener() {
-			@Override
-			public void onTriggered(Button button) {
-				if (form.validate()) {
-					if (form.getNextForm() == null) {
-						form.setNextForm(LBJFormSupplier.getAddColumnForm(form.getWindow(), form));
-					}
-					form.goToNextForm();
+		addColumnButton.addListener(button -> {
+			if (form.validate()) {
+				if (form.getNextForm() == null) {
+					form.setNextForm(LBJFormSupplier.getAddColumnForm(form.getWindow(), form));
 				}
-
+				form.goToNextForm();
 			}
 		});
 		return addColumnButton;
@@ -123,16 +129,12 @@ public class LBJFormUtils {
 
 	public static Button createDropColumnButton(LBJWizardForm form) {
 		Button addDropButton = new Button(Labels.BUTTON_DROP_ANOTHER_COLUMN);
-		addDropButton.addListener(new Listener() {
-			@Override
-			public void onTriggered(Button button) {
-				if (form.validate()) {
-					if (form.getNextForm() == null) {
-						form.setNextForm(LBJFormSupplier.getDropColumnForm(form.getWindow(), form));
-					}
-					form.goToNextForm();
+		addDropButton.addListener(button -> {
+			if (form.validate()) {
+				if (form.getNextForm() == null) {
+					form.setNextForm(LBJFormSupplier.getDropColumnForm(form.getWindow(), form));
 				}
-
+				form.goToNextForm();
 			}
 		});
 		return addDropButton;

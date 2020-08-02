@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.ActionListBox;
-import com.googlecode.lanterna.gui2.BasicWindow;
 import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.GridLayout;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
@@ -25,6 +24,8 @@ import com.googlecode.lanterna.terminal.Terminal;
 
 import constants.Labels;
 import constants.Settings;
+import gui.components.LBJPlainLabel;
+import gui.utils.LBJFormUtils;
 
 /**
  * <p>
@@ -43,12 +44,10 @@ public abstract class LBJMainMenuForm extends LBJForm {
 
 	private static final Logger LOGGER = Logger.getLogger(LBJMainMenuForm.class.getSimpleName());
 
+	private ActionListBox mainMenu;
+	private LBJPlainLabel questionLabel;
 	private List<LBJForm> formsToUpdate;
 	private TextGUIThread thread;
-
-	public LBJMainMenuForm() {
-		this(new BasicWindow(Labels.WINDOW_NAME));
-	}
 
 	public LBJMainMenuForm(Window window) {
 		super(window);
@@ -58,6 +57,17 @@ public abstract class LBJMainMenuForm extends LBJForm {
 	@Override
 	public String toString() {
 		return Labels.MAIN_MENU_FORM;
+	}
+
+	@Override
+	public void initializeComponents() {
+		mainMenu = new ActionListBox();
+	}
+
+	@Override
+	public void addComponents() {
+		LBJFormUtils.addLabelToMainMenuContent(getContent(), questionLabel);
+		LBJFormUtils.addMenuToMainMenuContent(getContent(), getMainMenu());
 	}
 
 	@Override
@@ -87,7 +97,8 @@ public abstract class LBJMainMenuForm extends LBJForm {
 
 	public void startTerminal() {
 		try (Screen screen = new DefaultTerminalFactory().setMouseCaptureMode(MouseCaptureMode.CLICK)
-				.setInitialTerminalSize(Settings.TERMINAL_SIZE).createScreen()) {
+				.setInitialTerminalSize(Settings.TERMINAL_SIZE)/** .setTelnetPort(2323) */
+				.createScreen()) {
 			screen.startScreen();
 			WindowBasedTextGUI gui = new MultiWindowTextGUI(screen);
 			thread = gui.getGUIThread();
@@ -143,6 +154,22 @@ public abstract class LBJMainMenuForm extends LBJForm {
 
 	public TextGUIThread getThread() {
 		return thread;
+	}
+
+	public ActionListBox getMainMenu() {
+		return mainMenu;
+	}
+
+	public void setMainMenu(ActionListBox mainMenu) {
+		this.mainMenu = mainMenu;
+	}
+
+	public LBJPlainLabel getQuestionLabel() {
+		return questionLabel;
+	}
+
+	public void setQuestionLabel(LBJPlainLabel questionLabel) {
+		this.questionLabel = questionLabel;
 	}
 
 }

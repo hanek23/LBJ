@@ -1,12 +1,9 @@
 package gui.forms.mainmenu;
 
-import com.googlecode.lanterna.gui2.ActionListBox;
 import com.googlecode.lanterna.gui2.BasicWindow;
-import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
 import gui.builders.LBJPlainLabelBuilder;
-import gui.components.LBJPlainLabel;
 import gui.forms.LBJMainMenuForm;
 import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.createtable.CreateTableForm;
@@ -22,8 +19,6 @@ import gui.utils.LBJFormUtils;
  */
 public class MainMenuForm extends LBJMainMenuForm {
 
-	private LBJPlainLabel questionLabel;
-	private ActionListBox mainMenu;
 	private CreateTableForm createTableForm;
 	private DropTableForm dropTableForm;
 	private AddColumnForm addColumnForm;
@@ -32,12 +27,7 @@ public class MainMenuForm extends LBJMainMenuForm {
 	private PreferencesForm preferencesForm;
 
 	public MainMenuForm() {
-		this(new BasicWindow(Labels.WINDOW_NAME));
-	}
-
-	private MainMenuForm(Window window) {
-		super(window);
-		initialize();
+		super(new BasicWindow(Labels.WINDOW_NAME));
 	}
 
 	@Override
@@ -47,8 +37,8 @@ public class MainMenuForm extends LBJMainMenuForm {
 
 	@Override
 	public void initializeComponents() {
-		mainMenu = new ActionListBox();
-		questionLabel = new LBJPlainLabelBuilder(Labels.MAIN_MENU_QUESTION, this).build();
+		super.initializeComponents();
+		setQuestionLabel(new LBJPlainLabelBuilder(Labels.MAIN_MENU_QUESTION, this).build());
 		createTableForm = LBJFormSupplier.getCreateTableForm(getWindow(), this, false);
 		dropTableForm = LBJFormSupplier.getDropTableForm(getWindow(), this, false);
 		addColumnForm = LBJFormSupplier.getAddColumnForm(getWindow(), this, false);
@@ -66,15 +56,14 @@ public class MainMenuForm extends LBJMainMenuForm {
 
 	@Override
 	public void addComponents() {
-		LBJFormUtils.addLabelToMainMenuContent(getContent(), questionLabel);
-		LBJFormUtils.addMenuToMainMenuContent(getContent(), mainMenu);
-		LBJFormUtils.addItemToMenu(mainMenu, createTableForm, Labels.MAIN_MENU_CREATE_TABLE);
-		LBJFormUtils.addItemToMenu(mainMenu, dropTableForm, Labels.MAIN_MENU_DROP_TABLE);
-		LBJFormUtils.addItemToMenu(mainMenu, addColumnForm, Labels.MAIN_MENU_ADD_COLUMN);
-		LBJFormUtils.addItemToMenu(mainMenu, dropColumnForm, Labels.MAIN_MENU_DROP_COLUMN);
-		LBJFormUtils.addItemToMenu(mainMenu, dropNotNullConstraintForm, Labels.MAIN_MENU_DROP_NOT_NULL_CONSTRAINT);
-		LBJFormUtils.addItemToMenu(mainMenu, preferencesForm, Labels.MAIN_MENU_PREFERENCES);
-		LBJFormUtils.addExitButtonToMainMenu(mainMenu);
+		super.addComponents();
+		LBJFormUtils.addItemToMenu(getMainMenu(), createTableForm, Labels.MAIN_MENU_CREATE_TABLE);
+		LBJFormUtils.addItemToMenu(getMainMenu(), dropTableForm, Labels.MAIN_MENU_DROP_TABLE);
+		LBJFormUtils.addItemToMenu(getMainMenu(), addColumnForm, Labels.MAIN_MENU_ADD_COLUMN);
+		LBJFormUtils.addItemToMenu(getMainMenu(), dropColumnForm, Labels.MAIN_MENU_DROP_COLUMN);
+		LBJFormUtils.addItemToMenu(getMainMenu(), dropNotNullConstraintForm, Labels.MAIN_MENU_DROP_NOT_NULL_CONSTRAINT);
+		LBJFormUtils.addItemToMenu(getMainMenu(), preferencesForm, Labels.MAIN_MENU_PREFERENCES);
+		LBJFormUtils.addExitButtonToMainMenu(getMainMenu());
 	}
 
 	public AddColumnForm getAddColumnForm() {

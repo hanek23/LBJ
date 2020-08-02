@@ -69,7 +69,8 @@ public class GenerateForm extends LBJWizardForm {
 		mssqlCheckBox = new LBJCheckBoxBuilder(Labels.GENERATE_FORM_DATABASES_MSSQL, this).checked().build();
 		postgreCheckBox = new LBJCheckBoxBuilder(Labels.GENERATE_FORM_DATABASES_POSTGRESQL, this).checked().build();
 
-		generatedXmlTextBox = new LBJTextBoxBuilder(Labels.GENERATE_FORM_GENERATED_XML, this).build();
+		generatedXmlTextBox = new LBJTextBoxBuilder(Labels.GENERATE_FORM_GENERATED_XML, this).hidden().readOnly()
+				.build();
 
 	}
 
@@ -116,14 +117,14 @@ public class GenerateForm extends LBJWizardForm {
 
 	@Override
 	public void addComponents() {
-		LBJFormUtils.addComponentTo(this, authorTextBox);
-		LBJFormUtils.addComponentTo(this, onlyChangeSetsCheckBox);
-		LBJFormUtils.addComponentTo(this, startingIdTextBox);
-		LBJFormUtils.addComponentTo(this, databasesLabel);
-		LBJFormUtils.addComponentTo(this, oracleCheckBox);
-		LBJFormUtils.addComponentTo(this, mssqlCheckBox);
-		LBJFormUtils.addComponentTo(this, postgreCheckBox);
-		LBJFormUtils.addHiddenTextAreaTo(this, generatedXmlTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, authorTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, onlyChangeSetsCheckBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, startingIdTextBox);
+		LBJFormUtils.addLabeledComponentTo(this, databasesLabel);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, oracleCheckBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, mssqlCheckBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, postgreCheckBox);
+		LBJFormUtils.addValueComponentTo(this, generatedXmlTextBox);
 
 	}
 

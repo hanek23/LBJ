@@ -121,16 +121,16 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 
 	@Override
 	public void addComponents() {
-		LBJFormUtils.addComponentTo(this, tableNameTextBox);
-		LBJFormUtils.addComponentTo(this, columnNameTextBox);
-		LBJFormUtils.addComponentTo(this, dataTypeTextBox);
-		LBJFormUtils.addComponentTo(this, nullableCheckBox);
-		LBJFormUtils.addComponentTo(this, indexCheckBox);
-		LBJFormUtils.addComponentTo(this, indexNameTextBox);
-		LBJFormUtils.addComponentTo(this, foreignKeyCheckBox);
-		LBJFormUtils.addComponentTo(this, referencedTableNameTextBox);
-		LBJFormUtils.addComponentTo(this, referencedColumnNameTextBox);
-		LBJFormUtils.addComponentTo(this, foreignKeyNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, tableNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, columnNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, dataTypeTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, nullableCheckBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, indexCheckBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, indexNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, foreignKeyCheckBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, referencedTableNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, referencedColumnNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, foreignKeyNameTextBox);
 	}
 
 	@Override

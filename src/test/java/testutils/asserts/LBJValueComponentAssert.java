@@ -5,7 +5,9 @@ import org.assertj.core.util.Objects;
 
 import constants.NamingConventions;
 import gui.components.LBJValueComponent;
+import gui.suppliers.LBJUpdaterSupplier;
 import gui.suppliers.LBJValidatorSupplier;
+import gui.updaters.LBJComponentUpdater;
 import gui.validators.LBJValueValidator;
 
 public class LBJValueComponentAssert extends LBJLabeledComponentAssert<LBJValueComponent<?>> {
@@ -26,6 +28,14 @@ public class LBJValueComponentAssert extends LBJLabeledComponentAssert<LBJValueC
 		return this;
 	}
 
+	private LBJValueComponentAssert hasUpdater(LBJComponentUpdater updater) {
+		if (!actual.getUpdaters().contains(updater)) {
+			failWithMessage("Expecting component '%s' to have updater of type '%s', but it does not", actual,
+					updater.getClass().getSimpleName());
+		}
+		return this;
+	}
+
 	private void isForClass(Class<?> clazz) {
 		if (!actual.forType().equals(clazz)) {
 			failWithMessage("Expecting component '%s' to be for type '%s' but it was '%s'", actual,
@@ -38,6 +48,7 @@ public class LBJValueComponentAssert extends LBJLabeledComponentAssert<LBJValueC
 		isNotNull();
 		isForClass(String.class);
 		hasValidator(LBJValidatorSupplier.getStringRequiredValidator());
+		hasUpdater(LBJUpdaterSupplier.getRequiredLabelComponentUpdater());
 		return this;
 	}
 

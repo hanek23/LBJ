@@ -59,9 +59,9 @@ public class DropTableForm extends LBJEntityForm<DropTable> {
 
 	@Override
 	public void addComponents() {
-		LBJFormUtils.addComponentTo(this, tableNameTextBox);
-		LBJFormUtils.addComponentTo(this, dropSequenceCheckBox);
-		LBJFormUtils.addComponentTo(this, sequenceNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, tableNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, dropSequenceCheckBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, sequenceNameTextBox);
 	}
 
 	@Override

@@ -70,10 +70,10 @@ public class CreateTableForm extends LBJEntityForm<CreateTable> {
 
 	@Override
 	public void addComponents() {
-		LBJFormUtils.addComponentTo(this, tableNameTextBox);
-		LBJFormUtils.addComponentTo(this, primaryKeyNameTextBox);
-		LBJFormUtils.addComponentTo(this, primaryKeyConstraintNameTextBox);
-		LBJFormUtils.addComponentTo(this, sequenceNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, tableNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, primaryKeyNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, primaryKeyConstraintNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, sequenceNameTextBox);
 	}
 
 	@Override

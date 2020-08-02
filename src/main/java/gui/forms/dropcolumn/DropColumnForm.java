@@ -74,12 +74,12 @@ public class DropColumnForm extends LBJEntityForm<DropColumn> {
 
 	@Override
 	public void addComponents() {
-		LBJFormUtils.addComponentTo(this, tableNameTextBox);
-		LBJFormUtils.addComponentTo(this, columnNameTextBox);
-		LBJFormUtils.addComponentTo(this, dropIndexCheckBox);
-		LBJFormUtils.addComponentTo(this, indexNameTextBox);
-		LBJFormUtils.addComponentTo(this, dropForeignKeyCheckBox);
-		LBJFormUtils.addComponentTo(this, foreignKeyNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, tableNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, columnNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, dropIndexCheckBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, indexNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, dropForeignKeyCheckBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, foreignKeyNameTextBox);
 	}
 
 	@Override

@@ -60,9 +60,9 @@ public class DropNotNullConstraintForm extends LBJEntityForm<DropNotNullConstrai
 
 	@Override
 	public void addComponents() {
-		LBJFormUtils.addComponentTo(this, tableNameTextBox);
-		LBJFormUtils.addComponentTo(this, columnNameTextBox);
-		LBJFormUtils.addComponentTo(this, dataTypeTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, tableNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, columnNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, dataTypeTextBox);
 	}
 
 	@Override

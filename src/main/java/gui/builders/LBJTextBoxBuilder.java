@@ -1,5 +1,6 @@
 package gui.builders;
 
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.TextBox;
 
@@ -42,8 +43,22 @@ public class LBJTextBoxBuilder {
 		lbjTextBox.setLabel(new Label(name));
 	}
 
+	public LBJTextBoxBuilder readOnly() {
+		lbjTextBox.getTextBox().setReadOnly(true);
+		return this;
+	}
+
 	public LBJTextBoxBuilder disabled() {
 		lbjTextBox.setEnabled(false);
+		return this;
+	}
+
+	public LBJTextBoxBuilder hidden() {
+		return size(0, 0);
+	}
+
+	public LBJTextBoxBuilder size(int columns, int rows) {
+		lbjTextBox.getComponent().setPreferredSize(new TerminalSize(columns, rows));
 		return this;
 	}
 
@@ -104,6 +119,7 @@ public class LBJTextBoxBuilder {
 	 * Adds {@link LBJStringRequiredValidator} to this {@link LBJTextBox}
 	 */
 	public LBJTextBoxBuilder required() {
+		addUpdater(LBJUpdaterSupplier.getRequiredLabelComponentUpdater());
 		return addValueValidator(LBJValidatorSupplier.getStringRequiredValidator());
 	}
 

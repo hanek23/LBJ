@@ -115,11 +115,11 @@ public class PreferencesForm extends LBJWizardForm {
 
 	@Override
 	public void addComponents() {
-		LBJFormUtils.addComponentTo(this, primaryKeyName);
-		LBJFormUtils.addComponentTo(this, primaryKeyConstraintName);
-		LBJFormUtils.addComponentTo(this, sequenceName);
-		LBJFormUtils.addComponentTo(this, indexName);
-		LBJFormUtils.addComponentTo(this, foreignKeyName);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, primaryKeyName);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, primaryKeyConstraintName);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, sequenceName);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, indexName);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, foreignKeyName);
 	}
 
 	@Override
