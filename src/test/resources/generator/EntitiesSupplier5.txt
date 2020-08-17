@@ -12,7 +12,7 @@
 		</preConditions>
 		<comment>Add column version_id to LBJ_REFERENCE</comment>
 		<addColumn tableName="LBJ_REFERENCE">
-			<column name="version_id" type="integer">
+			<column name="version_id" type="integer" defaultValue="0">
 			</column>
 		</addColumn>
 	</changeSet>

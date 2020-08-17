@@ -109,6 +109,7 @@ public class EndToEndTestCase4 extends AbstractXmlSupplier implements EndToEndTe
 		// boolean column
 		assertThat(addColumnFormName.getTableNameTextBox()).isEqualToIgnoringCase(TABLE_NAME);
 		LBJTestUtils.setValueOf(addColumnFormIsAlive.getColumnNameTextBox(), "isAlive");
+		LBJTestUtils.setValueOf(addColumnFormIsAlive.getNullableCheckBox(), false);
 		// because of missing data type
 		LBJFormAssert.assertThat(addColumnFormIsAlive).isNotValid();
 		LBJTestUtils.setValueOf(addColumnFormIsAlive.getDataTypeTextBox(), "boolean");

@@ -1,5 +1,7 @@
 package gui.forms.addcolumn;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Window;
 
@@ -38,6 +40,7 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 	private LBJTextBox columnNameTextBox;
 	private LBJTextBox dataTypeTextBox;
 	private LBJCheckBox nullableCheckBox;
+	private LBJTextBox defaultValueTextBox;
 	private LBJCheckBox indexCheckBox;
 	private LBJTextBox indexNameTextBox;
 	private LBJCheckBox foreignKeyCheckBox;
@@ -63,7 +66,10 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 
 		dataTypeTextBox = new LBJTextBoxBuilder(Labels.COLUMN_DATA_TYPE, this).required().build();
 
-		nullableCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_NULLABLE, this).build();
+		nullableCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_NULLABLE, this).checked().build();
+
+		defaultValueTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_DEFAULT_VALUE, this)
+				.deactivatorComponent(nullableCheckBox).disabled().build();
 
 		indexCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_INDEX, this).build();
 
@@ -125,6 +131,7 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 		LBJFormUtils.addValueAndLabeledComponentTo(this, columnNameTextBox);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, dataTypeTextBox);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, nullableCheckBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, defaultValueTextBox);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, indexCheckBox);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, indexNameTextBox);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, foreignKeyCheckBox);
@@ -146,6 +153,13 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 		column.setTableName(tableNameTextBox.getValue());
 		column.setDataType(dataTypeTextBox.getValue());
 		column.setNullable(nullableCheckBox.getValue());
+		if (column.isTypeBoolean()) {
+			// boolean is false by default, user gets a chance to specify own default
+			column.setDefaultValue("false");
+		}
+		if (!column.isNullable() && StringUtils.isNotBlank(defaultValueTextBox.getValue())) {
+			column.setDefaultValue(defaultValueTextBox.getValue());
+		}
 		column.setIndex(indexCheckBox.getValue());
 		column.setIndexName(indexNameTextBox.getValue());
 		if (foreignKeyCheckBox.isChecked()) {
@@ -223,6 +237,14 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 
 	public Button getGenerateButton() {
 		return generateButton;
+	}
+
+	public LBJTextBox getDefaultValueTextBox() {
+		return defaultValueTextBox;
+	}
+
+	public void setDefaultValueTextBox(LBJTextBox defaultValueTextBox) {
+		this.defaultValueTextBox = defaultValueTextBox;
 	}
 
 }

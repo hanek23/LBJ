@@ -19,7 +19,7 @@ public class EntitySupplierUtils {
 	}
 
 	public static AddColumn addColumn(String name, String tableName, String indexName, ForeignKey foreignKey,
-			boolean nullable, String dataType) {
+			boolean nullable, String dataType, String defaultValue) {
 		AddColumn column = new Column(name, ColumnOperation.ADD);
 		column.setTableName(tableName);
 		column.setDataType(dataType);
@@ -27,6 +27,7 @@ public class EntitySupplierUtils {
 		column.setIndex(!StringUtils.isBlank(indexName));
 		column.setIndexName(indexName);
 		column.setForeignKey(foreignKey);
+		column.setDefaultValue(defaultValue);
 		return column;
 	}
 

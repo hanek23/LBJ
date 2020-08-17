@@ -12,6 +12,7 @@ public class Column extends AbstractEntity implements AddColumn, DropNotNullCons
 	private String indexName;
 	private ForeignKey foreignKey;
 	private ColumnOperation operation;
+	private String defaultValue;
 
 	public Column(String name, ColumnOperation operation) {
 		this.name = name;
@@ -122,6 +123,14 @@ public class Column extends AbstractEntity implements AddColumn, DropNotNullCons
 	@Override
 	public boolean isDropNotNullConstraint() {
 		return getOperation() == ColumnOperation.DROP_NOT_NULL_CONSTRAINT;
+	}
+
+	public String getDefaultValue() {
+		return defaultValue;
+	}
+
+	public void setDefaultValue(String defaultValue) {
+		this.defaultValue = defaultValue;
 	}
 
 }

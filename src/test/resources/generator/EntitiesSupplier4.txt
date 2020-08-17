@@ -68,7 +68,7 @@
 		<comment>Add column version_id to LBJ_RELATED_ID</comment>
 		<addColumn tableName="LBJ_RELATED_ID">
 
-			<column name="version_id" type="integer">
+			<column name="version_id" type="integer" defaultValue="0">
 				<constraints nullable="false" />
 			</column>
 		</addColumn>

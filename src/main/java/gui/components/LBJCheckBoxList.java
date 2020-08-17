@@ -10,9 +10,9 @@ import gui.forms.LBJForm;
 /**
  * List of {@link String} values where each item has its own check box.
  */
-public class LBJCheckBoxList extends LBJValueComponent<List<String>> {
+public class LBJCheckBoxList<T extends LBJComponentValueHolder> extends LBJValueComponent<List<T>> {
 
-	private CheckBoxList<String> checkBoxList;
+	private CheckBoxList<T> checkBoxList;
 
 	public LBJCheckBoxList(String name, LBJForm form) {
 		super(name, form);
@@ -22,14 +22,14 @@ public class LBJCheckBoxList extends LBJValueComponent<List<String>> {
 	 * @return list of checked values
 	 */
 	@Override
-	public List<String> getValue() {
+	public List<T> getValue() {
 		return getCheckBoxList().getCheckedItems();
 	}
 
 	@Override
-	public void setValue(List<String> items) {
+	public void setValue(List<T> items) {
 		getCheckBoxList().clearItems();
-		for (String item : items) {
+		for (T item : items) {
 			getCheckBoxList().addItem(item);
 		}
 	}
@@ -44,16 +44,20 @@ public class LBJCheckBoxList extends LBJValueComponent<List<String>> {
 		return getCheckBoxList().isFocused();
 	}
 
-	public String getFocusedItem() {
+	public T getFocusedItem() {
 		return getCheckBoxList().getSelectedItem();
 	}
 
-	public CheckBoxList<String> getCheckBoxList() {
+	public CheckBoxList<T> getCheckBoxList() {
 		return checkBoxList;
 	}
 
-	public void setCheckBoxList(CheckBoxList<String> checkBoxList) {
+	public void setCheckBoxList(CheckBoxList<T> checkBoxList) {
 		this.checkBoxList = checkBoxList;
+	}
+	
+	public void addItem(T item) {
+		getCheckBoxList().addItem(item);
 	}
 
 }

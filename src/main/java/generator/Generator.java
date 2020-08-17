@@ -93,11 +93,36 @@ public class Generator {
 	private static String addColumn(AddColumn column) {
 		String xmlColumn = XmlPartsSupplier.getAddColumnBase(column);
 		xmlColumn = handleConstraints(column, xmlColumn);
+		xmlColumn = handleDefaultValue(column, xmlColumn);
 		xmlColumn = handleIndex(column, xmlColumn);
 
 		xmlColumn = XmlPartsSupplier.replaceTableName(xmlColumn, column.getTableName());
 		xmlColumn = XmlPartsSupplier.replaceColumnName(xmlColumn, column);
 		xmlColumn = XmlPartsSupplier.replaceColumnDataType(xmlColumn, column);
+		return xmlColumn;
+	}
+
+	private static String handleDefaultValue(AddColumn column, String xmlColumn) {
+		if (StringUtils.isNotBlank(column.getDefaultValue())) {
+			xmlColumn = XmlPartsSupplier.replaceColumnDefaultValueBase(xmlColumn);
+			if (column.isTypeBoolean()) {
+				xmlColumn = handleDefaultValueForBoolean(column, xmlColumn);
+			} else {
+				xmlColumn = XmlPartsSupplier.replaceColumnDefaultValue(xmlColumn, column);
+			}
+		} else {
+			xmlColumn = XmlPartsSupplier.removeColumnDefaultValueBase(xmlColumn);
+		}
+		return xmlColumn;
+	}
+
+	private static String handleDefaultValueForBoolean(AddColumn column, String xmlColumn) {
+		if (column.isForOracle() || column.isForMssql()) {
+			xmlColumn = XmlPartsSupplier.replaceColumnDefaultValueOracleMssql(xmlColumn, column);
+		}
+		if (column.isForPostgre()) {
+			xmlColumn = XmlPartsSupplier.replaceColumnDefaultValuePostgre(xmlColumn, column);
+		}
 		return xmlColumn;
 	}
 

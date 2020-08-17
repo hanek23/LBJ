@@ -114,6 +114,19 @@ public class LBJTextBoxBuilder {
 		addUpdater(LBJUpdaterSupplier.getActivatorComponentUpdater());
 		return this;
 	}
+	
+	/**
+	 * Adds component (usually {@link Checkbox}) to this component so that when
+	 * value of this activatorComponent changes to <code>false</code>, this component
+	 * will get activated. Also adds {@link LBJDeactivatorComponentUpdater} which does
+	 * the work.
+	 * 
+	 */
+	public LBJTextBoxBuilder deactivatorComponent(LBJValueComponent<Boolean> activatorComponent) {
+		lbjTextBox.setActivatorComponent(activatorComponent);
+		addUpdater(LBJUpdaterSupplier.getDeactivatorComponentUpdater());
+		return this;
+	}
 
 	/**
 	 * Adds {@link LBJStringRequiredValidator} to this {@link LBJTextBox}

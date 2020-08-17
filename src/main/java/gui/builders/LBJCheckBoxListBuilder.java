@@ -4,14 +4,15 @@ import com.googlecode.lanterna.gui2.CheckBoxList;
 import com.googlecode.lanterna.gui2.Label;
 
 import gui.components.LBJCheckBoxList;
+import gui.components.LBJComponentValueHolder;
 import gui.forms.LBJForm;
 
 /**
  * Builder for {@link LBJCheckBoxList}.
  */
-public class LBJCheckBoxListBuilder {
+public class LBJCheckBoxListBuilder<T extends LBJComponentValueHolder> {
 
-	private LBJCheckBoxList lbjCheckBoxList;
+	private LBJCheckBoxList<T> lbjCheckBoxList;
 
 	/**
 	 * Starts building a {@link LBJCheckBoxList}.
@@ -21,17 +22,17 @@ public class LBJCheckBoxListBuilder {
 	 * 
 	 */
 	public LBJCheckBoxListBuilder(String name, LBJForm form) {
-		lbjCheckBoxList = new LBJCheckBoxList(name, form);
+		lbjCheckBoxList = new LBJCheckBoxList<>(name, form);
 		lbjCheckBoxList.setCheckBoxList(new CheckBoxList<>());
 		lbjCheckBoxList.setLabel(new Label(name));
 	}
 
-	public LBJCheckBoxListBuilder addValue(String value) {
-		((CheckBoxList<String>) lbjCheckBoxList.getComponent()).addItem(value);
+	public LBJCheckBoxListBuilder<T> addItem(T item) {
+		lbjCheckBoxList.addItem(item);
 		return this;
 	}
 
-	public LBJCheckBoxList build() {
+	public LBJCheckBoxList<T> build() {
 		return lbjCheckBoxList;
 	}
 

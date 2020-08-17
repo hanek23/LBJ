@@ -32,6 +32,7 @@ public class EndToEndTestCase7 extends AbstractXmlSupplier implements EndToEndTe
 		LBJTestUtils.setValueOf(addColumnForm.getTableNameTextBox(), "LBJ_REFERENCE");
 		LBJTestUtils.setValueOf(addColumnForm.getColumnNameTextBox(), "forPostgre");
 		LBJTestUtils.setValueOf(addColumnForm.getDataTypeTextBox(), "boolean");
+		LBJTestUtils.setValueOf(addColumnForm.getNullableCheckBox(), false);
 		LBJFormAssert.assertThat(addColumnForm).isValid();
 
 		LBJTestUtils.click(addColumnForm.getGenerateButton());

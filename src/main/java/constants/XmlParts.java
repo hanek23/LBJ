@@ -44,6 +44,8 @@ public class XmlParts {
 	protected static final String REPLACE_COLUMN_NULLABLE = XML_REPLACE_START + "NULLABLE" + XML_REPLACE_END;
 	protected static final String REPLACE_COLUMN_NULLABLE_VALUE = XML_REPLACE_START + "NULLABLE_VALUE"
 			+ XML_REPLACE_END;
+	protected static final String REPLACE_COLUMN_DEFAULT_VALUE_BASE = XML_REPLACE_START + "COLUMN_DEFAULT_VALUE_BASE" + XML_REPLACE_END;
+	protected static final String REPLACE_COLUMN_DEFAULT_VALUE = XML_REPLACE_START + "COLUMN_DEFAULT_VALUE" + XML_REPLACE_END;
 
 	// Paths to templates
 	private static final String CHANGELOG_START_TEMPLATE = "/generator/shared/ChangeLogStart.txt";
@@ -62,6 +64,7 @@ public class XmlParts {
 	private static final String ADD_COLUMN_CONSTRAINTS_NULLABLE_TEMPLATE = "/generator/addcolumn/AddColumnConstraintsNullable.txt";
 	private static final String ADD_COLUMN_INDEX_MSSQL_POSTGRE_TEMPLATE = "/generator/addcolumn/CreateIndexMssqlPostgre.txt";
 	private static final String ADD_COLUMN_INDEX_ORACLE_TEMPLATE = "/generator/addcolumn/CreateIndexOracle.txt";
+	private static final String ADD_COLUMN_DEFAULT_VALUE_TEMPLATE = "/generator/addcolumn/AddColumnDefaultValue.txt";
 
 	private static final String DROP_COLUMN_TEMPLATE = "/generator/dropcolumn/DropColumn.txt";
 	private static final String DROP_INDEX_MSSQL_POSTGRE_TEMPLATE = "/generator/dropcolumn/DropIndexMssqlPostgre.txt";
@@ -110,6 +113,11 @@ public class XmlParts {
 	protected static String getAddGeneralColumnBase() {
 		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_COLUMN_TEMPLATE);
 	}
+	
+	protected static String getAddColumnDefaultValue() {
+		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_COLUMN_DEFAULT_VALUE_TEMPLATE);
+	}
+
 
 	protected static String getDropColumnBase() {
 		return FileUtils.getStringFromFileResource(XmlParts.class, DROP_COLUMN_TEMPLATE);

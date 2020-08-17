@@ -84,7 +84,7 @@
 		</preConditions>
 		<comment>Add column isalive to TABLE_NAME</comment>
 		<addColumn tableName="TABLE_NAME">
-			<column defaultValue="0" name="isalive" type="char(1)">
+			<column name="isalive" type="char(1)" defaultValue="0">
 				<constraints nullable="false"/>
 			</column>
 		</addColumn>
@@ -97,7 +97,7 @@
 		</preConditions>
 		<comment>Add column isalive to TABLE_NAME</comment>
 		<addColumn tableName="TABLE_NAME">
-			<column defaultValue="false" name="isalive" type="boolean">
+			<column name="isalive" type="boolean" defaultValue="false">
 				<constraints nullable="false"/>
 			</column>
 		</addColumn>

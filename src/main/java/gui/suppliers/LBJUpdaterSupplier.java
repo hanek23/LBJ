@@ -4,6 +4,7 @@ import constants.NamingConventions.LetterCase;
 import gui.components.LBJValueComponent;
 import gui.updaters.LBJValueUpdater;
 import gui.updaters.shared.LBJActivatorComponentUpdater;
+import gui.updaters.shared.LBJDeactivatorComponentUpdater;
 import gui.updaters.shared.LBJLowerCaseUpdater;
 import gui.updaters.shared.LBJRequiredLabelComponentUpdater;
 import gui.updaters.shared.LBJUpperCaseUpdater;
@@ -17,6 +18,7 @@ public class LBJUpdaterSupplier {
 	private static final LBJLowerCaseUpdater LOWER_CASE_UPDATER = new LBJLowerCaseUpdater();
 	private static final LBJUpperCaseUpdater UPPER_CASE_UPDATER = new LBJUpperCaseUpdater();
 	private static final LBJActivatorComponentUpdater ACTIVATOR_COMPONENT_UPDATER = new LBJActivatorComponentUpdater();
+	private static final LBJDeactivatorComponentUpdater DEACTIVATOR_COMPONENT_UPDATER = new LBJDeactivatorComponentUpdater();
 	private static final LBJRequiredLabelComponentUpdater REQUIRED_LABEL_COMPONENT_UPDATER = new LBJRequiredLabelComponentUpdater();
 	private static final LBJValueUpdater<String> NO_UPDATER = new LBJValueUpdater<String>() {
 		@Override
@@ -56,6 +58,10 @@ public class LBJUpdaterSupplier {
 
 	public static LBJActivatorComponentUpdater getActivatorComponentUpdater() {
 		return ACTIVATOR_COMPONENT_UPDATER;
+	}
+	
+	public static LBJDeactivatorComponentUpdater getDeactivatorComponentUpdater() {
+		return DEACTIVATOR_COMPONENT_UPDATER;
 	}
 
 	public static LBJRequiredLabelComponentUpdater getRequiredLabelComponentUpdater() {

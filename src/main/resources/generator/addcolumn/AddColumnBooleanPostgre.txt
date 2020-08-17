@@ -6,7 +6,7 @@
 	</preConditions>
 	<comment>Add column ${COLUMN_NAME}$ to ${TABLE_NAME}$</comment>
 	<addColumn tableName="${TABLE_NAME}$">
-		<column name="${COLUMN_NAME}$" type="boolean" defaultValue="false">
+		<column name="${COLUMN_NAME}$" type="boolean" ${COLUMN_DEFAULT_VALUE_BASE}$>
 			${COLUMN_CONSTRAINS}$
 		</column>
 	</addColumn>

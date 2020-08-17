@@ -48,6 +48,7 @@ public class Labels {
 	public static final String ADD_COLUMN_INDEX = "Index";
 	public static final String ADD_COLUMN_FOREIGN_KEY = "Foreign key";
 	public static final String ADD_COLUMN_NULLABLE = "Nullable";
+	public static final String ADD_COLUMN_DEFAULT_VALUE = "Default value";
 	public static final String COLUMN_DATA_TYPE = "Data type";
 	public static final String ADD_COLUMN_REFERENCED_TABLE = "Referenced table";
 	public static final String ADD_COLUMN_REFERENCED_COLUMN = "Referenced column";

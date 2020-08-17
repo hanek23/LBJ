@@ -14,8 +14,8 @@ public class EntitiesSupplier5 extends AbstractXmlSupplier implements EntitiesSu
 
 	@Override
 	public List<Entity> getEntities() {
-		return Arrays.asList(addColumn("version_id", TABLE_NAME, null, null, true, "integer"),
-				addColumn("isAlive", TABLE_NAME, null, null, false, "boolean"));
+		return Arrays.asList(addColumn("version_id", TABLE_NAME, null, null, true, "integer", "0"),
+				addColumn("isAlive", TABLE_NAME, null, null, false, "boolean", "false"));
 	}
 
 	@Override

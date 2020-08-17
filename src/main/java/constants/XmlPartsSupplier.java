@@ -161,11 +161,11 @@ public class XmlPartsSupplier {
 		}
 		return xmlTable;
 	}
-	
+
 	public static String getDropTableBase() {
 		return XmlParts.getDropTableBase();
 	}
-	
+
 	public static String getDropSequenceBase() {
 		return XmlParts.getDropSequenceBase();
 	}
@@ -230,6 +230,51 @@ public class XmlPartsSupplier {
 			xmlConstraint += XmlParts.getDropNotNullConstraintPostgre();
 		}
 		return xmlConstraint;
+	}
+
+	public static String replaceColumnDefaultValueBase(String replaceIn) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_DEFAULT_VALUE_BASE,
+				XmlParts.getAddColumnDefaultValue());
+	}
+
+	public static String replaceColumnDefaultValue(String replaceIn, AddColumn column) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_DEFAULT_VALUE, column.getDefaultValue());
+	}
+
+	public static String removeColumnDefaultValueBase(String replaceIn) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_DEFAULT_VALUE_BASE, "");
+	}
+
+	public static String replaceColumnDefaultValueOracleMssql(String replaceIn, AddColumn column) {
+		String defaultValue = null;
+		if (StringUtils.equals(column.getDefaultValue(), "1")
+				|| StringUtils.equalsIgnoreCase(column.getDefaultValue(), "true")) {
+			defaultValue = "1";
+		} else if (StringUtils.equals(column.getDefaultValue(), "0")
+				|| StringUtils.equalsIgnoreCase(column.getDefaultValue(), "false")) {
+			defaultValue = "0";
+		} else {
+			throw new IllegalArgumentException(
+					"Invalid default value for column of type boolean, valid values are 0, 1, true and false. Your value: "
+							+ column.getDefaultValue());
+		}
+		return StringUtils.replaceOnce(replaceIn, XmlParts.REPLACE_COLUMN_DEFAULT_VALUE, defaultValue);
+	}
+
+	public static String replaceColumnDefaultValuePostgre(String replaceIn, AddColumn column) {
+		String defaultValue = null;
+		if (StringUtils.equals(column.getDefaultValue(), "1")
+				|| StringUtils.equalsIgnoreCase(column.getDefaultValue(), "true")) {
+			defaultValue = "true";
+		} else if (StringUtils.equals(column.getDefaultValue(), "0")
+				|| StringUtils.equalsIgnoreCase(column.getDefaultValue(), "false")) {
+			defaultValue = "false";
+		} else {
+			throw new IllegalArgumentException(
+					"Invalid default value for column of type boolean, valid values are 0, 1, true and false. Your value: "
+							+ column.getDefaultValue());
+		}
+		return StringUtils.replaceOnce(replaceIn, XmlParts.REPLACE_COLUMN_DEFAULT_VALUE, defaultValue);
 	}
 
 }

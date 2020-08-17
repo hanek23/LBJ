@@ -7,7 +7,7 @@
 	</preConditions>
 	<comment>Add column foralldatabases to LBJ_REFERENCE</comment>
 	<addColumn tableName="LBJ_REFERENCE">
-		<column defaultValue="0" name="foralldatabases" type="char(1)">
+		<column name="foralldatabases" type="char(1)" defaultValue="0">
 			<constraints nullable="false"/>
 		</column>
 	</addColumn>
@@ -21,7 +21,7 @@
 	</preConditions>
 	<comment>Add column foralldatabases to LBJ_REFERENCE</comment>
 	<addColumn tableName="LBJ_REFERENCE">
-		<column defaultValue="false" name="foralldatabases" type="boolean">
+		<column name="foralldatabases" type="boolean" defaultValue="false">
 			<constraints nullable="false"/>
 		</column>
 	</addColumn>
