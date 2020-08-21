@@ -2,12 +2,13 @@ package gui.updaters.shared;
 
 import gui.components.LBJComponent;
 import gui.updaters.LBJComponentUpdater;
+import gui.utils.SimpleBean;
 
 /**
  * Enables a component if {@link LBJComponent#getActivatorComponent()} returns
  * <code>true</code>
  */
-public class LBJActivatorComponentUpdater implements LBJComponentUpdater {
+public class LBJActivatorComponentUpdater implements LBJComponentUpdater, SimpleBean<LBJActivatorComponentUpdater> {
 
 	@Override
 	public void update(LBJComponent component) {

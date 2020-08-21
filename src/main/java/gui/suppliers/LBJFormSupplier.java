@@ -11,6 +11,7 @@ import gui.forms.droptable.DropTableForm;
 import gui.forms.generate.GenerateForm;
 import gui.forms.mainmenu.MainMenuForm;
 import gui.forms.preferences.PreferencesForm;
+import gui.utils.BeanSupplier;
 
 /**
  * Static supplier of all {@link LBJForm}s
@@ -21,7 +22,6 @@ public class LBJFormSupplier {
 		// static supplier
 	}
 
-	private static MainMenuForm mainMenuForm;
 	private static CreateTableForm createTableForm;
 	private static DropTableForm dropTableForm;
 	private static GenerateForm generateForm;
@@ -32,10 +32,7 @@ public class LBJFormSupplier {
 	 * @return One and only instance of {@link MainMenuForm}.
 	 */
 	public static synchronized MainMenuForm getMainMenuForm() {
-		if (mainMenuForm == null) {
-			mainMenuForm = new MainMenuForm();
-		}
-		return mainMenuForm;
+		return BeanSupplier.get(MainMenuForm.class);
 	}
 
 	/**
@@ -46,7 +43,7 @@ public class LBJFormSupplier {
 		if (createTableForm == null) {
 			createTableForm = new CreateTableForm(window, previousForm);
 			if (addAsUpdatableForm) {
-				mainMenuForm.addFormToUpdate(createTableForm);
+				getMainMenuForm().addFormToUpdate(createTableForm);
 			}
 		}
 		return createTableForm;
@@ -58,7 +55,7 @@ public class LBJFormSupplier {
 	public static synchronized GenerateForm getGenerateForm(Window window, LBJForm previousForm) {
 		if (generateForm == null) {
 			generateForm = new GenerateForm(window, previousForm);
-			mainMenuForm.addFormToUpdate(generateForm);
+			getMainMenuForm().addFormToUpdate(generateForm);
 		}
 		// So every time the instance of this object points to requsted previous form
 		generateForm.setPreviousForm(previousForm);
@@ -75,7 +72,7 @@ public class LBJFormSupplier {
 	public static AddColumnForm getAddColumnForm(Window window, LBJForm previousForm, boolean addAsUpdatableForm) {
 		AddColumnForm form = new AddColumnForm(window, previousForm);
 		if (addAsUpdatableForm) {
-			mainMenuForm.addFormToUpdate(form);
+			getMainMenuForm().addFormToUpdate(form);
 		}
 		return form;
 	}
@@ -90,7 +87,7 @@ public class LBJFormSupplier {
 	public static DropColumnForm getDropColumnForm(Window window, LBJForm previousForm, boolean addAsUpdatableForm) {
 		DropColumnForm form = new DropColumnForm(window, previousForm);
 		if (addAsUpdatableForm) {
-			mainMenuForm.addFormToUpdate(form);
+			getMainMenuForm().addFormToUpdate(form);
 		}
 		return form;
 	}
@@ -107,7 +104,7 @@ public class LBJFormSupplier {
 		if (dropNotNullConstraintForm == null) {
 			dropNotNullConstraintForm = new DropNotNullConstraintForm(window, previousForm);
 			if (addAsUpdatableForm) {
-				mainMenuForm.addFormToUpdate(dropNotNullConstraintForm);
+				getMainMenuForm().addFormToUpdate(dropNotNullConstraintForm);
 			}
 		}
 		return dropNotNullConstraintForm;
@@ -117,7 +114,7 @@ public class LBJFormSupplier {
 		if (preferencesForm == null) {
 			preferencesForm = new PreferencesForm(window, previousForm);
 			if (addAsUpdatableForm) {
-				mainMenuForm.addFormToUpdate(preferencesForm);
+				getMainMenuForm().addFormToUpdate(preferencesForm);
 			}
 		}
 		return preferencesForm;
@@ -131,7 +128,7 @@ public class LBJFormSupplier {
 		if (dropTableForm == null) {
 			dropTableForm = new DropTableForm(window, previousForm);
 			if (addAsUpdatableForm) {
-				mainMenuForm.addFormToUpdate(createTableForm);
+				getMainMenuForm().addFormToUpdate(createTableForm);
 			}
 		}
 		return dropTableForm;
@@ -141,7 +138,9 @@ public class LBJFormSupplier {
 	 * Only for testing!
 	 */
 	public static void reset() {
-		mainMenuForm = null;
+//		TODO
+		BeanSupplier.init();
+//		mainMenuForm = null;
 		createTableForm = null;
 		dropTableForm = null;
 		dropNotNullConstraintForm = null;

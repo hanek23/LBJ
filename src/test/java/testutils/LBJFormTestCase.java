@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import constants.NamingConventions;
 import gui.suppliers.LBJFormSupplier;
+import gui.utils.BeanSupplier;
 
 /**
  * <ul>
@@ -12,10 +13,11 @@ import gui.suppliers.LBJFormSupplier;
  * <li>Resets {@link NamingConventions}'s preferences to default values</li>
  * </ul>
  */
-public abstract class LBJFormTest {
+public abstract class LBJFormTestCase extends LBJTestCase {
 
 	@BeforeEach
 	public void beforeEach() {
+		super.beforeEach();
 		LBJFormSupplier.reset();
 		NamingConventions.setDefaultPreferences();
 	}

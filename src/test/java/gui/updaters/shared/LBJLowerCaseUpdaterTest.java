@@ -8,7 +8,7 @@ import constants.Labels;
 import constants.NamingConventions.LetterCase;
 import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJTextBox;
-import gui.suppliers.LBJUpdaterSupplier;
+import gui.utils.LBJCaseUtils;
 import testutils.LBJMockForm;
 
 public class LBJLowerCaseUpdaterTest {
@@ -16,7 +16,7 @@ public class LBJLowerCaseUpdaterTest {
 	@Test
 	public void testUpdate() {
 		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm())
-				.addValueUpdater(LBJUpdaterSupplier.caseUpdater(LetterCase.LOWER)).build();
+				.addValueUpdater(LBJCaseUtils.caseUpdater(LetterCase.LOWER)).build();
 
 		textBox.setValue("TABLE_NAME");
 		assertThat(textBox).isUpperCase();

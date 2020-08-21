@@ -12,9 +12,9 @@ import domain.ForeignKey;
 import domain.Table;
 import domain.TableOperation;
 
-public class EntitySupplierUtils {
+public class GeneratorTestUtils {
 
-	private EntitySupplierUtils() {
+	private GeneratorTestUtils() {
 		// only static methods
 	}
 

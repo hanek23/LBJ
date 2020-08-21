@@ -8,10 +8,11 @@ import org.junit.jupiter.api.Test;
 
 import constants.Labels;
 import generator.GeneratorSettings;
-import gui.suppliers.LBJValidatorSupplier;
+import gui.utils.BeanSupplier;
+import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
 
-public class GenerateFormTest {
+public class GenerateFormTest extends LBJFormTestCase {
 
 	private static final String AUTHOR = "hanek23";
 	private static final String STARTING_ID = "23";
@@ -40,7 +41,7 @@ public class GenerateFormTest {
 		// with all validators
 		assertThat(form.getAuthorTextBox()).isRequired();
 		assertThat(form.getStartingIdTextBox()).isRequired().isNumbersOnly();
-		assertThat(form).hasValidator(LBJValidatorSupplier.getGenerateFormDatabasesValidator());
+		assertThat(form).hasValidator(BeanSupplier.get(GenerateFormDatabasesValidator.class));
 
 	}
 

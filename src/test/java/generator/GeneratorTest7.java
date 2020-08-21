@@ -1,6 +1,6 @@
 package generator;
 
-import static generator.EntitySupplierUtils.dropTable;
+import static generator.GeneratorTestUtils.dropTable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 import domain.Entity;
 import testutils.AbstractXmlSupplier;
 
-public class EntitiesSupplier7 extends AbstractXmlSupplier implements EntitiesSupplier {
+public class GeneratorTest7 extends AbstractXmlSupplier implements GeneratorTestCase {
 
 	private static final String TABLE_NAME = "LBJ_REFERENCE";
 

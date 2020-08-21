@@ -24,7 +24,7 @@ import gui.components.LBJPlainLabel;
 import gui.components.LBJTextBox;
 import gui.forms.LBJForm;
 import gui.forms.LBJWizardForm;
-import gui.suppliers.LBJValidatorSupplier;
+import gui.utils.BeanSupplier;
 import gui.utils.LBJFormUtils;
 import transformers.FormsToEntityTransformer;
 
@@ -112,7 +112,7 @@ public class GenerateForm extends LBJWizardForm {
 
 	@Override
 	public void addFormValidators() {
-		addValidator(LBJValidatorSupplier.getGenerateFormDatabasesValidator());
+		addValidator(BeanSupplier.get(GenerateFormDatabasesValidator.class));
 	}
 
 	@Override

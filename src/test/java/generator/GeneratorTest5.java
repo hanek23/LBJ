@@ -1,6 +1,6 @@
 package generator;
 
-import static generator.EntitySupplierUtils.addColumn;
+import static generator.GeneratorTestUtils.addColumn;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 import domain.Entity;
 import testutils.AbstractXmlSupplier;
 
-public class EntitiesSupplier5 extends AbstractXmlSupplier implements EntitiesSupplier {
+public class GeneratorTest5 extends AbstractXmlSupplier implements GeneratorTestCase {
 
 	private static final String TABLE_NAME = "LBJ_REFERENCE";
 

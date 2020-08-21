@@ -8,14 +8,16 @@ import constants.NamingConventions.LetterCase;
 import gui.components.LBJTextBox;
 import gui.components.LBJValueComponent;
 import gui.forms.LBJForm;
-import gui.suppliers.LBJUpdaterSupplier;
-import gui.suppliers.LBJValidatorSupplier;
 import gui.updaters.LBJComponentUpdater;
 import gui.updaters.LBJValueUpdater;
 import gui.updaters.shared.LBJActivatorComponentUpdater;
+import gui.updaters.shared.LBJDeactivatorComponentUpdater;
 import gui.updaters.shared.LBJLowerCaseUpdater;
 import gui.updaters.shared.LBJNamingConventionUpdater;
+import gui.updaters.shared.LBJRequiredLabelComponentUpdater;
 import gui.updaters.shared.LBJUpperCaseUpdater;
+import gui.utils.BeanSupplier;
+import gui.utils.LBJCaseUtils;
 import gui.validators.LBJValueValidator;
 import gui.validators.shared.LBJLowerCaseValidator;
 import gui.validators.shared.LBJNumbersOnlyValidator;
@@ -111,20 +113,20 @@ public class LBJTextBoxBuilder {
 	 */
 	public LBJTextBoxBuilder activatorComponent(LBJValueComponent<Boolean> activatorComponent) {
 		lbjTextBox.setActivatorComponent(activatorComponent);
-		addUpdater(LBJUpdaterSupplier.getActivatorComponentUpdater());
+		addUpdater(BeanSupplier.get(LBJActivatorComponentUpdater.class));
 		return this;
 	}
-	
+
 	/**
 	 * Adds component (usually {@link Checkbox}) to this component so that when
-	 * value of this activatorComponent changes to <code>false</code>, this component
-	 * will get activated. Also adds {@link LBJDeactivatorComponentUpdater} which does
-	 * the work.
+	 * value of this activatorComponent changes to <code>false</code>, this
+	 * component will get activated. Also adds
+	 * {@link LBJDeactivatorComponentUpdater} which does the work.
 	 * 
 	 */
 	public LBJTextBoxBuilder deactivatorComponent(LBJValueComponent<Boolean> activatorComponent) {
 		lbjTextBox.setActivatorComponent(activatorComponent);
-		addUpdater(LBJUpdaterSupplier.getDeactivatorComponentUpdater());
+		addUpdater(BeanSupplier.get(LBJDeactivatorComponentUpdater.class));
 		return this;
 	}
 
@@ -132,15 +134,15 @@ public class LBJTextBoxBuilder {
 	 * Adds {@link LBJStringRequiredValidator} to this {@link LBJTextBox}
 	 */
 	public LBJTextBoxBuilder required() {
-		addUpdater(LBJUpdaterSupplier.getRequiredLabelComponentUpdater());
-		return addValueValidator(LBJValidatorSupplier.getStringRequiredValidator());
+		addUpdater(BeanSupplier.get(LBJRequiredLabelComponentUpdater.class));
+		return addValueValidator(BeanSupplier.get(LBJStringRequiredValidator.class));
 	}
 
 	/**
 	 * Adds {@link LBJStringLengthValidator} to this {@link LBJTextBox}
 	 */
 	public LBJTextBoxBuilder addLengthValidator() {
-		return addValueValidator(LBJValidatorSupplier.getStringLengthValidator());
+		return addValueValidator(BeanSupplier.get(LBJStringLengthValidator.class));
 	}
 
 	/**
@@ -152,15 +154,15 @@ public class LBJTextBoxBuilder {
 		if (LetterCase.NONE == letterCase) {
 			return this;
 		}
-		addValueUpdater(LBJUpdaterSupplier.caseUpdater(letterCase));
-		return addValueValidator(LBJValidatorSupplier.getCaseValidator(letterCase));
+		addValueUpdater(LBJCaseUtils.caseUpdater(letterCase));
+		return addValueValidator(LBJCaseUtils.getCaseValidator(letterCase));
 	}
 
 	/**
 	 * Adds {@link LBJNumbersOnlyValidator}
 	 */
 	public LBJTextBoxBuilder numbersOnly() {
-		addValueValidator(LBJValidatorSupplier.getNumbersOnlyValidator());
+		addValueValidator(BeanSupplier.get(LBJNumbersOnlyValidator.class));
 		return this;
 	}
 
@@ -169,7 +171,7 @@ public class LBJTextBoxBuilder {
 	 */
 	public LBJTextBoxBuilder addNamingConventionUpdater(String namingConvention) {
 		lbjTextBox.setNamingConvention(namingConvention);
-		addValueUpdater(LBJValidatorSupplier.getNamingConventionUpdater());
+		addValueUpdater(BeanSupplier.get(LBJNamingConventionUpdater.class));
 		return this;
 	}
 

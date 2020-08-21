@@ -2,13 +2,16 @@ package gui.forms.generate;
 
 import gui.components.LBJCheckBox;
 import gui.components.LBJPlainLabel;
+import gui.utils.Bean;
+import gui.utils.SimpleBean;
 import gui.validators.LBJFormValidator;
 
 /**
  * Custom validator for {@link GenerateForm} that validates that at least one
  * checkbox of databases (oracle, mssql, postgre) is checked.
  */
-public class GenerateFormDatabasesValidator implements LBJFormValidator<GenerateForm> {
+public class GenerateFormDatabasesValidator
+		implements LBJFormValidator<GenerateForm>, SimpleBean<GenerateFormDatabasesValidator> {
 
 	/**
 	 * Validates that at least one database checkbox is checked.

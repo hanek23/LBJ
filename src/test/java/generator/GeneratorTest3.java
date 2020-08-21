@@ -9,7 +9,7 @@ import domain.Entity;
 import domain.DropNotNullConstraint;
 import testutils.AbstractXmlSupplier;
 
-public class EntitiesSupplier3 extends AbstractXmlSupplier implements EntitiesSupplier {
+public class GeneratorTest3 extends AbstractXmlSupplier implements GeneratorTestCase {
 
 	@Override
 	public List<Entity> getEntities() {

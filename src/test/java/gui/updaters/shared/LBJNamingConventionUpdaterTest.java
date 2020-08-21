@@ -12,14 +12,14 @@ import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.createtable.CreateTableForm;
-import testutils.LBJFormTest;
+import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
 
 /**
  * Ignoring case when testing values. Testing case updaters and validators is
  * not the goal.
  */
-public class LBJNamingConventionUpdaterTest extends LBJFormTest {
+public class LBJNamingConventionUpdaterTest extends LBJFormTestCase {
 
 	private static final String TABLE_NAME = "TABLE_NAME";
 	private static final String COLUMN_NAME = "COLUMN";

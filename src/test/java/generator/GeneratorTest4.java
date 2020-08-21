@@ -1,7 +1,7 @@
 package generator;
 
-import static generator.EntitySupplierUtils.addColumn;
-import static generator.EntitySupplierUtils.createTable;
+import static generator.GeneratorTestUtils.addColumn;
+import static generator.GeneratorTestUtils.createTable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +10,7 @@ import domain.Entity;
 import domain.ForeignKey;
 import testutils.AbstractXmlSupplier;
 
-public class EntitiesSupplier4 extends AbstractXmlSupplier implements EntitiesSupplier {
+public class GeneratorTest4 extends AbstractXmlSupplier implements GeneratorTestCase {
 
 	private static final String TABLE_NAME = "LBJ_RELATED_ID";
 

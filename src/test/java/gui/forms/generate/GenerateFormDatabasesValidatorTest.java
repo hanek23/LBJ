@@ -5,9 +5,10 @@ import static testutils.asserts.LBJLabeledComponentAssert.assertThat;
 import org.junit.jupiter.api.Test;
 
 import gui.components.LBJPlainLabel;
+import testutils.LBJTestCase;
 import testutils.LBJTestUtils;
 
-public class GenerateFormDatabasesValidatorTest {
+public class GenerateFormDatabasesValidatorTest extends LBJTestCase {
 
 	@Test
 	public void testIsValid() {

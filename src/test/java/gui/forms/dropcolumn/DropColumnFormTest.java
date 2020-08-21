@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 import constants.Labels;
 import constants.NamingConventions;
 import domain.DropColumn;
-import testutils.LBJFormTest;
+import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
 
-public class DropColumnFormTest extends LBJFormTest {
+public class DropColumnFormTest extends LBJFormTestCase {
 
 	private static final String TABLE_NAME = "ACTION";
 	private static final String COLUMN_NAME = "lbj";

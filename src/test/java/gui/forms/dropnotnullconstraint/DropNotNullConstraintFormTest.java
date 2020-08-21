@@ -9,9 +9,10 @@ import org.junit.jupiter.api.Test;
 import constants.Labels;
 import constants.NamingConventions;
 import domain.DropNotNullConstraint;
+import testutils.LBJTestCase;
 import testutils.LBJTestUtils;
 
-public class DropNotNullConstraintFormTest {
+public class DropNotNullConstraintFormTest extends LBJTestCase {
 
 	private static final String TABLE_NAME = "ACTION";
 	private static final String COLUMN_NAME = "lbj";

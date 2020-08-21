@@ -9,7 +9,7 @@ import domain.Entity;
 import domain.ForeignKey;
 import testutils.AbstractXmlSupplier;
 
-public class EntitiesSupplier1 extends AbstractXmlSupplier implements EntitiesSupplier {
+public class GeneratorTest1 extends AbstractXmlSupplier implements GeneratorTestCase {
 
 	private Column createColumnAction() {
 		Column column = new Column("action", ColumnOperation.ADD);

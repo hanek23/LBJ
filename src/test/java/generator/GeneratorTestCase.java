@@ -4,7 +4,7 @@ import java.util.List;
 
 import domain.Entity;
 
-public interface EntitiesSupplier {
+public interface GeneratorTestCase {
 
 	String getExpectedXml();
 

@@ -8,7 +8,7 @@ import com.googlecode.lanterna.gui2.Interactable;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
-import generator.GeneratorTest;
+import generator.GeneratorTestRunner;
 import gui.components.LBJValueComponent;
 import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.createtable.CreateTableForm;
@@ -132,7 +132,7 @@ public class LBJTestUtils {
 
 	public static void assertLiquibaseXmlEquals(String expected, String actual, boolean checkXsd) {
 		if (checkXsd) {
-			StreamSource liquibaseXsd = new StreamSource(GeneratorTest.class.getResourceAsStream(LIQUIBASE_XSD));
+			StreamSource liquibaseXsd = new StreamSource(GeneratorTestRunner.class.getResourceAsStream(LIQUIBASE_XSD));
 			XmlAssert.assertThat(actual).isValid();
 			XmlAssert.assertThat(actual).isValidAgainst(liquibaseXsd);
 		}

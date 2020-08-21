@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 import constants.Labels;
 import constants.NamingConventions;
 import domain.AddColumn;
-import testutils.LBJFormTest;
+import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
 
-public class AddColumnFormTest extends LBJFormTest{
+public class AddColumnFormTest extends LBJFormTestCase {
 
 	private static final String TABLE_NAME = "ACTION";
 	private static final String COLUMN_NAME = "lbj";
@@ -105,7 +105,6 @@ public class AddColumnFormTest extends LBJFormTest{
 		assertThat(column.getForeignKey().getReferencedColumn()).isEqualToIgnoringCase(REFERENCED_COLUMN_NAME);
 		assertThat(column.getForeignKey().getName()).isEqualToIgnoringCase(FOREIGN_KEY_NAME);
 	}
-	
 
 	@Test
 	public void testConvertBoolean() {
@@ -139,7 +138,7 @@ public class AddColumnFormTest extends LBJFormTest{
 		assertThat(column.getForeignKey().getReferencedColumn()).isEqualToIgnoringCase(REFERENCED_COLUMN_NAME);
 		assertThat(column.getForeignKey().getName()).isEqualToIgnoringCase(FOREIGN_KEY_NAME);
 	}
-	
+
 	@Test
 	public void testConvertBooleanNewDefaultValue() {
 		AddColumnForm form = LBJTestUtils.getAddColumnForm();

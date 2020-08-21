@@ -13,10 +13,11 @@ import com.googlecode.lanterna.TextColor;
 import constants.Labels;
 import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJTextBox;
-import gui.suppliers.LBJValidatorSupplier;
+import gui.utils.BeanSupplier;
 import testutils.LBJMockForm;
+import testutils.LBJTestCase;
 
-public class LBJStringRequiredValidatorTest {
+public class LBJStringRequiredValidatorTest extends LBJTestCase {
 
 	private LBJStringRequiredValidator tested = new LBJStringRequiredValidator();
 
@@ -43,7 +44,7 @@ public class LBJStringRequiredValidatorTest {
 	@Test
 	public void testWithComponentTrue() {
 		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm())
-				.addValueValidator(LBJValidatorSupplier.getStringRequiredValidator()).build();
+				.addValueValidator(BeanSupplier.get(LBJStringRequiredValidator.class)).build();
 		textBox.setValue("TABLE_NAME");
 
 		assertTrue(textBox.isValid());
@@ -56,7 +57,7 @@ public class LBJStringRequiredValidatorTest {
 	@ValueSource(strings = { "", " " })
 	public void testWithComponentFalse(String invalidValue) {
 		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm())
-				.addValueValidator(LBJValidatorSupplier.getStringRequiredValidator()).build();
+				.addValueValidator(BeanSupplier.get(LBJStringRequiredValidator.class)).build();
 
 		textBox.setValue(invalidValue);
 

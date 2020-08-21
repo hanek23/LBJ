@@ -5,10 +5,14 @@ import org.assertj.core.util.Objects;
 
 import constants.NamingConventions;
 import gui.components.LBJValueComponent;
-import gui.suppliers.LBJUpdaterSupplier;
-import gui.suppliers.LBJValidatorSupplier;
 import gui.updaters.LBJComponentUpdater;
+import gui.updaters.shared.LBJRequiredLabelComponentUpdater;
+import gui.utils.BeanSupplier;
+import gui.utils.LBJCaseUtils;
 import gui.validators.LBJValueValidator;
+import gui.validators.shared.LBJNumbersOnlyValidator;
+import gui.validators.shared.LBJStringLengthValidator;
+import gui.validators.shared.LBJStringRequiredValidator;
 
 public class LBJValueComponentAssert extends LBJLabeledComponentAssert<LBJValueComponent<?>> {
 
@@ -47,29 +51,29 @@ public class LBJValueComponentAssert extends LBJLabeledComponentAssert<LBJValueC
 	public LBJValueComponentAssert isRequired() {
 		isNotNull();
 		isForClass(String.class);
-		hasValidator(LBJValidatorSupplier.getStringRequiredValidator());
-		hasUpdater(LBJUpdaterSupplier.getRequiredLabelComponentUpdater());
+		hasValidator((LBJValueValidator<?>) BeanSupplier.get(LBJStringRequiredValidator.class));
+		hasUpdater(BeanSupplier.get(LBJRequiredLabelComponentUpdater.class));
 		return this;
 	}
 
 	public LBJValueComponentAssert hasLengthValidator() {
 		isNotNull();
 		isForClass(String.class);
-		hasValidator(LBJValidatorSupplier.getStringLengthValidator());
+		hasValidator(BeanSupplier.get(LBJStringLengthValidator.class));
 		return this;
 	}
 
 	public LBJValueComponentAssert hasCaseValidator(NamingConventions.LetterCase letterCase) {
 		isNotNull();
 		isForClass(String.class);
-		hasValidator(LBJValidatorSupplier.getCaseValidator(letterCase));
+		hasValidator(LBJCaseUtils.getCaseValidator(letterCase));
 		return this;
 	}
 
 	public LBJValueComponentAssert isNumbersOnly() {
 		isNotNull();
 		isForClass(String.class);
-		hasValidator(LBJValidatorSupplier.getNumbersOnlyValidator());
+		hasValidator(BeanSupplier.get(LBJNumbersOnlyValidator.class));
 		return this;
 	}
 

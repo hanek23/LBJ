@@ -12,12 +12,14 @@ import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
 import gui.forms.droptable.DropTableForm;
 import gui.forms.preferences.PreferencesForm;
 import gui.suppliers.LBJFormSupplier;
+import gui.utils.Bean;
 import gui.utils.LBJFormUtils;
+import gui.utils.SimpleBean;
 
 /**
  * @see LBJMainMenuForm
  */
-public class MainMenuForm extends LBJMainMenuForm {
+public class MainMenuForm extends LBJMainMenuForm implements SimpleBean<MainMenuForm> {
 
 	private CreateTableForm createTableForm;
 	private DropTableForm dropTableForm;
@@ -81,5 +83,4 @@ public class MainMenuForm extends LBJMainMenuForm {
 	public DropColumnForm getDropColumnForm() {
 		return dropColumnForm;
 	}
-
 }

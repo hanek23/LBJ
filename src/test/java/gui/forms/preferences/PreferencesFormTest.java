@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import constants.Labels;
 import constants.NamingConventions;
-import testutils.LBJFormTest;
+import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
 
-public class PreferencesFormTest extends LBJFormTest {
+public class PreferencesFormTest extends LBJFormTestCase {
 
 	@Test
 	public void testInitializeComponents() {

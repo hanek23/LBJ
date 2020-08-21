@@ -18,9 +18,9 @@ import gui.forms.generate.GenerateForm;
 import gui.forms.mainmenu.MainMenuForm;
 import gui.suppliers.LBJFormSupplier;
 import testutils.LBJTestUtils;
-import testutils.LBJFormTest;
+import testutils.LBJFormTestCase;
 
-public class FormsToEntityTransformerTest extends LBJFormTest {
+public class FormsToEntityTransformerTest extends LBJFormTestCase {
 
 	@Test
 	public void testTransform() {

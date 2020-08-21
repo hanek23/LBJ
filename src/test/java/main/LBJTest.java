@@ -15,9 +15,9 @@ import com.googlecode.lanterna.gui2.TextGUIThread.ExceptionHandler;
 import gui.forms.LBJForm;
 import gui.forms.mainmenu.MainMenuForm;
 import gui.suppliers.LBJFormSupplier;
-import testutils.LBJFormTest;
+import testutils.LBJFormTestCase;
 
-public class LBJTest extends LBJFormTest {
+public class LBJTest extends LBJFormTestCase {
 
 	private volatile List<Exception> exceptions = new ArrayList<>();
 	private MainMenuForm mainMenuForm;

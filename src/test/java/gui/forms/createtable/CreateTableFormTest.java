@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 import constants.Labels;
 import constants.NamingConventions;
 import domain.CreateTable;
-import testutils.LBJFormTest;
+import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
 
-public class CreateTableFormTest extends LBJFormTest {
+public class CreateTableFormTest extends LBJFormTestCase {
 
 	private static final String TABLE_NAME = "ACTION";
 	private static final String PRIMARY_KEY_NAME = "id";

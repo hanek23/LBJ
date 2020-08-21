@@ -2,12 +2,13 @@ package gui.updaters.shared;
 
 import gui.components.LBJComponent;
 import gui.updaters.LBJComponentUpdater;
+import gui.utils.SimpleBean;
 
 /**
  * Disables a component if {@link LBJComponent#getActivatorComponent()} returns
  * <code>true</code>
  */
-public class LBJDeactivatorComponentUpdater implements LBJComponentUpdater {
+public class LBJDeactivatorComponentUpdater implements LBJComponentUpdater, SimpleBean<LBJDeactivatorComponentUpdater> {
 
 	@Override
 	public void update(LBJComponent component) {

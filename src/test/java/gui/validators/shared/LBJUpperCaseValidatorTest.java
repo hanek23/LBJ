@@ -11,10 +11,11 @@ import com.googlecode.lanterna.TextColor;
 import constants.Labels;
 import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJTextBox;
-import gui.suppliers.LBJValidatorSupplier;
+import gui.utils.BeanSupplier;
 import testutils.LBJMockForm;
+import testutils.LBJTestCase;
 
-public class LBJUpperCaseValidatorTest {
+public class LBJUpperCaseValidatorTest extends LBJTestCase {
 
 	private LBJUpperCaseValidator tested = new LBJUpperCaseValidator();
 
@@ -46,7 +47,7 @@ public class LBJUpperCaseValidatorTest {
 	@Test
 	public void testWithComponentTrue() {
 		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm())
-				.addValueValidator(LBJValidatorSupplier.getUpperCasevalidator()).build();
+				.addValueValidator(BeanSupplier.get(LBJUpperCaseValidator.class)).build();
 		textBox.setValue("TABLE_NAME");
 
 		assertTrue(textBox.isValid());
@@ -58,7 +59,7 @@ public class LBJUpperCaseValidatorTest {
 	@Test
 	public void testWithComponentFalse() {
 		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm())
-				.addValueValidator(LBJValidatorSupplier.getUpperCasevalidator()).build();
+				.addValueValidator(BeanSupplier.get(LBJUpperCaseValidator.class)).build();
 		textBox.setValue("TABLE_NAMe");
 
 		assertFalse(textBox.isValid());

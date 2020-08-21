@@ -7,10 +7,10 @@ import java.awt.datatransfer.DataFlavor;
 
 import org.junit.jupiter.api.Test;
 
-import testutils.LBJFormTest;
+import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
 
-public class EndToEndTestRunner extends LBJFormTest {
+public class EndToEndTestRunner extends LBJFormTestCase {
 
 	@Test
 	public void test1() throws Exception {
