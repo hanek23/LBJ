@@ -1,3 +1,6 @@
+utils.LBJProperties
+utils.LBJPreferences
+gui.forms.mainmenu.MainMenuForm
 gui.validators.shared.LBJLowerCaseValidator
 gui.validators.shared.LBJNumbersOnlyValidator
 gui.validators.shared.LBJStringLengthValidator
@@ -10,4 +13,3 @@ gui.updaters.shared.LBJRequiredLabelComponentUpdater
 gui.updaters.shared.LBJUpperCaseUpdater
 gui.updaters.shared.LBJNamingConventionUpdater
 gui.forms.generate.GenerateFormDatabasesValidator
-gui.forms.mainmenu.MainMenuForm

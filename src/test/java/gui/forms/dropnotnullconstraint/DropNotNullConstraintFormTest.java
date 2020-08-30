@@ -29,9 +29,9 @@ public class DropNotNullConstraintFormTest extends LBJTestCase {
 		assertThat(form).hasComponentWithName(Labels.COLUMN_DATA_TYPE);
 
 		// with all validators
-		assertThat(form.getTableNameTextBox()).isRequired().hasCaseValidator(NamingConventions.TABLE_NAME_CASE)
+		assertThat(form.getTableNameTextBox()).isRequired().hasCaseValidator(NamingConventions.DEFAULT_TABLE_NAME_CASE)
 				.hasLengthValidator();
-		assertThat(form.getColumnNameTextBox()).isRequired().hasCaseValidator(NamingConventions.COLUMN_NAME_CASE)
+		assertThat(form.getColumnNameTextBox()).isRequired().hasCaseValidator(NamingConventions.DEFAULT_COLUMN_NAME_CASE)
 				.hasLengthValidator();
 		assertThat(form.getDataTypeTextBox()).isRequired();
 

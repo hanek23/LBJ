@@ -12,7 +12,6 @@ import gui.components.LBJTextBox;
 import gui.components.LBJValueComponent;
 import gui.forms.LBJForm;
 import gui.updaters.LBJValueUpdater;
-import gui.utils.Bean;
 import gui.utils.SimpleBean;
 
 /**
@@ -23,7 +22,7 @@ import gui.utils.SimpleBean;
  * replace them accordingly in Index name so it looks something like I_LBJ_ID
  * (Table name: LBJ, Column name: id)
  */
-public class LBJNamingConventionUpdater implements LBJValueUpdater<String>, SimpleBean<LBJNamingConventionUpdater> {
+public class LBJNamingConventionUpdater implements LBJValueUpdater<String>, SimpleBean {
 
 	@Override
 	@SuppressWarnings("unchecked")

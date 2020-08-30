@@ -120,6 +120,7 @@ public class LBJFormSupplier {
 		return preferencesForm;
 	}
 
+
 	/**
 	 * @return One and only instance of {@link DropTableForm}.
 	 */
@@ -138,9 +139,6 @@ public class LBJFormSupplier {
 	 * Only for testing!
 	 */
 	public static void reset() {
-//		TODO
-		BeanSupplier.init();
-//		mainMenuForm = null;
 		createTableForm = null;
 		dropTableForm = null;
 		dropNotNullConstraintForm = null;

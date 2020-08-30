@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import constants.NamingConventions;
 import gui.suppliers.LBJFormSupplier;
 import gui.utils.BeanSupplier;
+import utils.LBJPreferences;
 
 /**
  * <ul>
@@ -19,7 +20,7 @@ public abstract class LBJFormTestCase extends LBJTestCase {
 	public void beforeEach() {
 		super.beforeEach();
 		LBJFormSupplier.reset();
-		NamingConventions.setDefaultPreferences();
+		BeanSupplier.get(LBJPreferences.class).setDefaultPreferences();
 	}
 
 }

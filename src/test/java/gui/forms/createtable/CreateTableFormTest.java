@@ -31,16 +31,16 @@ public class CreateTableFormTest extends LBJFormTestCase {
 		assertThat(form).hasComponentWithName(Labels.TABLE_SEQUENCE_NAME);
 
 		assertThat(form.getTableNameTextBox()).isRequired().hasLengthValidator()
-				.hasCaseValidator(NamingConventions.TABLE_NAME_CASE);
+				.hasCaseValidator(NamingConventions.DEFAULT_TABLE_NAME_CASE);
 
 		assertThat(form.getPrimaryKeyNameTextBox()).isRequired().hasLengthValidator()
-				.hasCaseValidator(NamingConventions.PRIMARY_KEY_NAME_CASE);
+				.hasCaseValidator(NamingConventions.DEFAULT_PRIMARY_KEY_NAME_CASE);
 
 		assertThat(form.getPrimaryKeyConstraintNameTextBox()).isRequired().hasLengthValidator()
-				.hasCaseValidator(NamingConventions.PRIMARY_KEY_CONSTRAINT_NAME_CASE);
+				.hasCaseValidator(NamingConventions.DEFAULT_PRIMARY_KEY_CONSTRAINT_NAME_CASE);
 
 		assertThat(form.getSequenceNameTextBox()).isRequired().hasLengthValidator()
-				.hasCaseValidator(NamingConventions.SEQUENCE_NAME_CASE);
+				.hasCaseValidator(NamingConventions.DEFAULT_SEQUENCE_NAME_CASE);
 
 	}
 

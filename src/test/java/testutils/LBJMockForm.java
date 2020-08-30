@@ -14,7 +14,7 @@ public class LBJMockForm extends LBJForm {
 
 	public LBJMockForm() {
 		super(new BasicWindow(Labels.WINDOW_NAME));
-		initialize();
+		initializeForm();
 	}
 
 	@Override

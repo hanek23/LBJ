@@ -13,13 +13,14 @@ import gui.forms.droptable.DropTableForm;
 import gui.forms.preferences.PreferencesForm;
 import gui.suppliers.LBJFormSupplier;
 import gui.utils.Bean;
+import gui.utils.BeanSupplier;
 import gui.utils.LBJFormUtils;
-import gui.utils.SimpleBean;
+import utils.LBJProperties;
 
 /**
  * @see LBJMainMenuForm
  */
-public class MainMenuForm extends LBJMainMenuForm implements SimpleBean<MainMenuForm> {
+public class MainMenuForm extends LBJMainMenuForm implements Bean {
 
 	private CreateTableForm createTableForm;
 	private DropTableForm dropTableForm;
@@ -29,7 +30,13 @@ public class MainMenuForm extends LBJMainMenuForm implements SimpleBean<MainMenu
 	private PreferencesForm preferencesForm;
 
 	public MainMenuForm() {
-		super(new BasicWindow(Labels.WINDOW_NAME));
+		super(new BasicWindow());
+	}
+
+	public void initializeBean() {
+		((BasicWindow) getWindow())
+				.setTitle(Labels.WINDOW_NAME + " v" + BeanSupplier.get(LBJProperties.class).getVersion());
+		initializeForm();
 	}
 
 	@Override
@@ -83,4 +90,5 @@ public class MainMenuForm extends LBJMainMenuForm implements SimpleBean<MainMenu
 	public DropColumnForm getDropColumnForm() {
 		return dropColumnForm;
 	}
+
 }

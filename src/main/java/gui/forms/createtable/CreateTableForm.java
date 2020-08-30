@@ -13,7 +13,9 @@ import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
 import gui.forms.addcolumn.AddColumnForm;
+import gui.utils.BeanSupplier;
 import gui.utils.LBJFormUtils;
+import utils.LBJPreferences;
 
 /**
  * Form for creating table. You can choose table name, primary key name, primary
@@ -36,20 +38,20 @@ public class CreateTableForm extends LBJEntityForm<CreateTable> {
 	@Override
 	public void initializeComponents() {
 		tableNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, this).required().addLengthValidator()
-				.addCaseUpdaterAndValidator(NamingConventions.TABLE_NAME_CASE).build();
+				.addCaseUpdaterAndValidator(NamingConventions.DEFAULT_TABLE_NAME_CASE).build();
 
 		primaryKeyNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_NAME, this).required()
-				.addNamingConventionUpdater(NamingConventions.getPrimaryKeyName())
-				.addCaseUpdaterAndValidator(NamingConventions.PRIMARY_KEY_NAME_CASE).addLengthValidator().build();
+				.addNamingConventionUpdater(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyName())
+				.addCaseUpdaterAndValidator(NamingConventions.DEFAULT_PRIMARY_KEY_NAME_CASE).addLengthValidator().build();
 
 		primaryKeyConstraintNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN_NAME, this)
 				.required().addLengthValidator()
-				.addNamingConventionUpdater(NamingConventions.getPrimaryKeyConstraintName())
-				.addCaseUpdaterAndValidator(NamingConventions.PRIMARY_KEY_CONSTRAINT_NAME_CASE).build();
+				.addNamingConventionUpdater(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintName())
+				.addCaseUpdaterAndValidator(NamingConventions.DEFAULT_PRIMARY_KEY_CONSTRAINT_NAME_CASE).build();
 
 		sequenceNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_SEQUENCE_NAME, this).required()
-				.addCaseUpdaterAndValidator(NamingConventions.SEQUENCE_NAME_CASE).addLengthValidator()
-				.addNamingConventionUpdater(NamingConventions.getSequenceName()).build();
+				.addCaseUpdaterAndValidator(NamingConventions.DEFAULT_SEQUENCE_NAME_CASE).addLengthValidator()
+				.addNamingConventionUpdater(BeanSupplier.get(LBJPreferences.class).getSequenceName()).build();
 
 	}
 
@@ -102,9 +104,9 @@ public class CreateTableForm extends LBJEntityForm<CreateTable> {
 	 * changed since last visit
 	 */
 	private void applyPreferences() {
-		primaryKeyNameTextBox.setNamingConvention(NamingConventions.getPrimaryKeyName());
-		primaryKeyConstraintNameTextBox.setNamingConvention(NamingConventions.getPrimaryKeyConstraintName());
-		sequenceNameTextBox.setNamingConvention(NamingConventions.getSequenceName());
+		primaryKeyNameTextBox.setNamingConvention(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyName());
+		primaryKeyConstraintNameTextBox.setNamingConvention(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintName());
+		sequenceNameTextBox.setNamingConvention(BeanSupplier.get(LBJPreferences.class).getSequenceName());
 	}
 
 	@Override

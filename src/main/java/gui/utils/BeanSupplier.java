@@ -21,16 +21,18 @@ public class BeanSupplier {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T extends Bean<T>> T get(Class<T> clazz) {
+	public static <T> T get(Class<T> clazz) {
 		return (T) get(clazz.getSimpleName());
 	}
 
-	@SuppressWarnings("rawtypes")
 	public static void init() {
 		beans = new HashMap<>();
 		ServiceLoader<Bean> loader = ServiceLoader.load(Bean.class);
 		for (Bean implBean : loader) {
-			beans.put(implBean.getClass().getSimpleName(), implBean.create());
+			beans.put(implBean.getClass().getSimpleName(), implBean);
+		}
+		for (Object bean : beans.values()) {
+			((Bean) bean).initializeBean();
 		}
 	}
 

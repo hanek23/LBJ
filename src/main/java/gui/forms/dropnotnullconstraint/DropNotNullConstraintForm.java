@@ -36,11 +36,11 @@ public class DropNotNullConstraintForm extends LBJEntityForm<DropNotNullConstrai
 	@Override
 	public void initializeComponents() {
 		tableNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, this).required().addLengthValidator()
-				.addCaseUpdaterAndValidator(NamingConventions.TABLE_NAME_CASE).build();
+				.addCaseUpdaterAndValidator(NamingConventions.DEFAULT_TABLE_NAME_CASE).build();
 		columnNameTextBox = new LBJTextBoxBuilder(Labels.COLUMN_NAME, this).required().addLengthValidator()
-				.addCaseUpdaterAndValidator(NamingConventions.COLUMN_NAME_CASE).build();
+				.addCaseUpdaterAndValidator(NamingConventions.DEFAULT_COLUMN_NAME_CASE).build();
 		dataTypeTextBox = new LBJTextBoxBuilder(Labels.COLUMN_DATA_TYPE, this).required()
-				.addCaseUpdaterAndValidator(NamingConventions.DATA_TYPE_CASE).build();
+				.addCaseUpdaterAndValidator(NamingConventions.DEFAULT_DATA_TYPE_CASE).build();
 	}
 
 	@Override

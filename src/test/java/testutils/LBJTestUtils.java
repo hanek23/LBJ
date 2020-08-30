@@ -16,6 +16,7 @@ import gui.forms.dropcolumn.DropColumnForm;
 import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
 import gui.forms.droptable.DropTableForm;
 import gui.forms.generate.GenerateForm;
+import gui.forms.preferences.NamingConventionsForm;
 import gui.forms.preferences.PreferencesForm;
 
 public class LBJTestUtils {
@@ -126,6 +127,16 @@ public class LBJTestUtils {
 	public static PreferencesForm getPreferencesForm() {
 		LBJMockForm mockForm = new LBJMockForm();
 		PreferencesForm form = new PreferencesForm(mockForm.getWindow(), mockForm);
+		form.focus();
+		return form;
+	}
+	
+	/**
+	 * @return {@link PreferencesForm} that is already focused
+	 */
+	public static NamingConventionsForm getNamingConventionsForm() {
+		LBJMockForm mockForm = new LBJMockForm();
+		NamingConventionsForm form = new NamingConventionsForm(mockForm.getWindow(), mockForm);
 		form.focus();
 		return form;
 	}

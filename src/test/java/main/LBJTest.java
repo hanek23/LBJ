@@ -1,6 +1,7 @@
 package main;
 
 import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 
@@ -35,6 +36,7 @@ public class LBJTest extends LBJFormTestCase {
 		for (LBJForm form : mainMenuForm.getFormsToUpdate()) {
 			form.focus();
 			wait(100);
+			assertEquals(form.getContent(), mainMenuForm.getWindow().getComponent());
 			mainMenuForm.focus();
 		}
 		assertNoException();
@@ -61,7 +63,7 @@ public class LBJTest extends LBJFormTestCase {
 			}
 		});
 		mainMenuThread.start();
-		wait(1000);
+		wait(5000);
 		mainMenuForm.focus();
 		mainMenuForm.getThread().setExceptionHandler(new ExceptionHandler() {
 

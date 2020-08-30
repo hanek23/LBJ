@@ -43,7 +43,7 @@ public abstract class LBJForm implements Runnable {
 	@Override
 	public abstract String toString();
 
-	public void initialize() {
+	public void initializeForm() {
 		initializeContent();
 		initializeComponents();
 		initializeButtons();

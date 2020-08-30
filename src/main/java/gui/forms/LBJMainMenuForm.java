@@ -51,7 +51,6 @@ public abstract class LBJMainMenuForm extends LBJForm {
 
 	public LBJMainMenuForm(Window window) {
 		super(window);
-		initialize();
 	}
 
 	@Override
@@ -66,8 +65,8 @@ public abstract class LBJMainMenuForm extends LBJForm {
 
 	@Override
 	public void addComponents() {
-		LBJFormUtils.addLabelToMainMenuContent(getContent(), questionLabel);
-		LBJFormUtils.addMenuToMainMenuContent(getContent(), getMainMenu());
+		LBJFormUtils.addLabelToMenuContent(getContent(), questionLabel);
+		LBJFormUtils.addMenuContent(getContent(), getMainMenu());
 	}
 
 	@Override
@@ -97,8 +96,7 @@ public abstract class LBJMainMenuForm extends LBJForm {
 
 	public void startTerminal() {
 		try (Screen screen = new DefaultTerminalFactory().setMouseCaptureMode(MouseCaptureMode.CLICK)
-				.setInitialTerminalSize(Settings.TERMINAL_SIZE)/** .setTelnetPort(2323) */
-				.createScreen()) {
+				.setInitialTerminalSize(Settings.TERMINAL_SIZE)/**.setTelnetPort(2323)*/.createScreen()) {
 			screen.startScreen();
 			WindowBasedTextGUI gui = new MultiWindowTextGUI(screen);
 			thread = gui.getGUIThread();

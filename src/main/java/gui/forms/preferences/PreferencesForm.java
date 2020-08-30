@@ -1,30 +1,23 @@
 package gui.forms.preferences;
 
-import com.googlecode.lanterna.gui2.Button;
+import com.googlecode.lanterna.gui2.ActionListBox;
+import com.googlecode.lanterna.gui2.GridLayout;
+import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
-import constants.NamingConventions;
-import gui.builders.LBJTextBoxBuilder;
-import gui.components.LBJTextBox;
+import gui.builders.LBJPlainLabelBuilder;
+import gui.components.LBJPlainLabel;
 import gui.forms.LBJForm;
 import gui.forms.LBJWizardForm;
 import gui.utils.LBJFormUtils;
-import main.LBJ;
 
 public class PreferencesForm extends LBJWizardForm {
 
-	private LBJTextBox primaryKeyName;
-	private LBJTextBox primaryKeyConstraintName;
-	private LBJTextBox sequenceName;
-	private LBJTextBox indexName;
-	private LBJTextBox foreignKeyName;
-
-	// cannot use default back button as I need to override a bit with applying and
-	// reseting changes to preferences
-	private Button backButton;
-	private Button applyButton;
-	private Button resetToDefaultButton;
+	private ActionListBox menu;
+	private LBJPlainLabel menuLabel;
+	private NamingConventionsForm namingConventionsForm;
+	private LetterCaseConventionsForm letterCaseConventionsForm;
 
 	public PreferencesForm(Window window, LBJForm previousForm) {
 		super(window, previousForm);
@@ -32,73 +25,23 @@ public class PreferencesForm extends LBJWizardForm {
 
 	@Override
 	public void initializeComponents() {
-		primaryKeyName = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_NAME, this)
-				.value(NamingConventions.getPrimaryKeyName()).required().build();
+		menu = new ActionListBox();
+		menuLabel = new LBJPlainLabelBuilder(Labels.PREFERENCES_MENU_LABEL, this).build();
+		namingConventionsForm = new NamingConventionsForm(getWindow(), this);
+		letterCaseConventionsForm = new LetterCaseConventionsForm(getWindow(), this);
 
-		primaryKeyConstraintName = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN_NAME, this)
-				.value(NamingConventions.getPrimaryKeyConstraintName()).required().build();
+		LBJFormUtils.addUpdatableFormToMainMenu(namingConventionsForm);
+		LBJFormUtils.addUpdatableFormToMainMenu(letterCaseConventionsForm);
+	}
 
-		sequenceName = new LBJTextBoxBuilder(Labels.TABLE_SEQUENCE_NAME, this)
-				.value(NamingConventions.getSequenceName()).required().build();
-
-		indexName = new LBJTextBoxBuilder(Labels.ADD_COLUMN_INDEX_NAME, this).value(NamingConventions.getIndexName())
-				.required().build();
-
-		foreignKeyName = new LBJTextBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY_NAME, this)
-				.value(NamingConventions.getForeignKeyName()).required().build();
+	@Override
+	public void initializeContent() {
+		setContent(new Panel(new GridLayout(1)));
 	}
 
 	@Override
 	public void initializeButtons() {
-		applyButton = new Button(Labels.BUTTON_PREFERENCES_APPLY, new Runnable() {
-			@Override
-			public void run() {
-				if (!validate()) {
-					return;
-				}
-				// apply and return to main menu
-				applyPreferences();
-				goToPreviousForm();
-			}
-
-		});
-
-		resetToDefaultButton = new Button(Labels.BUTTON_PREFERENCES_RESET, new Runnable() {
-			@Override
-			public void run() {
-				NamingConventions.setDefaultPreferences();
-				setComponentsToPreferenceValues();
-			}
-
-		});
-
-		backButton = new Button(Labels.BUTTON_BACK, new Runnable() {
-			@Override
-			public void run() {
-				setComponentsToPreferenceValues();
-				goToPreviousForm();
-			}
-
-		});
-	}
-
-	/**
-	 * Will set all components to current preference value
-	 */
-	private void setComponentsToPreferenceValues() {
-		primaryKeyName.setValue(NamingConventions.getPrimaryKeyName());
-		primaryKeyConstraintName.setValue(NamingConventions.getPrimaryKeyConstraintName());
-		sequenceName.setValue(NamingConventions.getSequenceName());
-		indexName.setValue(NamingConventions.getIndexName());
-		foreignKeyName.setValue(NamingConventions.getForeignKeyName());
-	}
-
-	private void applyPreferences() {
-		LBJ.preferences.put(NamingConventions.PKEY_PRIMARY_KEY_NAME, primaryKeyName.getValue());
-		LBJ.preferences.put(NamingConventions.PKEY_PRIMARY_KEY_CONSTRAINT_NAME, primaryKeyConstraintName.getValue());
-		LBJ.preferences.put(NamingConventions.PKEY_SEQUENCE_NAME, sequenceName.getValue());
-		LBJ.preferences.put(NamingConventions.PKEY_INDEX_NAME, indexName.getValue());
-		LBJ.preferences.put(NamingConventions.PKEY_FOREIGN_KEY_NAME, foreignKeyName.getValue());
+		// no extra buttons
 	}
 
 	@Override
@@ -115,61 +58,20 @@ public class PreferencesForm extends LBJWizardForm {
 
 	@Override
 	public void addComponents() {
-		LBJFormUtils.addValueAndLabeledComponentTo(this, primaryKeyName);
-		LBJFormUtils.addValueAndLabeledComponentTo(this, primaryKeyConstraintName);
-		LBJFormUtils.addValueAndLabeledComponentTo(this, sequenceName);
-		LBJFormUtils.addValueAndLabeledComponentTo(this, indexName);
-		LBJFormUtils.addValueAndLabeledComponentTo(this, foreignKeyName);
+		LBJFormUtils.addLabelToMenuContent(getContent(), menuLabel);
+		LBJFormUtils.addMenuContent(getContent(), menu);
+		LBJFormUtils.addItemToMenu(menu, namingConventionsForm, Labels.PREFERENCES_NAMING_CONVENTIONS);
+		LBJFormUtils.addItemToMenu(menu, letterCaseConventionsForm, Labels.PREFERENCES_LETTER_CASE_CONVENTIONS);
 	}
 
 	@Override
 	public void addButtons() {
-		LBJFormUtils.addEmptySpaceTo(this);
-		LBJFormUtils.addButtonTo(this, backButton);
-		LBJFormUtils.addButtonTo(this, resetToDefaultButton);
-		LBJFormUtils.addButtonTo(this, applyButton);
+		initializeBackButton();
 	}
 
 	@Override
 	public String toString() {
 		return Labels.PREFERENCES_FORM;
-	}
-
-	public LBJTextBox getPrimaryKeyName() {
-		return primaryKeyName;
-	}
-
-	public LBJTextBox getPrimaryKeyConstraintName() {
-		return primaryKeyConstraintName;
-	}
-
-	public LBJTextBox getSequenceName() {
-		return sequenceName;
-	}
-
-	public LBJTextBox getIndexName() {
-		return indexName;
-	}
-
-	public LBJTextBox getForeignKeyName() {
-		return foreignKeyName;
-	}
-
-	public void setForeignKeyName(LBJTextBox foreignKeyName) {
-		this.foreignKeyName = foreignKeyName;
-	}
-
-	@Override
-	public Button getBackButton() {
-		return backButton;
-	}
-
-	public Button getApplyButton() {
-		return applyButton;
-	}
-
-	public Button getResetToDefaultButton() {
-		return resetToDefaultButton;
 	}
 
 }

@@ -4,13 +4,15 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>hanek.lbj</groupId>
 	<artifactId>lbj</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1</version>
 
 	<properties>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.build.timestamp.format>dd.MM. yyyy</maven.build.timestamp.format>
+		<build.date>${maven.build.timestamp}</build.date>
 	</properties>
 
 	<dependencies>
@@ -63,6 +65,12 @@
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

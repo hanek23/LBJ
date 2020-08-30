@@ -1,15 +1,13 @@
 package main;
 
-import java.util.prefs.Preferences;
-
 import gui.forms.LBJMainMenuForm;
 import gui.suppliers.LBJFormSupplier;
+import gui.utils.BeanSupplier;
 
 public class LBJ {
 
-	public static final Preferences preferences = Preferences.userRoot().node(LBJ.class.getSimpleName());
-
 	public static void main(String[] args) {
+		BeanSupplier.init();
 		LBJMainMenuForm mainMenuForm = LBJFormSupplier.getMainMenuForm();
 		mainMenuForm.focus();
 		mainMenuForm.startTerminal();

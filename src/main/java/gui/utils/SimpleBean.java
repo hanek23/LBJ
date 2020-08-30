@@ -1,15 +1,9 @@
 package gui.utils;
 
-public interface SimpleBean<T> extends Bean<T> {
+public interface SimpleBean extends Bean {
 
-	@Override
-	@SuppressWarnings("unchecked")
-	default T create() {
-		try {
-			return (T) getClass().newInstance();
-		} catch (InstantiationException | IllegalAccessException e) {
-			throw new IllegalStateException("Cannot initialize bean with name " + getClass().getSimpleName());
-		}
+	default void initializeBean() {
+		// nothing
 	}
 
 }

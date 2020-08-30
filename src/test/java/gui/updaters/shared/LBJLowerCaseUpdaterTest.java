@@ -11,10 +11,10 @@ import gui.components.LBJTextBox;
 import gui.utils.LBJCaseUtils;
 import testutils.LBJMockForm;
 
-public class LBJLowerCaseUpdaterTest {
+class LBJLowerCaseUpdaterTest {
 
 	@Test
-	public void testUpdate() {
+	void testUpdate() {
 		LBJTextBox textBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, new LBJMockForm())
 				.addValueUpdater(LBJCaseUtils.caseUpdater(LetterCase.LOWER)).build();
 

@@ -7,7 +7,7 @@ import gui.utils.SimpleBean;
 /**
  * Updates components {@link String} value to upper case.
  */
-public class LBJUpperCaseUpdater implements LBJValueUpdater<String>, SimpleBean<LBJUpperCaseUpdater> {
+public class LBJUpperCaseUpdater implements LBJValueUpdater<String>, SimpleBean {
 
 	@Override
 	public void update(LBJValueComponent<String> component) {

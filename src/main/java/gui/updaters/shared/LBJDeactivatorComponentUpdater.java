@@ -8,7 +8,7 @@ import gui.utils.SimpleBean;
  * Disables a component if {@link LBJComponent#getActivatorComponent()} returns
  * <code>true</code>
  */
-public class LBJDeactivatorComponentUpdater implements LBJComponentUpdater, SimpleBean<LBJDeactivatorComponentUpdater> {
+public class LBJDeactivatorComponentUpdater implements LBJComponentUpdater, SimpleBean {
 
 	@Override
 	public void update(LBJComponent component) {

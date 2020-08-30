@@ -2,7 +2,6 @@ package gui.validators.shared;
 
 import org.apache.commons.lang3.StringUtils;
 
-import gui.utils.Bean;
 import gui.utils.SimpleBean;
 import gui.validators.LBJValueValidator;
 
@@ -11,7 +10,7 @@ import gui.validators.LBJValueValidator;
  * {@link StringUtils#isBlank(CharSequence)}
  */
 public class LBJStringRequiredValidator
-		implements LBJValueValidator<String>, SimpleBean<LBJStringRequiredValidator> {
+		implements LBJValueValidator<String>, SimpleBean {
 
 	@Override
 	public boolean isValid(String value) {

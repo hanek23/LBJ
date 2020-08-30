@@ -88,11 +88,11 @@ public class LBJFormUtils {
 				button.setLayoutData(GridLayout.createHorizontallyFilledLayoutData(Settings.GUI_NUMBER_OF_COLUMNS)));
 	}
 
-	public static void addLabelToMainMenuContent(Panel content, LBJPlainLabel label) {
+	public static void addLabelToMenuContent(Panel content, LBJPlainLabel label) {
 		content.addComponent(label.getLabel());
 	}
 
-	public static void addMenuToMainMenuContent(Panel content, ActionListBox mainMenu) {
+	public static void addMenuContent(Panel content, ActionListBox mainMenu) {
 		content.addComponent(mainMenu);
 	}
 
@@ -138,6 +138,10 @@ public class LBJFormUtils {
 			}
 		});
 		return addDropButton;
+	}
+	
+	public static void addUpdatableFormToMainMenu(LBJForm form) {
+		LBJFormSupplier.getMainMenuForm().addFormToUpdate(form);
 	}
 
 }

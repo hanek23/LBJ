@@ -3,7 +3,6 @@ package gui.validators.shared;
 import org.apache.commons.lang3.StringUtils;
 
 import constants.Settings;
-import gui.utils.Bean;
 import gui.utils.SimpleBean;
 import gui.validators.LBJValueValidator;
 
@@ -12,7 +11,7 @@ import gui.validators.LBJValueValidator;
  * {@link Settings#MAX_LENGTH_OF_NAMES}
  */
 public class LBJStringLengthValidator
-		implements LBJValueValidator<String>, SimpleBean<LBJStringLengthValidator> {
+		implements LBJValueValidator<String>, SimpleBean {
 
 	@Override
 	public boolean isValid(String value) {

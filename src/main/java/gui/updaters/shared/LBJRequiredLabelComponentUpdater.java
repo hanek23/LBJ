@@ -10,7 +10,7 @@ import gui.utils.SimpleBean;
  * Changes label to "label*" if component is enabled to symbol that component is
  * required, removes it otherwise
  */
-public class LBJRequiredLabelComponentUpdater implements LBJLabeledComponentUpdater, SimpleBean<LBJRequiredLabelComponentUpdater> {
+public class LBJRequiredLabelComponentUpdater implements LBJLabeledComponentUpdater, SimpleBean {
 
 	private static final String REQUIRED_ASTERISK = "*";
 

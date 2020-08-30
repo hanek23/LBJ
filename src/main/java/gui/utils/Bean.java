@@ -1,7 +1,7 @@
 package gui.utils;
 
-public interface Bean<T> {
+public interface Bean {
 
-	T create();
+	 void initializeBean();
 
 }

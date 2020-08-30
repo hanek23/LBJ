@@ -35,6 +35,7 @@ public class Labels {
 	public static final String MAIN_MENU_DROP_TABLE = "Drop table";
 	public static final String MAIN_MENU_DROP_NOT_NULL_CONSTRAINT = "Remove not null constraint";
 	public static final String MAIN_MENU_PREFERENCES = "Preferences";
+	public static final String MAIN_MENU_BUILD_DATE = "Build time";
 	public static final String BUTTON_EXIT = "Exit";
 
 	// CREATE/DROP TABLE
@@ -66,6 +67,9 @@ public class Labels {
 	public static final String GENERATE_FORM_GENERATED_XML = "Generated XML";
 
 	// PREFERENCES
+	public static final String PREFERENCES_MENU_LABEL = "Set preferences of";
+	public static final String PREFERENCES_NAMING_CONVENTIONS = "Naming conventions";
+	public static final String PREFERENCES_LETTER_CASE_CONVENTIONS = "Letter case conventions";
 	public static final String BUTTON_PREFERENCES_APPLY = "Apply and return";
 	public static final String BUTTON_PREFERENCES_RESET = "Reset to default";
 

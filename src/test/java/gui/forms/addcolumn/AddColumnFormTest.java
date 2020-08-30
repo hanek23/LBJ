@@ -57,19 +57,19 @@ public class AddColumnFormTest extends LBJFormTestCase {
 		assertThat(form.getForeignKeyNameTextBox()).isNotEnabled();
 
 		// with all validators
-		assertThat(form.getTableNameTextBox()).isRequired().hasCaseValidator(NamingConventions.TABLE_NAME_CASE)
+		assertThat(form.getTableNameTextBox()).isRequired().hasCaseValidator(NamingConventions.DEFAULT_TABLE_NAME_CASE)
 				.hasLengthValidator();
-		assertThat(form.getColumnNameTextBox()).isRequired().hasCaseValidator(NamingConventions.COLUMN_NAME_CASE)
+		assertThat(form.getColumnNameTextBox()).isRequired().hasCaseValidator(NamingConventions.DEFAULT_COLUMN_NAME_CASE)
 				.hasLengthValidator();
 		assertThat(form.getDataTypeTextBox()).isRequired();
-		assertThat(form.getIndexNameTextBox()).isRequired().hasCaseValidator(NamingConventions.INDEX_NAME_CASE)
+		assertThat(form.getIndexNameTextBox()).isRequired().hasCaseValidator(NamingConventions.DEFAULT_INDEX_NAME_CASE)
 				.hasLengthValidator();
 		assertThat(form.getReferencedTableNameTextBox()).isRequired()
-				.hasCaseValidator(NamingConventions.TABLE_NAME_CASE).hasLengthValidator();
+				.hasCaseValidator(NamingConventions.DEFAULT_TABLE_NAME_CASE).hasLengthValidator();
 		assertThat(form.getReferencedColumnNameTextBox()).isRequired()
-				.hasCaseValidator(NamingConventions.COLUMN_NAME_CASE).hasLengthValidator();
+				.hasCaseValidator(NamingConventions.DEFAULT_COLUMN_NAME_CASE).hasLengthValidator();
 		assertThat(form.getForeignKeyNameTextBox()).isRequired()
-				.hasCaseValidator(NamingConventions.FOREIGN_KEY_NAME_CASE).hasLengthValidator();
+				.hasCaseValidator(NamingConventions.DEFAULT_FOREIGN_KEY_NAME_CASE).hasLengthValidator();
 
 	}
 
