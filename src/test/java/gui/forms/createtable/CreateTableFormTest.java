@@ -9,8 +9,10 @@ import org.junit.jupiter.api.Test;
 import constants.Labels;
 import constants.NamingConventions;
 import domain.CreateTable;
+import gui.utils.BeanSupplier;
 import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
+import utils.LBJPreferences;
 
 public class CreateTableFormTest extends LBJFormTestCase {
 
@@ -31,16 +33,16 @@ public class CreateTableFormTest extends LBJFormTestCase {
 		assertThat(form).hasComponentWithName(Labels.TABLE_SEQUENCE_NAME);
 
 		assertThat(form.getTableNameTextBox()).isRequired().hasLengthValidator()
-				.hasCaseValidator(NamingConventions.DEFAULT_TABLE_NAME_CASE);
+				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getTableNameCase());
 
 		assertThat(form.getPrimaryKeyNameTextBox()).isRequired().hasLengthValidator()
-				.hasCaseValidator(NamingConventions.DEFAULT_PRIMARY_KEY_NAME_CASE);
+				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyNameCase());
 
 		assertThat(form.getPrimaryKeyConstraintNameTextBox()).isRequired().hasLengthValidator()
-				.hasCaseValidator(NamingConventions.DEFAULT_PRIMARY_KEY_CONSTRAINT_NAME_CASE);
+				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintNameCase());
 
 		assertThat(form.getSequenceNameTextBox()).isRequired().hasLengthValidator()
-				.hasCaseValidator(NamingConventions.DEFAULT_SEQUENCE_NAME_CASE);
+				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getSequenceNameCase());
 
 	}
 

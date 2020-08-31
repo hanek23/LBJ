@@ -13,7 +13,9 @@ import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
 import gui.forms.generate.GenerateForm;
+import gui.utils.BeanSupplier;
 import gui.utils.LBJFormUtils;
+import utils.LBJPreferences;
 
 /**
  * Form for removing not null constraint from column. There are only 3
@@ -36,11 +38,11 @@ public class DropNotNullConstraintForm extends LBJEntityForm<DropNotNullConstrai
 	@Override
 	public void initializeComponents() {
 		tableNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, this).required().addLengthValidator()
-				.addCaseUpdaterAndValidator(NamingConventions.DEFAULT_TABLE_NAME_CASE).build();
+				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getTableNameCase()).build();
 		columnNameTextBox = new LBJTextBoxBuilder(Labels.COLUMN_NAME, this).required().addLengthValidator()
-				.addCaseUpdaterAndValidator(NamingConventions.DEFAULT_COLUMN_NAME_CASE).build();
+				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getColumnNameCase()).build();
 		dataTypeTextBox = new LBJTextBoxBuilder(Labels.COLUMN_DATA_TYPE, this).required()
-				.addCaseUpdaterAndValidator(NamingConventions.DEFAULT_DATA_TYPE_CASE).build();
+				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getDataTypeCase()).build();
 	}
 
 	@Override

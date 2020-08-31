@@ -26,6 +26,9 @@ public class Labels {
 	public static final String REMOVE_NOT_NULL_CONSTRAINT_FORM = "Remove not null constraint form";
 	public static final String GENERATE_FORM = "Generate form";
 	public static final String PREFERENCES_FORM = "Preferences form";
+	public static final String NAMING_CONVENTIONS_FORM = "Naming conventions form";
+	public static final String LETTER_CASE_FORM = "Letter case form";
+	public static final String DROP_TABLE_COLUMN_PREFERENCES_FORM = "Drop Table Column preferences form";
 
 	// MAIN MENU
 	public static final String MAIN_MENU_QUESTION = "What do you want to do?";
@@ -70,7 +73,10 @@ public class Labels {
 	public static final String PREFERENCES_MENU_LABEL = "Set preferences of";
 	public static final String PREFERENCES_NAMING_CONVENTIONS = "Naming conventions";
 	public static final String PREFERENCES_LETTER_CASE_CONVENTIONS = "Letter case conventions";
+	public static final String PREFERENCES_DROP_TABLE_COLUMN = "Preferences on Drop Table/Column forms";
 	public static final String BUTTON_PREFERENCES_APPLY = "Apply and return";
 	public static final String BUTTON_PREFERENCES_RESET = "Reset to default";
+	public static final String PREFERENCES_USE_LETTER_CASE_CONVENTIONS = "Use letter case convensions";
+	public static final String PREFERENCES_COPY_TABLE_NAME = "Copy table name to the next form";
 
 }

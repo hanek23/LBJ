@@ -49,7 +49,7 @@ public class LBJCheckBox extends LBJValueComponent<Boolean> {
 	public void setCheckBox(CheckBox checkBox) {
 		this.checkBox = checkBox;
 	}
-
+	
 	@Override
 	public Component getComponent() {
 		return getCheckBox();

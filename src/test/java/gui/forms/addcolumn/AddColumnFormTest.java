@@ -9,8 +9,10 @@ import org.junit.jupiter.api.Test;
 import constants.Labels;
 import constants.NamingConventions;
 import domain.AddColumn;
+import gui.utils.BeanSupplier;
 import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
+import utils.LBJPreferences;
 
 public class AddColumnFormTest extends LBJFormTestCase {
 
@@ -57,19 +59,19 @@ public class AddColumnFormTest extends LBJFormTestCase {
 		assertThat(form.getForeignKeyNameTextBox()).isNotEnabled();
 
 		// with all validators
-		assertThat(form.getTableNameTextBox()).isRequired().hasCaseValidator(NamingConventions.DEFAULT_TABLE_NAME_CASE)
-				.hasLengthValidator();
-		assertThat(form.getColumnNameTextBox()).isRequired().hasCaseValidator(NamingConventions.DEFAULT_COLUMN_NAME_CASE)
-				.hasLengthValidator();
+		assertThat(form.getTableNameTextBox()).isRequired()
+				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getTableNameCase()).hasLengthValidator();
+		assertThat(form.getColumnNameTextBox()).isRequired()
+				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getColumnNameCase()).hasLengthValidator();
 		assertThat(form.getDataTypeTextBox()).isRequired();
-		assertThat(form.getIndexNameTextBox()).isRequired().hasCaseValidator(NamingConventions.DEFAULT_INDEX_NAME_CASE)
-				.hasLengthValidator();
+		assertThat(form.getIndexNameTextBox()).isRequired()
+				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getIndexNameCase()).hasLengthValidator();
 		assertThat(form.getReferencedTableNameTextBox()).isRequired()
-				.hasCaseValidator(NamingConventions.DEFAULT_TABLE_NAME_CASE).hasLengthValidator();
+				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getTableNameCase()).hasLengthValidator();
 		assertThat(form.getReferencedColumnNameTextBox()).isRequired()
-				.hasCaseValidator(NamingConventions.DEFAULT_COLUMN_NAME_CASE).hasLengthValidator();
+				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getColumnNameCase()).hasLengthValidator();
 		assertThat(form.getForeignKeyNameTextBox()).isRequired()
-				.hasCaseValidator(NamingConventions.DEFAULT_FOREIGN_KEY_NAME_CASE).hasLengthValidator();
+				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getForeignKeyNameCase()).hasLengthValidator();
 
 	}
 

@@ -13,7 +13,9 @@ import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
+import gui.utils.BeanSupplier;
 import gui.utils.LBJFormUtils;
+import utils.LBJPreferences;
 
 /**
  * Form for removing table. You have to specify table name and potentionaly
@@ -34,12 +36,17 @@ public class DropTableForm extends LBJEntityForm<DropTable> {
 
 	@Override
 	public void initializeComponents() {
-		tableNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, this).required().addLengthValidator().build();
+		tableNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, this).required()
+				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getTableNameCase(),
+						BeanSupplier.get(LBJPreferences.class).getUseLetterCaseConventions())
+				.addLengthValidator().build();
 
 		dropSequenceCheckBox = new LBJCheckBoxBuilder(Labels.TABLE_SEQUENCE_NAME, this).build();
 
-		sequenceNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_SEQUENCE_NAME, this).required().addLengthValidator()
-				.activatorComponent(dropSequenceCheckBox).disabled().build();
+		sequenceNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_SEQUENCE_NAME, this).required()
+				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getSequenceNameCase(),
+						BeanSupplier.get(LBJPreferences.class).getUseLetterCaseConventions())
+				.addLengthValidator().activatorComponent(dropSequenceCheckBox).disabled().build();
 	}
 
 	@Override

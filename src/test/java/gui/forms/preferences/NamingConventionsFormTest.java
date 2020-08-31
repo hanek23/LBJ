@@ -18,7 +18,7 @@ class NamingConventionsFormTest extends LBJFormTestCase {
 	void testInitializeComponents() {
 		NamingConventionsForm form = LBJTestUtils.getNamingConventionsForm();
 
-		assertThat(form).hasName(Labels.PREFERENCES_FORM);
+		assertThat(form).hasName(Labels.NAMING_CONVENTIONS_FORM);
 		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_PRIMARY_KEY_NAME);
 		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN_NAME);
 		assertThat(form).hasComponentWithName(Labels.TABLE_SEQUENCE_NAME);

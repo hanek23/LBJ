@@ -14,7 +14,11 @@ import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
+import gui.forms.addcolumn.AddColumnForm;
+import gui.forms.createtable.CreateTableForm;
+import gui.utils.BeanSupplier;
 import gui.utils.LBJFormUtils;
+import utils.LBJPreferences;
 
 /**
  * Form for droping column. You have to specify table name, column name and
@@ -40,20 +44,45 @@ public class DropColumnForm extends LBJEntityForm<DropColumn> {
 
 	@Override
 	public void initializeComponents() {
-		tableNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, this).required().addLengthValidator().build();
+		tableNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, this).required()
+				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getTableNameCase(),
+						BeanSupplier.get(LBJPreferences.class).getUseLetterCaseConventions())
+				.addLengthValidator().build();
 
-		columnNameTextBox = new LBJTextBoxBuilder(Labels.COLUMN_NAME, this).required().addLengthValidator().build();
+		if (BeanSupplier.get(LBJPreferences.class).getCopyTableName()) {
+			setTableNameIfPossible();
+		}
+
+		columnNameTextBox = new LBJTextBoxBuilder(Labels.COLUMN_NAME, this).required()
+				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getColumnNameCase(),
+						BeanSupplier.get(LBJPreferences.class).getUseLetterCaseConventions())
+				.addLengthValidator().build();
 
 		dropIndexCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_INDEX, this).build();
 
-		indexNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_INDEX_NAME, this).required().addLengthValidator()
-				.activatorComponent(dropIndexCheckBox).disabled().build();
+		indexNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_INDEX_NAME, this).required()
+				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getIndexNameCase(),
+						BeanSupplier.get(LBJPreferences.class).getUseLetterCaseConventions())
+				.addLengthValidator().activatorComponent(dropIndexCheckBox).disabled().build();
 
 		dropForeignKeyCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY, this).build();
 
-		foreignKeyNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY_NAME, this).required()
-				.addLengthValidator().activatorComponent(dropForeignKeyCheckBox).disabled().build();
+		foreignKeyNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY_NAME, this)
+				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getForeignKeyNameCase(),
+						BeanSupplier.get(LBJPreferences.class).getUseLetterCaseConventions())
+				.required().addLengthValidator().activatorComponent(dropForeignKeyCheckBox).disabled().build();
 
+	}
+
+	/**
+	 * If previousForm has Table name textBox, this method will copy that value into
+	 * this form's table name
+	 */
+	private void setTableNameIfPossible() {
+		if (getPreviousForm() instanceof DropColumnForm) {
+			tableNameTextBox.setValue(((DropColumnForm) getPreviousForm()).getTableNameTextBox().getValue());
+			return;
+		}
 	}
 
 	@Override

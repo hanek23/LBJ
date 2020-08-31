@@ -14,12 +14,14 @@ import gui.updaters.shared.LBJActivatorComponentUpdater;
 import gui.updaters.shared.LBJDeactivatorComponentUpdater;
 import gui.updaters.shared.LBJLowerCaseUpdater;
 import gui.updaters.shared.LBJNamingConventionUpdater;
+import gui.updaters.shared.LBJNoneCaseUpdater;
 import gui.updaters.shared.LBJRequiredLabelComponentUpdater;
 import gui.updaters.shared.LBJUpperCaseUpdater;
 import gui.utils.BeanSupplier;
 import gui.utils.LBJCaseUtils;
 import gui.validators.LBJValueValidator;
 import gui.validators.shared.LBJLowerCaseValidator;
+import gui.validators.shared.LBJNoneCaseValidator;
 import gui.validators.shared.LBJNumbersOnlyValidator;
 import gui.validators.shared.LBJStringLengthValidator;
 import gui.validators.shared.LBJStringRequiredValidator;
@@ -146,16 +148,25 @@ public class LBJTextBoxBuilder {
 	}
 
 	/**
-	 * Adds {@link LBJUpperCaseUpdater}/{@link LBJLowerCaseUpdater} and
-	 * {@link LBJUpperCaseValidator}/{@link LBJLowerCaseValidator} according to
-	 * passed {@link LetterCase}.
+	 * Adds
+	 * {@link LBJUpperCaseUpdater}/{@link LBJLowerCaseUpdater}/{@link LBJNoneCaseUpdater}
+	 * and
+	 * {@link LBJUpperCaseValidator}/{@link LBJLowerCaseValidator}/{@link LBJNoneCaseValidator}
+	 * according to passed {@link LetterCase}.
 	 */
 	public LBJTextBoxBuilder addCaseUpdaterAndValidator(LetterCase letterCase) {
-		if (LetterCase.NONE == letterCase) {
-			return this;
-		}
 		addValueUpdater(LBJCaseUtils.caseUpdater(letterCase));
 		return addValueValidator(LBJCaseUtils.getCaseValidator(letterCase));
+	}
+	
+	/**
+	 * Conditionally adds letter case validators with {@link #addCaseUpdaterAndValidator}
+	 */
+	public LBJTextBoxBuilder addCaseUpdaterAndValidator(LetterCase letterCase, boolean add) {
+		if (!add) {
+			return this;
+		}
+		return addCaseUpdaterAndValidator(letterCase);
 	}
 
 	/**

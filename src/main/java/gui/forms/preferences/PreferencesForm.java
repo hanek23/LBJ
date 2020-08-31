@@ -18,6 +18,7 @@ public class PreferencesForm extends LBJWizardForm {
 	private LBJPlainLabel menuLabel;
 	private NamingConventionsForm namingConventionsForm;
 	private LetterCaseConventionsForm letterCaseConventionsForm;
+	private DropTableColumnPreferencesForm dropTableColumnPreferencesForm;
 
 	public PreferencesForm(Window window, LBJForm previousForm) {
 		super(window, previousForm);
@@ -29,9 +30,11 @@ public class PreferencesForm extends LBJWizardForm {
 		menuLabel = new LBJPlainLabelBuilder(Labels.PREFERENCES_MENU_LABEL, this).build();
 		namingConventionsForm = new NamingConventionsForm(getWindow(), this);
 		letterCaseConventionsForm = new LetterCaseConventionsForm(getWindow(), this);
+		dropTableColumnPreferencesForm = new DropTableColumnPreferencesForm(getWindow(), this);
 
 		LBJFormUtils.addUpdatableFormToMainMenu(namingConventionsForm);
 		LBJFormUtils.addUpdatableFormToMainMenu(letterCaseConventionsForm);
+		LBJFormUtils.addUpdatableFormToMainMenu(dropTableColumnPreferencesForm);
 	}
 
 	@Override
@@ -62,6 +65,7 @@ public class PreferencesForm extends LBJWizardForm {
 		LBJFormUtils.addMenuContent(getContent(), menu);
 		LBJFormUtils.addItemToMenu(menu, namingConventionsForm, Labels.PREFERENCES_NAMING_CONVENTIONS);
 		LBJFormUtils.addItemToMenu(menu, letterCaseConventionsForm, Labels.PREFERENCES_LETTER_CASE_CONVENTIONS);
+		LBJFormUtils.addItemToMenu(menu, dropTableColumnPreferencesForm, Labels.PREFERENCES_DROP_TABLE_COLUMN);
 	}
 
 	@Override

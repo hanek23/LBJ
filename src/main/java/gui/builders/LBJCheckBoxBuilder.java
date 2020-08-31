@@ -34,6 +34,11 @@ public class LBJCheckBoxBuilder {
 		lbjCheckBox.getCheckBox().setChecked(true);
 		return this;
 	}
+	
+	public LBJCheckBoxBuilder setChecked(boolean checked) {
+		lbjCheckBox.getCheckBox().setChecked(checked);
+		return this;
+	}
 
 	public LBJCheckBox build() {
 		return lbjCheckBox;

@@ -8,9 +8,12 @@ import org.junit.jupiter.api.Test;
 
 import constants.Labels;
 import constants.NamingConventions;
+import constants.NamingConventions.LetterCase;
 import domain.DropNotNullConstraint;
+import gui.utils.BeanSupplier;
 import testutils.LBJTestCase;
 import testutils.LBJTestUtils;
+import utils.LBJPreferences;
 
 public class DropNotNullConstraintFormTest extends LBJTestCase {
 
@@ -29,11 +32,11 @@ public class DropNotNullConstraintFormTest extends LBJTestCase {
 		assertThat(form).hasComponentWithName(Labels.COLUMN_DATA_TYPE);
 
 		// with all validators
-		assertThat(form.getTableNameTextBox()).isRequired().hasCaseValidator(NamingConventions.DEFAULT_TABLE_NAME_CASE)
-				.hasLengthValidator();
-		assertThat(form.getColumnNameTextBox()).isRequired().hasCaseValidator(NamingConventions.DEFAULT_COLUMN_NAME_CASE)
-				.hasLengthValidator();
-		assertThat(form.getDataTypeTextBox()).isRequired();
+		assertThat(form.getTableNameTextBox()).isRequired()
+				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getTableNameCase()).hasLengthValidator();
+		assertThat(form.getColumnNameTextBox()).isRequired()
+				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getColumnNameCase()).hasLengthValidator();
+		assertThat(form.getDataTypeTextBox()).hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getDataTypeCase()).isRequired();
 
 	}
 

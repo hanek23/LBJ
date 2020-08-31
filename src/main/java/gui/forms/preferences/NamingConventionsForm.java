@@ -20,11 +20,6 @@ public class NamingConventionsForm extends LBJPreferencesForm {
 	private LBJTextBox sequenceName;
 	private LBJTextBox indexName;
 	private LBJTextBox foreignKeyName;
-	// cannot use default back button as I need to override a bit with applying and
-	// reseting changes to preferences
-	private Button backButton;
-	private Button applyButton;
-	private Button resetToDefaultButton;
 
 	public NamingConventionsForm(Window window, LBJForm previousForm) {
 		super(window, previousForm);
@@ -41,18 +36,11 @@ public class NamingConventionsForm extends LBJPreferencesForm {
 		sequenceName = new LBJTextBoxBuilder(Labels.TABLE_SEQUENCE_NAME, this)
 				.value(BeanSupplier.get(LBJPreferences.class).getSequenceName()).required().build();
 
-		indexName = new LBJTextBoxBuilder(Labels.ADD_COLUMN_INDEX_NAME, this).value(BeanSupplier.get(LBJPreferences.class).getIndexName())
-				.required().build();
+		indexName = new LBJTextBoxBuilder(Labels.ADD_COLUMN_INDEX_NAME, this)
+				.value(BeanSupplier.get(LBJPreferences.class).getIndexName()).required().build();
 
 		foreignKeyName = new LBJTextBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY_NAME, this)
 				.value(BeanSupplier.get(LBJPreferences.class).getForeignKeyName()).required().build();
-	}
-
-	@Override
-	public void initializeButtons() {
-		applyButton = createApplyPreferencesButton(this);
-		resetToDefaultButton = createResetPreferencesButton(this);
-		backButton = createBackPreferencesButton(this);
 	}
 
 	/**
@@ -68,9 +56,10 @@ public class NamingConventionsForm extends LBJPreferencesForm {
 	}
 
 	@Override
-	public void applyPreferences() {
+	public void applyToPreferences() {
 		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_PRIMARY_KEY_NAME, primaryKeyName.getValue());
-		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_PRIMARY_KEY_CONSTRAINT_NAME, primaryKeyConstraintName.getValue());
+		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_PRIMARY_KEY_CONSTRAINT_NAME,
+				primaryKeyConstraintName.getValue());
 		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_SEQUENCE_NAME, sequenceName.getValue());
 		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_INDEX_NAME, indexName.getValue());
 		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_FOREIGN_KEY_NAME, foreignKeyName.getValue());
@@ -98,16 +87,8 @@ public class NamingConventionsForm extends LBJPreferencesForm {
 	}
 
 	@Override
-	public void addButtons() {
-		LBJFormUtils.addEmptySpaceTo(this);
-		LBJFormUtils.addButtonTo(this, backButton);
-		LBJFormUtils.addButtonTo(this, resetToDefaultButton);
-		LBJFormUtils.addButtonTo(this, applyButton);
-	}
-
-	@Override
 	public String toString() {
-		return Labels.PREFERENCES_FORM;
+		return Labels.NAMING_CONVENTIONS_FORM;
 	}
 
 	public LBJTextBox getPrimaryKeyName() {
@@ -132,19 +113,6 @@ public class NamingConventionsForm extends LBJPreferencesForm {
 
 	public void setForeignKeyName(LBJTextBox foreignKeyName) {
 		this.foreignKeyName = foreignKeyName;
-	}
-
-	@Override
-	public Button getBackButton() {
-		return backButton;
-	}
-
-	public Button getApplyButton() {
-		return applyButton;
-	}
-
-	public Button getResetToDefaultButton() {
-		return resetToDefaultButton;
 	}
 
 }

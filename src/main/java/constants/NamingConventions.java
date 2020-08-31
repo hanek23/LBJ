@@ -18,6 +18,7 @@ public class NamingConventions {
 	public static final String END = "}€";
 
 	// PREFERENCE KEYS
+	// NAMING CONVENTIONS
 	private static final String PKEY_START_NAMING_CONVENTION = "naming_convention" + SEPARATOR;
 	public static final String PKEY_PRIMARY_KEY_NAME = PKEY_START_NAMING_CONVENTION + "primary_key_name";
 	public static final String PKEY_PRIMARY_KEY_CONSTRAINT_NAME = PKEY_START_NAMING_CONVENTION
@@ -25,11 +26,7 @@ public class NamingConventions {
 	public static final String PKEY_SEQUENCE_NAME = PKEY_START_NAMING_CONVENTION + "sequence_name";
 	public static final String PKEY_INDEX_NAME = PKEY_START_NAMING_CONVENTION + "index_name";
 	public static final String PKEY_FOREIGN_KEY_NAME = PKEY_START_NAMING_CONVENTION + "foreign_key_name";
-
-	public static final String PKEY_START_LETTER_CASE = "letter_case";
-	public static final String PKEY_TABLE_NAME_CASE = PKEY_START_LETTER_CASE + "table_name";
-
-	// DEFAULT VALUES
+	// DEFAULT NAMING CONVENTIONS VALUES
 	public static final String DEFAULT_PRIMARY_KEY_NAME = "id" + SEPARATOR + toNamingConvention(Labels.TABLE_NAME);
 	public static final String DEFAULT_PRIMARY_KEY_CONSTRAINT_NAME = "P" + SEPARATOR
 			+ toNamingConvention(Labels.TABLE_NAME);
@@ -40,6 +37,17 @@ public class NamingConventions {
 			+ SEPARATOR + toNamingConvention(Labels.ADD_COLUMN_REFERENCED_TABLE) + SEPARATOR
 			+ toNamingConvention(Labels.COLUMN_NAME);
 
+	// LETTER CASE
+	private static final String PKEY_START_LETTER_CASE = "letter_case" + SEPARATOR;
+	public static final String PKEY_TABLE_NAME_CASE = PKEY_START_LETTER_CASE + "table_name";
+	public static final String PKEY_PRIMARY_KEY_NAME_CASE = PKEY_START_LETTER_CASE + "primary_key_name";
+	public static final String PKEY_PRIMARY_KEY_CONSTRAINT_NAME_CASE = PKEY_START_LETTER_CASE
+			+ "primary_key_constraint_name";
+	public static final String PKEY_SEQUENCE_NAME_CASE = PKEY_START_LETTER_CASE + "sequence_name";
+	public static final String PKEY_COLUMN_NAME_CASE = PKEY_START_LETTER_CASE + "column_name";
+	public static final String PKEY_DATA_TYPE_CASE = PKEY_START_LETTER_CASE + "data_type";
+	public static final String PKEY_FOREIGN_KEY_NAME_CASE = PKEY_START_LETTER_CASE + "foreign_key_name";
+	public static final String PKEY_INDEX_NAME_CASE = PKEY_START_LETTER_CASE + "index_name";
 	// DEFAULT LETTER CASE
 	public static final LetterCase DEFAULT_TABLE_NAME_CASE = LetterCase.UPPER;
 	public static final LetterCase DEFAULT_PRIMARY_KEY_NAME_CASE = LetterCase.LOWER;
@@ -49,6 +57,15 @@ public class NamingConventions {
 	public static final LetterCase DEFAULT_DATA_TYPE_CASE = LetterCase.NONE;
 	public static final LetterCase DEFAULT_FOREIGN_KEY_NAME_CASE = LetterCase.UPPER;
 	public static final LetterCase DEFAULT_INDEX_NAME_CASE = LetterCase.UPPER;
+
+	// DROP TABLE COLUMN PREFERENCES
+	private static final String PKEY_START_DROP_TABLE_COLUMN_PREFERENCES = "drop_table_column_preferences" + SEPARATOR;
+	public static final String PKEY_USE_LETTER_CASE_CONVENTIONS = PKEY_START_DROP_TABLE_COLUMN_PREFERENCES
+			+ "use_letter_case_conventions";
+	public static final String PKEY_COPY_TABLE_NAME = PKEY_START_DROP_TABLE_COLUMN_PREFERENCES + "copy_table_name";
+	// DEFAULT DROP TABLE COLUMN PREFERENCES
+	public static final boolean DEFAULT_USE_LETTER_CASE_CONVENTIONS = false;
+	public static final boolean DEFAULT_COPY_TABLE_NAME = false;
 
 	public enum LetterCase {
 		UPPER, LOWER, NONE;
