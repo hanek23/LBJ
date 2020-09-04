@@ -1,0 +1,24 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
+	objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+	<changeSet author="hanek23" id="1">
+		<preConditions onFail="MARK_RAN">
+			<columnExists tableName="SIBELIUS" columnName="jean" />
+		</preConditions>
+		<comment>Modify data type of 'jean' in table 'SIBELIUS' to 'awesomeness(9999)'</comment>
+		<modifyDataType tableName="SIBELIUS" columnName="jean"
+			newDataType="awesomeness(9999)" />
+	</changeSet>
+
+	<changeSet author="hanek23" id="2">
+		<preConditions onFail="MARK_RAN">
+			<columnExists tableName="HAHN" columnName="hilary" />
+		</preConditions>
+		<comment>Modify data type of 'hilary' in table 'HAHN' to 'skill(9999)'</comment>
+		<modifyDataType tableName="HAHN" columnName="hilary"
+			newDataType="skill(9999)" />
+	</changeSet>
+</databaseChangeLog>

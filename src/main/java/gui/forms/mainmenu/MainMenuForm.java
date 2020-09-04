@@ -96,4 +96,8 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 		return dropColumnForm;
 	}
 
+	public ModifyDataTypeForm getModifyDataTypeForm() {
+		return modifyDataTypeForm;
+	}
+
 }

@@ -10,61 +10,66 @@ import org.junit.jupiter.api.Test;
 import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
 
-public class EndToEndTestRunner extends LBJFormTestCase {
+class EndToEndTestRunner extends LBJFormTestCase {
 
 	@Test
-	public void test1() throws Exception {
+	void test1() throws Exception {
 		runEndToEndTest(new EndToEndTestCase1());
 	}
 
 	@Test
-	public void test2() throws Exception {
+	void test2() throws Exception {
 		runEndToEndTest(new EndToEndTestCase2());
 	}
 
 	@Test
-	public void test3() throws Exception {
+	void test3() throws Exception {
 		runEndToEndTest(new EndToEndTestCase3());
 	}
 
 	@Test
-	public void test4() throws Exception {
+	void test4() throws Exception {
 		runEndToEndTest(new EndToEndTestCase4());
 	}
 
 	@Test
-	public void test5() throws Exception {
+	void test5() throws Exception {
 		runEndToEndTest(new EndToEndTestCase5());
 	}
 
 	@Test
-	public void test6() throws Exception {
+	void test6() throws Exception {
 		runEndToEndTest(new EndToEndTestCase6());
 	}
 
 	@Test
-	public void test7() throws Exception {
+	void test7() throws Exception {
 		runEndToEndTest(new EndToEndTestCase7());
 	}
 
 	@Test
-	public void test8() throws Exception {
+	void test8() throws Exception {
 		runEndToEndTest(new EndToEndTestCase8());
 	}
 
 	@Test
-	public void test9() throws Exception {
+	void test9() throws Exception {
 		runEndToEndTest(new EndToEndTestCase9());
 	}
 
 	@Test
-	public void test10() throws Exception {
+	void test10() throws Exception {
 		runEndToEndTest(new EndToEndTestCase10());
 	}
 
 	@Test
-	public void test11() throws Exception {
+	void test11() throws Exception {
 		runEndToEndTest(new EndToEndTestCase11());
+	}
+
+	@Test
+	void test12() throws Exception {
+		runEndToEndTest(new EndToEndTestCase12());
 	}
 
 	private void runEndToEndTest(EndToEndTestCase testCase) throws Exception {

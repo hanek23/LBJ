@@ -91,7 +91,7 @@ public class ModifyDataTypeForm extends LBJEntityForm<ModifyDataType> {
 
 	@Override
 	public String toString() {
-		return Labels.ADD_COLUMN_FORM;
+		return Labels.MODIFY_DATA_TYPE_FORM;
 	}
 
 	public LBJTextBox getTableNameTextBox() {

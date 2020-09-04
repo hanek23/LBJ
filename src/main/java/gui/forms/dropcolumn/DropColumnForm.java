@@ -14,8 +14,6 @@ import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
-import gui.forms.addcolumn.AddColumnForm;
-import gui.forms.createtable.CreateTableForm;
 import gui.utils.BeanSupplier;
 import gui.utils.LBJFormUtils;
 import utils.LBJPreferences;

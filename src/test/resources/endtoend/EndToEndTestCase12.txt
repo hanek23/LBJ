@@ -1,0 +1,19 @@
+<dontForget objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+	<changeSet author="hanek23" id="10">
+		<preConditions onFail="MARK_RAN">
+			<columnExists tableName="MENDELSSOHN" columnName="felix" />
+		</preConditions>
+		<comment>Modify data type of 'felix' in table 'MENDELSSOHN' to 'awesomeness(9999)'</comment>
+		<modifyDataType tableName="MENDELSSOHN" columnName="felix"
+			newDataType="awesomeness(9999)" />
+	</changeSet>
+	
+	<changeSet author="hanek23" id="11">
+		<preConditions onFail="MARK_RAN">
+			<columnExists tableName="CHEN" columnName="ray" />
+		</preConditions>
+		<comment>Modify data type of 'ray' in table 'CHEN' to 'skill(9999)'</comment>
+		<modifyDataType tableName="CHEN" columnName="ray"
+			newDataType="skill(9999)" />
+	</changeSet>
+</dontForget>

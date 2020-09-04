@@ -1,4 +1,4 @@
-package gui.forms.dropnotnullconstraint;
+package gui.forms.modifydatatype;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static testutils.asserts.LBJFormAssert.assertThat;
@@ -7,51 +7,55 @@ import static testutils.asserts.LBJValueComponentAssert.assertThat;
 import org.junit.jupiter.api.Test;
 
 import constants.Labels;
-import domain.DropNotNullConstraint;
+import domain.ModifyDataType;
 import gui.utils.BeanSupplier;
-import testutils.LBJTestCase;
+import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
 import utils.LBJPreferences;
 
-public class DropNotNullConstraintFormTest extends LBJTestCase {
+class ModifyDataTypeFormTest extends LBJFormTestCase {
 
 	private static final String TABLE_NAME = "ACTION";
 	private static final String COLUMN_NAME = "lbj";
 	private static final String COLUMN_DATA_TYPE = "integer";
 
 	@Test
-	public void testInitialize() {
-		DropNotNullConstraintForm form = LBJTestUtils.getDropNotNullConstraintForm();
+	void testInitialize() {
+		ModifyDataTypeForm form = LBJTestUtils.getModifyDataTypeForm();
 
 		// Has all components
-		assertThat(form).hasName(Labels.REMOVE_NOT_NULL_CONSTRAINT_FORM);
+		assertThat(form).hasName(Labels.MODIFY_DATA_TYPE_FORM);
 		assertThat(form).hasComponentWithName(Labels.TABLE_NAME);
 		assertThat(form).hasComponentWithName(Labels.COLUMN_NAME);
 		assertThat(form).hasComponentWithName(Labels.COLUMN_DATA_TYPE);
+
+		// in right states
+		assertThat(form.getTableNameTextBox()).isEnabled();
+		assertThat(form.getColumnNameTextBox()).isEnabled();
+		assertThat(form.getDataTypeTextBox()).isEnabled();
 
 		// with all validators
 		assertThat(form.getTableNameTextBox()).isRequired()
 				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getTableNameCase()).hasLengthValidator();
 		assertThat(form.getColumnNameTextBox()).isRequired()
 				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getColumnNameCase()).hasLengthValidator();
-		assertThat(form.getDataTypeTextBox()).hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getDataTypeCase()).isRequired();
-
+		assertThat(form.getDataTypeTextBox()).isRequired();
 	}
 
 	@Test
-	public void testConvert() {
-		DropNotNullConstraintForm form = LBJTestUtils.getDropNotNullConstraintForm();
+	void testConvert() {
+		ModifyDataTypeForm form = LBJTestUtils.getModifyDataTypeForm();
 
 		LBJTestUtils.setValueOf(form.getTableNameTextBox(), TABLE_NAME);
 		LBJTestUtils.setValueOf(form.getColumnNameTextBox(), COLUMN_NAME);
 		LBJTestUtils.setValueOf(form.getDataTypeTextBox(), COLUMN_DATA_TYPE);
 
-		DropNotNullConstraint column = form.convert();
-		assertThat(column.isDropNotNullConstraint()).isTrue();
+		ModifyDataType converted = form.convert();
+		assertThat(converted.isModifyDataType()).isTrue();
 		// ignoring case because testing case upadaters is not the goal of this test
-		assertThat(column.getTableName()).isEqualToIgnoringCase(TABLE_NAME);
-		assertThat(column.getName()).isEqualToIgnoringCase(COLUMN_NAME);
-		assertThat(column.getDataType()).isEqualToIgnoringCase(COLUMN_DATA_TYPE);
+		assertThat(converted.getTableName()).isEqualToIgnoringCase(TABLE_NAME);
+		assertThat(converted.getName()).isEqualToIgnoringCase(COLUMN_NAME);
+		assertThat(converted.getDataType()).isEqualToIgnoringCase(COLUMN_DATA_TYPE);
 	}
 
 }

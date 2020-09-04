@@ -4,7 +4,6 @@ import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
-import constants.NamingConventions;
 import domain.CreateTable;
 import domain.Table;
 import domain.TableOperation;
@@ -42,15 +41,18 @@ public class CreateTableForm extends LBJEntityForm<CreateTable> {
 
 		primaryKeyNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_NAME, this).required()
 				.addNamingConventionUpdater(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyName())
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyNameCase()).addLengthValidator().build();
+				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyNameCase())
+				.addLengthValidator().build();
 
 		primaryKeyConstraintNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN_NAME, this)
 				.required().addLengthValidator()
 				.addNamingConventionUpdater(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintName())
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintNameCase()).build();
+				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintNameCase())
+				.build();
 
 		sequenceNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_SEQUENCE_NAME, this).required()
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getSequenceNameCase()).addLengthValidator()
+				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getSequenceNameCase())
+				.addLengthValidator()
 				.addNamingConventionUpdater(BeanSupplier.get(LBJPreferences.class).getSequenceName()).build();
 
 	}
@@ -91,22 +93,6 @@ public class CreateTableForm extends LBJEntityForm<CreateTable> {
 		table.setPrimaryKeyContrainName(primaryKeyConstraintNameTextBox.getValue());
 		table.setSequenceName(sequenceNameTextBox.getValue());
 		return table;
-	}
-
-	@Override
-	public void run() {
-		applyPreferences();
-		super.run();
-	}
-
-	/**
-	 * Applies potential new Naming convention as preferences could have been
-	 * changed since last visit
-	 */
-	private void applyPreferences() {
-		primaryKeyNameTextBox.setNamingConvention(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyName());
-		primaryKeyConstraintNameTextBox.setNamingConvention(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintName());
-		sequenceNameTextBox.setNamingConvention(BeanSupplier.get(LBJPreferences.class).getSequenceName());
 	}
 
 	@Override

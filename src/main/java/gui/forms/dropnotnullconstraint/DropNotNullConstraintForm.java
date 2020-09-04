@@ -4,7 +4,6 @@ import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
-import constants.NamingConventions;
 import domain.Column;
 import domain.ColumnOperation;
 import domain.DropNotNullConstraint;

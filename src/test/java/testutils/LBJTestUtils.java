@@ -16,6 +16,9 @@ import gui.forms.dropcolumn.DropColumnForm;
 import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
 import gui.forms.droptable.DropTableForm;
 import gui.forms.generate.GenerateForm;
+import gui.forms.modifydatatype.ModifyDataTypeForm;
+import gui.forms.preferences.DropTableColumnPreferencesForm;
+import gui.forms.preferences.LetterCaseConventionsForm;
 import gui.forms.preferences.NamingConventionsForm;
 import gui.forms.preferences.PreferencesForm;
 
@@ -51,7 +54,8 @@ public class LBJTestUtils {
 		if (component == null || component.getForm() == null || value == null) {
 			throw new IllegalArgumentException("I aint working with null values");
 		}
-		if (component.forType() != value.getClass()) {
+		// Component forType does not handle generic enums correctly
+		if (!value.getClass().isEnum() && (component.forType() != value.getClass())) {
 			throw new IllegalArgumentException("Invalid combination of component and value! Type of component: "
 					+ component.forType().getSimpleName() + " but type of passed value: "
 					+ value.getClass().getSimpleName());
@@ -87,6 +91,16 @@ public class LBJTestUtils {
 	public static AddColumnForm getAddColumnForm() {
 		LBJMockForm mockForm = new LBJMockForm();
 		AddColumnForm form = new AddColumnForm(mockForm.getWindow(), mockForm);
+		form.focus();
+		return form;
+	}
+
+	/**
+	 * @return {@link ModifyDataTypeForm} that is already focused
+	 */
+	public static ModifyDataTypeForm getModifyDataTypeForm() {
+		LBJMockForm mockForm = new LBJMockForm();
+		ModifyDataTypeForm form = new ModifyDataTypeForm(mockForm.getWindow(), mockForm);
 		form.focus();
 		return form;
 	}
@@ -130,13 +144,33 @@ public class LBJTestUtils {
 		form.focus();
 		return form;
 	}
-	
+
 	/**
-	 * @return {@link PreferencesForm} that is already focused
+	 * @return {@link NamingConventionsForm} that is already focused
 	 */
 	public static NamingConventionsForm getNamingConventionsForm() {
 		LBJMockForm mockForm = new LBJMockForm();
 		NamingConventionsForm form = new NamingConventionsForm(mockForm.getWindow(), mockForm);
+		form.focus();
+		return form;
+	}
+
+	/**
+	 * @return {@link LetterCaseConventionsForm} that is already focused
+	 */
+	public static LetterCaseConventionsForm getLetterCaseConventionsForm() {
+		LBJMockForm mockForm = new LBJMockForm();
+		LetterCaseConventionsForm form = new LetterCaseConventionsForm(mockForm.getWindow(), mockForm);
+		form.focus();
+		return form;
+	}
+
+	/**
+	 * @return {@link DropTableColumnPreferencesForm} that is already focused
+	 */
+	public static DropTableColumnPreferencesForm getDropTableColumnPreferencesForm() {
+		LBJMockForm mockForm = new LBJMockForm();
+		DropTableColumnPreferencesForm form = new DropTableColumnPreferencesForm(mockForm.getWindow(), mockForm);
 		form.focus();
 		return form;
 	}

@@ -6,7 +6,6 @@ import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
-import constants.NamingConventions;
 import domain.AddColumn;
 import domain.Column;
 import domain.ColumnOperation;
@@ -66,7 +65,7 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 		columnNameTextBox = new LBJTextBoxBuilder(Labels.COLUMN_NAME, this).required().addLengthValidator()
 				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getColumnNameCase()).build();
 
-		dataTypeTextBox = new LBJTextBoxBuilder(Labels.COLUMN_DATA_TYPE, this).required().build();
+		dataTypeTextBox = new LBJTextBoxBuilder(Labels.COLUMN_DATA_TYPE, this).addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getDataTypeCase()).required().build();
 
 		nullableCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_NULLABLE, this).checked().build();
 
@@ -177,21 +176,6 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 			column.setForeignKey(key);
 		}
 		return column;
-	}
-
-	@Override
-	public void run() {
-		applyPreferences();
-		super.run();
-	}
-
-	/**
-	 * Applies potential new Naming convention as preferences could have been
-	 * changed since last visit
-	 */
-	private void applyPreferences() {
-		indexNameTextBox.setNamingConvention(BeanSupplier.get(LBJPreferences.class).getIndexName());
-		foreignKeyNameTextBox.setNamingConvention(BeanSupplier.get(LBJPreferences.class).getForeignKeyName());
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import domain.CreateTable;
 import domain.DropColumn;
 import domain.DropTable;
 import domain.ForeignKey;
+import domain.ModifyDataType;
 import domain.Table;
 import domain.TableOperation;
 
@@ -32,11 +33,18 @@ public class GeneratorTestUtils {
 	}
 
 	public static DropColumn dropColumn(String name, String tableName, String indexName, ForeignKey foreignKey) {
-		Column column = new Column(name, ColumnOperation.DROP);
+		DropColumn column = new Column(name, ColumnOperation.DROP);
 		column.setTableName(tableName);
 		column.setIndex(!StringUtils.isBlank(indexName));
 		column.setIndexName(indexName);
 		column.setForeignKey(foreignKey);
+		return column;
+	}
+
+	public static ModifyDataType modifyDataType(String name, String tableName, String newDataType) {
+		ModifyDataType column = new Column(name, ColumnOperation.MODIFY_DATA_TYPE);
+		column.setTableName(tableName);
+		column.setDataType(newDataType);
 		return column;
 	}
 

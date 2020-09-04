@@ -1,6 +1,5 @@
 package gui.forms.preferences;
 
-import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;

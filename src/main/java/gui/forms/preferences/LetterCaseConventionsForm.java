@@ -114,11 +114,11 @@ public class LetterCaseConventionsForm extends LBJPreferencesForm {
 	@Override
 	public void addComponents() {
 		LBJFormUtils.addValueAndLabeledComponentTo(this, tableNameCase);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, columnNameCase);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, dataTypeCase);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, primaryKeyNameCase);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, primaryKeyConstraintNameCase);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, sequenceNameCase);
-		LBJFormUtils.addValueAndLabeledComponentTo(this, columnNameCase);
-		LBJFormUtils.addValueAndLabeledComponentTo(this, dataTypeCase);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, foreignKeyNameCase);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, indexNameCase);
 	}
@@ -127,4 +127,37 @@ public class LetterCaseConventionsForm extends LBJPreferencesForm {
 	public String toString() {
 		return Labels.LETTER_CASE_FORM;
 	}
+
+	public LBJComboBox<LetterCase> getTableNameCase() {
+		return tableNameCase;
+	}
+
+	public LBJComboBox<LetterCase> getPrimaryKeyNameCase() {
+		return primaryKeyNameCase;
+	}
+
+	public LBJComboBox<LetterCase> getPrimaryKeyConstraintNameCase() {
+		return primaryKeyConstraintNameCase;
+	}
+
+	public LBJComboBox<LetterCase> getSequenceNameCase() {
+		return sequenceNameCase;
+	}
+
+	public LBJComboBox<LetterCase> getColumnNameCase() {
+		return columnNameCase;
+	}
+
+	public LBJComboBox<LetterCase> getDataTypeCase() {
+		return dataTypeCase;
+	}
+
+	public LBJComboBox<LetterCase> getForeignKeyNameCase() {
+		return foreignKeyNameCase;
+	}
+
+	public LBJComboBox<LetterCase> getIndexNameCase() {
+		return indexNameCase;
+	}
+
 }

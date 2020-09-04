@@ -17,13 +17,13 @@ import gui.forms.createtable.CreateTableForm;
 import gui.forms.generate.GenerateForm;
 import gui.forms.mainmenu.MainMenuForm;
 import gui.suppliers.LBJFormSupplier;
-import testutils.LBJTestUtils;
 import testutils.LBJFormTestCase;
+import testutils.LBJTestUtils;
 
-public class FormsToEntityTransformerTest extends LBJFormTestCase {
+class FormsToEntityTransformerTest extends LBJFormTestCase {
 
 	@Test
-	public void testTransform() {
+	void testTransform() {
 		MainMenuForm mainMenuForm = LBJFormSupplier.getMainMenuForm();
 		mainMenuForm.focus();
 		CreateTableForm createTableForm = mainMenuForm.getCreateTableForm();

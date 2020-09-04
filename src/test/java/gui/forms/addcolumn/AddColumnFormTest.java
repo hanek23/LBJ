@@ -14,7 +14,7 @@ import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
 import utils.LBJPreferences;
 
-public class AddColumnFormTest extends LBJFormTestCase {
+class AddColumnFormTest extends LBJFormTestCase {
 
 	private static final String TABLE_NAME = "ACTION";
 	private static final String COLUMN_NAME = "lbj";
@@ -31,7 +31,7 @@ public class AddColumnFormTest extends LBJFormTestCase {
 			+ NamingConventions.SEPARATOR + REFERENCED_COLUMN_NAME;
 
 	@Test
-	public void testInitialize() {
+	void testInitialize() {
 		AddColumnForm form = LBJTestUtils.getAddColumnForm();
 
 		// Has all components
@@ -76,7 +76,7 @@ public class AddColumnFormTest extends LBJFormTestCase {
 	}
 
 	@Test
-	public void testConvert() {
+	void testConvert() {
 		AddColumnForm form = LBJTestUtils.getAddColumnForm();
 
 		LBJTestUtils.setValueOf(form.getTableNameTextBox(), TABLE_NAME);
@@ -109,7 +109,7 @@ public class AddColumnFormTest extends LBJFormTestCase {
 	}
 
 	@Test
-	public void testConvertBoolean() {
+	void testConvertBoolean() {
 		AddColumnForm form = LBJTestUtils.getAddColumnForm();
 
 		LBJTestUtils.setValueOf(form.getTableNameTextBox(), TABLE_NAME);
@@ -142,7 +142,7 @@ public class AddColumnFormTest extends LBJFormTestCase {
 	}
 
 	@Test
-	public void testConvertBooleanNewDefaultValue() {
+	void testConvertBooleanNewDefaultValue() {
 		AddColumnForm form = LBJTestUtils.getAddColumnForm();
 
 		LBJTestUtils.setValueOf(form.getTableNameTextBox(), TABLE_NAME);

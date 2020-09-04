@@ -158,9 +158,10 @@ public class LBJTextBoxBuilder {
 		addValueUpdater(LBJCaseUtils.caseUpdater(letterCase));
 		return addValueValidator(LBJCaseUtils.getCaseValidator(letterCase));
 	}
-	
+
 	/**
-	 * Conditionally adds letter case validators with {@link #addCaseUpdaterAndValidator}
+	 * Conditionally adds letter case validators with
+	 * {@link #addCaseUpdaterAndValidator}
 	 */
 	public LBJTextBoxBuilder addCaseUpdaterAndValidator(LetterCase letterCase, boolean add) {
 		if (!add) {

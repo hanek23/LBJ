@@ -55,7 +55,7 @@ public abstract class LBJPreferencesForm extends LBJWizardForm {
 				if (!form.validate()) {
 					return;
 				}
-				// apply and return to main menu
+				// apply and return to previous form
 				form.applyToPreferences();
 				form.goToPreviousForm();
 			}

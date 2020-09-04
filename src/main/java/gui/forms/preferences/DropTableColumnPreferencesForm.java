@@ -1,6 +1,7 @@
 package gui.forms.preferences;
 
-import static constants.NamingConventions.*;
+import static constants.NamingConventions.PKEY_COPY_TABLE_NAME;
+import static constants.NamingConventions.PKEY_USE_LETTER_CASE_CONVENTIONS;
 
 import com.googlecode.lanterna.gui2.Window;
 
@@ -65,6 +66,14 @@ public class DropTableColumnPreferencesForm extends LBJPreferencesForm {
 	@Override
 	public String toString() {
 		return Labels.DROP_TABLE_COLUMN_PREFERENCES_FORM;
+	}
+
+	public LBJCheckBox getUseLetterCaseConvensionCheckBox() {
+		return useLetterCaseConvensionCheckBox;
+	}
+
+	public LBJCheckBox getCopyTableNameCheckBox() {
+		return copyTableNameCheckBox;
 	}
 
 }
