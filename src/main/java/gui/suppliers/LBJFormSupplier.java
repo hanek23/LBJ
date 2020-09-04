@@ -10,6 +10,7 @@ import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
 import gui.forms.droptable.DropTableForm;
 import gui.forms.generate.GenerateForm;
 import gui.forms.mainmenu.MainMenuForm;
+import gui.forms.modifydatatype.ModifyDataTypeForm;
 import gui.forms.preferences.PreferencesForm;
 import gui.utils.BeanSupplier;
 
@@ -82,6 +83,22 @@ public class LBJFormSupplier {
 	}
 
 	/**
+	 * @return Always new instance of {@link ModifyDataTypeForm}.
+	 */
+	public static ModifyDataTypeForm getModifyDataTypeForm(Window window, LBJForm previousForm,
+			boolean addAsUpdatableForm) {
+		ModifyDataTypeForm form = new ModifyDataTypeForm(window, previousForm);
+		if (addAsUpdatableForm) {
+			getMainMenuForm().addFormToUpdate(form);
+		}
+		return form;
+	}
+
+	public static ModifyDataTypeForm getModifyDataTypeForm(Window window, LBJForm previousForm) {
+		return getModifyDataTypeForm(window, previousForm, true);
+	}
+
+	/**
 	 * @return Always new instance of {@link DropColumnForm}.
 	 */
 	public static DropColumnForm getDropColumnForm(Window window, LBJForm previousForm, boolean addAsUpdatableForm) {
@@ -119,7 +136,6 @@ public class LBJFormSupplier {
 		}
 		return preferencesForm;
 	}
-
 
 	/**
 	 * @return One and only instance of {@link DropTableForm}.

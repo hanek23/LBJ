@@ -2,7 +2,7 @@ package domain;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class Column extends AbstractEntity implements AddColumn, DropNotNullConstraint, DropColumn {
+public class Column extends AbstractEntity implements AddColumn, DropNotNullConstraint, DropColumn, ModifyDataType {
 
 	private String name;
 	private String tableName;
@@ -123,6 +123,11 @@ public class Column extends AbstractEntity implements AddColumn, DropNotNullCons
 	@Override
 	public boolean isDropNotNullConstraint() {
 		return getOperation() == ColumnOperation.DROP_NOT_NULL_CONSTRAINT;
+	}
+
+	@Override
+	public boolean isModifyDataType() {
+		return getOperation() == ColumnOperation.MODIFY_DATA_TYPE;
 	}
 
 	public String getDefaultValue() {

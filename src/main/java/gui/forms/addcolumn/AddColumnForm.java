@@ -77,8 +77,9 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 
 		indexNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_INDEX_NAME, this).required().addLengthValidator()
 				.addNamingConventionUpdater(BeanSupplier.get(LBJPreferences.class).getIndexName())
-				.activatorComponent(indexCheckBox).addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getIndexNameCase())
-				.disabled().build();
+				.activatorComponent(indexCheckBox)
+				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getIndexNameCase()).disabled()
+				.build();
 
 		foreignKeyCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY, this).build();
 
@@ -96,7 +97,8 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 				.addLengthValidator()
 				.addNamingConventionUpdater(BeanSupplier.get(LBJPreferences.class).getForeignKeyName())
 				.activatorComponent(foreignKeyCheckBox)
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getForeignKeyNameCase()).disabled().build();
+				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getForeignKeyNameCase()).disabled()
+				.build();
 
 	}
 

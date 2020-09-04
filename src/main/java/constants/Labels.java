@@ -14,6 +14,7 @@ public class Labels {
 	public static final String BUTTON_ADD_COLUMN = "Add column";
 	public static final String BUTTON_ADD_ANOTHER_COLUMN = "Add another column";
 	public static final String BUTTON_DROP_ANOTHER_COLUMN = "Drop another column";
+	public static final String BUTTON_MODIFY_ANOTHER_COLUMN = "Modify another column";
 	public static final String BUTTON_GENERATE = "Generate";
 	public static final String BUTTON_COPY_TO_CLIPBOARD = "Copy to clipboard";
 
@@ -29,6 +30,7 @@ public class Labels {
 	public static final String NAMING_CONVENTIONS_FORM = "Naming conventions form";
 	public static final String LETTER_CASE_FORM = "Letter case form";
 	public static final String DROP_TABLE_COLUMN_PREFERENCES_FORM = "Drop Table Column preferences form";
+	public static final String MODIFY_DATA_TYPE_FORM = "Modify data type form";
 
 	// MAIN MENU
 	public static final String MAIN_MENU_QUESTION = "What do you want to do?";
@@ -37,8 +39,8 @@ public class Labels {
 	public static final String MAIN_MENU_CREATE_TABLE = "Create table";
 	public static final String MAIN_MENU_DROP_TABLE = "Drop table";
 	public static final String MAIN_MENU_DROP_NOT_NULL_CONSTRAINT = "Remove not null constraint";
+	public static final String MAIN_MENU_MODIFY_DATA_TYPE = "Modify data type(s)";
 	public static final String MAIN_MENU_PREFERENCES = "Preferences";
-	public static final String MAIN_MENU_BUILD_DATE = "Build time";
 	public static final String BUTTON_EXIT = "Exit";
 
 	// CREATE/DROP TABLE

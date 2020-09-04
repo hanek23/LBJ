@@ -10,6 +10,7 @@ import gui.forms.createtable.CreateTableForm;
 import gui.forms.dropcolumn.DropColumnForm;
 import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
 import gui.forms.droptable.DropTableForm;
+import gui.forms.modifydatatype.ModifyDataTypeForm;
 import gui.forms.preferences.PreferencesForm;
 import gui.suppliers.LBJFormSupplier;
 import gui.utils.Bean;
@@ -28,6 +29,7 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 	private DropColumnForm dropColumnForm;
 	private DropNotNullConstraintForm dropNotNullConstraintForm;
 	private PreferencesForm preferencesForm;
+	private ModifyDataTypeForm modifyDataTypeForm;
 
 	public MainMenuForm() {
 		super(new BasicWindow());
@@ -53,6 +55,7 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 		addColumnForm = LBJFormSupplier.getAddColumnForm(getWindow(), this, false);
 		dropColumnForm = LBJFormSupplier.getDropColumnForm(getWindow(), this, false);
 		dropNotNullConstraintForm = LBJFormSupplier.getDropNotNullConstraintForm(getWindow(), this, false);
+		modifyDataTypeForm = LBJFormSupplier.getModifyDataTypeForm(getWindow(), this, false);
 		preferencesForm = LBJFormSupplier.getPreferencesForm(getWindow(), this, false);
 
 		addFormToUpdate(createTableForm);
@@ -60,6 +63,7 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 		addFormToUpdate(addColumnForm);
 		addFormToUpdate(dropColumnForm);
 		addFormToUpdate(dropNotNullConstraintForm);
+		addFormToUpdate(modifyDataTypeForm);
 		addFormToUpdate(preferencesForm);
 	}
 
@@ -71,6 +75,7 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 		LBJFormUtils.addItemToMenu(getMainMenu(), addColumnForm, Labels.MAIN_MENU_ADD_COLUMN);
 		LBJFormUtils.addItemToMenu(getMainMenu(), dropColumnForm, Labels.MAIN_MENU_DROP_COLUMN);
 		LBJFormUtils.addItemToMenu(getMainMenu(), dropNotNullConstraintForm, Labels.MAIN_MENU_DROP_NOT_NULL_CONSTRAINT);
+		LBJFormUtils.addItemToMenu(getMainMenu(), modifyDataTypeForm, Labels.MAIN_MENU_MODIFY_DATA_TYPE);
 		LBJFormUtils.addItemToMenu(getMainMenu(), preferencesForm, Labels.MAIN_MENU_PREFERENCES);
 		LBJFormUtils.addExitButtonToMainMenu(getMainMenu());
 	}

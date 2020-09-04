@@ -14,6 +14,7 @@ import domain.DropTable;
 import domain.Entity;
 import domain.GeneralColumn;
 import domain.GeneralTable;
+import domain.ModifyDataType;
 import domain.Table;
 
 /**
@@ -46,8 +47,7 @@ public class Generator {
 		if (table.isDropTable()) {
 			return dropTable((DropTable) table);
 		}
-		throw new UnsupportedOperationException(
-				"Generator not yet implemeted for: " + table.getClass().getSimpleName());
+		throw new UnsupportedOperationException("Generator not yet implemeted for: " + table.getOperation());
 	}
 
 	private static String createColumnChangeset(GeneralColumn column) {
@@ -60,8 +60,18 @@ public class Generator {
 		if (column.isDropColumn()) {
 			return dropColumn((DropColumn) column);
 		}
-		throw new UnsupportedOperationException(
-				"Generator not yet implemeted for: " + column.getClass().getSimpleName());
+		if (column.isModifyDataType()) {
+			return modifyDataType((ModifyDataType) column);
+		}
+		throw new UnsupportedOperationException("Generator not yet implemeted for: " + column.getOperation());
+	}
+
+	private static String modifyDataType(ModifyDataType column) {
+		String modifyDataType = XmlPartsSupplier.getModifyDataTypeBase();
+		modifyDataType = XmlPartsSupplier.replaceTableName(modifyDataType, column.getTableName());
+		modifyDataType = XmlPartsSupplier.replaceColumnName(modifyDataType, column);
+		modifyDataType = XmlPartsSupplier.replaceColumnDataType(modifyDataType, column);
+		return modifyDataType;
 	}
 
 	private static String dropNotNullConstraint(DropNotNullConstraint constraint) {

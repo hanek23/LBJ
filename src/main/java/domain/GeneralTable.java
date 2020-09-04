@@ -13,5 +13,7 @@ public interface GeneralTable {
 	boolean isCreateTable();
 
 	boolean isDropTable();
+	
+	TableOperation getOperation();
 
 }

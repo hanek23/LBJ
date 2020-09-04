@@ -170,6 +170,10 @@ public class XmlPartsSupplier {
 		return XmlParts.getDropSequenceBase();
 	}
 
+	public static String getModifyDataTypeBase() {
+		return XmlParts.getModifyDataTypeBase();
+	}
+
 	public static String getAddColumnBase(AddColumn column) {
 		if (column.isTypeBoolean()) {
 			return getBooleanColumnBase(column);

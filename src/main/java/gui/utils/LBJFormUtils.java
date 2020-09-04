@@ -127,6 +127,19 @@ public class LBJFormUtils {
 		return addColumnButton;
 	}
 
+	public static Button createModifyAnotherColumnButton(LBJWizardForm form) {
+		Button modifyAnotherButton = new Button(Labels.BUTTON_MODIFY_ANOTHER_COLUMN);
+		modifyAnotherButton.addListener(button -> {
+			if (form.validate()) {
+				if (form.getNextForm() == null) {
+					form.setNextForm(LBJFormSupplier.getModifyDataTypeForm(form.getWindow(), form));
+				}
+				form.goToNextForm();
+			}
+		});
+		return modifyAnotherButton;
+	}
+
 	public static Button createDropColumnButton(LBJWizardForm form) {
 		Button addDropButton = new Button(Labels.BUTTON_DROP_ANOTHER_COLUMN);
 		addDropButton.addListener(button -> {
@@ -139,7 +152,7 @@ public class LBJFormUtils {
 		});
 		return addDropButton;
 	}
-	
+
 	public static void addUpdatableFormToMainMenu(LBJForm form) {
 		LBJFormSupplier.getMainMenuForm().addFormToUpdate(form);
 	}

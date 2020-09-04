@@ -1,0 +1,8 @@
+<changeSet id="${ID}$" author="${AUTHOR}$">
+	<preConditions onFail="MARK_RAN">
+		<columnExists tableName="${TABLE_NAME}$" columnName="${COLUMN_NAME}$" />
+	</preConditions>
+	<comment>Modify data type of '${COLUMN_NAME}$' in table '${TABLE_NAME}$' to '${COLUMN_TYPE}$'</comment>
+	<modifyDataType tableName="${TABLE_NAME}$" columnName="${COLUMN_NAME}$"
+		newDataType="${COLUMN_TYPE}$" />
+</changeSet>

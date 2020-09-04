@@ -44,8 +44,10 @@ public class XmlParts {
 	protected static final String REPLACE_COLUMN_NULLABLE = XML_REPLACE_START + "NULLABLE" + XML_REPLACE_END;
 	protected static final String REPLACE_COLUMN_NULLABLE_VALUE = XML_REPLACE_START + "NULLABLE_VALUE"
 			+ XML_REPLACE_END;
-	protected static final String REPLACE_COLUMN_DEFAULT_VALUE_BASE = XML_REPLACE_START + "COLUMN_DEFAULT_VALUE_BASE" + XML_REPLACE_END;
-	protected static final String REPLACE_COLUMN_DEFAULT_VALUE = XML_REPLACE_START + "COLUMN_DEFAULT_VALUE" + XML_REPLACE_END;
+	protected static final String REPLACE_COLUMN_DEFAULT_VALUE_BASE = XML_REPLACE_START + "COLUMN_DEFAULT_VALUE_BASE"
+			+ XML_REPLACE_END;
+	protected static final String REPLACE_COLUMN_DEFAULT_VALUE = XML_REPLACE_START + "COLUMN_DEFAULT_VALUE"
+			+ XML_REPLACE_END;
 
 	// Paths to templates
 	private static final String CHANGELOG_START_TEMPLATE = "/generator/shared/ChangeLogStart.txt";
@@ -77,6 +79,8 @@ public class XmlParts {
 
 	private static final String DROP_TABLE_SEQUENCE_TEMPLATE = "/generator/droptable/DropSequence.txt";
 	private static final String DROP_TABLE_TEMPLATE = "/generator/droptable/DropTable.txt";
+
+	private static final String MODIFY_DATA_TYPE_TEMPLATE = "/generator/modifyDataType/ModifyDataType.txt";
 
 	protected static String getChangelogStart() {
 		return FileUtils.getStringFromFileResource(XmlParts.class, CHANGELOG_START_TEMPLATE);
@@ -113,11 +117,10 @@ public class XmlParts {
 	protected static String getAddGeneralColumnBase() {
 		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_COLUMN_TEMPLATE);
 	}
-	
+
 	protected static String getAddColumnDefaultValue() {
 		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_COLUMN_DEFAULT_VALUE_TEMPLATE);
 	}
-
 
 	protected static String getDropColumnBase() {
 		return FileUtils.getStringFromFileResource(XmlParts.class, DROP_COLUMN_TEMPLATE);
@@ -173,6 +176,10 @@ public class XmlParts {
 
 	protected static String getDropTableBase() {
 		return FileUtils.getStringFromFileResource(XmlParts.class, DROP_TABLE_TEMPLATE);
+	}
+
+	protected static String getModifyDataTypeBase() {
+		return FileUtils.getStringFromFileResource(XmlParts.class, MODIFY_DATA_TYPE_TEMPLATE);
 	}
 
 }
