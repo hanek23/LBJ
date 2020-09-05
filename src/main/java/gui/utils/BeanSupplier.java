@@ -21,7 +21,7 @@ public class BeanSupplier {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> T get(Class<T> clazz) {
+	public static <T extends Bean> T get(Class<T> clazz) {
 		return (T) get(clazz.getSimpleName());
 	}
 

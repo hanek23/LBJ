@@ -8,10 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import constants.Labels;
 import domain.ModifyDataType;
-import gui.utils.BeanSupplier;
+import main.LBJ;
 import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
-import utils.LBJPreferences;
 
 class ModifyDataTypeFormTest extends LBJFormTestCase {
 
@@ -27,7 +26,7 @@ class ModifyDataTypeFormTest extends LBJFormTestCase {
 		assertThat(form).hasName(Labels.MODIFY_DATA_TYPE_FORM);
 		assertThat(form).hasComponentWithName(Labels.TABLE_NAME);
 		assertThat(form).hasComponentWithName(Labels.COLUMN_NAME);
-		assertThat(form).hasComponentWithName(Labels.COLUMN_DATA_TYPE);
+		assertThat(form).hasComponentWithName(Labels.DATA_TYPE);
 
 		// in right states
 		assertThat(form.getTableNameTextBox()).isEnabled();
@@ -35,10 +34,10 @@ class ModifyDataTypeFormTest extends LBJFormTestCase {
 		assertThat(form.getDataTypeTextBox()).isEnabled();
 
 		// with all validators
-		assertThat(form.getTableNameTextBox()).isRequired()
-				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getTableNameCase()).hasLengthValidator();
-		assertThat(form.getColumnNameTextBox()).isRequired()
-				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getColumnNameCase()).hasLengthValidator();
+		assertThat(form.getTableNameTextBox()).isRequired().hasCaseValidator(LBJ.preferences.getTableNameCase())
+				.hasLengthValidator();
+		assertThat(form.getColumnNameTextBox()).isRequired().hasCaseValidator(LBJ.preferences.getColumnNameCase())
+				.hasLengthValidator();
 		assertThat(form.getDataTypeTextBox()).isRequired();
 	}
 

@@ -14,9 +14,8 @@ import gui.forms.modifydatatype.ModifyDataTypeForm;
 import gui.forms.preferences.PreferencesForm;
 import gui.suppliers.LBJFormSupplier;
 import gui.utils.Bean;
-import gui.utils.BeanSupplier;
 import gui.utils.LBJFormUtils;
-import utils.LBJProperties;
+import main.LBJ;
 
 /**
  * @see LBJMainMenuForm
@@ -37,7 +36,7 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 
 	public void initializeBean() {
 		((BasicWindow) getWindow())
-				.setTitle(Labels.WINDOW_NAME + " v" + BeanSupplier.get(LBJProperties.class).getVersion());
+				.setTitle(Labels.WINDOW_NAME + " v" + LBJ.properties.getVersion());
 		initializeForm();
 	}
 
@@ -77,7 +76,7 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 		LBJFormUtils.addItemToMenu(getMainMenu(), dropNotNullConstraintForm, Labels.MAIN_MENU_DROP_NOT_NULL_CONSTRAINT);
 		LBJFormUtils.addItemToMenu(getMainMenu(), modifyDataTypeForm, Labels.MAIN_MENU_MODIFY_DATA_TYPE);
 		LBJFormUtils.addItemToMenu(getMainMenu(), preferencesForm, Labels.MAIN_MENU_PREFERENCES);
-		LBJFormUtils.addExitButtonToMainMenu(getMainMenu());
+		LBJFormUtils.addExitButtonToMenu(getMainMenu());
 	}
 
 	public AddColumnForm getAddColumnForm() {

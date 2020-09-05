@@ -34,7 +34,7 @@ public class NamingConventions {
 	public static final String DEFAULT_INDEX_NAME = "I" + SEPARATOR + toNamingConvention(Labels.TABLE_NAME) + SEPARATOR
 			+ toNamingConvention(Labels.COLUMN_NAME);
 	public static final String DEFAULT_FOREIGN_KEY_NAME = "F" + SEPARATOR + toNamingConvention(Labels.TABLE_NAME)
-			+ SEPARATOR + toNamingConvention(Labels.ADD_COLUMN_REFERENCED_TABLE) + SEPARATOR
+			+ SEPARATOR + toNamingConvention(Labels.REFERENCED_TABLE) + SEPARATOR
 			+ toNamingConvention(Labels.COLUMN_NAME);
 
 	// LETTER CASE

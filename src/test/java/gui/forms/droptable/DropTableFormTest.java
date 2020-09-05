@@ -23,8 +23,8 @@ public class DropTableFormTest extends LBJFormTestCase {
 
 		assertThat(form).hasName(Labels.DROP_TABLE_FORM);
 		assertThat(form).hasComponentWithName(Labels.TABLE_NAME);
-		assertThat(form).hasComponentWithName(Labels.TABLE_SEQUENCE_NAME);
-		assertThat(form).hasComponentWithName(Labels.TABLE_SEQUENCE_NAME);
+		assertThat(form).hasComponentWithName(Labels.SEQUENCE_NAME);
+		assertThat(form).hasComponentWithName(Labels.SEQUENCE_NAME);
 
 		assertThat(form.getTableNameTextBox()).isRequired().hasLengthValidator();
 		assertThat(form.getDropSequenceCheckBox()).isNotChecked();

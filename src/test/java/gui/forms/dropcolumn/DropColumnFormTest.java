@@ -31,9 +31,9 @@ public class DropColumnFormTest extends LBJFormTestCase {
 		assertThat(form).hasComponentWithName(Labels.TABLE_NAME);
 		assertThat(form).hasComponentWithName(Labels.COLUMN_NAME);
 		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_INDEX);
-		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_INDEX_NAME);
+		assertThat(form).hasComponentWithName(Labels.INDEX_NAME);
 		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_FOREIGN_KEY);
-		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_FOREIGN_KEY_NAME);
+		assertThat(form).hasComponentWithName(Labels.FOREIGN_KEY_NAME);
 
 		// in right states
 		assertThat(form.getIndexCheckBox()).isNotChecked();

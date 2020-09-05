@@ -8,9 +8,8 @@ import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJTextBox;
 import gui.forms.LBJForm;
 import gui.forms.LBJPreferencesForm;
-import gui.utils.BeanSupplier;
 import gui.utils.LBJFormUtils;
-import utils.LBJPreferences;
+import main.LBJ;
 
 public class NamingConventionsForm extends LBJPreferencesForm {
 
@@ -26,20 +25,20 @@ public class NamingConventionsForm extends LBJPreferencesForm {
 
 	@Override
 	public void initializeComponents() {
-		primaryKeyName = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_NAME, this)
-				.value(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyName()).required().build();
+		primaryKeyName = new LBJTextBoxBuilder(Labels.PRIMARY_KEY_NAME, this).value(LBJ.preferences.getPrimaryKeyName())
+				.required().build();
 
-		primaryKeyConstraintName = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN_NAME, this)
-				.value(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintName()).required().build();
+		primaryKeyConstraintName = new LBJTextBoxBuilder(Labels.PRIMARY_KEY_CONSTRAIN_NAME, this)
+				.value(LBJ.preferences.getPrimaryKeyConstraintName()).required().build();
 
-		sequenceName = new LBJTextBoxBuilder(Labels.TABLE_SEQUENCE_NAME, this)
-				.value(BeanSupplier.get(LBJPreferences.class).getSequenceName()).required().build();
+		sequenceName = new LBJTextBoxBuilder(Labels.SEQUENCE_NAME, this).value(LBJ.preferences.getSequenceName())
+				.required().build();
 
-		indexName = new LBJTextBoxBuilder(Labels.ADD_COLUMN_INDEX_NAME, this)
-				.value(BeanSupplier.get(LBJPreferences.class).getIndexName()).required().build();
+		indexName = new LBJTextBoxBuilder(Labels.INDEX_NAME, this).value(LBJ.preferences.getIndexName()).required()
+				.build();
 
-		foreignKeyName = new LBJTextBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY_NAME, this)
-				.value(BeanSupplier.get(LBJPreferences.class).getForeignKeyName()).required().build();
+		foreignKeyName = new LBJTextBoxBuilder(Labels.FOREIGN_KEY_NAME, this).value(LBJ.preferences.getForeignKeyName())
+				.required().build();
 	}
 
 	/**
@@ -47,21 +46,20 @@ public class NamingConventionsForm extends LBJPreferencesForm {
 	 */
 	@Override
 	public void setComponentsToPreferenceValues() {
-		primaryKeyName.setValue(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyName());
-		primaryKeyConstraintName.setValue(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintName());
-		sequenceName.setValue(BeanSupplier.get(LBJPreferences.class).getSequenceName());
-		indexName.setValue(BeanSupplier.get(LBJPreferences.class).getIndexName());
-		foreignKeyName.setValue(BeanSupplier.get(LBJPreferences.class).getForeignKeyName());
+		primaryKeyName.setValue(LBJ.preferences.getPrimaryKeyName());
+		primaryKeyConstraintName.setValue(LBJ.preferences.getPrimaryKeyConstraintName());
+		sequenceName.setValue(LBJ.preferences.getSequenceName());
+		indexName.setValue(LBJ.preferences.getIndexName());
+		foreignKeyName.setValue(LBJ.preferences.getForeignKeyName());
 	}
 
 	@Override
 	public void applyToPreferences() {
-		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_PRIMARY_KEY_NAME, primaryKeyName.getValue());
-		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_PRIMARY_KEY_CONSTRAINT_NAME,
-				primaryKeyConstraintName.getValue());
-		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_SEQUENCE_NAME, sequenceName.getValue());
-		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_INDEX_NAME, indexName.getValue());
-		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_FOREIGN_KEY_NAME, foreignKeyName.getValue());
+		LBJ.preferences.put(NamingConventions.PKEY_PRIMARY_KEY_NAME, primaryKeyName.getValue());
+		LBJ.preferences.put(NamingConventions.PKEY_PRIMARY_KEY_CONSTRAINT_NAME, primaryKeyConstraintName.getValue());
+		LBJ.preferences.put(NamingConventions.PKEY_SEQUENCE_NAME, sequenceName.getValue());
+		LBJ.preferences.put(NamingConventions.PKEY_INDEX_NAME, indexName.getValue());
+		LBJ.preferences.put(NamingConventions.PKEY_FOREIGN_KEY_NAME, foreignKeyName.getValue());
 	}
 
 	@Override

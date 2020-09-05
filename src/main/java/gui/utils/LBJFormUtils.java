@@ -96,7 +96,7 @@ public class LBJFormUtils {
 		content.addComponent(mainMenu);
 	}
 
-	public static void addExitButtonToMainMenu(ActionListBox mainMenu) {
+	public static void addExitButtonToMenu(ActionListBox mainMenu) {
 		mainMenu.addItem(Labels.BUTTON_EXIT, () -> System.exit(0));
 	}
 

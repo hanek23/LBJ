@@ -9,9 +9,8 @@ import gui.builders.LBJComboBoxBuilder;
 import gui.components.LBJComboBox;
 import gui.forms.LBJForm;
 import gui.forms.LBJPreferencesForm;
-import gui.utils.BeanSupplier;
 import gui.utils.LBJFormUtils;
-import utils.LBJPreferences;
+import main.LBJ;
 
 public class LetterCaseConventionsForm extends LBJPreferencesForm {
 
@@ -30,29 +29,22 @@ public class LetterCaseConventionsForm extends LBJPreferencesForm {
 
 	@Override
 	public void initializeComponents() {
-		tableNameCase = createComboBoxLetterCase(Labels.TABLE_NAME,
-				BeanSupplier.get(LBJPreferences.class).getTableNameCase());
+		tableNameCase = createComboBoxLetterCase(Labels.TABLE_NAME, LBJ.preferences.getTableNameCase());
 
-		primaryKeyNameCase = createComboBoxLetterCase(Labels.CREATE_TABLE_PRIMARY_KEY_NAME,
-				BeanSupplier.get(LBJPreferences.class).getPrimaryKeyNameCase());
+		primaryKeyNameCase = createComboBoxLetterCase(Labels.PRIMARY_KEY_NAME, LBJ.preferences.getPrimaryKeyNameCase());
 
-		primaryKeyConstraintNameCase = createComboBoxLetterCase(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN_NAME,
-				BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintNameCase());
+		primaryKeyConstraintNameCase = createComboBoxLetterCase(Labels.PRIMARY_KEY_CONSTRAIN_NAME,
+				LBJ.preferences.getPrimaryKeyConstraintNameCase());
 
-		sequenceNameCase = createComboBoxLetterCase(Labels.TABLE_SEQUENCE_NAME,
-				BeanSupplier.get(LBJPreferences.class).getSequenceNameCase());
+		sequenceNameCase = createComboBoxLetterCase(Labels.SEQUENCE_NAME, LBJ.preferences.getSequenceNameCase());
 
-		columnNameCase = createComboBoxLetterCase(Labels.COLUMN_NAME,
-				BeanSupplier.get(LBJPreferences.class).getColumnNameCase());
+		columnNameCase = createComboBoxLetterCase(Labels.COLUMN_NAME, LBJ.preferences.getColumnNameCase());
 
-		dataTypeCase = createComboBoxLetterCase(Labels.COLUMN_DATA_TYPE,
-				BeanSupplier.get(LBJPreferences.class).getDataTypeCase());
+		dataTypeCase = createComboBoxLetterCase(Labels.DATA_TYPE, LBJ.preferences.getDataTypeCase());
 
-		foreignKeyNameCase = createComboBoxLetterCase(Labels.ADD_COLUMN_FOREIGN_KEY_NAME,
-				BeanSupplier.get(LBJPreferences.class).getForeignKeyNameCase());
+		foreignKeyNameCase = createComboBoxLetterCase(Labels.FOREIGN_KEY_NAME, LBJ.preferences.getForeignKeyNameCase());
 
-		indexNameCase = createComboBoxLetterCase(Labels.ADD_COLUMN_INDEX_NAME,
-				BeanSupplier.get(LBJPreferences.class).getIndexNameCase());
+		indexNameCase = createComboBoxLetterCase(Labels.INDEX_NAME, LBJ.preferences.getIndexNameCase());
 	}
 
 	private LBJComboBox<LetterCase> createComboBoxLetterCase(String name, LetterCase startValue) {
@@ -62,41 +54,34 @@ public class LetterCaseConventionsForm extends LBJPreferencesForm {
 
 	@Override
 	public void setComponentsToPreferenceValues() {
-		tableNameCase.setValue(BeanSupplier.get(LBJPreferences.class).getTableNameCase());
-		primaryKeyNameCase.setValue(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyNameCase());
-		primaryKeyConstraintNameCase.setValue(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintNameCase());
-		sequenceNameCase.setValue(BeanSupplier.get(LBJPreferences.class).getSequenceNameCase());
-		columnNameCase.setValue(BeanSupplier.get(LBJPreferences.class).getColumnNameCase());
-		dataTypeCase.setValue(BeanSupplier.get(LBJPreferences.class).getDataTypeCase());
-		foreignKeyNameCase.setValue(BeanSupplier.get(LBJPreferences.class).getForeignKeyNameCase());
-		indexNameCase.setValue(BeanSupplier.get(LBJPreferences.class).getIndexNameCase());
+		tableNameCase.setValue(LBJ.preferences.getTableNameCase());
+		primaryKeyNameCase.setValue(LBJ.preferences.getPrimaryKeyNameCase());
+		primaryKeyConstraintNameCase.setValue(LBJ.preferences.getPrimaryKeyConstraintNameCase());
+		sequenceNameCase.setValue(LBJ.preferences.getSequenceNameCase());
+		columnNameCase.setValue(LBJ.preferences.getColumnNameCase());
+		dataTypeCase.setValue(LBJ.preferences.getDataTypeCase());
+		foreignKeyNameCase.setValue(LBJ.preferences.getForeignKeyNameCase());
+		indexNameCase.setValue(LBJ.preferences.getIndexNameCase());
 	}
 
 	@Override
 	public void applyToPreferences() {
-		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_TABLE_NAME_CASE,
-				tableNameCase.getValue().toString());
+		LBJ.preferences.put(NamingConventions.PKEY_TABLE_NAME_CASE, tableNameCase.getValue().toString());
 
-		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_PRIMARY_KEY_NAME_CASE,
-				primaryKeyNameCase.getValue().toString());
+		LBJ.preferences.put(NamingConventions.PKEY_PRIMARY_KEY_NAME_CASE, primaryKeyNameCase.getValue().toString());
 
-		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_PRIMARY_KEY_CONSTRAINT_NAME_CASE,
+		LBJ.preferences.put(NamingConventions.PKEY_PRIMARY_KEY_CONSTRAINT_NAME_CASE,
 				primaryKeyConstraintNameCase.getValue().toString());
 
-		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_SEQUENCE_NAME_CASE,
-				sequenceNameCase.getValue().toString());
+		LBJ.preferences.put(NamingConventions.PKEY_SEQUENCE_NAME_CASE, sequenceNameCase.getValue().toString());
 
-		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_COLUMN_NAME_CASE,
-				columnNameCase.getValue().toString());
+		LBJ.preferences.put(NamingConventions.PKEY_COLUMN_NAME_CASE, columnNameCase.getValue().toString());
 
-		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_DATA_TYPE_CASE,
-				dataTypeCase.getValue().toString());
+		LBJ.preferences.put(NamingConventions.PKEY_DATA_TYPE_CASE, dataTypeCase.getValue().toString());
 
-		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_FOREIGN_KEY_NAME_CASE,
-				foreignKeyNameCase.getValue().toString());
+		LBJ.preferences.put(NamingConventions.PKEY_FOREIGN_KEY_NAME_CASE, foreignKeyNameCase.getValue().toString());
 
-		BeanSupplier.get(LBJPreferences.class).put(NamingConventions.PKEY_INDEX_NAME_CASE,
-				indexNameCase.getValue().toString());
+		LBJ.preferences.put(NamingConventions.PKEY_INDEX_NAME_CASE, indexNameCase.getValue().toString());
 	}
 
 	@Override

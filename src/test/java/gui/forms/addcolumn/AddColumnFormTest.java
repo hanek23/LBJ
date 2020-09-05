@@ -9,10 +9,9 @@ import org.junit.jupiter.api.Test;
 import constants.Labels;
 import constants.NamingConventions;
 import domain.AddColumn;
-import gui.utils.BeanSupplier;
+import main.LBJ;
 import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
-import utils.LBJPreferences;
 
 class AddColumnFormTest extends LBJFormTestCase {
 
@@ -38,15 +37,15 @@ class AddColumnFormTest extends LBJFormTestCase {
 		assertThat(form).hasName(Labels.ADD_COLUMN_FORM);
 		assertThat(form).hasComponentWithName(Labels.TABLE_NAME);
 		assertThat(form).hasComponentWithName(Labels.COLUMN_NAME);
-		assertThat(form).hasComponentWithName(Labels.COLUMN_DATA_TYPE);
+		assertThat(form).hasComponentWithName(Labels.DATA_TYPE);
 		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_NULLABLE);
 		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_DEFAULT_VALUE);
 		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_INDEX);
-		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_INDEX_NAME);
+		assertThat(form).hasComponentWithName(Labels.INDEX_NAME);
 		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_FOREIGN_KEY);
-		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_REFERENCED_TABLE);
-		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_REFERENCED_COLUMN);
-		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_FOREIGN_KEY_NAME);
+		assertThat(form).hasComponentWithName(Labels.REFERENCED_TABLE);
+		assertThat(form).hasComponentWithName(Labels.REFERENCED_COLUMN);
+		assertThat(form).hasComponentWithName(Labels.FOREIGN_KEY_NAME);
 
 		// in right states
 		assertThat(form.getNullableCheckBox()).isChecked();
@@ -59,19 +58,19 @@ class AddColumnFormTest extends LBJFormTestCase {
 		assertThat(form.getForeignKeyNameTextBox()).isNotEnabled();
 
 		// with all validators
-		assertThat(form.getTableNameTextBox()).isRequired()
-				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getTableNameCase()).hasLengthValidator();
-		assertThat(form.getColumnNameTextBox()).isRequired()
-				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getColumnNameCase()).hasLengthValidator();
+		assertThat(form.getTableNameTextBox()).isRequired().hasCaseValidator(LBJ.preferences.getTableNameCase())
+				.hasLengthValidator();
+		assertThat(form.getColumnNameTextBox()).isRequired().hasCaseValidator(LBJ.preferences.getColumnNameCase())
+				.hasLengthValidator();
 		assertThat(form.getDataTypeTextBox()).isRequired();
-		assertThat(form.getIndexNameTextBox()).isRequired()
-				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getIndexNameCase()).hasLengthValidator();
+		assertThat(form.getIndexNameTextBox()).isRequired().hasCaseValidator(LBJ.preferences.getIndexNameCase())
+				.hasLengthValidator();
 		assertThat(form.getReferencedTableNameTextBox()).isRequired()
-				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getTableNameCase()).hasLengthValidator();
+				.hasCaseValidator(LBJ.preferences.getTableNameCase()).hasLengthValidator();
 		assertThat(form.getReferencedColumnNameTextBox()).isRequired()
-				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getColumnNameCase()).hasLengthValidator();
+				.hasCaseValidator(LBJ.preferences.getColumnNameCase()).hasLengthValidator();
 		assertThat(form.getForeignKeyNameTextBox()).isRequired()
-				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getForeignKeyNameCase()).hasLengthValidator();
+				.hasCaseValidator(LBJ.preferences.getForeignKeyNameCase()).hasLengthValidator();
 
 	}
 

@@ -7,10 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import constants.Labels;
 import constants.NamingConventions.LetterCase;
-import gui.utils.BeanSupplier;
+import main.LBJ;
 import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
-import utils.LBJPreferences;
 
 class LetterCaseConventionsFormTest extends LBJFormTestCase {
 
@@ -21,26 +20,22 @@ class LetterCaseConventionsFormTest extends LBJFormTestCase {
 		assertThat(form).hasName(Labels.LETTER_CASE_FORM);
 		assertThat(form).hasComponentWithName(Labels.TABLE_NAME);
 		assertThat(form).hasComponentWithName(Labels.COLUMN_NAME);
-		assertThat(form).hasComponentWithName(Labels.COLUMN_DATA_TYPE);
-		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_PRIMARY_KEY_NAME);
-		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN_NAME);
-		assertThat(form).hasComponentWithName(Labels.TABLE_SEQUENCE_NAME);
-		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_FOREIGN_KEY_NAME);
-		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_INDEX_NAME);
+		assertThat(form).hasComponentWithName(Labels.DATA_TYPE);
+		assertThat(form).hasComponentWithName(Labels.PRIMARY_KEY_NAME);
+		assertThat(form).hasComponentWithName(Labels.PRIMARY_KEY_CONSTRAIN_NAME);
+		assertThat(form).hasComponentWithName(Labels.SEQUENCE_NAME);
+		assertThat(form).hasComponentWithName(Labels.FOREIGN_KEY_NAME);
+		assertThat(form).hasComponentWithName(Labels.INDEX_NAME);
 
-		assertThat(form.getTableNameCase()).hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getTableNameCase());
-		assertThat(form.getColumnNameCase())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getColumnNameCase());
-		assertThat(form.getDataTypeCase()).hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getDataTypeCase());
-		assertThat(form.getPrimaryKeyNameCase())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyNameCase());
+		assertThat(form.getTableNameCase()).hasValueEqualTo(LBJ.preferences.getTableNameCase());
+		assertThat(form.getColumnNameCase()).hasValueEqualTo(LBJ.preferences.getColumnNameCase());
+		assertThat(form.getDataTypeCase()).hasValueEqualTo(LBJ.preferences.getDataTypeCase());
+		assertThat(form.getPrimaryKeyNameCase()).hasValueEqualTo(LBJ.preferences.getPrimaryKeyNameCase());
 		assertThat(form.getPrimaryKeyConstraintNameCase())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintNameCase());
-		assertThat(form.getSequenceNameCase())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getSequenceNameCase());
-		assertThat(form.getForeignKeyNameCase())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getForeignKeyNameCase());
-		assertThat(form.getIndexNameCase()).hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getIndexNameCase());
+				.hasValueEqualTo(LBJ.preferences.getPrimaryKeyConstraintNameCase());
+		assertThat(form.getSequenceNameCase()).hasValueEqualTo(LBJ.preferences.getSequenceNameCase());
+		assertThat(form.getForeignKeyNameCase()).hasValueEqualTo(LBJ.preferences.getForeignKeyNameCase());
+		assertThat(form.getIndexNameCase()).hasValueEqualTo(LBJ.preferences.getIndexNameCase());
 	}
 
 	@Test
@@ -89,19 +84,15 @@ class LetterCaseConventionsFormTest extends LBJFormTestCase {
 		form.focus();
 		assertThat(form).isFocused();
 		// Values should have been restarted as back button was pressed
-		assertThat(form.getTableNameCase()).hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getTableNameCase());
-		assertThat(form.getColumnNameCase())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getColumnNameCase());
-		assertThat(form.getDataTypeCase()).hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getDataTypeCase());
-		assertThat(form.getPrimaryKeyNameCase())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyNameCase());
+		assertThat(form.getTableNameCase()).hasValueEqualTo(LBJ.preferences.getTableNameCase());
+		assertThat(form.getColumnNameCase()).hasValueEqualTo(LBJ.preferences.getColumnNameCase());
+		assertThat(form.getDataTypeCase()).hasValueEqualTo(LBJ.preferences.getDataTypeCase());
+		assertThat(form.getPrimaryKeyNameCase()).hasValueEqualTo(LBJ.preferences.getPrimaryKeyNameCase());
 		assertThat(form.getPrimaryKeyConstraintNameCase())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintNameCase());
-		assertThat(form.getSequenceNameCase())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getSequenceNameCase());
-		assertThat(form.getForeignKeyNameCase())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getForeignKeyNameCase());
-		assertThat(form.getIndexNameCase()).hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getIndexNameCase());
+				.hasValueEqualTo(LBJ.preferences.getPrimaryKeyConstraintNameCase());
+		assertThat(form.getSequenceNameCase()).hasValueEqualTo(LBJ.preferences.getSequenceNameCase());
+		assertThat(form.getForeignKeyNameCase()).hasValueEqualTo(LBJ.preferences.getForeignKeyNameCase());
+		assertThat(form.getIndexNameCase()).hasValueEqualTo(LBJ.preferences.getIndexNameCase());
 	}
 
 	@Test
@@ -120,19 +111,15 @@ class LetterCaseConventionsFormTest extends LBJFormTestCase {
 		LBJTestUtils.click(form.getResetToDefaultButton());
 		assertThat(form).isFocused();
 		// Values should have been restarted to defaults
-		assertThat(form.getTableNameCase()).hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getTableNameCase());
-		assertThat(form.getColumnNameCase())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getColumnNameCase());
-		assertThat(form.getDataTypeCase()).hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getDataTypeCase());
-		assertThat(form.getPrimaryKeyNameCase())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyNameCase());
+		assertThat(form.getTableNameCase()).hasValueEqualTo(LBJ.preferences.getTableNameCase());
+		assertThat(form.getColumnNameCase()).hasValueEqualTo(LBJ.preferences.getColumnNameCase());
+		assertThat(form.getDataTypeCase()).hasValueEqualTo(LBJ.preferences.getDataTypeCase());
+		assertThat(form.getPrimaryKeyNameCase()).hasValueEqualTo(LBJ.preferences.getPrimaryKeyNameCase());
 		assertThat(form.getPrimaryKeyConstraintNameCase())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintNameCase());
-		assertThat(form.getSequenceNameCase())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getSequenceNameCase());
-		assertThat(form.getForeignKeyNameCase())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getForeignKeyNameCase());
-		assertThat(form.getIndexNameCase()).hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getIndexNameCase());
+				.hasValueEqualTo(LBJ.preferences.getPrimaryKeyConstraintNameCase());
+		assertThat(form.getSequenceNameCase()).hasValueEqualTo(LBJ.preferences.getSequenceNameCase());
+		assertThat(form.getForeignKeyNameCase()).hasValueEqualTo(LBJ.preferences.getForeignKeyNameCase());
+		assertThat(form.getIndexNameCase()).hasValueEqualTo(LBJ.preferences.getIndexNameCase());
 	}
 
 }

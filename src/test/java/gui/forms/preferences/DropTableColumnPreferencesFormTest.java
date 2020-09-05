@@ -6,10 +6,9 @@ import static testutils.asserts.LBJValueComponentAssert.assertThat;
 import org.junit.jupiter.api.Test;
 
 import constants.Labels;
-import gui.utils.BeanSupplier;
+import main.LBJ;
 import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
-import utils.LBJPreferences;
 
 class DropTableColumnPreferencesFormTest extends LBJFormTestCase {
 
@@ -22,9 +21,8 @@ class DropTableColumnPreferencesFormTest extends LBJFormTestCase {
 		assertThat(form).hasComponentWithName(Labels.PREFERENCES_COPY_TABLE_NAME);
 
 		assertThat(form.getUseLetterCaseConvensionCheckBox())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getUseLetterCaseConventions());
-		assertThat(form.getCopyTableNameCheckBox())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getCopyTableName());
+				.hasValueEqualTo(LBJ.preferences.getUseLetterCaseConventions());
+		assertThat(form.getCopyTableNameCheckBox()).hasValueEqualTo(LBJ.preferences.getCopyTableName());
 	}
 
 	@Test
@@ -56,9 +54,8 @@ class DropTableColumnPreferencesFormTest extends LBJFormTestCase {
 		assertThat(form).isFocused();
 		// Values should have been restarted as back button was pressed
 		assertThat(form.getUseLetterCaseConvensionCheckBox())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getUseLetterCaseConventions());
-		assertThat(form.getCopyTableNameCheckBox())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getCopyTableName());
+				.hasValueEqualTo(LBJ.preferences.getUseLetterCaseConventions());
+		assertThat(form.getCopyTableNameCheckBox()).hasValueEqualTo(LBJ.preferences.getCopyTableName());
 	}
 
 	@Test
@@ -72,9 +69,8 @@ class DropTableColumnPreferencesFormTest extends LBJFormTestCase {
 		assertThat(form).isFocused();
 		// Values should have been restarted to defaults
 		assertThat(form.getUseLetterCaseConvensionCheckBox())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getUseLetterCaseConventions());
-		assertThat(form.getCopyTableNameCheckBox())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getCopyTableName());
+				.hasValueEqualTo(LBJ.preferences.getUseLetterCaseConventions());
+		assertThat(form.getCopyTableNameCheckBox()).hasValueEqualTo(LBJ.preferences.getCopyTableName());
 	}
 
 }

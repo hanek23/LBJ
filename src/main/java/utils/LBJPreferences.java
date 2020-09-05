@@ -1,14 +1,42 @@
 package utils;
 
-import static constants.NamingConventions.*;
+import static constants.NamingConventions.DEFAULT_COLUMN_NAME_CASE;
+import static constants.NamingConventions.DEFAULT_COPY_TABLE_NAME;
+import static constants.NamingConventions.DEFAULT_DATA_TYPE_CASE;
+import static constants.NamingConventions.DEFAULT_FOREIGN_KEY_NAME;
+import static constants.NamingConventions.DEFAULT_FOREIGN_KEY_NAME_CASE;
+import static constants.NamingConventions.DEFAULT_INDEX_NAME;
+import static constants.NamingConventions.DEFAULT_INDEX_NAME_CASE;
+import static constants.NamingConventions.DEFAULT_PRIMARY_KEY_CONSTRAINT_NAME;
+import static constants.NamingConventions.DEFAULT_PRIMARY_KEY_CONSTRAINT_NAME_CASE;
+import static constants.NamingConventions.DEFAULT_PRIMARY_KEY_NAME;
+import static constants.NamingConventions.DEFAULT_PRIMARY_KEY_NAME_CASE;
+import static constants.NamingConventions.DEFAULT_SEQUENCE_NAME;
+import static constants.NamingConventions.DEFAULT_SEQUENCE_NAME_CASE;
+import static constants.NamingConventions.DEFAULT_TABLE_NAME_CASE;
+import static constants.NamingConventions.DEFAULT_USE_LETTER_CASE_CONVENTIONS;
+import static constants.NamingConventions.PKEY_COLUMN_NAME_CASE;
+import static constants.NamingConventions.PKEY_COPY_TABLE_NAME;
+import static constants.NamingConventions.PKEY_DATA_TYPE_CASE;
+import static constants.NamingConventions.PKEY_FOREIGN_KEY_NAME;
+import static constants.NamingConventions.PKEY_FOREIGN_KEY_NAME_CASE;
+import static constants.NamingConventions.PKEY_INDEX_NAME;
+import static constants.NamingConventions.PKEY_INDEX_NAME_CASE;
+import static constants.NamingConventions.PKEY_PRIMARY_KEY_CONSTRAINT_NAME;
+import static constants.NamingConventions.PKEY_PRIMARY_KEY_CONSTRAINT_NAME_CASE;
+import static constants.NamingConventions.PKEY_PRIMARY_KEY_NAME;
+import static constants.NamingConventions.PKEY_PRIMARY_KEY_NAME_CASE;
+import static constants.NamingConventions.PKEY_SEQUENCE_NAME;
+import static constants.NamingConventions.PKEY_SEQUENCE_NAME_CASE;
+import static constants.NamingConventions.PKEY_TABLE_NAME_CASE;
+import static constants.NamingConventions.PKEY_USE_LETTER_CASE_CONVENTIONS;
 
 import java.util.prefs.Preferences;
 
 import constants.NamingConventions.LetterCase;
-import gui.utils.SimpleBean;
 import main.LBJ;
 
-public class LBJPreferences implements SimpleBean {
+public class LBJPreferences {
 
 	private final Preferences preferences;
 

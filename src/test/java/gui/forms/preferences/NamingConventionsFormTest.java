@@ -7,10 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import constants.Labels;
 import constants.NamingConventions;
-import gui.utils.BeanSupplier;
+import main.LBJ;
 import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
-import utils.LBJPreferences;
 
 class NamingConventionsFormTest extends LBJFormTestCase {
 
@@ -19,22 +18,18 @@ class NamingConventionsFormTest extends LBJFormTestCase {
 		NamingConventionsForm form = LBJTestUtils.getNamingConventionsForm();
 
 		assertThat(form).hasName(Labels.NAMING_CONVENTIONS_FORM);
-		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_PRIMARY_KEY_NAME);
-		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN_NAME);
-		assertThat(form).hasComponentWithName(Labels.TABLE_SEQUENCE_NAME);
-		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_INDEX_NAME);
-		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_FOREIGN_KEY_NAME);
+		assertThat(form).hasComponentWithName(Labels.PRIMARY_KEY_NAME);
+		assertThat(form).hasComponentWithName(Labels.PRIMARY_KEY_CONSTRAIN_NAME);
+		assertThat(form).hasComponentWithName(Labels.SEQUENCE_NAME);
+		assertThat(form).hasComponentWithName(Labels.INDEX_NAME);
+		assertThat(form).hasComponentWithName(Labels.FOREIGN_KEY_NAME);
 
-		assertThat(form.getPrimaryKeyName()).isRequired()
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyName());
+		assertThat(form.getPrimaryKeyName()).isRequired().hasValueEqualTo(LBJ.preferences.getPrimaryKeyName());
 		assertThat(form.getPrimaryKeyConstraintName()).isRequired()
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintName());
-		assertThat(form.getSequenceName()).isRequired()
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getSequenceName());
-		assertThat(form.getIndexName()).isRequired()
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getIndexName());
-		assertThat(form.getForeignKeyName()).isRequired()
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getForeignKeyName());
+				.hasValueEqualTo(LBJ.preferences.getPrimaryKeyConstraintName());
+		assertThat(form.getSequenceName()).isRequired().hasValueEqualTo(LBJ.preferences.getSequenceName());
+		assertThat(form.getIndexName()).isRequired().hasValueEqualTo(LBJ.preferences.getIndexName());
+		assertThat(form.getForeignKeyName()).isRequired().hasValueEqualTo(LBJ.preferences.getForeignKeyName());
 	}
 
 	@Test
@@ -78,14 +73,11 @@ class NamingConventionsFormTest extends LBJFormTestCase {
 		form.focus();
 		assertThat(form).isFocused();
 		// Nothing should have been saved, so values are those from preferences
-		assertThat(form.getPrimaryKeyName())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyName());
-		assertThat(form.getPrimaryKeyConstraintName())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintName());
-		assertThat(form.getSequenceName()).hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getSequenceName());
-		assertThat(form.getIndexName()).hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getIndexName());
-		assertThat(form.getForeignKeyName())
-				.hasValueEqualTo(BeanSupplier.get(LBJPreferences.class).getForeignKeyName());
+		assertThat(form.getPrimaryKeyName()).hasValueEqualTo(LBJ.preferences.getPrimaryKeyName());
+		assertThat(form.getPrimaryKeyConstraintName()).hasValueEqualTo(LBJ.preferences.getPrimaryKeyConstraintName());
+		assertThat(form.getSequenceName()).hasValueEqualTo(LBJ.preferences.getSequenceName());
+		assertThat(form.getIndexName()).hasValueEqualTo(LBJ.preferences.getIndexName());
+		assertThat(form.getForeignKeyName()).hasValueEqualTo(LBJ.preferences.getForeignKeyName());
 
 	}
 

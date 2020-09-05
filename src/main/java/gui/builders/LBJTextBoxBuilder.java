@@ -1,10 +1,13 @@
 package gui.builders;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.Label;
 import com.googlecode.lanterna.gui2.TextBox;
 
 import constants.NamingConventions.LetterCase;
+import gui.attribute.Attribute;
 import gui.components.LBJTextBox;
 import gui.components.LBJValueComponent;
 import gui.forms.LBJForm;
@@ -45,6 +48,20 @@ public class LBJTextBoxBuilder {
 		lbjTextBox = new LBJTextBox(name, form);
 		lbjTextBox.setTextBox(new TextBox());
 		lbjTextBox.setLabel(new Label(name));
+	}
+
+	public LBJTextBoxBuilder(Attribute attribute, LBJForm form) {
+		this(attribute.getLabel(), form);
+		addCaseUpdaterAndValidator(attribute.getLetterCase());
+		if (StringUtils.isNotBlank(attribute.getNamingConvention())) {
+			addNamingConventionUpdater(attribute.getNamingConvention());
+		}
+		if (attribute.isRequired()) {
+			required();
+		}
+		if (attribute.shouldValidateLength()) {
+			addLengthValidator();
+		}
 	}
 
 	public LBJTextBoxBuilder readOnly() {

@@ -1,5 +1,3 @@
-utils.LBJProperties
-utils.LBJPreferences
 gui.forms.mainmenu.MainMenuForm
 gui.validators.shared.LBJLowerCaseValidator
 gui.validators.shared.LBJNoneCaseValidator

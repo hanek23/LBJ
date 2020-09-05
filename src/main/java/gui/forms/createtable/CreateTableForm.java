@@ -7,14 +7,13 @@ import constants.Labels;
 import domain.CreateTable;
 import domain.Table;
 import domain.TableOperation;
+import gui.attribute.Attribute;
 import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
 import gui.forms.addcolumn.AddColumnForm;
-import gui.utils.BeanSupplier;
 import gui.utils.LBJFormUtils;
-import utils.LBJPreferences;
 
 /**
  * Form for creating table. You can choose table name, primary key name, primary
@@ -36,25 +35,10 @@ public class CreateTableForm extends LBJEntityForm<CreateTable> {
 
 	@Override
 	public void initializeComponents() {
-		tableNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, this).required().addLengthValidator()
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getTableNameCase()).build();
-
-		primaryKeyNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_NAME, this).required()
-				.addNamingConventionUpdater(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyName())
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyNameCase())
-				.addLengthValidator().build();
-
-		primaryKeyConstraintNameTextBox = new LBJTextBoxBuilder(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN_NAME, this)
-				.required().addLengthValidator()
-				.addNamingConventionUpdater(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintName())
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintNameCase())
-				.build();
-
-		sequenceNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_SEQUENCE_NAME, this).required()
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getSequenceNameCase())
-				.addLengthValidator()
-				.addNamingConventionUpdater(BeanSupplier.get(LBJPreferences.class).getSequenceName()).build();
-
+		tableNameTextBox = new LBJTextBoxBuilder(Attribute.TABLE_NAME, this).build();
+		primaryKeyNameTextBox = new LBJTextBoxBuilder(Attribute.PRIMARY_KEY_NAME, this).build();
+		primaryKeyConstraintNameTextBox = new LBJTextBoxBuilder(Attribute.PRIMARY_KEY_CONSTRAINT_NAME, this).build();
+		sequenceNameTextBox = new LBJTextBoxBuilder(Attribute.SEQUENCE_NAME, this).build();
 	}
 
 	@Override

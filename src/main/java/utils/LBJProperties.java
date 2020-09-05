@@ -7,9 +7,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import gui.utils.SimpleBean;
-
-public class LBJProperties implements SimpleBean {
+public class LBJProperties {
 
 	private static final Logger LOGGER = Logger.getLogger(LBJProperties.class.getSimpleName());
 

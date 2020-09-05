@@ -19,7 +19,7 @@ import testutils.LBJTestUtils;
  * Ignoring case when testing values. Testing case updaters and validators is
  * not the goal.
  */
-public class LBJNamingConventionUpdaterTest extends LBJFormTestCase {
+class LBJNamingConventionUpdaterTest extends LBJFormTestCase {
 
 	private static final String TABLE_NAME = "TABLE_NAME";
 	private static final String COLUMN_NAME = "COLUMN";
@@ -34,7 +34,7 @@ public class LBJNamingConventionUpdaterTest extends LBJFormTestCase {
 	private static final String SEQUENCE_START = "SEQ_";
 
 	@Test
-	public void testUpdateAddColumnForeignKey() {
+	void testUpdateAddColumnForeignKey() {
 		AddColumnForm form = LBJTestUtils.getAddColumnForm();
 		LBJCheckBox foreignKeyCheckBox = form.getForeignKeyCheckBox();
 		LBJTextBox tableName = form.getTableNameTextBox();
@@ -92,7 +92,7 @@ public class LBJNamingConventionUpdaterTest extends LBJFormTestCase {
 	}
 
 	@Test
-	public void testUpdateAddColumnIndexName() {
+	void testUpdateAddColumnIndexName() {
 		AddColumnForm form = LBJTestUtils.getAddColumnForm();
 		LBJCheckBox indexCheckBox = form.getIndexCheckBox();
 		LBJTextBox indexName = form.getIndexNameTextBox();
@@ -148,7 +148,7 @@ public class LBJNamingConventionUpdaterTest extends LBJFormTestCase {
 	}
 
 	@Test
-	public void testUpdateCreateTablePrimaryKey() {
+	void testUpdateCreateTablePrimaryKey() {
 		CreateTableForm form = LBJTestUtils.getCreateTableForm();
 		LBJTextBox tableName = form.getTableNameTextBox();
 		LBJTextBox primaryKeyName = form.getPrimaryKeyNameTextBox();
@@ -172,7 +172,7 @@ public class LBJNamingConventionUpdaterTest extends LBJFormTestCase {
 	}
 
 	@Test
-	public void testUpdateCreateTableSequence() {
+	void testUpdateCreateTableSequence() {
 		CreateTableForm form = LBJTestUtils.getCreateTableForm();
 		LBJTextBox tableName = form.getTableNameTextBox();
 		LBJTextBox sequenceName = form.getSequenceNameTextBox();

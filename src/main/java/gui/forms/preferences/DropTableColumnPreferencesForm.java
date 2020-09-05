@@ -10,9 +10,8 @@ import gui.builders.LBJCheckBoxBuilder;
 import gui.components.LBJCheckBox;
 import gui.forms.LBJForm;
 import gui.forms.LBJPreferencesForm;
-import gui.utils.BeanSupplier;
 import gui.utils.LBJFormUtils;
-import utils.LBJPreferences;
+import main.LBJ;
 
 public class DropTableColumnPreferencesForm extends LBJPreferencesForm {
 
@@ -26,23 +25,22 @@ public class DropTableColumnPreferencesForm extends LBJPreferencesForm {
 	@Override
 	public void initializeComponents() {
 		useLetterCaseConvensionCheckBox = new LBJCheckBoxBuilder(Labels.PREFERENCES_USE_LETTER_CASE_CONVENTIONS, this)
-				.setChecked(BeanSupplier.get(LBJPreferences.class).getUseLetterCaseConventions()).build();
+				.setChecked(LBJ.preferences.getUseLetterCaseConventions()).build();
 
 		copyTableNameCheckBox = new LBJCheckBoxBuilder(Labels.PREFERENCES_COPY_TABLE_NAME, this)
-				.setChecked(BeanSupplier.get(LBJPreferences.class).getCopyTableName()).build();
+				.setChecked(LBJ.preferences.getCopyTableName()).build();
 	}
 
 	@Override
 	public void setComponentsToPreferenceValues() {
-		useLetterCaseConvensionCheckBox.setValue(BeanSupplier.get(LBJPreferences.class).getUseLetterCaseConventions());
-		copyTableNameCheckBox.setValue(BeanSupplier.get(LBJPreferences.class).getCopyTableName());
+		useLetterCaseConvensionCheckBox.setValue(LBJ.preferences.getUseLetterCaseConventions());
+		copyTableNameCheckBox.setValue(LBJ.preferences.getCopyTableName());
 	}
 
 	@Override
 	public void applyToPreferences() {
-		BeanSupplier.get(LBJPreferences.class).putBoolean(PKEY_USE_LETTER_CASE_CONVENTIONS,
-				useLetterCaseConvensionCheckBox.getValue());
-		BeanSupplier.get(LBJPreferences.class).putBoolean(PKEY_COPY_TABLE_NAME, copyTableNameCheckBox.getValue());
+		LBJ.preferences.putBoolean(PKEY_USE_LETTER_CASE_CONVENTIONS, useLetterCaseConvensionCheckBox.getValue());
+		LBJ.preferences.putBoolean(PKEY_COPY_TABLE_NAME, copyTableNameCheckBox.getValue());
 	}
 
 	@Override

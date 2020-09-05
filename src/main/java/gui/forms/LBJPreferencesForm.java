@@ -4,9 +4,8 @@ import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
-import gui.utils.BeanSupplier;
 import gui.utils.LBJFormUtils;
-import utils.LBJPreferences;
+import main.LBJ;
 
 /**
  * Adds possibility to apply and reset preferences.
@@ -67,7 +66,7 @@ public abstract class LBJPreferencesForm extends LBJWizardForm {
 		return new Button(Labels.BUTTON_PREFERENCES_RESET, new Runnable() {
 			@Override
 			public void run() {
-				BeanSupplier.get(LBJPreferences.class).setDefaultPreferences();
+				LBJ.preferences.setDefaultPreferences();
 				form.setComponentsToPreferenceValues();
 			}
 

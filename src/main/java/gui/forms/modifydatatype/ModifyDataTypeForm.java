@@ -7,13 +7,12 @@ import constants.Labels;
 import domain.Column;
 import domain.ColumnOperation;
 import domain.ModifyDataType;
+import gui.attribute.Attribute;
 import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
-import gui.utils.BeanSupplier;
 import gui.utils.LBJFormUtils;
-import utils.LBJPreferences;
 
 public class ModifyDataTypeForm extends LBJEntityForm<ModifyDataType> {
 
@@ -30,14 +29,10 @@ public class ModifyDataTypeForm extends LBJEntityForm<ModifyDataType> {
 
 	@Override
 	public void initializeComponents() {
-		tableNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, this).required().addLengthValidator()
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getTableNameCase()).build();
+		tableNameTextBox = new LBJTextBoxBuilder(Attribute.TABLE_NAME, this).build();
 		setTableNameIfPossible();
-
-		columnNameTextBox = new LBJTextBoxBuilder(Labels.COLUMN_NAME, this).required().addLengthValidator()
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getColumnNameCase()).build();
-
-		dataTypeTextBox = new LBJTextBoxBuilder(Labels.COLUMN_DATA_TYPE, this).required().build();
+		columnNameTextBox = new LBJTextBoxBuilder(Attribute.COLUMN_NAME, this).build();
+		dataTypeTextBox = new LBJTextBoxBuilder(Attribute.DATA_TYPE, this).build();
 
 	}
 

@@ -10,6 +10,7 @@ import domain.AddColumn;
 import domain.Column;
 import domain.ColumnOperation;
 import domain.ForeignKey;
+import gui.attribute.Attribute;
 import gui.builders.LBJCheckBoxBuilder;
 import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJCheckBox;
@@ -18,9 +19,7 @@ import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
 import gui.forms.createtable.CreateTableForm;
 import gui.forms.mainmenu.MainMenuForm;
-import gui.utils.BeanSupplier;
 import gui.utils.LBJFormUtils;
-import utils.LBJPreferences;
 
 /**
  * <p>
@@ -58,46 +57,29 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 
 	@Override
 	public void initializeComponents() {
-		tableNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, this).required().addLengthValidator()
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getTableNameCase()).build();
+		tableNameTextBox = new LBJTextBoxBuilder(Attribute.TABLE_NAME, this).build();
 		setTableNameIfPossible();
-
-		columnNameTextBox = new LBJTextBoxBuilder(Labels.COLUMN_NAME, this).required().addLengthValidator()
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getColumnNameCase()).build();
-
-		dataTypeTextBox = new LBJTextBoxBuilder(Labels.COLUMN_DATA_TYPE, this).addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getDataTypeCase()).required().build();
+		columnNameTextBox = new LBJTextBoxBuilder(Attribute.COLUMN_NAME, this).build();
+		dataTypeTextBox = new LBJTextBoxBuilder(Attribute.DATA_TYPE, this).build();
 
 		nullableCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_NULLABLE, this).checked().build();
-
 		defaultValueTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_DEFAULT_VALUE, this)
 				.deactivatorComponent(nullableCheckBox).disabled().build();
 
 		indexCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_INDEX, this).build();
-
-		indexNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_INDEX_NAME, this).required().addLengthValidator()
-				.addNamingConventionUpdater(BeanSupplier.get(LBJPreferences.class).getIndexName())
-				.activatorComponent(indexCheckBox)
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getIndexNameCase()).disabled()
-				.build();
+		indexNameTextBox = new LBJTextBoxBuilder(Attribute.INDEX_NAME, this).activatorComponent(indexCheckBox)
+				.disabled().build();
 
 		foreignKeyCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY, this).build();
 
-		referencedTableNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_REFERENCED_TABLE, this).required()
-				.addLengthValidator().activatorComponent(foreignKeyCheckBox)
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getTableNameCase()).disabled()
-				.build();
+		referencedTableNameTextBox = new LBJTextBoxBuilder(Attribute.REFERENCED_TABLE, this)
+				.activatorComponent(foreignKeyCheckBox).disabled().build();
 
-		referencedColumnNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_REFERENCED_COLUMN, this).required()
-				.addLengthValidator().activatorComponent(foreignKeyCheckBox)
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getColumnNameCase()).disabled()
-				.build();
+		referencedColumnNameTextBox = new LBJTextBoxBuilder(Attribute.REFERENCED_COLUMN, this)
+				.activatorComponent(foreignKeyCheckBox).disabled().build();
 
-		foreignKeyNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY_NAME, this).required()
-				.addLengthValidator()
-				.addNamingConventionUpdater(BeanSupplier.get(LBJPreferences.class).getForeignKeyName())
-				.activatorComponent(foreignKeyCheckBox)
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getForeignKeyNameCase()).disabled()
-				.build();
+		foreignKeyNameTextBox = new LBJTextBoxBuilder(Attribute.FOREIGN_KEY_NAME, this)
+				.activatorComponent(foreignKeyCheckBox).disabled().build();
 
 	}
 

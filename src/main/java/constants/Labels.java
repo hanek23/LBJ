@@ -45,9 +45,9 @@ public class Labels {
 
 	// CREATE/DROP TABLE
 	public static final String TABLE_NAME = "Table name";
-	public static final String CREATE_TABLE_PRIMARY_KEY_NAME = "Primary key name";
-	public static final String CREATE_TABLE_PRIMARY_KEY_CONSTRAIN_NAME = "Primary key constraint name";
-	public static final String TABLE_SEQUENCE_NAME = "Sequence name";
+	public static final String PRIMARY_KEY_NAME = "Primary key name";
+	public static final String PRIMARY_KEY_CONSTRAIN_NAME = "Primary key constraint name";
+	public static final String SEQUENCE_NAME = "Sequence name";
 
 	// ADD COLUMN
 	public static final String COLUMN_NAME = "Column name";
@@ -55,11 +55,11 @@ public class Labels {
 	public static final String ADD_COLUMN_FOREIGN_KEY = "Foreign key";
 	public static final String ADD_COLUMN_NULLABLE = "Nullable";
 	public static final String ADD_COLUMN_DEFAULT_VALUE = "Default value";
-	public static final String COLUMN_DATA_TYPE = "Data type";
-	public static final String ADD_COLUMN_REFERENCED_TABLE = "Referenced table";
-	public static final String ADD_COLUMN_REFERENCED_COLUMN = "Referenced column";
-	public static final String ADD_COLUMN_FOREIGN_KEY_NAME = "Foreign key name";
-	public static final String ADD_COLUMN_INDEX_NAME = "Index name";
+	public static final String DATA_TYPE = "Data type";
+	public static final String REFERENCED_TABLE = "Referenced table";
+	public static final String REFERENCED_COLUMN = "Referenced column";
+	public static final String FOREIGN_KEY_NAME = "Foreign key name";
+	public static final String INDEX_NAME = "Index name";
 
 	// GENERATE
 	public static final String GENERATE_FORM_AUTHOR = "Author";

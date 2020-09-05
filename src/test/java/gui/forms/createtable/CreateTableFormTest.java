@@ -9,12 +9,11 @@ import org.junit.jupiter.api.Test;
 import constants.Labels;
 import constants.NamingConventions;
 import domain.CreateTable;
-import gui.utils.BeanSupplier;
+import main.LBJ;
 import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
-import utils.LBJPreferences;
 
-public class CreateTableFormTest extends LBJFormTestCase {
+class CreateTableFormTest extends LBJFormTestCase {
 
 	private static final String TABLE_NAME = "ACTION";
 	private static final String PRIMARY_KEY_NAME = "id";
@@ -23,31 +22,31 @@ public class CreateTableFormTest extends LBJFormTestCase {
 	private static final String SEQUENCE_NAME = NamingConventions.DEFAULT_SEQUENCE_NAME + TABLE_NAME;
 
 	@Test
-	public void testInitialize() {
+	void testInitialize() {
 		CreateTableForm form = LBJTestUtils.getCreateTableForm();
 
 		assertThat(form).hasName(Labels.CREATE_TABLE_FORM);
 		assertThat(form).hasComponentWithName(Labels.TABLE_NAME);
-		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_PRIMARY_KEY_NAME);
-		assertThat(form).hasComponentWithName(Labels.CREATE_TABLE_PRIMARY_KEY_CONSTRAIN_NAME);
-		assertThat(form).hasComponentWithName(Labels.TABLE_SEQUENCE_NAME);
+		assertThat(form).hasComponentWithName(Labels.PRIMARY_KEY_NAME);
+		assertThat(form).hasComponentWithName(Labels.PRIMARY_KEY_CONSTRAIN_NAME);
+		assertThat(form).hasComponentWithName(Labels.SEQUENCE_NAME);
 
 		assertThat(form.getTableNameTextBox()).isRequired().hasLengthValidator()
-				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getTableNameCase());
+				.hasCaseValidator(LBJ.preferences.getTableNameCase());
 
 		assertThat(form.getPrimaryKeyNameTextBox()).isRequired().hasLengthValidator()
-				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyNameCase());
+				.hasCaseValidator(LBJ.preferences.getPrimaryKeyNameCase());
 
 		assertThat(form.getPrimaryKeyConstraintNameTextBox()).isRequired().hasLengthValidator()
-				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getPrimaryKeyConstraintNameCase());
+				.hasCaseValidator(LBJ.preferences.getPrimaryKeyConstraintNameCase());
 
 		assertThat(form.getSequenceNameTextBox()).isRequired().hasLengthValidator()
-				.hasCaseValidator(BeanSupplier.get(LBJPreferences.class).getSequenceNameCase());
+				.hasCaseValidator(LBJ.preferences.getSequenceNameCase());
 
 	}
 
 	@Test
-	public void testConvert() {
+	void testConvert() {
 		CreateTableForm form = LBJTestUtils.getCreateTableForm();
 
 		LBJTestUtils.setValueOf(form.getTableNameTextBox(), TABLE_NAME);

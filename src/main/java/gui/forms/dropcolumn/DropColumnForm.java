@@ -16,6 +16,7 @@ import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
 import gui.utils.BeanSupplier;
 import gui.utils.LBJFormUtils;
+import main.LBJ;
 import utils.LBJPreferences;
 
 /**
@@ -43,31 +44,31 @@ public class DropColumnForm extends LBJEntityForm<DropColumn> {
 	@Override
 	public void initializeComponents() {
 		tableNameTextBox = new LBJTextBoxBuilder(Labels.TABLE_NAME, this).required()
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getTableNameCase(),
-						BeanSupplier.get(LBJPreferences.class).getUseLetterCaseConventions())
+				.addCaseUpdaterAndValidator(LBJ.preferences.getTableNameCase(),
+						LBJ.preferences.getUseLetterCaseConventions())
 				.addLengthValidator().build();
 
-		if (BeanSupplier.get(LBJPreferences.class).getCopyTableName()) {
+		if (LBJ.preferences.getCopyTableName()) {
 			setTableNameIfPossible();
 		}
 
 		columnNameTextBox = new LBJTextBoxBuilder(Labels.COLUMN_NAME, this).required()
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getColumnNameCase(),
-						BeanSupplier.get(LBJPreferences.class).getUseLetterCaseConventions())
+				.addCaseUpdaterAndValidator(LBJ.preferences.getColumnNameCase(),
+						LBJ.preferences.getUseLetterCaseConventions())
 				.addLengthValidator().build();
 
 		dropIndexCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_INDEX, this).build();
 
-		indexNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_INDEX_NAME, this).required()
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getIndexNameCase(),
-						BeanSupplier.get(LBJPreferences.class).getUseLetterCaseConventions())
+		indexNameTextBox = new LBJTextBoxBuilder(Labels.INDEX_NAME, this).required()
+				.addCaseUpdaterAndValidator(LBJ.preferences.getIndexNameCase(),
+						LBJ.preferences.getUseLetterCaseConventions())
 				.addLengthValidator().activatorComponent(dropIndexCheckBox).disabled().build();
 
 		dropForeignKeyCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY, this).build();
 
-		foreignKeyNameTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_FOREIGN_KEY_NAME, this)
-				.addCaseUpdaterAndValidator(BeanSupplier.get(LBJPreferences.class).getForeignKeyNameCase(),
-						BeanSupplier.get(LBJPreferences.class).getUseLetterCaseConventions())
+		foreignKeyNameTextBox = new LBJTextBoxBuilder(Labels.FOREIGN_KEY_NAME, this)
+				.addCaseUpdaterAndValidator(LBJ.preferences.getForeignKeyNameCase(),
+						LBJ.preferences.getUseLetterCaseConventions())
 				.required().addLengthValidator().activatorComponent(dropForeignKeyCheckBox).disabled().build();
 
 	}
