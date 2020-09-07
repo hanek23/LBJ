@@ -4,6 +4,7 @@ import com.googlecode.lanterna.gui2.Window;
 
 import gui.forms.LBJForm;
 import gui.forms.addcolumn.AddColumnForm;
+import gui.forms.addnotnullconstraint.AddNotNullConstraintForm;
 import gui.forms.createtable.CreateTableForm;
 import gui.forms.dropcolumn.DropColumnForm;
 import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
@@ -27,6 +28,7 @@ public class LBJFormSupplier {
 	private static DropTableForm dropTableForm;
 	private static GenerateForm generateForm;
 	private static DropNotNullConstraintForm dropNotNullConstraintForm;
+	private static AddNotNullConstraintForm addNotNullConstraintForm;
 	private static PreferencesForm preferencesForm;
 
 	/**
@@ -127,6 +129,20 @@ public class LBJFormSupplier {
 		return dropNotNullConstraintForm;
 	}
 
+	/**
+	 * @return One and only instance of {@link AddNotNullConstraintForm}.
+	 */
+	public static synchronized AddNotNullConstraintForm getAddNotNullConstraintForm(Window window, LBJForm previousForm,
+			boolean addAsUpdatableForm) {
+		if (addNotNullConstraintForm == null) {
+			addNotNullConstraintForm = new AddNotNullConstraintForm(window, previousForm);
+			if (addAsUpdatableForm) {
+				getMainMenuForm().addFormToUpdate(addNotNullConstraintForm);
+			}
+		}
+		return addNotNullConstraintForm;
+	}
+
 	public static PreferencesForm getPreferencesForm(Window window, LBJForm previousForm, boolean addAsUpdatableForm) {
 		if (preferencesForm == null) {
 			preferencesForm = new PreferencesForm(window, previousForm);
@@ -157,8 +173,9 @@ public class LBJFormSupplier {
 	public static void reset() {
 		createTableForm = null;
 		dropTableForm = null;
-		dropNotNullConstraintForm = null;
 		generateForm = null;
+		dropNotNullConstraintForm = null;
+		addNotNullConstraintForm = null;
 		preferencesForm = null;
 	}
 

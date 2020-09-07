@@ -6,6 +6,7 @@ import constants.Labels;
 import gui.builders.LBJPlainLabelBuilder;
 import gui.forms.LBJMainMenuForm;
 import gui.forms.addcolumn.AddColumnForm;
+import gui.forms.addnotnullconstraint.AddNotNullConstraintForm;
 import gui.forms.createtable.CreateTableForm;
 import gui.forms.dropcolumn.DropColumnForm;
 import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
@@ -27,6 +28,7 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 	private AddColumnForm addColumnForm;
 	private DropColumnForm dropColumnForm;
 	private DropNotNullConstraintForm dropNotNullConstraintForm;
+	private AddNotNullConstraintForm addNotNullConstraintForm;
 	private PreferencesForm preferencesForm;
 	private ModifyDataTypeForm modifyDataTypeForm;
 
@@ -35,8 +37,7 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 	}
 
 	public void initializeBean() {
-		((BasicWindow) getWindow())
-				.setTitle(Labels.WINDOW_NAME + " v" + LBJ.properties.getVersion());
+		((BasicWindow) getWindow()).setTitle(Labels.WINDOW_NAME + " v" + LBJ.properties.getVersion());
 		initializeForm();
 	}
 
@@ -54,6 +55,7 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 		addColumnForm = LBJFormSupplier.getAddColumnForm(getWindow(), this, false);
 		dropColumnForm = LBJFormSupplier.getDropColumnForm(getWindow(), this, false);
 		dropNotNullConstraintForm = LBJFormSupplier.getDropNotNullConstraintForm(getWindow(), this, false);
+		addNotNullConstraintForm = LBJFormSupplier.getAddNotNullConstraintForm(getWindow(), this, false);
 		modifyDataTypeForm = LBJFormSupplier.getModifyDataTypeForm(getWindow(), this, false);
 		preferencesForm = LBJFormSupplier.getPreferencesForm(getWindow(), this, false);
 
@@ -61,6 +63,7 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 		addFormToUpdate(dropTableForm);
 		addFormToUpdate(addColumnForm);
 		addFormToUpdate(dropColumnForm);
+		addFormToUpdate(addNotNullConstraintForm);
 		addFormToUpdate(dropNotNullConstraintForm);
 		addFormToUpdate(modifyDataTypeForm);
 		addFormToUpdate(preferencesForm);
@@ -73,6 +76,7 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 		LBJFormUtils.addItemToMenu(getMainMenu(), dropTableForm, Labels.MAIN_MENU_DROP_TABLE);
 		LBJFormUtils.addItemToMenu(getMainMenu(), addColumnForm, Labels.MAIN_MENU_ADD_COLUMN);
 		LBJFormUtils.addItemToMenu(getMainMenu(), dropColumnForm, Labels.MAIN_MENU_DROP_COLUMN);
+		LBJFormUtils.addItemToMenu(getMainMenu(), addNotNullConstraintForm, Labels.MAIN_MENU_ADD_NOT_NULL_CONSTRAINT);
 		LBJFormUtils.addItemToMenu(getMainMenu(), dropNotNullConstraintForm, Labels.MAIN_MENU_DROP_NOT_NULL_CONSTRAINT);
 		LBJFormUtils.addItemToMenu(getMainMenu(), modifyDataTypeForm, Labels.MAIN_MENU_MODIFY_DATA_TYPE);
 		LBJFormUtils.addItemToMenu(getMainMenu(), preferencesForm, Labels.MAIN_MENU_PREFERENCES);
@@ -85,6 +89,10 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 
 	public DropNotNullConstraintForm getDropNotNullConstraintForm() {
 		return dropNotNullConstraintForm;
+	}
+
+	public AddNotNullConstraintForm getAddNotNullConstraintForm() {
+		return addNotNullConstraintForm;
 	}
 
 	public CreateTableForm getCreateTableForm() {

@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import constants.XmlPartsSupplier;
 import domain.AddColumn;
+import domain.AddNotNullConstraint;
 import domain.Column;
 import domain.CreateTable;
 import domain.DropColumn;
@@ -63,6 +64,9 @@ public class Generator {
 		if (column.isModifyDataType()) {
 			return modifyDataType((ModifyDataType) column);
 		}
+		if (column.isAddNotNullConstraint()) {
+			return addNotNullConstraint((AddNotNullConstraint) column);
+		}
 		throw new UnsupportedOperationException("Generator not yet implemeted for: " + column.getOperation());
 	}
 
@@ -80,6 +84,14 @@ public class Generator {
 		dropNotNullConstraint = XmlPartsSupplier.replaceColumnName(dropNotNullConstraint, constraint);
 		dropNotNullConstraint = XmlPartsSupplier.replaceColumnDataType(dropNotNullConstraint, constraint);
 		return dropNotNullConstraint;
+	}
+
+	private static String addNotNullConstraint(AddNotNullConstraint constraint) {
+		String addNotNullConstraint = XmlPartsSupplier.getAddNotNullConstraintBase(constraint);
+		addNotNullConstraint = XmlPartsSupplier.replaceTableName(addNotNullConstraint, constraint.getTableName());
+		addNotNullConstraint = XmlPartsSupplier.replaceColumnName(addNotNullConstraint, constraint);
+		addNotNullConstraint = XmlPartsSupplier.replaceColumnDataType(addNotNullConstraint, constraint);
+		return addNotNullConstraint;
 	}
 
 	private static String dropColumn(DropColumn column) {

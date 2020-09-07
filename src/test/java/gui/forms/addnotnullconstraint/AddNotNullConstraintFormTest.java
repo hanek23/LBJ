@@ -1,4 +1,4 @@
-package gui.forms.dropnotnullconstraint;
+package gui.forms.addnotnullconstraint;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static testutils.asserts.LBJFormAssert.assertThat;
@@ -7,12 +7,12 @@ import static testutils.asserts.LBJValueComponentAssert.assertThat;
 import org.junit.jupiter.api.Test;
 
 import constants.Labels;
-import domain.DropNotNullConstraint;
+import domain.AddNotNullConstraint;
 import main.LBJ;
-import testutils.LBJTestCase;
+import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
 
-public class DropNotNullConstraintFormTest extends LBJTestCase {
+public class AddNotNullConstraintFormTest extends LBJFormTestCase {
 
 	private static final String TABLE_NAME = "ACTION";
 	private static final String COLUMN_NAME = "lbj";
@@ -20,10 +20,10 @@ public class DropNotNullConstraintFormTest extends LBJTestCase {
 
 	@Test
 	public void testInitialize() {
-		DropNotNullConstraintForm form = LBJTestUtils.getDropNotNullConstraintForm();
+		AddNotNullConstraintForm form = LBJTestUtils.getAddNotNullConstraintForm();
 
 		// Has all components
-		assertThat(form).hasName(Labels.DROP_NOT_NULL_CONSTRAINT_FORM);
+		assertThat(form).hasName(Labels.ADD_NOT_NULL_CONSTRAINT_FORM);
 		assertThat(form).hasComponentWithName(Labels.TABLE_NAME);
 		assertThat(form).hasComponentWithName(Labels.COLUMN_NAME);
 		assertThat(form).hasComponentWithName(Labels.DATA_TYPE);
@@ -39,14 +39,14 @@ public class DropNotNullConstraintFormTest extends LBJTestCase {
 
 	@Test
 	public void testConvert() {
-		DropNotNullConstraintForm form = LBJTestUtils.getDropNotNullConstraintForm();
+		AddNotNullConstraintForm form = LBJTestUtils.getAddNotNullConstraintForm();
 
 		LBJTestUtils.setValueOf(form.getTableNameTextBox(), TABLE_NAME);
 		LBJTestUtils.setValueOf(form.getColumnNameTextBox(), COLUMN_NAME);
 		LBJTestUtils.setValueOf(form.getDataTypeTextBox(), COLUMN_DATA_TYPE);
 
-		DropNotNullConstraint column = form.convert();
-		assertThat(column.isDropNotNullConstraint()).isTrue();
+		AddNotNullConstraint column = form.convert();
+		assertThat(column.isAddNotNullConstraint()).isTrue();
 		// ignoring case because testing case upadaters is not the goal of this test
 		assertThat(column.getTableName()).isEqualToIgnoringCase(TABLE_NAME);
 		assertThat(column.getName()).isEqualToIgnoringCase(COLUMN_NAME);

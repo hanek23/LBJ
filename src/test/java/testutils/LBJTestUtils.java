@@ -11,6 +11,7 @@ import com.googlecode.lanterna.input.KeyType;
 import generator.GeneratorTestRunner;
 import gui.components.LBJValueComponent;
 import gui.forms.addcolumn.AddColumnForm;
+import gui.forms.addnotnullconstraint.AddNotNullConstraintForm;
 import gui.forms.createtable.CreateTableForm;
 import gui.forms.dropcolumn.DropColumnForm;
 import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
@@ -121,6 +122,16 @@ public class LBJTestUtils {
 	public static DropNotNullConstraintForm getDropNotNullConstraintForm() {
 		LBJMockForm mockForm = new LBJMockForm();
 		DropNotNullConstraintForm form = new DropNotNullConstraintForm(mockForm.getWindow(), mockForm);
+		form.focus();
+		return form;
+	}
+	
+	/**
+	 * @return {@link AddNotNullConstraintForm} that is already focused
+	 */
+	public static AddNotNullConstraintForm getAddNotNullConstraintForm() {
+		LBJMockForm mockForm = new LBJMockForm();
+		AddNotNullConstraintForm form = new AddNotNullConstraintForm(mockForm.getWindow(), mockForm);
 		form.focus();
 		return form;
 	}

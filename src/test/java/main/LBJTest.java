@@ -36,7 +36,8 @@ public class LBJTest extends LBJFormTestCase {
 		for (LBJForm form : mainMenuForm.getFormsToUpdate()) {
 			form.focus();
 			wait(100);
-			assertEquals(form.getContent(), mainMenuForm.getWindow().getComponent());
+			assertEquals(form.getContent(), mainMenuForm.getWindow().getComponent(),
+					form.toString() + " is not focused");
 			wait(100);
 			mainMenuForm.focus();
 		}
@@ -55,6 +56,7 @@ public class LBJTest extends LBJFormTestCase {
 	}
 
 	private void initTest() throws InterruptedException {
+		wait(1000);
 		mainMenuThread = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -64,8 +66,7 @@ public class LBJTest extends LBJFormTestCase {
 			}
 		});
 		mainMenuThread.start();
-		wait(5000);
-		mainMenuForm.focus();
+		wait(1000);
 		mainMenuForm.getThread().setExceptionHandler(new ExceptionHandler() {
 
 			@Override

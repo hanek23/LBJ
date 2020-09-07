@@ -1,9 +1,10 @@
-package gui.forms.dropnotnullconstraint;
+package gui.forms.addnotnullconstraint;
 
 import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.Window;
 
 import constants.Labels;
+import domain.AddNotNullConstraint;
 import domain.Column;
 import domain.ColumnOperation;
 import domain.DropNotNullConstraint;
@@ -16,12 +17,12 @@ import gui.forms.generate.GenerateForm;
 import gui.utils.LBJFormUtils;
 
 /**
- * Form for removing not null constraint from column. There are only 3
+ * Form for adding not null constraint to column. There are only 3
  * {@link LBJTextBox} all of which are required. They are table name, column
  * name and data type. Only next step is to go to {@link GenerateForm} as you
- * cannot, at the moment, remove multiple not null constraints at once.
+ * cannot, at the moment, add multiple not null constraints at once.
  */
-public class DropNotNullConstraintForm extends LBJEntityForm<DropNotNullConstraint> {
+public class AddNotNullConstraintForm extends LBJEntityForm<AddNotNullConstraint> {
 
 	private LBJTextBox tableNameTextBox;
 	private LBJTextBox columnNameTextBox;
@@ -29,7 +30,7 @@ public class DropNotNullConstraintForm extends LBJEntityForm<DropNotNullConstrai
 
 	private Button generateButton;
 
-	public DropNotNullConstraintForm(Window window, LBJForm previousForm) {
+	public AddNotNullConstraintForm(Window window, LBJForm previousForm) {
 		super(window, previousForm);
 	}
 
@@ -69,9 +70,8 @@ public class DropNotNullConstraintForm extends LBJEntityForm<DropNotNullConstrai
 	}
 
 	@Override
-	public DropNotNullConstraint convert() {
-		DropNotNullConstraint c = new Column(getColumnNameTextBox().getValue(),
-				ColumnOperation.DROP_NOT_NULL_CONSTRAINT);
+	public AddNotNullConstraint convert() {
+		AddNotNullConstraint c = new Column(getColumnNameTextBox().getValue(), ColumnOperation.ADD_NOT_NULL_CONSTRAINT);
 		c.setDataType(dataTypeTextBox.getValue());
 		c.setTableName(tableNameTextBox.getValue());
 		return c;
@@ -79,7 +79,7 @@ public class DropNotNullConstraintForm extends LBJEntityForm<DropNotNullConstrai
 
 	@Override
 	public String toString() {
-		return Labels.DROP_NOT_NULL_CONSTRAINT_FORM;
+		return Labels.ADD_NOT_NULL_CONSTRAINT_FORM;
 	}
 
 	public LBJTextBox getTableNameTextBox() {

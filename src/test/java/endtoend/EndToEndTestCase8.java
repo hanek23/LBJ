@@ -41,7 +41,7 @@ public class EndToEndTestCase8 extends AbstractXmlSupplier implements EndToEndTe
 		LBJTestUtils.setValueOf(generateForm.getAuthorTextBox(), "hanek23");
 		// whole changelog
 		LBJTestUtils.setValueOf(generateForm.getOnlyChangesetsCheckBox(), ONLY_CHANGESETS);
-		// only for oracle
+		// only for mssql
 		LBJTestUtils.setValueOf(generateForm.getOracleCheckBox(), false);
 		LBJTestUtils.setValueOf(generateForm.getMssqlCheckBox(), true);
 		LBJTestUtils.setValueOf(generateForm.getPostgreCheckBox(), false);

@@ -71,6 +71,11 @@ class EndToEndTestRunner extends LBJFormTestCase {
 	void test12() throws Exception {
 		runEndToEndTest(new EndToEndTestCase12());
 	}
+	
+	@Test
+	void test13() throws Exception {
+		runEndToEndTest(new EndToEndTestCase13());
+	}
 
 	private void runEndToEndTest(EndToEndTestCase testCase) throws Exception {
 		testCase.test();

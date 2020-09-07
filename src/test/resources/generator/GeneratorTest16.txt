@@ -1,0 +1,21 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
+	objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+	<changeSet id="1" author="hanek23" dbms="postgresql">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="YES">
+				SELECT is_nullable
+				FROM information_schema.columns
+				WHERE
+				columns.table_name = 'lbj_related_id'
+				AND columns.column_name = 'container'
+			</sqlCheck>
+		</preConditions>
+		<comment>Add NOTNULL constraint to column container in table LBJ_RELATED_ID if it exists</comment>
+		<addNotNullConstraint tableName="LBJ_RELATED_ID" columnName="container"
+			columnDataType="integer" />
+	</changeSet>
+</databaseChangeLog>

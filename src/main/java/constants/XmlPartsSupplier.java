@@ -3,6 +3,7 @@ package constants;
 import org.apache.commons.lang3.StringUtils;
 
 import domain.AddColumn;
+import domain.AddNotNullConstraint;
 import domain.Column;
 import domain.CreateTable;
 import domain.DropColumn;
@@ -232,6 +233,20 @@ public class XmlPartsSupplier {
 		}
 		if (constraint.isForPostgre()) {
 			xmlConstraint += XmlParts.getDropNotNullConstraintPostgre();
+		}
+		return xmlConstraint;
+	}
+
+	public static String getAddNotNullConstraintBase(AddNotNullConstraint constraint) {
+		String xmlConstraint = "";
+		if (constraint.isForOracle()) {
+			xmlConstraint += XmlParts.getAddNotNullConstraintOracle();
+		}
+		if (constraint.isForMssql()) {
+			xmlConstraint += XmlParts.getAddNotNullConstraintMssql();
+		}
+		if (constraint.isForPostgre()) {
+			xmlConstraint += XmlParts.getAddNotNullConstraintPostgre();
 		}
 		return xmlConstraint;
 	}

@@ -24,7 +24,8 @@ public class Labels {
 	public static final String DROP_TABLE_FORM = "Drop table form";
 	public static final String ADD_COLUMN_FORM = "Add column form";
 	public static final String DROP_COLUMN_FORM = "Drop column form";
-	public static final String REMOVE_NOT_NULL_CONSTRAINT_FORM = "Remove not null constraint form";
+	public static final String DROP_NOT_NULL_CONSTRAINT_FORM = "Drop not null constraint form";
+	public static final String ADD_NOT_NULL_CONSTRAINT_FORM = "Add not null constraint form";
 	public static final String GENERATE_FORM = "Generate form";
 	public static final String PREFERENCES_FORM = "Preferences form";
 	public static final String NAMING_CONVENTIONS_FORM = "Naming conventions form";
@@ -38,7 +39,8 @@ public class Labels {
 	public static final String MAIN_MENU_DROP_COLUMN = "Drop column(s)";
 	public static final String MAIN_MENU_CREATE_TABLE = "Create table";
 	public static final String MAIN_MENU_DROP_TABLE = "Drop table";
-	public static final String MAIN_MENU_DROP_NOT_NULL_CONSTRAINT = "Remove not null constraint";
+	public static final String MAIN_MENU_DROP_NOT_NULL_CONSTRAINT = "Drop not null constraint";
+	public static final String MAIN_MENU_ADD_NOT_NULL_CONSTRAINT = "Add not null constraint";
 	public static final String MAIN_MENU_MODIFY_DATA_TYPE = "Modify data type(s)";
 	public static final String MAIN_MENU_PREFERENCES = "Preferences";
 	public static final String BUTTON_EXIT = "Exit";

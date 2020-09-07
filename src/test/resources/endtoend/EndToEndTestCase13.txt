@@ -1,0 +1,48 @@
+<dontForget objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+	<changeSet id="123" author="hanek23" dbms="oracle">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="Y">
+				SELECT NULLABLE
+				FROM USER_TAB_COLUMNS
+				WHERE table_name =
+				'LBJ_RELATED_ID'
+				AND column_name = 'CONTAINER'
+			</sqlCheck>
+		</preConditions>
+		<comment>Add NOTNULL constraint to column CONTAINER in table LBJ_RELATED_ID if it exists</comment>
+		<addNotNullConstraint tableName="LBJ_RELATED_ID" columnName="container"
+			columnDataType="integer" />
+	</changeSet>
+
+	<changeSet id="124" author="hanek23" dbms="mssql">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="1">
+				SELECT is_nullable
+				FROM sys.columns
+				WHERE object_id =
+				OBJECT_ID('LBJ_RELATED_ID')
+				AND name = 'CONTAINER'
+			</sqlCheck>
+		</preConditions>
+		<comment>Add NOTNULL constraint to column CONTAINER in table LBJ_RELATED_ID if it exists</comment>
+		<addNotNullConstraint tableName="LBJ_RELATED_ID" columnName="container"
+			columnDataType="integer" />
+	</changeSet>
+
+	<changeSet id="125" author="hanek23" dbms="postgresql">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="YES">
+				SELECT is_nullable
+				FROM information_schema.columns
+				WHERE
+				columns.table_name = 'lbj_related_id'
+				AND columns.column_name = 'container'
+			</sqlCheck>
+		</preConditions>
+		<comment>Add NOTNULL constraint to column container in table LBJ_RELATED_ID if it exists</comment>
+		<addNotNullConstraint tableName="LBJ_RELATED_ID" columnName="container"
+			columnDataType="integer" />
+	</changeSet>
+
+</dontForget>

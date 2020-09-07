@@ -19,6 +19,8 @@ public interface GeneralColumn {
 	public boolean isAddColumn();
 
 	public boolean isDropNotNullConstraint();
+	
+	public boolean isAddNotNullConstraint();
 
 	public boolean isDropColumn();
 

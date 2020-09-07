@@ -73,10 +73,25 @@ public class GeneratorTestRunner {
 	void testGenerate12() throws Exception {
 		assertChangeLogEquals(new GeneratorTest12());
 	}
-	
+
 	@Test
 	void testGenerate13() throws Exception {
 		assertChangeLogEquals(new GeneratorTest13());
+	}
+
+	@Test
+	void testGenerate14() throws Exception {
+		assertChangeLogEquals(new GeneratorTest14());
+	}
+	
+	@Test
+	void testGenerate15() throws Exception {
+		assertChangeLogEquals(new GeneratorTest15());
+	}
+	
+	@Test
+	void testGenerate16() throws Exception {
+		assertChangeLogEquals(new GeneratorTest16());
 	}
 
 	private void assertChangeLogEquals(GeneratorTestCase testTableSupplier) throws Exception {

@@ -77,6 +77,10 @@ public class XmlParts {
 	private static final String DROP_NOT_NULL_CONSTRAINT_MSSQL_TEMPLATE = "/generator/dropnotnullconstraint/DropNotNullConstraintMssql.txt";
 	private static final String DROP_NOT_NULL_CONSTRAINT_POSTGRE_TEMPLATE = "/generator/dropnotnullconstraint/DropNotNullConstraintPostgre.txt";
 
+	private static final String ADD_NOT_NULL_CONSTRAINT_ORACLE_TEMPLATE = "/generator/addnotnullconstraint/AddNotNullConstraintOracle.txt";
+	private static final String ADD_NOT_NULL_CONSTRAINT_MSSQL_TEMPLATE = "/generator/addnotnullconstraint/AddNotNullConstraintMssql.txt";
+	private static final String ADD_NOT_NULL_CONSTRAINT_POSTGRE_TEMPLATE = "/generator/addnotnullconstraint/AddNotNullConstraintPostgre.txt";
+
 	private static final String DROP_TABLE_SEQUENCE_TEMPLATE = "/generator/droptable/DropSequence.txt";
 	private static final String DROP_TABLE_TEMPLATE = "/generator/droptable/DropTable.txt";
 
@@ -156,6 +160,18 @@ public class XmlParts {
 
 	protected static String getDropNotNullConstraintPostgre() {
 		return FileUtils.getStringFromFileResource(XmlParts.class, DROP_NOT_NULL_CONSTRAINT_POSTGRE_TEMPLATE);
+	}
+
+	protected static String getAddNotNullConstraintOracle() {
+		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_NOT_NULL_CONSTRAINT_ORACLE_TEMPLATE);
+	}
+
+	protected static String getAddNotNullConstraintMssql() {
+		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_NOT_NULL_CONSTRAINT_MSSQL_TEMPLATE);
+	}
+
+	protected static String getAddNotNullConstraintPostgre() {
+		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_NOT_NULL_CONSTRAINT_POSTGRE_TEMPLATE);
 	}
 
 	protected static String getAddColumnConstraints() {
