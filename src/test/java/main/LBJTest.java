@@ -37,6 +37,7 @@ public class LBJTest extends LBJFormTestCase {
 			form.focus();
 			wait(100);
 			assertEquals(form.getContent(), mainMenuForm.getWindow().getComponent());
+			wait(100);
 			mainMenuForm.focus();
 		}
 		assertNoException();
