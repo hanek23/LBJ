@@ -97,7 +97,7 @@ public class Generator {
 	private static String dropColumn(DropColumn column) {
 		String xmlDropColumn = "";
 		if (column.hasIndex()) {
-			xmlDropColumn = XmlPartsSupplier.getDropIndexBase(column);
+			xmlDropColumn += XmlPartsSupplier.getDropIndexBase(column);
 			xmlDropColumn = XmlPartsSupplier.replaceColumnIndexName(xmlDropColumn, (Column) column);
 		}
 		if (column.hasForeignKey()) {
@@ -107,6 +107,7 @@ public class Generator {
 			xmlDropColumn = XmlPartsSupplier.replaceColumnForeignKeyReferencedTable(xmlDropColumn, (Column) column);
 		}
 		xmlDropColumn += XmlPartsSupplier.getDropColumnBase();
+		xmlDropColumn = XmlPartsSupplier.replaceDropColumnDefaultValue(xmlDropColumn, column);
 		xmlDropColumn = XmlPartsSupplier.replaceTableName(xmlDropColumn, column.getTableName());
 		xmlDropColumn = XmlPartsSupplier.replaceColumnName(xmlDropColumn, column);
 		return xmlDropColumn;

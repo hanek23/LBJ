@@ -25,17 +25,19 @@ public class GeneratorTestUtils {
 		column.setTableName(tableName);
 		column.setDataType(dataType);
 		column.setNullable(nullable);
-		column.setIndex(!StringUtils.isBlank(indexName));
+		column.setHasIndex(!StringUtils.isBlank(indexName));
 		column.setIndexName(indexName);
 		column.setForeignKey(foreignKey);
 		column.setDefaultValue(defaultValue);
 		return column;
 	}
 
-	public static DropColumn dropColumn(String name, String tableName, String indexName, ForeignKey foreignKey) {
+	public static DropColumn dropColumn(String name, String tableName, boolean hasDefaultValue, String indexName,
+			ForeignKey foreignKey) {
 		DropColumn column = new Column(name, ColumnOperation.DROP);
 		column.setTableName(tableName);
-		column.setIndex(!StringUtils.isBlank(indexName));
+		column.setHasDefaultValue(hasDefaultValue);
+		column.setHasIndex(!StringUtils.isBlank(indexName));
 		column.setIndexName(indexName);
 		column.setForeignKey(foreignKey);
 		return column;

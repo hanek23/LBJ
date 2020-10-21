@@ -45,6 +45,7 @@ public class EndToEndTestCase11 extends AbstractXmlSupplier implements EndToEndT
 		// Column with just index
 		LBJTestUtils.setValueOf(dropColumnForm2.getTableNameTextBox(), TABLE_NAME);
 		LBJTestUtils.setValueOf(dropColumnForm2.getColumnNameTextBox(), COLUMN_NAME_2);
+		LBJTestUtils.setValueOf(dropColumnForm2.getDropDefaultValueCheckBox(), true);
 		LBJTestUtils.setValueOf(dropColumnForm2.getIndexCheckBox(), true);
 		LBJTestUtils.setValueOf(dropColumnForm2.getIndexNameTextBox(), INDEX_NAME);
 		LBJFormAssert.assertThat(dropColumnForm2).isValid();
@@ -54,6 +55,7 @@ public class EndToEndTestCase11 extends AbstractXmlSupplier implements EndToEndT
 		// Column with just foreign key
 		LBJTestUtils.setValueOf(dropColumnForm3.getTableNameTextBox(), TABLE_NAME);
 		LBJTestUtils.setValueOf(dropColumnForm3.getColumnNameTextBox(), COLUMN_NAME_3);
+		LBJTestUtils.setValueOf(dropColumnForm3.getDropDefaultValueCheckBox(), true);
 		LBJTestUtils.setValueOf(dropColumnForm3.getForeignKeyCheckBox(), true);
 		LBJTestUtils.setValueOf(dropColumnForm3.getForeignKeyNameTextBox(), FK_NAME);
 		LBJFormAssert.assertThat(dropColumnForm3).isValid();

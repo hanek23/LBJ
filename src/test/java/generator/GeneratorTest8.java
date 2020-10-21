@@ -18,7 +18,7 @@ public class GeneratorTest8 extends AbstractXmlSupplier implements GeneratorTest
 
 	@Override
 	public List<Entity> getEntities() {
-		return Arrays.asList(dropColumn(COLUMN_NAME, TABLE_NAME, INDEX_NAME, new ForeignKey(FK_NAME)));
+		return Arrays.asList(dropColumn(COLUMN_NAME, TABLE_NAME,false, INDEX_NAME, new ForeignKey(FK_NAME)));
 
 	}
 

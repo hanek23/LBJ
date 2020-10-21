@@ -16,7 +16,7 @@ public class GeneratorTest12 extends AbstractXmlSupplier implements GeneratorTes
 
 	@Override
 	public List<Entity> getEntities() {
-		return Arrays.asList(dropColumn(COLUMN_NAME, TABLE_NAME, INDEX_NAME, null));
+		return Arrays.asList(dropColumn(COLUMN_NAME, TABLE_NAME, true, INDEX_NAME, null));
 
 	}
 

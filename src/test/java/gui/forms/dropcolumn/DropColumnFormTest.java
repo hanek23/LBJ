@@ -16,6 +16,7 @@ public class DropColumnFormTest extends LBJFormTestCase {
 
 	private static final String TABLE_NAME = "ACTION";
 	private static final String COLUMN_NAME = "lbj";
+	private static final boolean HAS_DEFAULT_VALUE = true;
 	private static final boolean HAS_INDEX = true;
 	private static final String INDEX_NAME = NamingConventions.DEFAULT_INDEX_NAME + TABLE_NAME
 			+ NamingConventions.SEPARATOR + COLUMN_NAME;
@@ -30,12 +31,14 @@ public class DropColumnFormTest extends LBJFormTestCase {
 		assertThat(form).hasName(Labels.DROP_COLUMN_FORM);
 		assertThat(form).hasComponentWithName(Labels.TABLE_NAME);
 		assertThat(form).hasComponentWithName(Labels.COLUMN_NAME);
+		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_DEFAULT_VALUE);
 		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_INDEX);
 		assertThat(form).hasComponentWithName(Labels.INDEX_NAME);
 		assertThat(form).hasComponentWithName(Labels.ADD_COLUMN_FOREIGN_KEY);
 		assertThat(form).hasComponentWithName(Labels.FOREIGN_KEY_NAME);
 
 		// in right states
+		assertThat(form.getDropDefaultValueCheckBox()).isNotChecked();
 		assertThat(form.getIndexCheckBox()).isNotChecked();
 		assertThat(form.getIndexNameTextBox()).isNotEnabled();
 		assertThat(form.getForeignKeyCheckBox()).isNotChecked();
@@ -55,6 +58,7 @@ public class DropColumnFormTest extends LBJFormTestCase {
 
 		LBJTestUtils.setValueOf(form.getTableNameTextBox(), TABLE_NAME);
 		LBJTestUtils.setValueOf(form.getColumnNameTextBox(), COLUMN_NAME);
+		LBJTestUtils.setValueOf(form.getDropDefaultValueCheckBox(), HAS_DEFAULT_VALUE);
 		LBJTestUtils.setValueOf(form.getIndexCheckBox(), HAS_INDEX);
 		LBJTestUtils.setValueOf(form.getIndexNameTextBox(), INDEX_NAME);
 		LBJTestUtils.setValueOf(form.getForeignKeyCheckBox(), HAS_FOREIGNKEY);
@@ -65,6 +69,7 @@ public class DropColumnFormTest extends LBJFormTestCase {
 		// ignoring case because testing case upadaters is not the goal of this test
 		assertThat(column.getTableName()).isEqualToIgnoringCase(TABLE_NAME);
 		assertThat(column.getName()).isEqualToIgnoringCase(COLUMN_NAME);
+		assertThat(column.hasDefaultValue()).isEqualTo(HAS_DEFAULT_VALUE);
 		assertThat(column.hasIndex()).isEqualTo(HAS_INDEX);
 		assertThat(column.getIndexName()).isEqualToIgnoringCase(INDEX_NAME);
 		assertThat(column.hasForeignKey()).isEqualTo(HAS_FOREIGNKEY);

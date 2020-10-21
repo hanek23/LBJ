@@ -35,7 +35,7 @@
 		<columnExists tableName="LBJ_REFERENCE" columnName="ACTION" />
 	</preConditions>
 	<comment>Drop column ACTION from table LBJ_REFERENCE if exists</comment>
-	<dropColumn columnName="ACTION" tableName="LBJ_REFERENCE" />
+	<dropColumn  tableName="LBJ_REFERENCE" columnName="ACTION" />
 </changeSet>
 	
 </databaseChangeLog>

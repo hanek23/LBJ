@@ -35,7 +35,8 @@
 		<columnExists tableName="LBJ_REFERENCE" columnName="ACTION" />
 	</preConditions>
 	<comment>Drop column ACTION from table LBJ_REFERENCE if exists</comment>
-	<dropColumn columnName="ACTION" tableName="LBJ_REFERENCE" />
+	<dropColumn tableName="LBJ_REFERENCE" columnName="ACTION" />
+	<dropDefaultValue tableName="LBJ_REFERENCE" columnName="ACTION"/>
 </changeSet>
 
 
@@ -70,7 +71,7 @@
 		<columnExists tableName="LBJ_KEY" columnName="ESC" />
 	</preConditions>
 	<comment>Drop column ESC from table LBJ_KEY if exists</comment>
-	<dropColumn columnName="ESC" tableName="LBJ_KEY" />
+	<dropColumn tableName="LBJ_KEY" columnName="ESC" />
 </changeSet>
 	
 </databaseChangeLog>

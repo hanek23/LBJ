@@ -149,7 +149,7 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 		if (!column.isNullable() && StringUtils.isNotBlank(defaultValueTextBox.getValue())) {
 			column.setDefaultValue(defaultValueTextBox.getValue());
 		}
-		column.setIndex(indexCheckBox.getValue());
+		column.setHasIndex(indexCheckBox.getValue());
 		column.setIndexName(indexNameTextBox.getValue());
 		if (foreignKeyCheckBox.isChecked()) {
 			ForeignKey key = new ForeignKey(foreignKeyNameTextBox.getValue());

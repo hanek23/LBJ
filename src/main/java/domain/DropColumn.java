@@ -14,12 +14,16 @@ public interface DropColumn extends GeneralColumn, Entity {
 
 	public boolean hasIndex();
 
-	public void setIndex(boolean index);
+	public void setHasIndex(boolean index);
 
 	/**
 	 * @return true if either {@link #hasIndex()} or {@link #hasForeignKey()} return
 	 *         true
 	 */
 	public boolean hasConstrains();
+	
+	public boolean hasDefaultValue();
+
+	public void setHasDefaultValue(boolean defaultValue);
 
 }

@@ -296,4 +296,12 @@ public class XmlPartsSupplier {
 		return StringUtils.replaceOnce(replaceIn, XmlParts.REPLACE_COLUMN_DEFAULT_VALUE, defaultValue);
 	}
 
+	public static String replaceDropColumnDefaultValue(String xmlDropColumn, DropColumn column) {
+		String replaceWith = "";
+		if (column.hasDefaultValue()) {
+			replaceWith = XmlParts.getDropColumnDefaultValue();
+		}
+		return StringUtils.replace(xmlDropColumn, XmlParts.REPLACE_DROP_COLUMN_DEFAULT_VALUE, replaceWith);
+	}
+
 }

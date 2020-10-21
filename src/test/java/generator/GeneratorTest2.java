@@ -16,7 +16,7 @@ public class GeneratorTest2 extends AbstractXmlSupplier implements GeneratorTest
 		column.setDataType("integer");
 		column.setForeignKey(new ForeignKey("F_LBJ_USER_ID_LBJ_ERROR", "LBJ_ERROR", "id_lbj_error"));
 		column.setIndexName("I_LBJ_USER_NOTIF");
-		column.setIndex(true);
+		column.setHasIndex(true);
 		column.setNullable(false);
 		column.setTableName("LBJ_NSNCONT_USER");
 		return column;

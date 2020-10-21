@@ -18,7 +18,7 @@ public interface AddColumn extends GeneralColumn, Entity {
 
 	public boolean hasIndex();
 
-	public void setIndex(boolean index);
+	public void setHasIndex(boolean index);
 
 	/**
 	 * @return true if either {@link #hasIndex()} or {@link #hasForeignKey()} return

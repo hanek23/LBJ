@@ -17,7 +17,7 @@ public class GeneratorTest1 extends AbstractXmlSupplier implements GeneratorTest
 		column.setDataType("integer");
 		column.setForeignKey(new ForeignKey("F_LBJ_REF_ID_LBJ_ACTION", "LBJ_ACTION", "id_lbj_action"));
 		column.setIndexName("I_LBJ_REFERENCE_NACTION");
-		column.setIndex(true);
+		column.setHasIndex(true);
 		column.setTableName("LBJ_REFERENCE");
 		return column;
 	}

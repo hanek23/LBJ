@@ -48,6 +48,8 @@ public class XmlParts {
 			+ XML_REPLACE_END;
 	protected static final String REPLACE_COLUMN_DEFAULT_VALUE = XML_REPLACE_START + "COLUMN_DEFAULT_VALUE"
 			+ XML_REPLACE_END;
+	protected static final String REPLACE_DROP_COLUMN_DEFAULT_VALUE = XML_REPLACE_START + "DROP_COLUMN_DEFAULT_VALUE"
+			+ XML_REPLACE_END;
 
 	// Paths to templates
 	private static final String CHANGELOG_START_TEMPLATE = "/generator/shared/ChangeLogStart.txt";
@@ -72,6 +74,7 @@ public class XmlParts {
 	private static final String DROP_INDEX_MSSQL_POSTGRE_TEMPLATE = "/generator/dropcolumn/DropIndexMssqlPostgre.txt";
 	private static final String DROP_INDEX_ORACLE_TEMPLATE = "/generator/dropcolumn/DropIndexOracle.txt";
 	private static final String DROP_FOREIGN_KEY_TEMPLATE = "/generator/dropcolumn/DropForeignKey.txt";
+	private static final String DROP_COLUMN_DEFAULT_VALUE_TEMPLATE = "/generator/dropcolumn/DropDefaultValue.txt";
 
 	private static final String DROP_NOT_NULL_CONSTRAINT_ORACLE_TEMPLATE = "/generator/dropnotnullconstraint/DropNotNullConstraintOracle.txt";
 	private static final String DROP_NOT_NULL_CONSTRAINT_MSSQL_TEMPLATE = "/generator/dropnotnullconstraint/DropNotNullConstraintMssql.txt";
@@ -196,6 +199,10 @@ public class XmlParts {
 
 	protected static String getModifyDataTypeBase() {
 		return FileUtils.getStringFromFileResource(XmlParts.class, MODIFY_DATA_TYPE_TEMPLATE);
+	}
+
+	public static String getDropColumnDefaultValue() {
+		return FileUtils.getStringFromFileResource(XmlParts.class, DROP_COLUMN_DEFAULT_VALUE_TEMPLATE);
 	}
 
 }

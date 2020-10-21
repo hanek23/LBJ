@@ -21,14 +21,16 @@ import utils.LBJPreferences;
 
 /**
  * Form for droping column. You have to specify table name, column name and
- * potentionaly index and foreign key names. Does not have any case updaters nor
- * validators since you might want to drop something that does not comply
- * standards.
+ * potentionaly index and foreign key names. You can also choose to drop default
+ * value which is required to do on MSSQL if there is one. Does not have any
+ * case updaters nor validators since you might want to drop something that does
+ * not comply standards.
  */
 public class DropColumnForm extends LBJEntityForm<DropColumn> {
 
 	private LBJTextBox tableNameTextBox;
 	private LBJTextBox columnNameTextBox;
+	private LBJCheckBox dropDefaultValueCheckBox;
 	private LBJCheckBox dropIndexCheckBox;
 	private LBJTextBox indexNameTextBox;
 	private LBJCheckBox dropForeignKeyCheckBox;
@@ -56,6 +58,8 @@ public class DropColumnForm extends LBJEntityForm<DropColumn> {
 				.addCaseUpdaterAndValidator(LBJ.preferences.getColumnNameCase(),
 						LBJ.preferences.getUseLetterCaseConventions())
 				.addLengthValidator().build();
+
+		dropDefaultValueCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_DEFAULT_VALUE, this).build();
 
 		dropIndexCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_INDEX, this).build();
 
@@ -104,6 +108,7 @@ public class DropColumnForm extends LBJEntityForm<DropColumn> {
 	public void addComponents() {
 		LBJFormUtils.addValueAndLabeledComponentTo(this, tableNameTextBox);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, columnNameTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, dropDefaultValueCheckBox);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, dropIndexCheckBox);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, indexNameTextBox);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, dropForeignKeyCheckBox);
@@ -121,7 +126,8 @@ public class DropColumnForm extends LBJEntityForm<DropColumn> {
 	public DropColumn convert() {
 		DropColumn column = new Column(columnNameTextBox.getValue(), ColumnOperation.DROP);
 		column.setTableName(tableNameTextBox.getValue());
-		column.setIndex(dropIndexCheckBox.getValue());
+		column.setHasDefaultValue(dropDefaultValueCheckBox.getValue());
+		column.setHasIndex(dropIndexCheckBox.getValue());
 		column.setIndexName(indexNameTextBox.getValue());
 		if (dropForeignKeyCheckBox.isChecked()) {
 			ForeignKey key = new ForeignKey(foreignKeyNameTextBox.getValue());
@@ -165,6 +171,14 @@ public class DropColumnForm extends LBJEntityForm<DropColumn> {
 
 	public Button getGenerateButton() {
 		return generateButton;
+	}
+
+	public LBJCheckBox getDropDefaultValueCheckBox() {
+		return dropDefaultValueCheckBox;
+	}
+
+	public void setDropDefaultValueCheckBox(LBJCheckBox dropDefaultValueCheckBox) {
+		this.dropDefaultValueCheckBox = dropDefaultValueCheckBox;
 	}
 
 }

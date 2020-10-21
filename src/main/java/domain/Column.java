@@ -14,6 +14,7 @@ public class Column extends AbstractEntity
 	private ForeignKey foreignKey;
 	private ColumnOperation operation;
 	private String defaultValue;
+	private boolean hasDefaultValue;
 
 	public Column(String name, ColumnOperation operation) {
 		this.name = name;
@@ -82,7 +83,7 @@ public class Column extends AbstractEntity
 	}
 
 	@Override
-	public void setIndex(boolean index) {
+	public void setHasIndex(boolean index) {
 		this.hasIndex = index;
 	}
 
@@ -142,6 +143,16 @@ public class Column extends AbstractEntity
 
 	public void setDefaultValue(String defaultValue) {
 		this.defaultValue = defaultValue;
+	}
+
+	@Override
+	public boolean hasDefaultValue() {
+		return hasDefaultValue;
+	}
+
+	@Override
+	public void setHasDefaultValue(boolean hasDefaultValue) {
+		this.hasDefaultValue = hasDefaultValue;
 	}
 
 }
