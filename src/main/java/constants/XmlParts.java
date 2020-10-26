@@ -87,7 +87,7 @@ public class XmlParts {
 	private static final String DROP_TABLE_SEQUENCE_TEMPLATE = "/generator/droptable/DropSequence.txt";
 	private static final String DROP_TABLE_TEMPLATE = "/generator/droptable/DropTable.txt";
 
-	private static final String MODIFY_DATA_TYPE_TEMPLATE = "/generator/modifyDataType/ModifyDataType.txt";
+	private static final String MODIFY_DATA_TYPE_TEMPLATE = "/generator/modifydatatype/ModifyDataType.txt";
 
 	protected static String getChangelogStart() {
 		return FileUtils.getStringFromFileResource(XmlParts.class, CHANGELOG_START_TEMPLATE);
