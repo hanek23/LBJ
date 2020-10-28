@@ -10,8 +10,9 @@ import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJTextBox;
 import gui.utils.LBJCaseUtils;
 import testutils.LBJMockForm;
+import testutils.LBJTestCase;
 
-class LBJLowerCaseUpdaterTest {
+class LBJLowerCaseUpdaterTest extends LBJTestCase {
 
 	@Test
 	void testUpdate() {
