@@ -40,9 +40,6 @@ public abstract class LBJForm implements Runnable {
 		this.window = window;
 	}
 
-	@Override
-	public abstract String toString();
-
 	public void initializeForm() {
 		initializeContent();
 		initializeComponents();
@@ -195,5 +192,8 @@ public abstract class LBJForm implements Runnable {
 	public boolean addValidator(LBJFormValidator<? extends LBJForm> validator) {
 		return getValidators().add((LBJFormValidator<LBJForm>) validator);
 	}
+
+	@Override
+	public abstract String toString();
 
 }
