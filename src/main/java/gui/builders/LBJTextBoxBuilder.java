@@ -50,6 +50,15 @@ public class LBJTextBoxBuilder {
 		lbjTextBox.setLabel(new Label(name));
 	}
 
+	/**
+	 * Sets name and label of the component
+	 */
+	public LBJTextBoxBuilder name(String name) {
+		lbjTextBox.setName(name);
+		lbjTextBox.getLabel().setText(name);
+		return this;
+	}
+
 	public LBJTextBoxBuilder(Attribute attribute, LBJForm form) {
 		this(attribute.getLabel(), form);
 		addCaseUpdaterAndValidator(attribute.getLetterCase());

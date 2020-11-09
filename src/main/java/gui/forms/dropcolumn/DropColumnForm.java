@@ -14,10 +14,8 @@ import gui.components.LBJCheckBox;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
-import gui.utils.BeanSupplier;
 import gui.utils.LBJFormUtils;
 import main.LBJ;
-import utils.LBJPreferences;
 
 /**
  * Form for droping column. You have to specify table name, column name and

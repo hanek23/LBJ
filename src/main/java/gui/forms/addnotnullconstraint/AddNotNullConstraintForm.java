@@ -7,7 +7,6 @@ import constants.Labels;
 import domain.AddNotNullConstraint;
 import domain.Column;
 import domain.ColumnOperation;
-import domain.DropNotNullConstraint;
 import gui.attribute.Attribute;
 import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJTextBox;
