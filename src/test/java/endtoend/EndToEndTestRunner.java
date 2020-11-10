@@ -7,6 +7,7 @@ import java.awt.datatransfer.DataFlavor;
 
 import org.junit.jupiter.api.Test;
 
+import constants.XmlPartsSupplier;
 import testutils.LBJFormTestCase;
 import testutils.LBJTestUtils;
 
@@ -76,10 +77,21 @@ class EndToEndTestRunner extends LBJFormTestCase {
 	void test13() throws Exception {
 		runEndToEndTest(new EndToEndTestCase13());
 	}
+	
+	@Test
+	void test14() throws Exception {
+		runEndToEndTest(new EndToEndTestCase14());
+	}
+	
+	@Test
+	void test15() throws Exception {
+		runEndToEndTest(new EndToEndTestCase15());
+	}
 
 	private void runEndToEndTest(EndToEndTestCase testCase) throws Exception {
 		testCase.test();
 		String expected = testCase.getExpectedXml();
+		expected = XmlPartsSupplier.replaceVersion(expected);
 		String actual = getStringFromClipboard();
 		// used for replacement of names
 		assertThat(actual).doesNotContain("$");

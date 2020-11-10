@@ -7,8 +7,10 @@ import gui.builders.LBJPlainLabelBuilder;
 import gui.forms.LBJMainMenuForm;
 import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.addnotnullconstraint.AddNotNullConstraintForm;
+import gui.forms.createindex.CreateIndexForm;
 import gui.forms.createtable.CreateTableForm;
 import gui.forms.dropcolumn.DropColumnForm;
+import gui.forms.dropindex.DropIndexForm;
 import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
 import gui.forms.droptable.DropTableForm;
 import gui.forms.modifydatatype.ModifyDataTypeForm;
@@ -29,8 +31,10 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 	private DropColumnForm dropColumnForm;
 	private DropNotNullConstraintForm dropNotNullConstraintForm;
 	private AddNotNullConstraintForm addNotNullConstraintForm;
-	private PreferencesForm preferencesForm;
 	private ModifyDataTypeForm modifyDataTypeForm;
+	private CreateIndexForm createIndexForm;
+	private DropIndexForm dropIndexForm;
+	private PreferencesForm preferencesForm;
 
 	public MainMenuForm() {
 		super(new BasicWindow());
@@ -54,9 +58,11 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 		dropTableForm = LBJFormSupplier.getDropTableForm(getWindow(), this, false);
 		addColumnForm = LBJFormSupplier.getAddColumnForm(getWindow(), this, false);
 		dropColumnForm = LBJFormSupplier.getDropColumnForm(getWindow(), this, false);
-		dropNotNullConstraintForm = LBJFormSupplier.getDropNotNullConstraintForm(getWindow(), this, false);
 		addNotNullConstraintForm = LBJFormSupplier.getAddNotNullConstraintForm(getWindow(), this, false);
+		dropNotNullConstraintForm = LBJFormSupplier.getDropNotNullConstraintForm(getWindow(), this, false);
 		modifyDataTypeForm = LBJFormSupplier.getModifyDataTypeForm(getWindow(), this, false);
+		createIndexForm = LBJFormSupplier.getCreateIndexForm(getWindow(), this, false);
+		dropIndexForm = LBJFormSupplier.getDropIndexForm(getWindow(), this, false);
 		preferencesForm = LBJFormSupplier.getPreferencesForm(getWindow(), this, false);
 
 		addFormToUpdate(createTableForm);
@@ -66,6 +72,8 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 		addFormToUpdate(addNotNullConstraintForm);
 		addFormToUpdate(dropNotNullConstraintForm);
 		addFormToUpdate(modifyDataTypeForm);
+		addFormToUpdate(createIndexForm);
+		addFormToUpdate(dropIndexForm);
 		addFormToUpdate(preferencesForm);
 	}
 
@@ -79,6 +87,8 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 		LBJFormUtils.addItemToMenu(getMainMenu(), addNotNullConstraintForm, Labels.MAIN_MENU_ADD_NOT_NULL_CONSTRAINT);
 		LBJFormUtils.addItemToMenu(getMainMenu(), dropNotNullConstraintForm, Labels.MAIN_MENU_DROP_NOT_NULL_CONSTRAINT);
 		LBJFormUtils.addItemToMenu(getMainMenu(), modifyDataTypeForm, Labels.MAIN_MENU_MODIFY_DATA_TYPE);
+		LBJFormUtils.addItemToMenu(getMainMenu(), createIndexForm, Labels.MAIN_MENU_CREATE_INDEX);
+		LBJFormUtils.addItemToMenu(getMainMenu(), dropIndexForm, Labels.MAIN_MENU_DROP_INDEX);
 		LBJFormUtils.addItemToMenu(getMainMenu(), preferencesForm, Labels.MAIN_MENU_PREFERENCES);
 		LBJFormUtils.addExitButtonToMenu(getMainMenu());
 	}
@@ -105,6 +115,14 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 
 	public ModifyDataTypeForm getModifyDataTypeForm() {
 		return modifyDataTypeForm;
+	}
+
+	public CreateIndexForm getCreateIndexForm() {
+		return createIndexForm;
+	}
+
+	public DropIndexForm getDropIndexForm() {
+		return dropIndexForm;
 	}
 
 }

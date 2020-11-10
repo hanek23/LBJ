@@ -212,6 +212,15 @@ public class LBJTextBoxBuilder {
 		addValueUpdater(BeanSupplier.get(LBJNamingConventionUpdater.class));
 		return this;
 	}
+	
+	/**
+	 * Clears naming conventions
+	 */
+	public LBJTextBoxBuilder clearNamingConvention() {
+		lbjTextBox.setNamingConvention(null);
+		lbjTextBox.getValueUpdaters().remove(BeanSupplier.get(LBJNamingConventionUpdater.class));
+		return this;
+	}
 
 	public LBJTextBox build() {
 		lbjTextBox.getValueUpdaters().sort(LBJTextBoxBuilder::compareUpdaters);

@@ -5,13 +5,17 @@ import org.apache.commons.lang3.StringUtils;
 import domain.AddColumn;
 import domain.AddNotNullConstraint;
 import domain.Column;
+import domain.CreateIndex;
 import domain.CreateTable;
 import domain.DropColumn;
+import domain.DropIndex;
 import domain.DropNotNullConstraint;
 import domain.GeneralColumn;
 import domain.GeneralTable;
+import domain.HasIndex;
 import generator.Generator;
 import generator.GeneratorSettings;
+import main.LBJ;
 
 /**
  * Supplies {@link Generator} with {@link XmlParts}. Also does replacements of
@@ -40,19 +44,23 @@ public class XmlPartsSupplier {
 	 * from 1 and puts all of them into changelog.
 	 */
 	private static String toChangelog(String changesets, GeneratorSettings settings) {
-		changesets = XmlPartsSupplier.replaceAuthor(changesets, settings.getAuthor());
-		changesets = replaceIds(changesets, 1);
-		return StringUtils.replace(XmlParts.getChangelogStart(), XmlParts.REPLACE_CHAGESETS, changesets);
+		String changelog = StringUtils.replace(XmlParts.getChangelogStart(), XmlParts.REPLACE_CHAGESETS, changesets);
+		changelog = XmlPartsSupplier.replaceAuthor(changelog, settings.getAuthor());
+		changelog = replaceIds(changelog, 1);
+		changelog = XmlPartsSupplier.replaceVersion(changelog);
+		return changelog;
 	}
 
 	/**
-	 * Replaces author ID of each changeset with incremental number starting from
-	 * passed argumend
+	 * Replaces author and ID of each changeset with incremental number starting
+	 * from passed argumend
 	 */
 	private static String toChangeSets(String changesets, GeneratorSettings settings) {
+		changesets = StringUtils.replace(XmlParts.getChangesetsStart(), XmlParts.REPLACE_CHAGESETS, changesets);
 		changesets = XmlPartsSupplier.replaceAuthor(changesets, settings.getAuthor());
 		changesets = replaceIds(changesets, settings.getStartingId());
-		return StringUtils.replace(XmlParts.getChangesetsStart(), XmlParts.REPLACE_CHAGESETS, changesets);
+		changesets = XmlPartsSupplier.replaceVersion(changesets);
+		return changesets;
 	}
 
 	private static String replaceIds(String changesets, int startingId) {
@@ -65,6 +73,14 @@ public class XmlPartsSupplier {
 
 	private static String replaceAuthor(String replaceIn, String author) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_AUTHOR, author);
+	}
+
+	/**
+	 * Also used from tests where you need to replace version in tests files to be
+	 * in line with actually generated files
+	 */
+	public static String replaceVersion(String replaceIn) {
+		return StringUtils.replace(replaceIn, XmlParts.REPLACE_LBJ_VERSION, LBJ.properties.getVersion());
 	}
 
 	private static String replaceId(String replaceIn, int id) {
@@ -116,7 +132,7 @@ public class XmlPartsSupplier {
 				column.getForeignKey().getReferencedColumn());
 	}
 
-	public static String replaceColumnIndexName(String replaceIn, Column column) {
+	public static String replaceColumnIndexName(String replaceIn, HasIndex column) {
 		return StringUtils.replace(replaceIn, XmlParts.REPLACE_COLUMN_INDEX_NAME, column.getIndexName());
 	}
 
@@ -190,7 +206,7 @@ public class XmlPartsSupplier {
 		return XmlParts.getDropColumnBase();
 	}
 
-	public static String getDropIndexBase(DropColumn column) {
+	public static String getDropIndexBase(DropIndex column) {
 		String dropIndex = "";
 		if (column.isForMssql() || column.isForPostgre()) {
 			dropIndex += XmlParts.getDropIndexMssqlPostgre();
@@ -212,7 +228,7 @@ public class XmlPartsSupplier {
 		return xmlColumn;
 	}
 
-	public static String getColumnIndexBase(AddColumn column) {
+	public static String getColumnIndexBase(CreateIndex column) {
 		String xmlIndex = "";
 		if (column.isForMssql() || column.isForPostgre()) {
 			xmlIndex += XmlParts.getColumnIndexMssqlPostgre();

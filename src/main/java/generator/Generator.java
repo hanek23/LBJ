@@ -8,8 +8,10 @@ import constants.XmlPartsSupplier;
 import domain.AddColumn;
 import domain.AddNotNullConstraint;
 import domain.Column;
+import domain.CreateIndex;
 import domain.CreateTable;
 import domain.DropColumn;
+import domain.DropIndex;
 import domain.DropNotNullConstraint;
 import domain.DropTable;
 import domain.Entity;
@@ -67,6 +69,12 @@ public class Generator {
 		if (column.isAddNotNullConstraint()) {
 			return addNotNullConstraint((AddNotNullConstraint) column);
 		}
+		if (column.isCreateIndex()) {
+			return createIndex((CreateIndex) column);
+		}
+		if (column.isDropIndex()) {
+			return dropIndex((DropIndex) column);
+		}
 		throw new UnsupportedOperationException("Generator not yet implemeted for: " + column.getOperation());
 	}
 
@@ -97,8 +105,7 @@ public class Generator {
 	private static String dropColumn(DropColumn column) {
 		String xmlDropColumn = "";
 		if (column.hasIndex()) {
-			xmlDropColumn += XmlPartsSupplier.getDropIndexBase(column);
-			xmlDropColumn = XmlPartsSupplier.replaceColumnIndexName(xmlDropColumn, (Column) column);
+			xmlDropColumn += dropIndex(column);
 		}
 		if (column.hasForeignKey()) {
 			xmlDropColumn += XmlPartsSupplier.getDropForeignKeyBase();
@@ -117,7 +124,9 @@ public class Generator {
 		String xmlColumn = XmlPartsSupplier.getAddColumnBase(column);
 		xmlColumn = handleConstraints(column, xmlColumn);
 		xmlColumn = handleDefaultValue(column, xmlColumn);
-		xmlColumn = handleIndex(column, xmlColumn);
+		if (column.hasIndex()) {
+			xmlColumn += createIndex((CreateIndex) column);
+		}
 
 		xmlColumn = XmlPartsSupplier.replaceTableName(xmlColumn, column.getTableName());
 		xmlColumn = XmlPartsSupplier.replaceColumnName(xmlColumn, column);
@@ -145,14 +154,6 @@ public class Generator {
 		}
 		if (column.isForPostgre()) {
 			xmlColumn = XmlPartsSupplier.replaceColumnDefaultValuePostgre(xmlColumn, column);
-		}
-		return xmlColumn;
-	}
-
-	private static String handleIndex(AddColumn column, String xmlColumn) {
-		if (column.hasIndex()) {
-			xmlColumn += XmlPartsSupplier.getColumnIndexBase(column);
-			xmlColumn = XmlPartsSupplier.replaceColumnIndexName(xmlColumn, (Column) column);
 		}
 		return xmlColumn;
 	}
@@ -199,6 +200,21 @@ public class Generator {
 		dropTable = XmlPartsSupplier.replaceTableName(dropTable, table.getName());
 		dropTable = XmlPartsSupplier.replaceSequenceName(dropTable, table);
 		return dropTable;
+	}
+
+	private static String createIndex(CreateIndex column) {
+		String createIndex = XmlPartsSupplier.getColumnIndexBase(column);
+		createIndex = XmlPartsSupplier.replaceColumnIndexName(createIndex, column);
+		createIndex = XmlPartsSupplier.replaceTableName(createIndex, column.getTableName());
+		createIndex = XmlPartsSupplier.replaceColumnName(createIndex, column);
+		return createIndex;
+	}
+
+	private static String dropIndex(DropIndex column) {
+		String dropIndex = XmlPartsSupplier.getDropIndexBase(column);
+		dropIndex = XmlPartsSupplier.replaceColumnIndexName(dropIndex, column);
+		dropIndex = XmlPartsSupplier.replaceTableName(dropIndex, column.getTableName());
+		return dropIndex;
 	}
 
 }

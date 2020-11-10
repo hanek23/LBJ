@@ -122,7 +122,7 @@ public class DropColumnForm extends LBJEntityForm<DropColumn> {
 
 	@Override
 	public DropColumn convert() {
-		DropColumn column = new Column(columnNameTextBox.getValue(), ColumnOperation.DROP);
+		DropColumn column = new Column(columnNameTextBox.getValue(), ColumnOperation.DROP_COLUMN);
 		column.setTableName(tableNameTextBox.getValue());
 		column.setHasDefaultValue(dropDefaultValueCheckBox.getValue());
 		column.setHasIndex(dropIndexCheckBox.getValue());

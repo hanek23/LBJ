@@ -12,7 +12,7 @@ import testutils.AbstractXmlSupplier;
 public class GeneratorTest1 extends AbstractXmlSupplier implements GeneratorTestCase {
 
 	private Column createColumnAction() {
-		Column column = new Column("action", ColumnOperation.ADD);
+		Column column = new Column("action", ColumnOperation.ADD_COLUMN);
 		column.setNullable(true);
 		column.setDataType("integer");
 		column.setForeignKey(new ForeignKey("F_LBJ_REF_ID_LBJ_ACTION", "LBJ_ACTION", "id_lbj_action"));

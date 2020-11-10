@@ -1,29 +1,25 @@
 package domain;
 
-public interface DropColumn extends GeneralColumn, Entity {
+public interface DropColumn extends GeneralColumn, Entity, DropIndex {
 
-	public String getIndexName();
+	ForeignKey getForeignKey();
 
-	public void setIndexName(String indexName);
+	void setForeignKey(ForeignKey foreignKey);
 
-	public ForeignKey getForeignKey();
+	boolean hasForeignKey();
 
-	public void setForeignKey(ForeignKey foreignKey);
+	boolean hasIndex();
 
-	public boolean hasForeignKey();
-
-	public boolean hasIndex();
-
-	public void setHasIndex(boolean index);
+	void setHasIndex(boolean index);
 
 	/**
 	 * @return true if either {@link #hasIndex()} or {@link #hasForeignKey()} return
 	 *         true
 	 */
-	public boolean hasConstrains();
-	
-	public boolean hasDefaultValue();
+	boolean hasConstrains();
 
-	public void setHasDefaultValue(boolean defaultValue);
+	boolean hasDefaultValue();
+
+	void setHasDefaultValue(boolean defaultValue);
 
 }

@@ -2,28 +2,32 @@ package domain;
 
 public interface GeneralColumn {
 
-	public String getTableName();
+	String getTableName();
 
-	public void setTableName(String tableName);
+	void setTableName(String tableName);
 
-	public String getName();
+	String getName();
 
-	public void setName(String name);
+	void setName(String name);
 
-	public String getDataType();
+	String getDataType();
 
-	public void setDataType(String dataType);
+	void setDataType(String dataType);
 
-	public ColumnOperation getOperation();
+	ColumnOperation getOperation();
 
-	public boolean isAddColumn();
+	boolean isAddColumn();
 
-	public boolean isDropNotNullConstraint();
+	boolean isDropNotNullConstraint();
+
+	boolean isAddNotNullConstraint();
+
+	boolean isDropColumn();
+
+	boolean isModifyDataType();
+
+	boolean isCreateIndex();
 	
-	public boolean isAddNotNullConstraint();
-
-	public boolean isDropColumn();
-
-	public boolean isModifyDataType();
+	boolean isDropIndex();
 
 }

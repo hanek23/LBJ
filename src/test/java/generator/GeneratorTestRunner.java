@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import constants.XmlPartsSupplier;
 import domain.Entity;
 import testutils.LBJTestUtils;
 
@@ -83,19 +84,35 @@ public class GeneratorTestRunner {
 	void testGenerate14() throws Exception {
 		assertChangeLogEquals(new GeneratorTest14());
 	}
-	
+
 	@Test
 	void testGenerate15() throws Exception {
 		assertChangeLogEquals(new GeneratorTest15());
 	}
-	
+
 	@Test
 	void testGenerate16() throws Exception {
 		assertChangeLogEquals(new GeneratorTest16());
 	}
 
+	@Test
+	void testGenerate17() throws Exception {
+		assertChangeLogEquals(new GeneratorTest17());
+	}
+
+	@Test
+	void testGenerate18() throws Exception {
+		assertChangeLogEquals(new GeneratorTest18());
+	}
+
+	@Test
+	void testGenerate19() throws Exception {
+		assertChangeLogEquals(new GeneratorTest19());
+	}
+
 	private void assertChangeLogEquals(GeneratorTestCase testTableSupplier) throws Exception {
 		String expected = testTableSupplier.getExpectedXml();
+		expected = XmlPartsSupplier.replaceVersion(expected);
 		List<Entity> entities = testTableSupplier.getEntities();
 		String actual = Generator.generate(entities, DEFAULT_GENERATOR_SETTINGS);
 		// used for replacement of names

@@ -50,6 +50,7 @@ public class XmlParts {
 			+ XML_REPLACE_END;
 	protected static final String REPLACE_DROP_COLUMN_DEFAULT_VALUE = XML_REPLACE_START + "DROP_COLUMN_DEFAULT_VALUE"
 			+ XML_REPLACE_END;
+	protected static final String REPLACE_LBJ_VERSION = XML_REPLACE_START + "LBJ_VERSION" + XML_REPLACE_END;
 
 	// Paths to templates
 	private static final String CHANGELOG_START_TEMPLATE = "/generator/shared/ChangeLogStart.txt";
@@ -66,13 +67,9 @@ public class XmlParts {
 	private static final String ADD_COLUMN_CONSTRAINTS_TEMPLATE = "/generator/addcolumn/AddColumnConstraints.txt";
 	private static final String ADD_COLUMN_CONSTRAINTS_FOREIGN_KEY_TEMPLATE = "/generator/addcolumn/AddColumnConstraintsForeignKey.txt";
 	private static final String ADD_COLUMN_CONSTRAINTS_NULLABLE_TEMPLATE = "/generator/addcolumn/AddColumnConstraintsNullable.txt";
-	private static final String ADD_COLUMN_INDEX_MSSQL_POSTGRE_TEMPLATE = "/generator/addcolumn/CreateIndexMssqlPostgre.txt";
-	private static final String ADD_COLUMN_INDEX_ORACLE_TEMPLATE = "/generator/addcolumn/CreateIndexOracle.txt";
 	private static final String ADD_COLUMN_DEFAULT_VALUE_TEMPLATE = "/generator/addcolumn/AddColumnDefaultValue.txt";
 
 	private static final String DROP_COLUMN_TEMPLATE = "/generator/dropcolumn/DropColumn.txt";
-	private static final String DROP_INDEX_MSSQL_POSTGRE_TEMPLATE = "/generator/dropcolumn/DropIndexMssqlPostgre.txt";
-	private static final String DROP_INDEX_ORACLE_TEMPLATE = "/generator/dropcolumn/DropIndexOracle.txt";
 	private static final String DROP_FOREIGN_KEY_TEMPLATE = "/generator/dropcolumn/DropForeignKey.txt";
 	private static final String DROP_COLUMN_DEFAULT_VALUE_TEMPLATE = "/generator/dropcolumn/DropDefaultValue.txt";
 
@@ -88,6 +85,12 @@ public class XmlParts {
 	private static final String DROP_TABLE_TEMPLATE = "/generator/droptable/DropTable.txt";
 
 	private static final String MODIFY_DATA_TYPE_TEMPLATE = "/generator/modifydatatype/ModifyDataType.txt";
+	
+	private static final String CREATE_INDEX_MSSQL_POSTGRE_TEMPLATE = "/generator/createindex/CreateIndexMssqlPostgre.txt";
+	private static final String CREATE_INDEX_ORACLE_TEMPLATE = "/generator/createindex/CreateIndexOracle.txt";
+	
+	private static final String DROP_INDEX_MSSQL_POSTGRE_TEMPLATE = "/generator/dropindex/DropIndexMssqlPostgre.txt";
+	private static final String DROP_INDEX_ORACLE_TEMPLATE = "/generator/dropindex/DropIndexOracle.txt";
 
 	protected static String getChangelogStart() {
 		return FileUtils.getStringFromFileResource(XmlParts.class, CHANGELOG_START_TEMPLATE);
@@ -114,11 +117,11 @@ public class XmlParts {
 	}
 
 	protected static String getColumnIndexMssqlPostgre() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_COLUMN_INDEX_MSSQL_POSTGRE_TEMPLATE);
+		return FileUtils.getStringFromFileResource(XmlParts.class, CREATE_INDEX_MSSQL_POSTGRE_TEMPLATE);
 	}
 
 	protected static String getColumnIndexOracle() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_COLUMN_INDEX_ORACLE_TEMPLATE);
+		return FileUtils.getStringFromFileResource(XmlParts.class, CREATE_INDEX_ORACLE_TEMPLATE);
 	}
 
 	protected static String getAddGeneralColumnBase() {

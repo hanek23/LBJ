@@ -12,8 +12,10 @@ import generator.GeneratorTestRunner;
 import gui.components.LBJValueComponent;
 import gui.forms.addcolumn.AddColumnForm;
 import gui.forms.addnotnullconstraint.AddNotNullConstraintForm;
+import gui.forms.createindex.CreateIndexForm;
 import gui.forms.createtable.CreateTableForm;
 import gui.forms.dropcolumn.DropColumnForm;
+import gui.forms.dropindex.DropIndexForm;
 import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
 import gui.forms.droptable.DropTableForm;
 import gui.forms.generate.GenerateForm;
@@ -122,6 +124,27 @@ public class LBJTestUtils {
 	public static DropNotNullConstraintForm getDropNotNullConstraintForm() {
 		LBJMockForm mockForm = new LBJMockForm();
 		DropNotNullConstraintForm form = new DropNotNullConstraintForm(mockForm.getWindow(), mockForm);
+		form.focus();
+		return form;
+	}
+	
+
+	/**
+	 * @return {@link CreateIndexForm} that is already focused
+	 */
+	public static CreateIndexForm getCreateIndexForm() {
+		LBJMockForm mockForm = new LBJMockForm();
+		CreateIndexForm form = new CreateIndexForm(mockForm.getWindow(), mockForm);
+		form.focus();
+		return form;
+	}
+	
+	/**
+	 * @return {@link DropIndexForm} that is already focused
+	 */
+	public static DropIndexForm getDropIndexForm() {
+		LBJMockForm mockForm = new LBJMockForm();
+		DropIndexForm form = new DropIndexForm(mockForm.getWindow(), mockForm);
 		form.focus();
 		return form;
 	}

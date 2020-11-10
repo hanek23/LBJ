@@ -2,8 +2,8 @@ package domain;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class Column extends AbstractEntity
-		implements AddColumn, DropNotNullConstraint, AddNotNullConstraint, DropColumn, ModifyDataType {
+public class Column extends AbstractEntity implements AddColumn, DropNotNullConstraint, AddNotNullConstraint,
+		DropColumn, ModifyDataType, CreateIndex, DropIndex {
 
 	private String name;
 	private String tableName;
@@ -114,12 +114,12 @@ public class Column extends AbstractEntity
 
 	@Override
 	public boolean isAddColumn() {
-		return getOperation() == ColumnOperation.ADD;
+		return getOperation() == ColumnOperation.ADD_COLUMN;
 	}
 
 	@Override
 	public boolean isDropColumn() {
-		return getOperation() == ColumnOperation.DROP;
+		return getOperation() == ColumnOperation.DROP_COLUMN;
 	}
 
 	@Override
@@ -135,6 +135,16 @@ public class Column extends AbstractEntity
 	@Override
 	public boolean isModifyDataType() {
 		return getOperation() == ColumnOperation.MODIFY_DATA_TYPE;
+	}
+
+	@Override
+	public boolean isCreateIndex() {
+		return getOperation() == ColumnOperation.CREATE_INDEX;
+	}
+
+	@Override
+	public boolean isDropIndex() {
+		return getOperation() == ColumnOperation.DROP_INDEX;
 	}
 
 	public String getDefaultValue() {

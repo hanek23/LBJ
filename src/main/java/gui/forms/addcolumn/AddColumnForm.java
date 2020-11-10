@@ -138,7 +138,7 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 
 	@Override
 	public AddColumn convert() {
-		AddColumn column = new Column(columnNameTextBox.getValue(), ColumnOperation.ADD);
+		AddColumn column = new Column(columnNameTextBox.getValue(), ColumnOperation.ADD_COLUMN);
 		column.setTableName(tableNameTextBox.getValue());
 		column.setDataType(dataTypeTextBox.getValue());
 		column.setNullable(nullableCheckBox.getValue());

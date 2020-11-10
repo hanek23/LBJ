@@ -21,7 +21,7 @@ public class GeneratorTestUtils {
 
 	public static AddColumn addColumn(String name, String tableName, String indexName, ForeignKey foreignKey,
 			boolean nullable, String dataType, String defaultValue) {
-		AddColumn column = new Column(name, ColumnOperation.ADD);
+		AddColumn column = new Column(name, ColumnOperation.ADD_COLUMN);
 		column.setTableName(tableName);
 		column.setDataType(dataType);
 		column.setNullable(nullable);
@@ -34,7 +34,7 @@ public class GeneratorTestUtils {
 
 	public static DropColumn dropColumn(String name, String tableName, boolean hasDefaultValue, String indexName,
 			ForeignKey foreignKey) {
-		DropColumn column = new Column(name, ColumnOperation.DROP);
+		DropColumn column = new Column(name, ColumnOperation.DROP_COLUMN);
 		column.setTableName(tableName);
 		column.setHasDefaultValue(hasDefaultValue);
 		column.setHasIndex(!StringUtils.isBlank(indexName));

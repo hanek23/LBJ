@@ -15,6 +15,8 @@ public class Labels {
 	public static final String BUTTON_ADD_ANOTHER_COLUMN = "Add another column";
 	public static final String BUTTON_DROP_ANOTHER_COLUMN = "Drop another column";
 	public static final String BUTTON_MODIFY_ANOTHER_COLUMN = "Modify another column";
+	public static final String BUTTON_CREATE_INDEX = "Create another index";
+	public static final String BUTTON_DROP_INDEX = "Drop another index";
 	public static final String BUTTON_GENERATE = "Generate";
 	public static final String BUTTON_COPY_TO_CLIPBOARD = "Copy to clipboard";
 
@@ -32,6 +34,9 @@ public class Labels {
 	public static final String LETTER_CASE_FORM = "Letter case form";
 	public static final String DROP_TABLE_COLUMN_PREFERENCES_FORM = "Drop Table Column preferences form";
 	public static final String MODIFY_DATA_TYPE_FORM = "Modify data type form";
+	public static final String CREATE_INDEX_FORM = "Create index form";
+	public static final String DROP_INDEX_FORM = "Drop index form";
+	
 
 	// MAIN MENU
 	public static final String MAIN_MENU_QUESTION = "What do you want to do?";
@@ -42,6 +47,8 @@ public class Labels {
 	public static final String MAIN_MENU_DROP_NOT_NULL_CONSTRAINT = "Drop not null constraint";
 	public static final String MAIN_MENU_ADD_NOT_NULL_CONSTRAINT = "Add not null constraint";
 	public static final String MAIN_MENU_MODIFY_DATA_TYPE = "Modify data type(s)";
+	public static final String MAIN_MENU_CREATE_INDEX = "Create index";
+	public static final String MAIN_MENU_DROP_INDEX = "Drop index";
 	public static final String MAIN_MENU_PREFERENCES = "Preferences";
 	public static final String BUTTON_EXIT = "Exit";
 

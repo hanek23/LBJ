@@ -119,7 +119,7 @@ public class LBJFormUtils {
 		addColumnButton.addListener(button -> {
 			if (form.validate()) {
 				if (form.getNextForm() == null) {
-					form.setNextForm(LBJFormSupplier.getAddColumnForm(form.getWindow(), form));
+					form.setNextForm(LBJFormSupplier.getAddColumnForm(form.getWindow(), form, true));
 				}
 				form.goToNextForm();
 			}
@@ -127,12 +127,38 @@ public class LBJFormUtils {
 		return addColumnButton;
 	}
 
+	public static Button dropAnotherIndexButton(LBJWizardForm form) {
+		Button dropAnotherIndexButton = new Button(Labels.BUTTON_CREATE_INDEX);
+		dropAnotherIndexButton.addListener(button -> {
+			if (form.validate()) {
+				if (form.getNextForm() == null) {
+					form.setNextForm(LBJFormSupplier.getDropIndexForm(form.getWindow(), form, true));
+				}
+				form.goToNextForm();
+			}
+		});
+		return dropAnotherIndexButton;
+	}
+	
+	public static Button createAnotherIndexButton(LBJWizardForm form) {
+		Button createAnotherIndexButton = new Button(Labels.BUTTON_DROP_INDEX);
+		createAnotherIndexButton.addListener(button -> {
+			if (form.validate()) {
+				if (form.getNextForm() == null) {
+					form.setNextForm(LBJFormSupplier.getCreateIndexForm(form.getWindow(), form, true));
+				}
+				form.goToNextForm();
+			}
+		});
+		return createAnotherIndexButton;
+	}
+
 	public static Button createModifyAnotherColumnButton(LBJWizardForm form) {
 		Button modifyAnotherButton = new Button(Labels.BUTTON_MODIFY_ANOTHER_COLUMN);
 		modifyAnotherButton.addListener(button -> {
 			if (form.validate()) {
 				if (form.getNextForm() == null) {
-					form.setNextForm(LBJFormSupplier.getModifyDataTypeForm(form.getWindow(), form));
+					form.setNextForm(LBJFormSupplier.getModifyDataTypeForm(form.getWindow(), form, true));
 				}
 				form.goToNextForm();
 			}
@@ -145,7 +171,7 @@ public class LBJFormUtils {
 		addDropButton.addListener(button -> {
 			if (form.validate()) {
 				if (form.getNextForm() == null) {
-					form.setNextForm(LBJFormSupplier.getDropColumnForm(form.getWindow(), form));
+					form.setNextForm(LBJFormSupplier.getDropColumnForm(form.getWindow(), form, true));
 				}
 				form.goToNextForm();
 			}

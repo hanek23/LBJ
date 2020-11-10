@@ -12,7 +12,7 @@ import testutils.AbstractXmlSupplier;
 public class GeneratorTest2 extends AbstractXmlSupplier implements GeneratorTestCase {
 
 	private Column createColumnNotification() {
-		Column column = new Column("notification", ColumnOperation.ADD);
+		Column column = new Column("notification", ColumnOperation.ADD_COLUMN);
 		column.setDataType("integer");
 		column.setForeignKey(new ForeignKey("F_LBJ_USER_ID_LBJ_ERROR", "LBJ_ERROR", "id_lbj_error"));
 		column.setIndexName("I_LBJ_USER_NOTIF");
