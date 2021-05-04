@@ -101,31 +101,31 @@ public class XmlParts {
 	}
 
 	protected static String getCreateTableMssql() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, CREATE_TABLE_MSSQL_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, CREATE_TABLE_MSSQL_TEMPLATE));
 	}
 
 	protected static String getCreateTableOraclePostgre() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, CREATE_TABLE_ORACLE_POSTGRE_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, CREATE_TABLE_ORACLE_POSTGRE_TEMPLATE));
 	}
 
 	protected static String getCreateTableSequenceOracle() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, CREATE_TABLE_SEQUENCE_ORACLE_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, CREATE_TABLE_SEQUENCE_ORACLE_TEMPLATE));
 	}
 
 	protected static String getCreateTableSequencePostgre() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, CREATE_TABLE_SEQUENCE_POSTGRE_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, CREATE_TABLE_SEQUENCE_POSTGRE_TEMPLATE));
 	}
 
 	protected static String getColumnIndexMssqlPostgre() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, CREATE_INDEX_MSSQL_POSTGRE_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, CREATE_INDEX_MSSQL_POSTGRE_TEMPLATE));
 	}
 
 	protected static String getColumnIndexOracle() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, CREATE_INDEX_ORACLE_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, CREATE_INDEX_ORACLE_TEMPLATE));
 	}
 
 	protected static String getAddGeneralColumnBase() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_COLUMN_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, ADD_COLUMN_TEMPLATE));
 	}
 
 	protected static String getAddColumnDefaultValue() {
@@ -133,51 +133,51 @@ public class XmlParts {
 	}
 
 	protected static String getDropColumnBase() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, DROP_COLUMN_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, DROP_COLUMN_TEMPLATE));
 	}
 
 	protected static String getDropIndexMssqlPostgre() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, DROP_INDEX_MSSQL_POSTGRE_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, DROP_INDEX_MSSQL_POSTGRE_TEMPLATE));
 	}
 
 	protected static String getDropIndexOracle() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, DROP_INDEX_ORACLE_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, DROP_INDEX_ORACLE_TEMPLATE));
 	}
 
 	protected static String getDropForeignKey() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, DROP_FOREIGN_KEY_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, DROP_FOREIGN_KEY_TEMPLATE));
 	}
 
 	protected static String getBooleanCollumnOracleMssql() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_COLUMN_BOOLEAN_ORACLE_MSSQL_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, ADD_COLUMN_BOOLEAN_ORACLE_MSSQL_TEMPLATE));
 	}
 
 	protected static String getBooleanColumnPostgre() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_COLUMN_BOOLEAN_POSTGRE_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, ADD_COLUMN_BOOLEAN_POSTGRE_TEMPLATE));
 	}
 
 	protected static String getDropNotNullConstraintOracle() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, DROP_NOT_NULL_CONSTRAINT_ORACLE_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, DROP_NOT_NULL_CONSTRAINT_ORACLE_TEMPLATE));
 	}
 
 	protected static String getDropNotNullConstraintMssql() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, DROP_NOT_NULL_CONSTRAINT_MSSQL_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, DROP_NOT_NULL_CONSTRAINT_MSSQL_TEMPLATE));
 	}
 
 	protected static String getDropNotNullConstraintPostgre() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, DROP_NOT_NULL_CONSTRAINT_POSTGRE_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, DROP_NOT_NULL_CONSTRAINT_POSTGRE_TEMPLATE));
 	}
 
 	protected static String getAddNotNullConstraintOracle() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_NOT_NULL_CONSTRAINT_ORACLE_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, ADD_NOT_NULL_CONSTRAINT_ORACLE_TEMPLATE));
 	}
 
 	protected static String getAddNotNullConstraintMssql() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_NOT_NULL_CONSTRAINT_MSSQL_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, ADD_NOT_NULL_CONSTRAINT_MSSQL_TEMPLATE));
 	}
 
 	protected static String getAddNotNullConstraintPostgre() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, ADD_NOT_NULL_CONSTRAINT_POSTGRE_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, ADD_NOT_NULL_CONSTRAINT_POSTGRE_TEMPLATE));
 	}
 
 	protected static String getAddColumnConstraints() {
@@ -193,19 +193,26 @@ public class XmlParts {
 	}
 
 	protected static String getDropSequenceBase() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, DROP_TABLE_SEQUENCE_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, DROP_TABLE_SEQUENCE_TEMPLATE));
 	}
 
 	protected static String getDropTableBase() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, DROP_TABLE_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, DROP_TABLE_TEMPLATE));
 	}
 
 	protected static String getModifyDataTypeBase() {
-		return FileUtils.getStringFromFileResource(XmlParts.class, MODIFY_DATA_TYPE_TEMPLATE);
+		return ensureLineSeparatorAtEnd(FileUtils.getStringFromFileResource(XmlParts.class, MODIFY_DATA_TYPE_TEMPLATE));
 	}
 
 	public static String getDropColumnDefaultValue() {
 		return FileUtils.getStringFromFileResource(XmlParts.class, DROP_COLUMN_DEFAULT_VALUE_TEMPLATE);
+	}
+
+	private static String ensureLineSeparatorAtEnd(String content) {
+		if(!content.endsWith(System.lineSeparator())){
+			content = content.concat(System.lineSeparator());
+		}
+		return content;
 	}
 
 }
