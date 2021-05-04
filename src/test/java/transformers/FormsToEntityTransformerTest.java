@@ -1,7 +1,7 @@
 package transformers;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.*;
 import static testutils.asserts.LBJFormAssert.assertThat;
 
 import java.util.Collections;
