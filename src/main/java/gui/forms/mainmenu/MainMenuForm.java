@@ -6,10 +6,12 @@ import constants.Labels;
 import gui.builders.LBJPlainLabelBuilder;
 import gui.forms.LBJMainMenuForm;
 import gui.forms.addcolumn.AddColumnForm;
+import gui.forms.addforeignkeyconstraint.AddForeignKeyConstraintForm;
 import gui.forms.addnotnullconstraint.AddNotNullConstraintForm;
 import gui.forms.createindex.CreateIndexForm;
 import gui.forms.createtable.CreateTableForm;
 import gui.forms.dropcolumn.DropColumnForm;
+import gui.forms.dropforeignkeyconstraint.DropForeignKeyConstraintForm;
 import gui.forms.dropindex.DropIndexForm;
 import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
 import gui.forms.droptable.DropTableForm;
@@ -34,6 +36,8 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 	private ModifyDataTypeForm modifyDataTypeForm;
 	private CreateIndexForm createIndexForm;
 	private DropIndexForm dropIndexForm;
+	private AddForeignKeyConstraintForm addForeignKeyConstraintForm;
+	private DropForeignKeyConstraintForm dropForeignKeyConstraintForm;
 	private PreferencesForm preferencesForm;
 
 	public MainMenuForm() {
@@ -63,6 +67,8 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 		modifyDataTypeForm = LBJFormSupplier.getModifyDataTypeForm(getWindow(), this, false);
 		createIndexForm = LBJFormSupplier.getCreateIndexForm(getWindow(), this, false);
 		dropIndexForm = LBJFormSupplier.getDropIndexForm(getWindow(), this, false);
+		addForeignKeyConstraintForm = LBJFormSupplier.getAddForeignKeyConstraintForm(getWindow(), this, false);
+		dropForeignKeyConstraintForm = LBJFormSupplier.getDropForeignKeyConstraintForm(getWindow(), this, false);
 		preferencesForm = LBJFormSupplier.getPreferencesForm(getWindow(), this, false);
 
 		addFormToUpdate(createTableForm);
@@ -74,6 +80,8 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 		addFormToUpdate(modifyDataTypeForm);
 		addFormToUpdate(createIndexForm);
 		addFormToUpdate(dropIndexForm);
+		addFormToUpdate(addForeignKeyConstraintForm);
+		addFormToUpdate(dropForeignKeyConstraintForm);
 		addFormToUpdate(preferencesForm);
 	}
 
@@ -89,6 +97,10 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 		LBJFormUtils.addItemToMenu(getMainMenu(), modifyDataTypeForm, Labels.MAIN_MENU_MODIFY_DATA_TYPE);
 		LBJFormUtils.addItemToMenu(getMainMenu(), createIndexForm, Labels.MAIN_MENU_CREATE_INDEX);
 		LBJFormUtils.addItemToMenu(getMainMenu(), dropIndexForm, Labels.MAIN_MENU_DROP_INDEX);
+		LBJFormUtils.addItemToMenu(getMainMenu(), addForeignKeyConstraintForm,
+				Labels.MAIN_MENU_ADD_FOREIGN_KEY_CONSTRAINT);
+		LBJFormUtils.addItemToMenu(getMainMenu(), dropForeignKeyConstraintForm,
+				Labels.MAIN_MENU_DROP_FOREIGN_KEY_CONSTRAINT);
 		LBJFormUtils.addItemToMenu(getMainMenu(), preferencesForm, Labels.MAIN_MENU_PREFERENCES);
 		LBJFormUtils.addExitButtonToMenu(getMainMenu());
 	}
@@ -123,6 +135,14 @@ public class MainMenuForm extends LBJMainMenuForm implements Bean {
 
 	public DropIndexForm getDropIndexForm() {
 		return dropIndexForm;
+	}
+
+	public AddForeignKeyConstraintForm getAddForeignKeyConstraintForm() {
+		return addForeignKeyConstraintForm;
+	}
+
+	public DropForeignKeyConstraintForm getDropForeignKeyConstraintForm() {
+		return dropForeignKeyConstraintForm;
 	}
 
 }

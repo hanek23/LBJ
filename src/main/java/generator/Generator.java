@@ -6,11 +6,13 @@ import org.apache.commons.lang3.StringUtils;
 
 import constants.XmlPartsSupplier;
 import domain.AddColumn;
+import domain.AddForeignKeyConstraint;
 import domain.AddNotNullConstraint;
 import domain.Column;
 import domain.CreateIndex;
 import domain.CreateTable;
 import domain.DropColumn;
+import domain.DropForeignKeyConstraint;
 import domain.DropIndex;
 import domain.DropNotNullConstraint;
 import domain.DropTable;
@@ -75,6 +77,12 @@ public class Generator {
 		if (column.isDropIndex()) {
 			return dropIndex((DropIndex) column);
 		}
+		if (column.isAddForeignKeyConstraint()) {
+			return addForeignKeyConstraint((AddForeignKeyConstraint) column);
+		}
+		if (column.isDropForeignKeyConstraint()) {
+			return dropForeignKeyConstraint((DropForeignKeyConstraint) column);
+		}
 		throw new UnsupportedOperationException("Generator not yet implemeted for: " + column.getOperation());
 	}
 
@@ -108,7 +116,7 @@ public class Generator {
 			xmlDropColumn += dropIndex(column);
 		}
 		if (column.hasForeignKey()) {
-			xmlDropColumn += XmlPartsSupplier.getDropForeignKeyBase();
+			xmlDropColumn += XmlPartsSupplier.getDropForeignKeyConstraintBase();
 			xmlDropColumn = XmlPartsSupplier.replaceColumnForeignKeyName(xmlDropColumn, (Column) column);
 			xmlDropColumn = XmlPartsSupplier.replaceColumnForeignKeyReferencedColumn(xmlDropColumn, (Column) column);
 			xmlDropColumn = XmlPartsSupplier.replaceColumnForeignKeyReferencedTable(xmlDropColumn, (Column) column);
@@ -215,6 +223,24 @@ public class Generator {
 		dropIndex = XmlPartsSupplier.replaceColumnIndexName(dropIndex, column);
 		dropIndex = XmlPartsSupplier.replaceTableName(dropIndex, column.getTableName());
 		return dropIndex;
+	}
+
+	private static String addForeignKeyConstraint(AddForeignKeyConstraint column) {
+		String xmlColumn = XmlPartsSupplier.getAddForeignKeyConstraintBase();
+		xmlColumn = XmlPartsSupplier.addColumnConstraintsForeignKey(xmlColumn);
+		xmlColumn = XmlPartsSupplier.replaceTableName(xmlColumn, column.getTableName());
+		xmlColumn = XmlPartsSupplier.replaceColumnName(xmlColumn, column);
+		xmlColumn = XmlPartsSupplier.replaceColumnForeignKeyName(xmlColumn, (Column) column);
+		xmlColumn = XmlPartsSupplier.replaceColumnForeignKeyReferencedColumn(xmlColumn, (Column) column);
+		xmlColumn = XmlPartsSupplier.replaceColumnForeignKeyReferencedTable(xmlColumn, (Column) column);
+		return xmlColumn;
+	}
+
+	private static String dropForeignKeyConstraint(DropForeignKeyConstraint column) {
+		String xmlColumn = XmlPartsSupplier.getDropForeignKeyConstraintBase();
+		xmlColumn = XmlPartsSupplier.replaceTableName(xmlColumn, column.getTableName());
+		xmlColumn = XmlPartsSupplier.replaceColumnForeignKeyName(xmlColumn, (Column) column);
+		return xmlColumn;
 	}
 
 }

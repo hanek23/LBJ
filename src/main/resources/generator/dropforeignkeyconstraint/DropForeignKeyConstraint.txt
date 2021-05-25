@@ -3,7 +3,7 @@
 		<foreignKeyConstraintExists foreignKeyName="${COLUMN_FK_NAME}$"
 			foreignKeyTableName="${TABLE_NAME}$" />
 	</preConditions>
-	<comment>Drop foreignKey ${COLUMN_FK_NAME}$ from table ${TABLE_NAME}$ if exists</comment>
+	<comment>Drop foreignKey '${COLUMN_FK_NAME}$' from table '${TABLE_NAME}$' if exists</comment>
 	<dropForeignKeyConstraint baseTableName="${TABLE_NAME}$"
 		constraintName="${COLUMN_FK_NAME}$" />
 </changeSet>

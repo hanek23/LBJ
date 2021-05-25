@@ -109,6 +109,16 @@ public class GeneratorTestRunner {
 	void testGenerate19() throws Exception {
 		assertChangeLogEquals(new GeneratorTest19());
 	}
+	
+	@Test
+	void testGenerate20() throws Exception {
+		assertChangeLogEquals(new GeneratorTest20());
+	}
+	
+	@Test
+	void testGenerate21() throws Exception {
+		assertChangeLogEquals(new GeneratorTest21());
+	}
 
 	private void assertChangeLogEquals(GeneratorTestCase testTableSupplier) throws Exception {
 		String expected = testTableSupplier.getExpectedXml();

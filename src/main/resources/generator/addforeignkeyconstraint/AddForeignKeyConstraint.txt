@@ -1,0 +1,11 @@
+<changeSet id="${ID}$" author="${AUTHOR}$">
+	<preConditions onFail="MARK_RAN">
+		<not>
+			<foreignKeyConstraintExists foreignKeyName="${COLUMN_FK_NAME}$"
+				foreignKeyTableName="${TABLE_NAME}$" />
+		</not>
+	</preConditions>
+	<comment>Add foreignKey '${COLUMN_FK_NAME}$' to table '${TABLE_NAME}$'</comment>
+	<addForeignKeyConstraint constraintName="${COLUMN_FK_NAME}$" referencedTableName="${REFERENCED_TABLE_NAME}$" 
+			referencedColumnNames="${REFERENCED_COLUMN_NAME}$" baseTableName="${TABLE_NAME}$" baseColumnNames="${COLUMN_NAME}$"  />
+</changeSet>

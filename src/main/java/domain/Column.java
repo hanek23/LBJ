@@ -3,7 +3,7 @@ package domain;
 import org.apache.commons.lang3.StringUtils;
 
 public class Column extends AbstractEntity implements AddColumn, DropNotNullConstraint, AddNotNullConstraint,
-		DropColumn, ModifyDataType, CreateIndex, DropIndex {
+		DropColumn, ModifyDataType, CreateIndex, DropIndex, AddForeignKeyConstraint, DropForeignKeyConstraint {
 
 	private String name;
 	private String tableName;
@@ -145,6 +145,16 @@ public class Column extends AbstractEntity implements AddColumn, DropNotNullCons
 	@Override
 	public boolean isDropIndex() {
 		return getOperation() == ColumnOperation.DROP_INDEX;
+	}
+
+	@Override
+	public boolean isAddForeignKeyConstraint() {
+		return getOperation() == ColumnOperation.ADD_FOREIGN_KEY_CONSTRAINT;
+	}
+
+	@Override
+	public boolean isDropForeignKeyConstraint() {
+		return getOperation() == ColumnOperation.DROP_FOREIGN_KEY_CONSTRAINT;
 	}
 
 	public String getDefaultValue() {

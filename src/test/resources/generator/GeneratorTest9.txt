@@ -25,7 +25,7 @@
 		<foreignKeyConstraintExists foreignKeyName="F_REF_ACTION"
 			foreignKeyTableName="LBJ_REFERENCE" />
 	</preConditions>
-	<comment>Drop foreignKey F_REF_ACTION from table LBJ_REFERENCE if exists</comment>
+	<comment>Drop foreignKey 'F_REF_ACTION' from table 'LBJ_REFERENCE' if exists</comment>
 	<dropForeignKeyConstraint baseTableName="LBJ_REFERENCE"
 		constraintName="F_REF_ACTION" />
 </changeSet>
@@ -61,7 +61,7 @@
 		<foreignKeyConstraintExists foreignKeyName="F_KEY_ESC"
 			foreignKeyTableName="LBJ_KEY" />
 	</preConditions>
-	<comment>Drop foreignKey F_KEY_ESC from table LBJ_KEY if exists</comment>
+	<comment>Drop foreignKey 'F_KEY_ESC' from table 'LBJ_KEY' if exists</comment>
 	<dropForeignKeyConstraint baseTableName="LBJ_KEY"
 		constraintName="F_KEY_ESC" />
 </changeSet>

@@ -139,7 +139,7 @@ public class LBJFormUtils {
 		});
 		return dropAnotherIndexButton;
 	}
-	
+
 	public static Button createAnotherIndexButton(LBJWizardForm form) {
 		Button createAnotherIndexButton = new Button(Labels.BUTTON_DROP_INDEX);
 		createAnotherIndexButton.addListener(button -> {
@@ -177,6 +177,32 @@ public class LBJFormUtils {
 			}
 		});
 		return addDropButton;
+	}
+
+	public static Button addAnotherForeignKeyConstraintButton(LBJWizardForm form) {
+		Button addAnotherFKeyCButton = new Button(Labels.BUTTON_ADD_ANOTHER_FOREIGN_KEY_CONSTRAINT);
+		addAnotherFKeyCButton.addListener(button -> {
+			if (form.validate()) {
+				if (form.getNextForm() == null) {
+					form.setNextForm(LBJFormSupplier.getAddForeignKeyConstraintForm(form.getWindow(), form, true));
+				}
+				form.goToNextForm();
+			}
+		});
+		return addAnotherFKeyCButton;
+	}
+	
+	public static Button dropAnotherForeignKeyConstraintButton(LBJWizardForm form) {
+		Button dropAnotherFKeyCButton = new Button(Labels.BUTTON_DROP_ANOTHER_FOREIGN_KEY_CONSTRAINT);
+		dropAnotherFKeyCButton.addListener(button -> {
+			if (form.validate()) {
+				if (form.getNextForm() == null) {
+					form.setNextForm(LBJFormSupplier.getDropForeignKeyConstraintForm(form.getWindow(), form, true));
+				}
+				form.goToNextForm();
+			}
+		});
+		return dropAnotherFKeyCButton;
 	}
 
 	public static void addUpdatableFormToMainMenu(LBJForm form) {

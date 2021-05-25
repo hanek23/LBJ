@@ -11,10 +11,12 @@ import com.googlecode.lanterna.input.KeyType;
 import generator.GeneratorTestRunner;
 import gui.components.LBJValueComponent;
 import gui.forms.addcolumn.AddColumnForm;
+import gui.forms.addforeignkeyconstraint.AddForeignKeyConstraintForm;
 import gui.forms.addnotnullconstraint.AddNotNullConstraintForm;
 import gui.forms.createindex.CreateIndexForm;
 import gui.forms.createtable.CreateTableForm;
 import gui.forms.dropcolumn.DropColumnForm;
+import gui.forms.dropforeignkeyconstraint.DropForeignKeyConstraintForm;
 import gui.forms.dropindex.DropIndexForm;
 import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
 import gui.forms.droptable.DropTableForm;
@@ -127,7 +129,6 @@ public class LBJTestUtils {
 		form.focus();
 		return form;
 	}
-	
 
 	/**
 	 * @return {@link CreateIndexForm} that is already focused
@@ -138,7 +139,7 @@ public class LBJTestUtils {
 		form.focus();
 		return form;
 	}
-	
+
 	/**
 	 * @return {@link DropIndexForm} that is already focused
 	 */
@@ -148,7 +149,27 @@ public class LBJTestUtils {
 		form.focus();
 		return form;
 	}
-	
+
+	/**
+	 * @return {@link AddForeignKeyConstraintForm} that is already focused
+	 */
+	public static AddForeignKeyConstraintForm getAddForeignKeyConstraintForm() {
+		LBJMockForm mockForm = new LBJMockForm();
+		AddForeignKeyConstraintForm form = new AddForeignKeyConstraintForm(mockForm.getWindow(), mockForm);
+		form.focus();
+		return form;
+	}
+
+	/**
+	 * @return {@link DropForeignKeyConstraintForm} that is already focused
+	 */
+	public static DropForeignKeyConstraintForm getDropForeignKeyConstraintForm() {
+		LBJMockForm mockForm = new LBJMockForm();
+		DropForeignKeyConstraintForm form = new DropForeignKeyConstraintForm(mockForm.getWindow(), mockForm);
+		form.focus();
+		return form;
+	}
+
 	/**
 	 * @return {@link AddNotNullConstraintForm} that is already focused
 	 */

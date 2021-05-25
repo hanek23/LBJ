@@ -198,8 +198,12 @@ public class XmlPartsSupplier {
 		return XmlParts.getAddGeneralColumnBase();
 	}
 
-	public static String getDropForeignKeyBase() {
-		return XmlParts.getDropForeignKey();
+	public static String getDropForeignKeyConstraintBase() {
+		return XmlParts.getDropForeignKeyContraint();
+	}
+
+	public static String getAddForeignKeyConstraintBase() {
+		return XmlParts.getAddForeignKeyConstraint();
 	}
 
 	public static String getDropColumnBase() {

@@ -4,10 +4,12 @@ import com.googlecode.lanterna.gui2.Window;
 
 import gui.forms.LBJForm;
 import gui.forms.addcolumn.AddColumnForm;
+import gui.forms.addforeignkeyconstraint.AddForeignKeyConstraintForm;
 import gui.forms.addnotnullconstraint.AddNotNullConstraintForm;
 import gui.forms.createindex.CreateIndexForm;
 import gui.forms.createtable.CreateTableForm;
 import gui.forms.dropcolumn.DropColumnForm;
+import gui.forms.dropforeignkeyconstraint.DropForeignKeyConstraintForm;
 import gui.forms.dropindex.DropIndexForm;
 import gui.forms.dropnotnullconstraint.DropNotNullConstraintForm;
 import gui.forms.droptable.DropTableForm;
@@ -94,6 +96,30 @@ public class LBJFormSupplier {
 	 */
 	public static DropIndexForm getDropIndexForm(Window window, LBJForm previousForm, boolean addAsUpdatableForm) {
 		DropIndexForm form = new DropIndexForm(window, previousForm);
+		if (addAsUpdatableForm) {
+			getMainMenuForm().addFormToUpdate(form);
+		}
+		return form;
+	}
+
+	/**
+	 * @return Always new instance of {@link AddForeignKeyConstraintForm}.
+	 */
+	public static AddForeignKeyConstraintForm getAddForeignKeyConstraintForm(Window window, LBJForm previousForm,
+			boolean addAsUpdatableForm) {
+		AddForeignKeyConstraintForm form = new AddForeignKeyConstraintForm(window, previousForm);
+		if (addAsUpdatableForm) {
+			getMainMenuForm().addFormToUpdate(form);
+		}
+		return form;
+	}
+
+	/**
+	 * @return Always new instance of {@link DropForeignKeyConstraintForm}.
+	 */
+	public static DropForeignKeyConstraintForm getDropForeignKeyConstraintForm(Window window, LBJForm previousForm,
+			boolean addAsUpdatableForm) {
+		DropForeignKeyConstraintForm form = new DropForeignKeyConstraintForm(window, previousForm);
 		if (addAsUpdatableForm) {
 			getMainMenuForm().addFormToUpdate(form);
 		}

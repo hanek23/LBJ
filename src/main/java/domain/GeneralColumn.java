@@ -27,7 +27,11 @@ public interface GeneralColumn {
 	boolean isModifyDataType();
 
 	boolean isCreateIndex();
-	
+
 	boolean isDropIndex();
+
+	boolean isAddForeignKeyConstraint();
+
+	boolean isDropForeignKeyConstraint();
 
 }

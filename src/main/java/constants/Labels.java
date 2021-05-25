@@ -19,6 +19,8 @@ public class Labels {
 	public static final String BUTTON_DROP_INDEX = "Drop another index";
 	public static final String BUTTON_GENERATE = "Generate";
 	public static final String BUTTON_COPY_TO_CLIPBOARD = "Copy to clipboard";
+	public static final String BUTTON_ADD_ANOTHER_FOREIGN_KEY_CONSTRAINT = "Add another foreign key constraint";
+	public static final String BUTTON_DROP_ANOTHER_FOREIGN_KEY_CONSTRAINT = "Drop another foreign key constraint";
 
 	// FORM NAMES
 	public static final String MAIN_MENU_FORM = "Main menu form";
@@ -36,7 +38,8 @@ public class Labels {
 	public static final String MODIFY_DATA_TYPE_FORM = "Modify data type form";
 	public static final String CREATE_INDEX_FORM = "Create index form";
 	public static final String DROP_INDEX_FORM = "Drop index form";
-	
+	public static final String ADD_FOREIGN_KEY_CONSTRAINT_FORM = "Add foreign key constraint form";
+	public static final String DROP_FOREIGN_KEY_CONSTRAINT_FORM = "Drop foreign key constraint form";
 
 	// MAIN MENU
 	public static final String MAIN_MENU_QUESTION = "What do you want to do?";
@@ -49,6 +52,8 @@ public class Labels {
 	public static final String MAIN_MENU_MODIFY_DATA_TYPE = "Modify data type(s)";
 	public static final String MAIN_MENU_CREATE_INDEX = "Create index";
 	public static final String MAIN_MENU_DROP_INDEX = "Drop index";
+	public static final String MAIN_MENU_ADD_FOREIGN_KEY_CONSTRAINT = "Add foreign key constraint";
+	public static final String MAIN_MENU_DROP_FOREIGN_KEY_CONSTRAINT = "Drop foreign key constraint";
 	public static final String MAIN_MENU_PREFERENCES = "Preferences";
 	public static final String BUTTON_EXIT = "Exit";
 
