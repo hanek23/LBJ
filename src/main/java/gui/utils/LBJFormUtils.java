@@ -128,7 +128,7 @@ public class LBJFormUtils {
 	}
 
 	public static Button dropAnotherIndexButton(LBJWizardForm form) {
-		Button dropAnotherIndexButton = new Button(Labels.BUTTON_CREATE_INDEX);
+		Button dropAnotherIndexButton = new Button(Labels.BUTTON_DROP_INDEX);
 		dropAnotherIndexButton.addListener(button -> {
 			if (form.validate()) {
 				if (form.getNextForm() == null) {
@@ -141,7 +141,7 @@ public class LBJFormUtils {
 	}
 
 	public static Button createAnotherIndexButton(LBJWizardForm form) {
-		Button createAnotherIndexButton = new Button(Labels.BUTTON_DROP_INDEX);
+		Button createAnotherIndexButton = new Button(Labels.BUTTON_CREATE_INDEX);
 		createAnotherIndexButton.addListener(button -> {
 			if (form.validate()) {
 				if (form.getNextForm() == null) {
