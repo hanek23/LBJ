@@ -1,5 +1,7 @@
 package gui.forms.addcolumn;
 
+import java.util.stream.Stream;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.googlecode.lanterna.gui2.Button;
@@ -12,14 +14,19 @@ import domain.ColumnOperation;
 import domain.ForeignKey;
 import gui.attribute.Attribute;
 import gui.builders.LBJCheckBoxBuilder;
+import gui.builders.LBJComboBoxStringBuilder;
 import gui.builders.LBJTextBoxBuilder;
 import gui.components.LBJCheckBox;
+import gui.components.LBJComboBox;
+import gui.components.LBJComboBoxString;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
 import gui.forms.createtable.CreateTableForm;
 import gui.forms.mainmenu.MainMenuForm;
 import gui.utils.LBJFormUtils;
+import transformers.DataTypesLoader;
+import utils.FileUtils;
 
 /**
  * <p>
@@ -38,7 +45,7 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 
 	private LBJTextBox tableNameTextBox;
 	private LBJTextBox columnNameTextBox;
-	private LBJTextBox dataTypeTextBox;
+	private LBJComboBoxString dataTypeTextBox;
 	private LBJCheckBox nullableCheckBox;
 	private LBJTextBox defaultValueTextBox;
 	private LBJCheckBox indexCheckBox;
@@ -60,7 +67,13 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 		tableNameTextBox = new LBJTextBoxBuilder(Attribute.TABLE_NAME, this).build();
 		setTableNameIfPossible();
 		columnNameTextBox = new LBJTextBoxBuilder(Attribute.COLUMN_NAME, this).build();
-		dataTypeTextBox = new LBJTextBoxBuilder(Attribute.DATA_TYPE, this).build();
+		LBJComboBoxStringBuilder dataTypesBuilder =
+			new LBJComboBoxStringBuilder(Attribute.DATA_TYPE.getLabel(), this)
+			.setReadonly(false)
+			.setRequired();
+		DataTypesLoader.loadDataTypesValues(dataTypesBuilder);
+		dataTypeTextBox = dataTypesBuilder
+				.build();
 
 		nullableCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_NULLABLE, this).checked().build();
 		defaultValueTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_DEFAULT_VALUE, this)
@@ -173,7 +186,7 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 		return columnNameTextBox;
 	}
 
-	public LBJTextBox getDataTypeTextBox() {
+	public LBJComboBox<String> getDataTypeTextBox() {
 		return dataTypeTextBox;
 	}
 

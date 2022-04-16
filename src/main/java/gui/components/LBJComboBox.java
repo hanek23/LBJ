@@ -49,4 +49,9 @@ public class LBJComboBox<T> extends LBJValueComponent<T> {
 		this.comboBox = comboBox;
 	}
 
+	public void setReadOnly(boolean readOnly){
+		comboBox.setReadOnly(readOnly);
+	}
+
+
 }

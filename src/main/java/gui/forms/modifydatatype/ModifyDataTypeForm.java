@@ -8,17 +8,20 @@ import domain.Column;
 import domain.ColumnOperation;
 import domain.ModifyDataType;
 import gui.attribute.Attribute;
+import gui.builders.LBJComboBoxStringBuilder;
 import gui.builders.LBJTextBoxBuilder;
+import gui.components.LBJComboBoxString;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
 import gui.utils.LBJFormUtils;
+import transformers.DataTypesLoader;
 
 public class ModifyDataTypeForm extends LBJEntityForm<ModifyDataType> {
 
 	private LBJTextBox tableNameTextBox;
 	private LBJTextBox columnNameTextBox;
-	private LBJTextBox dataTypeTextBox;
+	private LBJComboBoxString dataTypeTextBox;
 
 	private Button modifyAnotherColumnButton;
 	private Button generateButton;
@@ -32,7 +35,13 @@ public class ModifyDataTypeForm extends LBJEntityForm<ModifyDataType> {
 		tableNameTextBox = new LBJTextBoxBuilder(Attribute.TABLE_NAME, this).build();
 		setTableNameIfPossible();
 		columnNameTextBox = new LBJTextBoxBuilder(Attribute.COLUMN_NAME, this).build();
-		dataTypeTextBox = new LBJTextBoxBuilder(Attribute.DATA_TYPE, this).build();
+		LBJComboBoxStringBuilder dataTypesBuilder =
+			new LBJComboBoxStringBuilder(Attribute.DATA_TYPE.getLabel(), this)
+				.setReadonly(false)
+				.setRequired();
+		DataTypesLoader.loadDataTypesValues(dataTypesBuilder);
+		dataTypeTextBox = dataTypesBuilder
+			.build();
 
 	}
 
@@ -97,7 +106,7 @@ public class ModifyDataTypeForm extends LBJEntityForm<ModifyDataType> {
 		return columnNameTextBox;
 	}
 
-	public LBJTextBox getDataTypeTextBox() {
+	public LBJComboBoxString getDataTypeTextBox() {
 		return dataTypeTextBox;
 	}
 
