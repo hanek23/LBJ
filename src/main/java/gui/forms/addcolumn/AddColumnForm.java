@@ -45,7 +45,7 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 
 	private LBJTextBox tableNameTextBox;
 	private LBJTextBox columnNameTextBox;
-	private LBJComboBoxString dataTypeTextBox;
+	private LBJComboBoxString dataTypeComboBox;
 	private LBJCheckBox nullableCheckBox;
 	private LBJTextBox defaultValueTextBox;
 	private LBJCheckBox indexCheckBox;
@@ -67,13 +67,10 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 		tableNameTextBox = new LBJTextBoxBuilder(Attribute.TABLE_NAME, this).build();
 		setTableNameIfPossible();
 		columnNameTextBox = new LBJTextBoxBuilder(Attribute.COLUMN_NAME, this).build();
-		LBJComboBoxStringBuilder dataTypesBuilder =
-			new LBJComboBoxStringBuilder(Attribute.DATA_TYPE.getLabel(), this)
-			.setReadonly(false)
-			.setRequired();
+		LBJComboBoxStringBuilder dataTypesBuilder = new LBJComboBoxStringBuilder(Attribute.DATA_TYPE, this)
+				.readOnly(false);
 		DataTypesLoader.loadDataTypesValues(dataTypesBuilder);
-		dataTypeTextBox = dataTypesBuilder
-				.build();
+		dataTypeComboBox = dataTypesBuilder.build();
 
 		nullableCheckBox = new LBJCheckBoxBuilder(Labels.ADD_COLUMN_NULLABLE, this).checked().build();
 		defaultValueTextBox = new LBJTextBoxBuilder(Labels.ADD_COLUMN_DEFAULT_VALUE, this)
@@ -131,7 +128,7 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 	public void addComponents() {
 		LBJFormUtils.addValueAndLabeledComponentTo(this, tableNameTextBox);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, columnNameTextBox);
-		LBJFormUtils.addValueAndLabeledComponentTo(this, dataTypeTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, dataTypeComboBox);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, nullableCheckBox);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, defaultValueTextBox);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, indexCheckBox);
@@ -153,7 +150,7 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 	public AddColumn convert() {
 		AddColumn column = new Column(columnNameTextBox.getValue(), ColumnOperation.ADD_COLUMN);
 		column.setTableName(tableNameTextBox.getValue());
-		column.setDataType(dataTypeTextBox.getValue());
+		column.setDataType(dataTypeComboBox.getValue());
 		column.setNullable(nullableCheckBox.getValue());
 		if (column.isTypeBoolean()) {
 			// boolean is false by default, user gets a chance to specify own default
@@ -186,8 +183,8 @@ public class AddColumnForm extends LBJEntityForm<AddColumn> {
 		return columnNameTextBox;
 	}
 
-	public LBJComboBox<String> getDataTypeTextBox() {
-		return dataTypeTextBox;
+	public LBJComboBox<String> getDataTypeComboBox() {
+		return dataTypeComboBox;
 	}
 
 	public LBJCheckBox getNullableCheckBox() {

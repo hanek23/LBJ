@@ -62,7 +62,7 @@ class AddColumnFormTest extends LBJFormTestCase {
 				.hasLengthValidator();
 		assertThat(form.getColumnNameTextBox()).isRequired().hasCaseValidator(LBJ.preferences.getColumnNameCase())
 				.hasLengthValidator();
-		assertThat(form.getDataTypeTextBox()).isRequired();
+		assertThat(form.getDataTypeComboBox()).hasCaseValidator(LBJ.preferences.getDataTypeCase()).isRequired();
 		assertThat(form.getIndexNameTextBox()).isRequired().hasCaseValidator(LBJ.preferences.getIndexNameCase())
 				.hasLengthValidator();
 		assertThat(form.getReferencedTableNameTextBox()).isRequired()
@@ -80,7 +80,7 @@ class AddColumnFormTest extends LBJFormTestCase {
 
 		LBJTestUtils.setValueOf(form.getTableNameTextBox(), TABLE_NAME);
 		LBJTestUtils.setValueOf(form.getColumnNameTextBox(), COLUMN_NAME);
-		LBJTestUtils.setValueOf(form.getDataTypeTextBox(), COLUMN_DATA_TYPE);
+		LBJTestUtils.setValueOf(form.getDataTypeComboBox(), COLUMN_DATA_TYPE);
 		LBJTestUtils.setValueOf(form.getNullableCheckBox(), NULLABLE);
 		LBJTestUtils.setValueOf(form.getDefaultValueTextBox(), DEFAULT_VALUE);
 		LBJTestUtils.setValueOf(form.getIndexCheckBox(), HAS_INDEX);
@@ -113,7 +113,7 @@ class AddColumnFormTest extends LBJFormTestCase {
 
 		LBJTestUtils.setValueOf(form.getTableNameTextBox(), TABLE_NAME);
 		LBJTestUtils.setValueOf(form.getColumnNameTextBox(), COLUMN_NAME);
-		LBJTestUtils.setValueOf(form.getDataTypeTextBox(), "boolean");
+		LBJTestUtils.setValueOf(form.getDataTypeComboBox(), "boolean");
 		LBJTestUtils.setValueOf(form.getNullableCheckBox(), NULLABLE);
 		LBJTestUtils.setValueOf(form.getIndexCheckBox(), HAS_INDEX);
 		LBJTestUtils.setValueOf(form.getIndexNameTextBox(), INDEX_NAME);
@@ -146,7 +146,7 @@ class AddColumnFormTest extends LBJFormTestCase {
 
 		LBJTestUtils.setValueOf(form.getTableNameTextBox(), TABLE_NAME);
 		LBJTestUtils.setValueOf(form.getColumnNameTextBox(), COLUMN_NAME);
-		LBJTestUtils.setValueOf(form.getDataTypeTextBox(), "boolean");
+		LBJTestUtils.setValueOf(form.getDataTypeComboBox(), "boolean");
 		LBJTestUtils.setValueOf(form.getNullableCheckBox(), NULLABLE);
 		LBJTestUtils.setValueOf(form.getDefaultValueTextBox(), "true");
 		LBJTestUtils.setValueOf(form.getIndexCheckBox(), HAS_INDEX);

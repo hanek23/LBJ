@@ -31,7 +31,7 @@ public class EndToEndTestCase1 extends AbstractXmlSupplier implements EndToEndTe
 		// Column
 		LBJTestUtils.setValueOf(addColumnForm.getTableNameTextBox(), "LBJ_REFERENCE");
 		LBJTestUtils.setValueOf(addColumnForm.getColumnNameTextBox(), "action");
-		LBJTestUtils.setValueOf(addColumnForm.getDataTypeTextBox(), "integer");
+		LBJTestUtils.setValueOf(addColumnForm.getDataTypeComboBox(), "integer");
 		// nullable
 		LBJTestUtils.setValueOf(addColumnForm.getNullableCheckBox(), true);
 		// with index

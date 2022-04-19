@@ -31,14 +31,14 @@ class ModifyDataTypeFormTest extends LBJFormTestCase {
 		// in right states
 		assertThat(form.getTableNameTextBox()).isEnabled();
 		assertThat(form.getColumnNameTextBox()).isEnabled();
-		assertThat(form.getDataTypeTextBox()).isEnabled();
+		assertThat(form.getDataTypeComboBox()).isEnabled();
 
 		// with all validators
 		assertThat(form.getTableNameTextBox()).isRequired().hasCaseValidator(LBJ.preferences.getTableNameCase())
 				.hasLengthValidator();
 		assertThat(form.getColumnNameTextBox()).isRequired().hasCaseValidator(LBJ.preferences.getColumnNameCase())
 				.hasLengthValidator();
-		assertThat(form.getDataTypeTextBox()).isRequired();
+		assertThat(form.getDataTypeComboBox()).hasCaseValidator(LBJ.preferences.getDataTypeCase()).isRequired();
 	}
 
 	@Test
@@ -47,7 +47,7 @@ class ModifyDataTypeFormTest extends LBJFormTestCase {
 
 		LBJTestUtils.setValueOf(form.getTableNameTextBox(), TABLE_NAME);
 		LBJTestUtils.setValueOf(form.getColumnNameTextBox(), COLUMN_NAME);
-		LBJTestUtils.setValueOf(form.getDataTypeTextBox(), COLUMN_DATA_TYPE);
+		LBJTestUtils.setValueOf(form.getDataTypeComboBox(), COLUMN_DATA_TYPE);
 
 		ModifyDataType converted = form.convert();
 		assertThat(converted.isModifyDataType()).isTrue();

@@ -30,7 +30,7 @@ public class EndToEndTestCase3 extends AbstractXmlSupplier implements EndToEndTe
 
 		LBJTestUtils.setValueOf(dropNotNullConstraintForm.getTableNameTextBox(), "LBJ_RELATED_ID");
 		LBJTestUtils.setValueOf(dropNotNullConstraintForm.getColumnNameTextBox(), "container");
-		LBJTestUtils.setValueOf(dropNotNullConstraintForm.getDataTypeTextBox(), "integer");
+		LBJTestUtils.setValueOf(dropNotNullConstraintForm.getDataTypeComboBox(), "integer");
 		LBJFormAssert.assertThat(dropNotNullConstraintForm).isValid();
 
 		LBJTestUtils.click(dropNotNullConstraintForm.getGenerateButton());

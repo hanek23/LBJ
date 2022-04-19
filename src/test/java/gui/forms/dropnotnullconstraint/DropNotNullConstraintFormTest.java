@@ -33,8 +33,7 @@ public class DropNotNullConstraintFormTest extends LBJTestCase {
 				.hasLengthValidator();
 		assertThat(form.getColumnNameTextBox()).isRequired().hasCaseValidator(LBJ.preferences.getColumnNameCase())
 				.hasLengthValidator();
-		assertThat(form.getDataTypeTextBox()).hasCaseValidator(LBJ.preferences.getDataTypeCase()).isRequired();
-
+		assertThat(form.getDataTypeComboBox()).hasCaseValidator(LBJ.preferences.getDataTypeCase()).isRequired();
 	}
 
 	@Test
@@ -43,7 +42,7 @@ public class DropNotNullConstraintFormTest extends LBJTestCase {
 
 		LBJTestUtils.setValueOf(form.getTableNameTextBox(), TABLE_NAME);
 		LBJTestUtils.setValueOf(form.getColumnNameTextBox(), COLUMN_NAME);
-		LBJTestUtils.setValueOf(form.getDataTypeTextBox(), COLUMN_DATA_TYPE);
+		LBJTestUtils.setValueOf(form.getDataTypeComboBox(), COLUMN_DATA_TYPE);
 
 		DropNotNullConstraint column = form.convert();
 		assertThat(column.isDropNotNullConstraint()).isTrue();

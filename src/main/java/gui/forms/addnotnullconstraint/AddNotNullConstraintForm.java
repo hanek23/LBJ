@@ -28,7 +28,7 @@ public class AddNotNullConstraintForm extends LBJEntityForm<AddNotNullConstraint
 
 	private LBJTextBox tableNameTextBox;
 	private LBJTextBox columnNameTextBox;
-	private LBJComboBoxString dataTypeTextBox;
+	private LBJComboBoxString dataTypeComboBox;
 
 	private Button generateButton;
 
@@ -40,13 +40,10 @@ public class AddNotNullConstraintForm extends LBJEntityForm<AddNotNullConstraint
 	public void initializeComponents() {
 		tableNameTextBox = new LBJTextBoxBuilder(Attribute.TABLE_NAME, this).build();
 		columnNameTextBox = new LBJTextBoxBuilder(Attribute.COLUMN_NAME, this).build();
-		LBJComboBoxStringBuilder dataTypesBuilder =
-			new LBJComboBoxStringBuilder(Attribute.DATA_TYPE.getLabel(), this)
-				.setReadonly(false)
-				.setRequired();
+		LBJComboBoxStringBuilder dataTypesBuilder = new LBJComboBoxStringBuilder(Attribute.DATA_TYPE, this)
+				.readOnly(false);
 		DataTypesLoader.loadDataTypesValues(dataTypesBuilder);
-		dataTypeTextBox = dataTypesBuilder
-			.build();
+		dataTypeComboBox = dataTypesBuilder.build();
 	}
 
 	@Override
@@ -68,7 +65,7 @@ public class AddNotNullConstraintForm extends LBJEntityForm<AddNotNullConstraint
 	public void addComponents() {
 		LBJFormUtils.addValueAndLabeledComponentTo(this, tableNameTextBox);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, columnNameTextBox);
-		LBJFormUtils.addValueAndLabeledComponentTo(this, dataTypeTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, dataTypeComboBox);
 	}
 
 	@Override
@@ -80,7 +77,7 @@ public class AddNotNullConstraintForm extends LBJEntityForm<AddNotNullConstraint
 	@Override
 	public AddNotNullConstraint convert() {
 		AddNotNullConstraint c = new Column(getColumnNameTextBox().getValue(), ColumnOperation.ADD_NOT_NULL_CONSTRAINT);
-		c.setDataType(dataTypeTextBox.getValue());
+		c.setDataType(dataTypeComboBox.getValue());
 		c.setTableName(tableNameTextBox.getValue());
 		return c;
 	}
@@ -98,8 +95,8 @@ public class AddNotNullConstraintForm extends LBJEntityForm<AddNotNullConstraint
 		return columnNameTextBox;
 	}
 
-	public LBJComboBoxString getDataTypeTextBox() {
-		return dataTypeTextBox;
+	public LBJComboBoxString getDataTypeComboBox() {
+		return dataTypeComboBox;
 	}
 
 	public Button getGenerateButton() {

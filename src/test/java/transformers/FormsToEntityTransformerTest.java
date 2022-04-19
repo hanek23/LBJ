@@ -40,7 +40,7 @@ class FormsToEntityTransformerTest extends LBJFormTestCase {
 
 		LBJTestUtils.setValueOf(addColumnForm1.getTableNameTextBox(), "TABLE_NAME");
 		LBJTestUtils.setValueOf(addColumnForm1.getColumnNameTextBox(), "name");
-		LBJTestUtils.setValueOf(addColumnForm1.getDataTypeTextBox(), "varchar(2)");
+		LBJTestUtils.setValueOf(addColumnForm1.getDataTypeComboBox(), "varchar(2)");
 		assertThat(addColumnForm1).isValid();
 		LBJTestUtils.click(addColumnForm1.getAddColumnButton());
 		AddColumnForm addColumnForm2 = (AddColumnForm) addColumnForm1.getNextForm();
@@ -48,7 +48,7 @@ class FormsToEntityTransformerTest extends LBJFormTestCase {
 
 		LBJTestUtils.setValueOf(addColumnForm2.getTableNameTextBox(), "TABLE_NAME");
 		LBJTestUtils.setValueOf(addColumnForm2.getColumnNameTextBox(), "version");
-		LBJTestUtils.setValueOf(addColumnForm2.getDataTypeTextBox(), "integer");
+		LBJTestUtils.setValueOf(addColumnForm2.getDataTypeComboBox(), "integer");
 		assertThat(addColumnForm2).isValid();
 		LBJTestUtils.click(addColumnForm2.getGenerateButton());
 		GenerateForm generateForm = LBJFormSupplier.getGenerateForm(addColumnForm2.getWindow(), addColumnForm2);

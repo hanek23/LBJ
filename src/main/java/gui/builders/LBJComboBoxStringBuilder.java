@@ -3,12 +3,12 @@ package gui.builders;
 import com.googlecode.lanterna.gui2.ComboBox;
 import com.googlecode.lanterna.gui2.Label;
 
-import gui.components.LBJComboBox;
+import gui.attribute.Attribute;
 import gui.components.LBJComboBoxString;
 import gui.forms.LBJForm;
 import gui.updaters.shared.LBJRequiredLabelComponentUpdater;
 import gui.utils.BeanSupplier;
-import gui.validators.LBJValueValidator;
+import gui.utils.LBJCaseUtils;
 import gui.validators.shared.LBJStringRequiredValidator;
 
 /**
@@ -18,23 +18,28 @@ public class LBJComboBoxStringBuilder {
 
 	private LBJComboBoxString lbjComboBox;
 
-	public LBJComboBoxStringBuilder(String name, LBJForm form) {
-		lbjComboBox = new LBJComboBoxString(name, form);
+	public LBJComboBoxStringBuilder(Attribute attribute, LBJForm form) {
+		lbjComboBox = new LBJComboBoxString(attribute.getLabel(), form);
 		lbjComboBox.setComboBox(new ComboBox<>());
-		lbjComboBox.setLabel(new Label(name));
+		lbjComboBox.setLabel(new Label(attribute.getLabel()));
+		lbjComboBox.addValueUpdater(LBJCaseUtils.caseUpdater(attribute.getLetterCase()));
+		lbjComboBox.addValueValidator(LBJCaseUtils.getCaseValidator(attribute.getLetterCase()));
+		if (attribute.isRequired()) {
+			setRequired();
+		}
 	}
 
 	public LBJComboBoxStringBuilder addItem(String item) {
 		lbjComboBox.addItem(item);
 		return this;
 	}
-	
+
 	public LBJComboBoxStringBuilder selectItem(String item) {
 		lbjComboBox.setValue(item);
 		return this;
 	}
 
-	public LBJComboBoxStringBuilder setReadonly(boolean isReadOlny) {
+	public LBJComboBoxStringBuilder readOnly(boolean isReadOlny) {
 		lbjComboBox.setReadOnly(isReadOlny);
 		return this;
 	}

@@ -39,14 +39,14 @@ public class EndToEndTestCase12 extends AbstractXmlSupplier implements EndToEndT
 		// Column withou index nor FK
 		LBJTestUtils.setValueOf(modifyDataType1.getTableNameTextBox(), TABLE_NAME_1);
 		LBJTestUtils.setValueOf(modifyDataType1.getColumnNameTextBox(), COLUMN_NAME_1);
-		LBJTestUtils.setValueOf(modifyDataType1.getDataTypeTextBox(), NEW_DATA_TYPE_1);
+		LBJTestUtils.setValueOf(modifyDataType1.getDataTypeComboBox(), NEW_DATA_TYPE_1);
 		LBJFormAssert.assertThat(modifyDataType1).isValid();
 		LBJTestUtils.click(modifyDataType1.getModifyDataTypeButton());
 
 		ModifyDataTypeForm modifyDataType2 = (ModifyDataTypeForm) modifyDataType1.getNextForm();
 		LBJTestUtils.setValueOf(modifyDataType2.getTableNameTextBox(), TABLE_NAME_2);
 		LBJTestUtils.setValueOf(modifyDataType2.getColumnNameTextBox(), COLUMN_NAME_2);
-		LBJTestUtils.setValueOf(modifyDataType2.getDataTypeTextBox(), NEW_DATA_TYPE_2);
+		LBJTestUtils.setValueOf(modifyDataType2.getDataTypeComboBox(), NEW_DATA_TYPE_2);
 		LBJFormAssert.assertThat(modifyDataType2).isValid();
 
 		// Generate

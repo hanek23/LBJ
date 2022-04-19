@@ -31,7 +31,7 @@ public class EndToEndTestCase5 extends AbstractXmlSupplier implements EndToEndTe
 		// boolean column
 		LBJTestUtils.setValueOf(addColumnForm.getTableNameTextBox(), "LBJ_REFERENCE");
 		LBJTestUtils.setValueOf(addColumnForm.getColumnNameTextBox(), "forOracle");
-		LBJTestUtils.setValueOf(addColumnForm.getDataTypeTextBox(), "boolean");
+		LBJTestUtils.setValueOf(addColumnForm.getDataTypeComboBox(), "boolean");
 		LBJTestUtils.setValueOf(addColumnForm.getNullableCheckBox(), false);
 		LBJFormAssert.assertThat(addColumnForm).isValid();
 

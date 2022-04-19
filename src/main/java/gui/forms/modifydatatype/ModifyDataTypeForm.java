@@ -21,7 +21,7 @@ public class ModifyDataTypeForm extends LBJEntityForm<ModifyDataType> {
 
 	private LBJTextBox tableNameTextBox;
 	private LBJTextBox columnNameTextBox;
-	private LBJComboBoxString dataTypeTextBox;
+	private LBJComboBoxString dataTypeComboBox;
 
 	private Button modifyAnotherColumnButton;
 	private Button generateButton;
@@ -35,13 +35,10 @@ public class ModifyDataTypeForm extends LBJEntityForm<ModifyDataType> {
 		tableNameTextBox = new LBJTextBoxBuilder(Attribute.TABLE_NAME, this).build();
 		setTableNameIfPossible();
 		columnNameTextBox = new LBJTextBoxBuilder(Attribute.COLUMN_NAME, this).build();
-		LBJComboBoxStringBuilder dataTypesBuilder =
-			new LBJComboBoxStringBuilder(Attribute.DATA_TYPE.getLabel(), this)
-				.setReadonly(false)
-				.setRequired();
+		LBJComboBoxStringBuilder dataTypesBuilder = new LBJComboBoxStringBuilder(Attribute.DATA_TYPE, this)
+				.readOnly(false);
 		DataTypesLoader.loadDataTypesValues(dataTypesBuilder);
-		dataTypeTextBox = dataTypesBuilder
-			.build();
+		dataTypeComboBox = dataTypesBuilder.build();
 
 	}
 
@@ -75,7 +72,7 @@ public class ModifyDataTypeForm extends LBJEntityForm<ModifyDataType> {
 	public void addComponents() {
 		LBJFormUtils.addValueAndLabeledComponentTo(this, tableNameTextBox);
 		LBJFormUtils.addValueAndLabeledComponentTo(this, columnNameTextBox);
-		LBJFormUtils.addValueAndLabeledComponentTo(this, dataTypeTextBox);
+		LBJFormUtils.addValueAndLabeledComponentTo(this, dataTypeComboBox);
 	}
 
 	@Override
@@ -89,7 +86,7 @@ public class ModifyDataTypeForm extends LBJEntityForm<ModifyDataType> {
 	public ModifyDataType convert() {
 		ModifyDataType column = new Column(columnNameTextBox.getValue(), ColumnOperation.MODIFY_DATA_TYPE);
 		column.setTableName(tableNameTextBox.getValue());
-		column.setDataType(dataTypeTextBox.getValue());
+		column.setDataType(dataTypeComboBox.getValue());
 		return column;
 	}
 
@@ -106,8 +103,8 @@ public class ModifyDataTypeForm extends LBJEntityForm<ModifyDataType> {
 		return columnNameTextBox;
 	}
 
-	public LBJComboBoxString getDataTypeTextBox() {
-		return dataTypeTextBox;
+	public LBJComboBoxString getDataTypeComboBox() {
+		return dataTypeComboBox;
 	}
 
 	public Button getGenerateButton() {

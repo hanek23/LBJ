@@ -39,7 +39,7 @@ public class EndToEndTestCase4 extends AbstractXmlSupplier implements EndToEndTe
 		// this
 		LBJTestUtils.setValueOf(dropNotNullConstraintForm.getTableNameTextBox(), "LBJ_RELATED_ID");
 		LBJTestUtils.setValueOf(dropNotNullConstraintForm.getColumnNameTextBox(), "container");
-		LBJTestUtils.setValueOf(dropNotNullConstraintForm.getDataTypeTextBox(), "integer");
+		LBJTestUtils.setValueOf(dropNotNullConstraintForm.getDataTypeComboBox(), "integer");
 		LBJFormAssert.assertThat(dropNotNullConstraintForm).isValid();
 		LBJTestUtils.click(dropNotNullConstraintForm.getBackButton());
 
@@ -79,7 +79,7 @@ public class EndToEndTestCase4 extends AbstractXmlSupplier implements EndToEndTe
 		// Fill first column, table name should aready be prefilled
 		assertThat(addColumnFormName.getTableNameTextBox()).isEqualToIgnoringCase(TABLE_NAME);
 		LBJTestUtils.setValueOf(addColumnFormName.getColumnNameTextBox(), "actionRef");
-		LBJTestUtils.setValueOf(addColumnFormName.getDataTypeTextBox(), "integer");
+		LBJTestUtils.setValueOf(addColumnFormName.getDataTypeComboBox(), "integer");
 		// nullable
 		LBJTestUtils.setValueOf(addColumnFormName.getNullableCheckBox(), true);
 		// with index
@@ -112,7 +112,7 @@ public class EndToEndTestCase4 extends AbstractXmlSupplier implements EndToEndTe
 		LBJTestUtils.setValueOf(addColumnFormIsAlive.getNullableCheckBox(), false);
 		// because of missing data type
 		LBJFormAssert.assertThat(addColumnFormIsAlive).isNotValid();
-		LBJTestUtils.setValueOf(addColumnFormIsAlive.getDataTypeTextBox(), "boolean");
+		LBJTestUtils.setValueOf(addColumnFormIsAlive.getDataTypeComboBox(), "boolean");
 		LBJFormAssert.assertThat(addColumnFormIsAlive).isValid();
 
 		// Go to generate form
