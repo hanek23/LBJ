@@ -8,12 +8,15 @@ import domain.Column;
 import domain.ColumnOperation;
 import domain.DropNotNullConstraint;
 import gui.attribute.Attribute;
+import gui.builders.LBJComboBoxStringBuilder;
 import gui.builders.LBJTextBoxBuilder;
+import gui.components.LBJComboBoxString;
 import gui.components.LBJTextBox;
 import gui.forms.LBJEntityForm;
 import gui.forms.LBJForm;
 import gui.forms.generate.GenerateForm;
 import gui.utils.LBJFormUtils;
+import transformers.DataTypesLoader;
 
 /**
  * Form for removing not null constraint from column. There are only 3
@@ -25,7 +28,7 @@ public class DropNotNullConstraintForm extends LBJEntityForm<DropNotNullConstrai
 
 	private LBJTextBox tableNameTextBox;
 	private LBJTextBox columnNameTextBox;
-	private LBJTextBox dataTypeTextBox;
+	private LBJComboBoxString dataTypeTextBox;
 
 	private Button generateButton;
 
@@ -37,7 +40,13 @@ public class DropNotNullConstraintForm extends LBJEntityForm<DropNotNullConstrai
 	public void initializeComponents() {
 		tableNameTextBox = new LBJTextBoxBuilder(Attribute.TABLE_NAME, this).build();
 		columnNameTextBox = new LBJTextBoxBuilder(Attribute.COLUMN_NAME, this).build();
-		dataTypeTextBox = new LBJTextBoxBuilder(Attribute.DATA_TYPE, this).build();
+		LBJComboBoxStringBuilder dataTypesBuilder =
+			new LBJComboBoxStringBuilder(Attribute.DATA_TYPE.getLabel(), this)
+				.setReadonly(false)
+				.setRequired();
+		DataTypesLoader.loadDataTypesValues(dataTypesBuilder);
+		dataTypeTextBox = dataTypesBuilder
+			.build();
 	}
 
 	@Override
@@ -90,7 +99,7 @@ public class DropNotNullConstraintForm extends LBJEntityForm<DropNotNullConstrai
 		return columnNameTextBox;
 	}
 
-	public LBJTextBox getDataTypeTextBox() {
+	public LBJComboBoxString getDataTypeTextBox() {
 		return dataTypeTextBox;
 	}
 

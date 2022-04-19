@@ -1,0 +1,8 @@
+
+blob
+clob
+boolean
+int
+char(X)
+varchar(X ${charUnit})
+varchar(X)
