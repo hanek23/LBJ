@@ -6,3 +6,6 @@ int
 char(X)
 varchar(X ${charUnit})
 varchar(X)
+double
+float
+datetime
